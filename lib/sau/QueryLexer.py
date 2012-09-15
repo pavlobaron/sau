@@ -1,10 +1,9 @@
-# $ANTLR 3.1.3 Mar 18, 2009 10:09:25 QueryLexer.g 2012-09-15 21:46:00
+# $ANTLR 3.1.3 Mar 18, 2009 10:09:25 QueryLexer.g 2012-09-15 22:26:59
 
 import sys
 from antlr3 import *
 from antlr3.compat import set, frozenset
          
-package org.apache.pig.parser;
 
 
 
@@ -173,34 +172,6 @@ class QueryLexer(Lexer):
 
               
 
-    @Override
-    public void reportError(RecognitionException e) {
-        super.reportError( e );
-        
-        // The method of this signature doesn't permit checked exception. Here we have to 
-        // throw a unchecked execption in order to stop at the first error.
-        // For more information, visit http://www.antlr.org/wiki/pages/viewpage.action?pageId=5341217.
-        StringBuilder sb = new StringBuilder();
-        sb.append( getErrorHeader( e ) ).append( " " );
-        sb.append( getErrorMessage( e, getTokenNames() ) );
-        throw new RuntimeException( sb.toString() );
-    }
-
-    @Override
-    public String getErrorMessage(RecognitionException e, String[] tokenNames ) {
-        if( e instanceof NoViableAltException ) {
-            return "Unexpected character " + getCharErrorDisplay( e.c );
-        } else {
-            return super.getErrorMessage( e, tokenNames );
-        }
-    }
-
-    @Override
-    public String getErrorHeader(RecognitionException ex) {
-    	return QueryParserUtils.generateErrorHeader( ex, this.getSourceName() );
-    }
-
-
 
 
     # $ANTLR start "VOID"
@@ -210,8 +181,8 @@ class QueryLexer(Lexer):
             _type = VOID
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:64:9: ( 'VOID' )
-            # QueryLexer.g:64:11: 'VOID'
+            # QueryLexer.g:27:9: ( 'VOID' )
+            # QueryLexer.g:27:11: 'VOID'
             pass 
             self.match("VOID")
 
@@ -235,8 +206,8 @@ class QueryLexer(Lexer):
             _type = IMPORT
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:67:9: ( 'IMPORT' )
-            # QueryLexer.g:67:11: 'IMPORT'
+            # QueryLexer.g:30:9: ( 'IMPORT' )
+            # QueryLexer.g:30:11: 'IMPORT'
             pass 
             self.match("IMPORT")
 
@@ -260,8 +231,8 @@ class QueryLexer(Lexer):
             _type = RETURNS
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:70:9: ( 'RETURNS' )
-            # QueryLexer.g:70:11: 'RETURNS'
+            # QueryLexer.g:33:9: ( 'RETURNS' )
+            # QueryLexer.g:33:11: 'RETURNS'
             pass 
             self.match("RETURNS")
 
@@ -285,8 +256,8 @@ class QueryLexer(Lexer):
             _type = DEFINE
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:73:8: ( 'DEFINE' )
-            # QueryLexer.g:73:10: 'DEFINE'
+            # QueryLexer.g:36:8: ( 'DEFINE' )
+            # QueryLexer.g:36:10: 'DEFINE'
             pass 
             self.match("DEFINE")
 
@@ -310,8 +281,8 @@ class QueryLexer(Lexer):
             _type = LOAD
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:76:8: ( 'LOAD' )
-            # QueryLexer.g:76:10: 'LOAD'
+            # QueryLexer.g:39:8: ( 'LOAD' )
+            # QueryLexer.g:39:10: 'LOAD'
             pass 
             self.match("LOAD")
 
@@ -335,8 +306,8 @@ class QueryLexer(Lexer):
             _type = FILTER
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:79:8: ( 'FILTER' )
-            # QueryLexer.g:79:10: 'FILTER'
+            # QueryLexer.g:42:8: ( 'FILTER' )
+            # QueryLexer.g:42:10: 'FILTER'
             pass 
             self.match("FILTER")
 
@@ -360,8 +331,8 @@ class QueryLexer(Lexer):
             _type = FOREACH
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:82:9: ( 'FOREACH' )
-            # QueryLexer.g:82:11: 'FOREACH'
+            # QueryLexer.g:45:9: ( 'FOREACH' )
+            # QueryLexer.g:45:11: 'FOREACH'
             pass 
             self.match("FOREACH")
 
@@ -385,8 +356,8 @@ class QueryLexer(Lexer):
             _type = ORDER
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:85:9: ( 'ORDER' )
-            # QueryLexer.g:85:12: 'ORDER'
+            # QueryLexer.g:48:9: ( 'ORDER' )
+            # QueryLexer.g:48:12: 'ORDER'
             pass 
             self.match("ORDER")
 
@@ -410,8 +381,8 @@ class QueryLexer(Lexer):
             _type = RANK
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:88:8: ( 'RANK' )
-            # QueryLexer.g:88:11: 'RANK'
+            # QueryLexer.g:51:8: ( 'RANK' )
+            # QueryLexer.g:51:11: 'RANK'
             pass 
             self.match("RANK")
 
@@ -435,8 +406,8 @@ class QueryLexer(Lexer):
             _type = DENSE
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:91:9: ( 'DENSE' )
-            # QueryLexer.g:91:12: 'DENSE'
+            # QueryLexer.g:54:9: ( 'DENSE' )
+            # QueryLexer.g:54:12: 'DENSE'
             pass 
             self.match("DENSE")
 
@@ -460,8 +431,8 @@ class QueryLexer(Lexer):
             _type = CUBE
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:94:9: ( 'CUBE' )
-            # QueryLexer.g:94:11: 'CUBE'
+            # QueryLexer.g:57:9: ( 'CUBE' )
+            # QueryLexer.g:57:11: 'CUBE'
             pass 
             self.match("CUBE")
 
@@ -485,8 +456,8 @@ class QueryLexer(Lexer):
             _type = ROLLUP
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:97:8: ( 'ROLLUP' )
-            # QueryLexer.g:97:10: 'ROLLUP'
+            # QueryLexer.g:60:8: ( 'ROLLUP' )
+            # QueryLexer.g:60:10: 'ROLLUP'
             pass 
             self.match("ROLLUP")
 
@@ -510,8 +481,8 @@ class QueryLexer(Lexer):
             _type = DISTINCT
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:100:10: ( 'DISTINCT' )
-            # QueryLexer.g:100:12: 'DISTINCT'
+            # QueryLexer.g:63:10: ( 'DISTINCT' )
+            # QueryLexer.g:63:12: 'DISTINCT'
             pass 
             self.match("DISTINCT")
 
@@ -535,8 +506,8 @@ class QueryLexer(Lexer):
             _type = COGROUP
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:103:9: ( 'COGROUP' )
-            # QueryLexer.g:103:11: 'COGROUP'
+            # QueryLexer.g:66:9: ( 'COGROUP' )
+            # QueryLexer.g:66:11: 'COGROUP'
             pass 
             self.match("COGROUP")
 
@@ -560,8 +531,8 @@ class QueryLexer(Lexer):
             _type = JOIN
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:106:6: ( 'JOIN' )
-            # QueryLexer.g:106:8: 'JOIN'
+            # QueryLexer.g:69:6: ( 'JOIN' )
+            # QueryLexer.g:69:8: 'JOIN'
             pass 
             self.match("JOIN")
 
@@ -585,8 +556,8 @@ class QueryLexer(Lexer):
             _type = CROSS
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:109:7: ( 'CROSS' )
-            # QueryLexer.g:109:9: 'CROSS'
+            # QueryLexer.g:72:7: ( 'CROSS' )
+            # QueryLexer.g:72:9: 'CROSS'
             pass 
             self.match("CROSS")
 
@@ -610,8 +581,8 @@ class QueryLexer(Lexer):
             _type = UNION
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:112:7: ( 'UNION' )
-            # QueryLexer.g:112:9: 'UNION'
+            # QueryLexer.g:75:7: ( 'UNION' )
+            # QueryLexer.g:75:9: 'UNION'
             pass 
             self.match("UNION")
 
@@ -635,8 +606,8 @@ class QueryLexer(Lexer):
             _type = SPLIT
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:115:7: ( 'SPLIT' )
-            # QueryLexer.g:115:9: 'SPLIT'
+            # QueryLexer.g:78:7: ( 'SPLIT' )
+            # QueryLexer.g:78:9: 'SPLIT'
             pass 
             self.match("SPLIT")
 
@@ -660,8 +631,8 @@ class QueryLexer(Lexer):
             _type = INTO
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:118:6: ( 'INTO' )
-            # QueryLexer.g:118:8: 'INTO'
+            # QueryLexer.g:81:6: ( 'INTO' )
+            # QueryLexer.g:81:8: 'INTO'
             pass 
             self.match("INTO")
 
@@ -685,8 +656,8 @@ class QueryLexer(Lexer):
             _type = IF
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:121:4: ( 'IF' )
-            # QueryLexer.g:121:6: 'IF'
+            # QueryLexer.g:84:4: ( 'IF' )
+            # QueryLexer.g:84:6: 'IF'
             pass 
             self.match("IF")
 
@@ -710,8 +681,8 @@ class QueryLexer(Lexer):
             _type = OTHERWISE
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:124:11: ( 'OTHERWISE' )
-            # QueryLexer.g:124:13: 'OTHERWISE'
+            # QueryLexer.g:87:11: ( 'OTHERWISE' )
+            # QueryLexer.g:87:13: 'OTHERWISE'
             pass 
             self.match("OTHERWISE")
 
@@ -735,8 +706,8 @@ class QueryLexer(Lexer):
             _type = ALL
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:127:5: ( 'ALL' )
-            # QueryLexer.g:127:7: 'ALL'
+            # QueryLexer.g:90:5: ( 'ALL' )
+            # QueryLexer.g:90:7: 'ALL'
             pass 
             self.match("ALL")
 
@@ -760,8 +731,8 @@ class QueryLexer(Lexer):
             _type = AS
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:130:4: ( 'AS' )
-            # QueryLexer.g:130:6: 'AS'
+            # QueryLexer.g:93:4: ( 'AS' )
+            # QueryLexer.g:93:6: 'AS'
             pass 
             self.match("AS")
 
@@ -785,8 +756,8 @@ class QueryLexer(Lexer):
             _type = BY
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:133:4: ( 'BY' )
-            # QueryLexer.g:133:6: 'BY'
+            # QueryLexer.g:96:4: ( 'BY' )
+            # QueryLexer.g:96:6: 'BY'
             pass 
             self.match("BY")
 
@@ -810,8 +781,8 @@ class QueryLexer(Lexer):
             _type = USING
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:136:7: ( 'USING' )
-            # QueryLexer.g:136:9: 'USING'
+            # QueryLexer.g:99:7: ( 'USING' )
+            # QueryLexer.g:99:9: 'USING'
             pass 
             self.match("USING")
 
@@ -835,8 +806,8 @@ class QueryLexer(Lexer):
             _type = INNER
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:139:7: ( 'INNER' )
-            # QueryLexer.g:139:9: 'INNER'
+            # QueryLexer.g:102:7: ( 'INNER' )
+            # QueryLexer.g:102:9: 'INNER'
             pass 
             self.match("INNER")
 
@@ -860,8 +831,8 @@ class QueryLexer(Lexer):
             _type = OUTER
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:142:7: ( 'OUTER' )
-            # QueryLexer.g:142:9: 'OUTER'
+            # QueryLexer.g:105:7: ( 'OUTER' )
+            # QueryLexer.g:105:9: 'OUTER'
             pass 
             self.match("OUTER")
 
@@ -885,8 +856,8 @@ class QueryLexer(Lexer):
             _type = ONSCHEMA
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:145:10: ( 'ONSCHEMA' )
-            # QueryLexer.g:145:12: 'ONSCHEMA'
+            # QueryLexer.g:108:10: ( 'ONSCHEMA' )
+            # QueryLexer.g:108:12: 'ONSCHEMA'
             pass 
             self.match("ONSCHEMA")
 
@@ -910,8 +881,8 @@ class QueryLexer(Lexer):
             _type = PARALLEL
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:148:10: ( 'PARALLEL' )
-            # QueryLexer.g:148:12: 'PARALLEL'
+            # QueryLexer.g:111:10: ( 'PARALLEL' )
+            # QueryLexer.g:111:12: 'PARALLEL'
             pass 
             self.match("PARALLEL")
 
@@ -935,8 +906,8 @@ class QueryLexer(Lexer):
             _type = PARTITION
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:151:11: ( 'PARTITION' )
-            # QueryLexer.g:151:13: 'PARTITION'
+            # QueryLexer.g:114:11: ( 'PARTITION' )
+            # QueryLexer.g:114:13: 'PARTITION'
             pass 
             self.match("PARTITION")
 
@@ -960,8 +931,8 @@ class QueryLexer(Lexer):
             _type = GROUP
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:154:7: ( 'GROUP' )
-            # QueryLexer.g:154:9: 'GROUP'
+            # QueryLexer.g:117:7: ( 'GROUP' )
+            # QueryLexer.g:117:9: 'GROUP'
             pass 
             self.match("GROUP")
 
@@ -985,8 +956,8 @@ class QueryLexer(Lexer):
             _type = AND
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:157:5: ( 'AND' )
-            # QueryLexer.g:157:7: 'AND'
+            # QueryLexer.g:120:5: ( 'AND' )
+            # QueryLexer.g:120:7: 'AND'
             pass 
             self.match("AND")
 
@@ -1010,8 +981,8 @@ class QueryLexer(Lexer):
             _type = OR
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:160:4: ( 'OR' )
-            # QueryLexer.g:160:6: 'OR'
+            # QueryLexer.g:123:4: ( 'OR' )
+            # QueryLexer.g:123:6: 'OR'
             pass 
             self.match("OR")
 
@@ -1035,8 +1006,8 @@ class QueryLexer(Lexer):
             _type = NOT
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:163:5: ( 'NOT' )
-            # QueryLexer.g:163:7: 'NOT'
+            # QueryLexer.g:126:5: ( 'NOT' )
+            # QueryLexer.g:126:7: 'NOT'
             pass 
             self.match("NOT")
 
@@ -1060,8 +1031,8 @@ class QueryLexer(Lexer):
             _type = GENERATE
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:166:10: ( 'GENERATE' )
-            # QueryLexer.g:166:12: 'GENERATE'
+            # QueryLexer.g:129:10: ( 'GENERATE' )
+            # QueryLexer.g:129:12: 'GENERATE'
             pass 
             self.match("GENERATE")
 
@@ -1085,8 +1056,8 @@ class QueryLexer(Lexer):
             _type = FLATTEN
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:169:9: ( 'FLATTEN' )
-            # QueryLexer.g:169:11: 'FLATTEN'
+            # QueryLexer.g:132:9: ( 'FLATTEN' )
+            # QueryLexer.g:132:11: 'FLATTEN'
             pass 
             self.match("FLATTEN")
 
@@ -1110,8 +1081,8 @@ class QueryLexer(Lexer):
             _type = ASC
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:172:5: ( 'ASC' )
-            # QueryLexer.g:172:7: 'ASC'
+            # QueryLexer.g:135:5: ( 'ASC' )
+            # QueryLexer.g:135:7: 'ASC'
             pass 
             self.match("ASC")
 
@@ -1135,8 +1106,8 @@ class QueryLexer(Lexer):
             _type = DESC
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:175:6: ( 'DESC' )
-            # QueryLexer.g:175:8: 'DESC'
+            # QueryLexer.g:138:6: ( 'DESC' )
+            # QueryLexer.g:138:8: 'DESC'
             pass 
             self.match("DESC")
 
@@ -1160,8 +1131,8 @@ class QueryLexer(Lexer):
             _type = BOOLEAN
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:178:9: ( 'BOOLEAN' )
-            # QueryLexer.g:178:11: 'BOOLEAN'
+            # QueryLexer.g:141:9: ( 'BOOLEAN' )
+            # QueryLexer.g:141:11: 'BOOLEAN'
             pass 
             self.match("BOOLEAN")
 
@@ -1185,8 +1156,8 @@ class QueryLexer(Lexer):
             _type = INT
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:181:5: ( 'INT' )
-            # QueryLexer.g:181:7: 'INT'
+            # QueryLexer.g:144:5: ( 'INT' )
+            # QueryLexer.g:144:7: 'INT'
             pass 
             self.match("INT")
 
@@ -1210,8 +1181,8 @@ class QueryLexer(Lexer):
             _type = LONG
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:184:6: ( 'LONG' )
-            # QueryLexer.g:184:8: 'LONG'
+            # QueryLexer.g:147:6: ( 'LONG' )
+            # QueryLexer.g:147:8: 'LONG'
             pass 
             self.match("LONG")
 
@@ -1235,8 +1206,8 @@ class QueryLexer(Lexer):
             _type = FLOAT
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:187:7: ( 'FLOAT' )
-            # QueryLexer.g:187:9: 'FLOAT'
+            # QueryLexer.g:150:7: ( 'FLOAT' )
+            # QueryLexer.g:150:9: 'FLOAT'
             pass 
             self.match("FLOAT")
 
@@ -1260,8 +1231,8 @@ class QueryLexer(Lexer):
             _type = DOUBLE
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:190:8: ( 'DOUBLE' )
-            # QueryLexer.g:190:10: 'DOUBLE'
+            # QueryLexer.g:153:8: ( 'DOUBLE' )
+            # QueryLexer.g:153:10: 'DOUBLE'
             pass 
             self.match("DOUBLE")
 
@@ -1285,8 +1256,8 @@ class QueryLexer(Lexer):
             _type = DATETIME
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:193:10: ( 'DATETIME' )
-            # QueryLexer.g:193:12: 'DATETIME'
+            # QueryLexer.g:156:10: ( 'DATETIME' )
+            # QueryLexer.g:156:12: 'DATETIME'
             pass 
             self.match("DATETIME")
 
@@ -1310,8 +1281,8 @@ class QueryLexer(Lexer):
             _type = CHARARRAY
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:196:11: ( 'CHARARRAY' )
-            # QueryLexer.g:196:13: 'CHARARRAY'
+            # QueryLexer.g:159:11: ( 'CHARARRAY' )
+            # QueryLexer.g:159:13: 'CHARARRAY'
             pass 
             self.match("CHARARRAY")
 
@@ -1335,8 +1306,8 @@ class QueryLexer(Lexer):
             _type = BYTEARRAY
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:199:11: ( 'BYTEARRAY' )
-            # QueryLexer.g:199:13: 'BYTEARRAY'
+            # QueryLexer.g:162:11: ( 'BYTEARRAY' )
+            # QueryLexer.g:162:13: 'BYTEARRAY'
             pass 
             self.match("BYTEARRAY")
 
@@ -1360,8 +1331,8 @@ class QueryLexer(Lexer):
             _type = BAG
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:202:5: ( 'BAG' )
-            # QueryLexer.g:202:7: 'BAG'
+            # QueryLexer.g:165:5: ( 'BAG' )
+            # QueryLexer.g:165:7: 'BAG'
             pass 
             self.match("BAG")
 
@@ -1385,8 +1356,8 @@ class QueryLexer(Lexer):
             _type = TUPLE
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:205:7: ( 'TUPLE' )
-            # QueryLexer.g:205:9: 'TUPLE'
+            # QueryLexer.g:168:7: ( 'TUPLE' )
+            # QueryLexer.g:168:9: 'TUPLE'
             pass 
             self.match("TUPLE")
 
@@ -1410,8 +1381,8 @@ class QueryLexer(Lexer):
             _type = MAP
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:208:5: ( 'MAP' )
-            # QueryLexer.g:208:7: 'MAP'
+            # QueryLexer.g:171:5: ( 'MAP' )
+            # QueryLexer.g:171:7: 'MAP'
             pass 
             self.match("MAP")
 
@@ -1435,8 +1406,8 @@ class QueryLexer(Lexer):
             _type = IS
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:211:4: ( 'IS' )
-            # QueryLexer.g:211:6: 'IS'
+            # QueryLexer.g:174:4: ( 'IS' )
+            # QueryLexer.g:174:6: 'IS'
             pass 
             self.match("IS")
 
@@ -1460,8 +1431,8 @@ class QueryLexer(Lexer):
             _type = STREAM
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:214:8: ( 'STREAM' )
-            # QueryLexer.g:214:10: 'STREAM'
+            # QueryLexer.g:177:8: ( 'STREAM' )
+            # QueryLexer.g:177:10: 'STREAM'
             pass 
             self.match("STREAM")
 
@@ -1485,8 +1456,8 @@ class QueryLexer(Lexer):
             _type = THROUGH
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:217:9: ( 'THROUGH' )
-            # QueryLexer.g:217:11: 'THROUGH'
+            # QueryLexer.g:180:9: ( 'THROUGH' )
+            # QueryLexer.g:180:11: 'THROUGH'
             pass 
             self.match("THROUGH")
 
@@ -1510,8 +1481,8 @@ class QueryLexer(Lexer):
             _type = STORE
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:220:7: ( 'STORE' )
-            # QueryLexer.g:220:9: 'STORE'
+            # QueryLexer.g:183:7: ( 'STORE' )
+            # QueryLexer.g:183:9: 'STORE'
             pass 
             self.match("STORE")
 
@@ -1535,8 +1506,8 @@ class QueryLexer(Lexer):
             _type = MAPREDUCE
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:223:11: ( 'MAPREDUCE' )
-            # QueryLexer.g:223:13: 'MAPREDUCE'
+            # QueryLexer.g:186:11: ( 'MAPREDUCE' )
+            # QueryLexer.g:186:13: 'MAPREDUCE'
             pass 
             self.match("MAPREDUCE")
 
@@ -1560,8 +1531,8 @@ class QueryLexer(Lexer):
             _type = SHIP
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:226:6: ( 'SHIP' )
-            # QueryLexer.g:226:8: 'SHIP'
+            # QueryLexer.g:189:6: ( 'SHIP' )
+            # QueryLexer.g:189:8: 'SHIP'
             pass 
             self.match("SHIP")
 
@@ -1585,8 +1556,8 @@ class QueryLexer(Lexer):
             _type = CACHE
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:229:7: ( 'CACHE' )
-            # QueryLexer.g:229:9: 'CACHE'
+            # QueryLexer.g:192:7: ( 'CACHE' )
+            # QueryLexer.g:192:9: 'CACHE'
             pass 
             self.match("CACHE")
 
@@ -1610,8 +1581,8 @@ class QueryLexer(Lexer):
             _type = INPUT
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:232:7: ( 'INPUT' )
-            # QueryLexer.g:232:9: 'INPUT'
+            # QueryLexer.g:195:7: ( 'INPUT' )
+            # QueryLexer.g:195:9: 'INPUT'
             pass 
             self.match("INPUT")
 
@@ -1635,8 +1606,8 @@ class QueryLexer(Lexer):
             _type = OUTPUT
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:235:8: ( 'OUTPUT' )
-            # QueryLexer.g:235:10: 'OUTPUT'
+            # QueryLexer.g:198:8: ( 'OUTPUT' )
+            # QueryLexer.g:198:10: 'OUTPUT'
             pass 
             self.match("OUTPUT")
 
@@ -1660,8 +1631,8 @@ class QueryLexer(Lexer):
             _type = STDERROR
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:238:10: ( 'STDERR' )
-            # QueryLexer.g:238:12: 'STDERR'
+            # QueryLexer.g:201:10: ( 'STDERR' )
+            # QueryLexer.g:201:12: 'STDERR'
             pass 
             self.match("STDERR")
 
@@ -1685,8 +1656,8 @@ class QueryLexer(Lexer):
             _type = STDIN
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:241:7: ( 'STDIN' )
-            # QueryLexer.g:241:9: 'STDIN'
+            # QueryLexer.g:204:7: ( 'STDIN' )
+            # QueryLexer.g:204:9: 'STDIN'
             pass 
             self.match("STDIN")
 
@@ -1710,8 +1681,8 @@ class QueryLexer(Lexer):
             _type = STDOUT
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:244:8: ( 'STDOUT' )
-            # QueryLexer.g:244:10: 'STDOUT'
+            # QueryLexer.g:207:8: ( 'STDOUT' )
+            # QueryLexer.g:207:10: 'STDOUT'
             pass 
             self.match("STDOUT")
 
@@ -1735,8 +1706,8 @@ class QueryLexer(Lexer):
             _type = LIMIT
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:247:7: ( 'LIMIT' )
-            # QueryLexer.g:247:9: 'LIMIT'
+            # QueryLexer.g:210:7: ( 'LIMIT' )
+            # QueryLexer.g:210:9: 'LIMIT'
             pass 
             self.match("LIMIT")
 
@@ -1760,8 +1731,8 @@ class QueryLexer(Lexer):
             _type = SAMPLE
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:250:8: ( 'SAMPLE' )
-            # QueryLexer.g:250:10: 'SAMPLE'
+            # QueryLexer.g:213:8: ( 'SAMPLE' )
+            # QueryLexer.g:213:10: 'SAMPLE'
             pass 
             self.match("SAMPLE")
 
@@ -1785,8 +1756,8 @@ class QueryLexer(Lexer):
             _type = LEFT
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:253:6: ( 'LEFT' )
-            # QueryLexer.g:253:8: 'LEFT'
+            # QueryLexer.g:216:6: ( 'LEFT' )
+            # QueryLexer.g:216:8: 'LEFT'
             pass 
             self.match("LEFT")
 
@@ -1810,8 +1781,8 @@ class QueryLexer(Lexer):
             _type = RIGHT
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:256:7: ( 'RIGHT' )
-            # QueryLexer.g:256:9: 'RIGHT'
+            # QueryLexer.g:219:7: ( 'RIGHT' )
+            # QueryLexer.g:219:9: 'RIGHT'
             pass 
             self.match("RIGHT")
 
@@ -1835,8 +1806,8 @@ class QueryLexer(Lexer):
             _type = FULL
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:259:6: ( 'FULL' )
-            # QueryLexer.g:259:8: 'FULL'
+            # QueryLexer.g:222:6: ( 'FULL' )
+            # QueryLexer.g:222:8: 'FULL'
             pass 
             self.match("FULL")
 
@@ -1860,8 +1831,8 @@ class QueryLexer(Lexer):
             _type = STR_OP_EQ
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:262:11: ( 'EQ' )
-            # QueryLexer.g:262:13: 'EQ'
+            # QueryLexer.g:225:11: ( 'EQ' )
+            # QueryLexer.g:225:13: 'EQ'
             pass 
             self.match("EQ")
 
@@ -1885,8 +1856,8 @@ class QueryLexer(Lexer):
             _type = STR_OP_GT
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:265:11: ( 'GT' )
-            # QueryLexer.g:265:13: 'GT'
+            # QueryLexer.g:228:11: ( 'GT' )
+            # QueryLexer.g:228:13: 'GT'
             pass 
             self.match("GT")
 
@@ -1910,8 +1881,8 @@ class QueryLexer(Lexer):
             _type = STR_OP_LT
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:268:11: ( 'LT' )
-            # QueryLexer.g:268:13: 'LT'
+            # QueryLexer.g:231:11: ( 'LT' )
+            # QueryLexer.g:231:13: 'LT'
             pass 
             self.match("LT")
 
@@ -1935,8 +1906,8 @@ class QueryLexer(Lexer):
             _type = STR_OP_GTE
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:271:12: ( 'GTE' )
-            # QueryLexer.g:271:14: 'GTE'
+            # QueryLexer.g:234:12: ( 'GTE' )
+            # QueryLexer.g:234:14: 'GTE'
             pass 
             self.match("GTE")
 
@@ -1960,8 +1931,8 @@ class QueryLexer(Lexer):
             _type = STR_OP_LTE
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:274:12: ( 'LTE' )
-            # QueryLexer.g:274:14: 'LTE'
+            # QueryLexer.g:237:12: ( 'LTE' )
+            # QueryLexer.g:237:14: 'LTE'
             pass 
             self.match("LTE")
 
@@ -1985,8 +1956,8 @@ class QueryLexer(Lexer):
             _type = STR_OP_NE
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:277:11: ( 'NEQ' )
-            # QueryLexer.g:277:13: 'NEQ'
+            # QueryLexer.g:240:11: ( 'NEQ' )
+            # QueryLexer.g:240:13: 'NEQ'
             pass 
             self.match("NEQ")
 
@@ -2010,8 +1981,8 @@ class QueryLexer(Lexer):
             _type = STR_OP_MATCHES
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:280:16: ( 'MATCHES' )
-            # QueryLexer.g:280:18: 'MATCHES'
+            # QueryLexer.g:243:16: ( 'MATCHES' )
+            # QueryLexer.g:243:18: 'MATCHES'
             pass 
             self.match("MATCHES")
 
@@ -2035,8 +2006,8 @@ class QueryLexer(Lexer):
             _type = TRUE
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:283:6: ( 'TRUE' )
-            # QueryLexer.g:283:8: 'TRUE'
+            # QueryLexer.g:246:6: ( 'TRUE' )
+            # QueryLexer.g:246:8: 'TRUE'
             pass 
             self.match("TRUE")
 
@@ -2060,8 +2031,8 @@ class QueryLexer(Lexer):
             _type = FALSE
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:286:7: ( 'FALSE' )
-            # QueryLexer.g:286:9: 'FALSE'
+            # QueryLexer.g:249:7: ( 'FALSE' )
+            # QueryLexer.g:249:9: 'FALSE'
             pass 
             self.match("FALSE")
 
@@ -2085,8 +2056,8 @@ class QueryLexer(Lexer):
             _type = NUM_OP_EQ
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:289:11: ( '==' )
-            # QueryLexer.g:289:13: '=='
+            # QueryLexer.g:252:11: ( '==' )
+            # QueryLexer.g:252:13: '=='
             pass 
             self.match("==")
 
@@ -2110,8 +2081,8 @@ class QueryLexer(Lexer):
             _type = NUM_OP_LT
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:292:11: ( '<' )
-            # QueryLexer.g:292:13: '<'
+            # QueryLexer.g:255:11: ( '<' )
+            # QueryLexer.g:255:13: '<'
             pass 
             self.match(60)
 
@@ -2135,8 +2106,8 @@ class QueryLexer(Lexer):
             _type = NUM_OP_LTE
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:295:12: ( '<=' )
-            # QueryLexer.g:295:14: '<='
+            # QueryLexer.g:258:12: ( '<=' )
+            # QueryLexer.g:258:14: '<='
             pass 
             self.match("<=")
 
@@ -2160,8 +2131,8 @@ class QueryLexer(Lexer):
             _type = NUM_OP_GT
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:298:11: ( '>' )
-            # QueryLexer.g:298:13: '>'
+            # QueryLexer.g:261:11: ( '>' )
+            # QueryLexer.g:261:13: '>'
             pass 
             self.match(62)
 
@@ -2185,8 +2156,8 @@ class QueryLexer(Lexer):
             _type = NUM_OP_GTE
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:301:12: ( '>=' )
-            # QueryLexer.g:301:14: '>='
+            # QueryLexer.g:264:12: ( '>=' )
+            # QueryLexer.g:264:14: '>='
             pass 
             self.match(">=")
 
@@ -2210,8 +2181,8 @@ class QueryLexer(Lexer):
             _type = NUM_OP_NE
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:304:11: ( '!=' )
-            # QueryLexer.g:304:13: '!='
+            # QueryLexer.g:267:11: ( '!=' )
+            # QueryLexer.g:267:13: '!='
             pass 
             self.match("!=")
 
@@ -2232,8 +2203,8 @@ class QueryLexer(Lexer):
     def mDIGIT(self, ):
 
         try:
-            # QueryLexer.g:307:16: ( '0' .. '9' )
-            # QueryLexer.g:307:18: '0' .. '9'
+            # QueryLexer.g:270:16: ( '0' .. '9' )
+            # QueryLexer.g:270:18: '0' .. '9'
             pass 
             self.matchRange(48, 57)
 
@@ -2252,8 +2223,8 @@ class QueryLexer(Lexer):
     def mLETTER(self, ):
 
         try:
-            # QueryLexer.g:310:17: ( 'A' .. 'Z' )
-            # QueryLexer.g:310:19: 'A' .. 'Z'
+            # QueryLexer.g:273:17: ( 'A' .. 'Z' )
+            # QueryLexer.g:273:19: 'A' .. 'Z'
             pass 
             self.matchRange(65, 90)
 
@@ -2272,8 +2243,8 @@ class QueryLexer(Lexer):
     def mSPECIALCHAR(self, ):
 
         try:
-            # QueryLexer.g:313:22: ( '_' )
-            # QueryLexer.g:313:24: '_'
+            # QueryLexer.g:276:22: ( '_' )
+            # QueryLexer.g:276:24: '_'
             pass 
             self.match(95)
 
@@ -2292,11 +2263,11 @@ class QueryLexer(Lexer):
     def mID(self, ):
 
         try:
-            # QueryLexer.g:316:12: ( LETTER ( DIGIT | LETTER | SPECIALCHAR )* )
-            # QueryLexer.g:316:14: LETTER ( DIGIT | LETTER | SPECIALCHAR )*
+            # QueryLexer.g:279:12: ( LETTER ( DIGIT | LETTER | SPECIALCHAR )* )
+            # QueryLexer.g:279:14: LETTER ( DIGIT | LETTER | SPECIALCHAR )*
             pass 
             self.mLETTER()
-            # QueryLexer.g:316:21: ( DIGIT | LETTER | SPECIALCHAR )*
+            # QueryLexer.g:279:21: ( DIGIT | LETTER | SPECIALCHAR )*
             while True: #loop1
                 alt1 = 2
                 LA1_0 = self.input.LA(1)
@@ -2341,8 +2312,8 @@ class QueryLexer(Lexer):
             _type = DCOLON
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:319:8: ( '::' )
-            # QueryLexer.g:319:10: '::'
+            # QueryLexer.g:282:8: ( '::' )
+            # QueryLexer.g:282:10: '::'
             pass 
             self.match("::")
 
@@ -2366,14 +2337,14 @@ class QueryLexer(Lexer):
             _type = IDENTIFIER_L
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:322:14: ( ( ID DCOLON )=> ( ID DCOLON IDENTIFIER_L ) | ID )
+            # QueryLexer.g:285:14: ( ( ID DCOLON )=> ( ID DCOLON IDENTIFIER_L ) | ID )
             alt2 = 2
             alt2 = self.dfa2.predict(self.input)
             if alt2 == 1:
-                # QueryLexer.g:322:16: ( ID DCOLON )=> ( ID DCOLON IDENTIFIER_L )
+                # QueryLexer.g:285:16: ( ID DCOLON )=> ( ID DCOLON IDENTIFIER_L )
                 pass 
-                # QueryLexer.g:322:33: ( ID DCOLON IDENTIFIER_L )
-                # QueryLexer.g:322:35: ID DCOLON IDENTIFIER_L
+                # QueryLexer.g:285:33: ( ID DCOLON IDENTIFIER_L )
+                # QueryLexer.g:285:35: ID DCOLON IDENTIFIER_L
                 pass 
                 self.mID()
                 self.mDCOLON()
@@ -2384,7 +2355,7 @@ class QueryLexer(Lexer):
 
 
             elif alt2 == 2:
-                # QueryLexer.g:323:14: ID
+                # QueryLexer.g:286:14: ID
                 pass 
                 self.mID()
 
@@ -2404,7 +2375,7 @@ class QueryLexer(Lexer):
     def mFLOATINGPOINT(self, ):
 
         try:
-            # QueryLexer.g:326:24: ( INTEGER ( PERIOD INTEGER )? | PERIOD INTEGER )
+            # QueryLexer.g:289:24: ( INTEGER ( PERIOD INTEGER )? | PERIOD INTEGER )
             alt4 = 2
             LA4_0 = self.input.LA(1)
 
@@ -2421,17 +2392,17 @@ class QueryLexer(Lexer):
                 raise nvae
 
             if alt4 == 1:
-                # QueryLexer.g:326:26: INTEGER ( PERIOD INTEGER )?
+                # QueryLexer.g:289:26: INTEGER ( PERIOD INTEGER )?
                 pass 
                 self.mINTEGER()
-                # QueryLexer.g:326:34: ( PERIOD INTEGER )?
+                # QueryLexer.g:289:34: ( PERIOD INTEGER )?
                 alt3 = 2
                 LA3_0 = self.input.LA(1)
 
                 if (LA3_0 == 46) :
                     alt3 = 1
                 if alt3 == 1:
-                    # QueryLexer.g:326:36: PERIOD INTEGER
+                    # QueryLexer.g:289:36: PERIOD INTEGER
                     pass 
                     self.mPERIOD()
                     self.mINTEGER()
@@ -2441,7 +2412,7 @@ class QueryLexer(Lexer):
 
 
             elif alt4 == 2:
-                # QueryLexer.g:326:56: PERIOD INTEGER
+                # QueryLexer.g:289:56: PERIOD INTEGER
                 pass 
                 self.mPERIOD()
                 self.mINTEGER()
@@ -2463,10 +2434,10 @@ class QueryLexer(Lexer):
             _type = INTEGER
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:329:8: ( ( DIGIT )+ )
-            # QueryLexer.g:329:10: ( DIGIT )+
+            # QueryLexer.g:292:8: ( ( DIGIT )+ )
+            # QueryLexer.g:292:10: ( DIGIT )+
             pass 
-            # QueryLexer.g:329:10: ( DIGIT )+
+            # QueryLexer.g:292:10: ( DIGIT )+
             cnt5 = 0
             while True: #loop5
                 alt5 = 2
@@ -2477,7 +2448,7 @@ class QueryLexer(Lexer):
 
 
                 if alt5 == 1:
-                    # QueryLexer.g:329:12: DIGIT
+                    # QueryLexer.g:292:12: DIGIT
                     pass 
                     self.mDIGIT()
 
@@ -2514,18 +2485,18 @@ class QueryLexer(Lexer):
             _type = LONGINTEGER
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:332:12: ( INTEGER ( 'L' )? )
-            # QueryLexer.g:332:14: INTEGER ( 'L' )?
+            # QueryLexer.g:295:12: ( INTEGER ( 'L' )? )
+            # QueryLexer.g:295:14: INTEGER ( 'L' )?
             pass 
             self.mINTEGER()
-            # QueryLexer.g:332:22: ( 'L' )?
+            # QueryLexer.g:295:22: ( 'L' )?
             alt6 = 2
             LA6_0 = self.input.LA(1)
 
             if (LA6_0 == 76) :
                 alt6 = 1
             if alt6 == 1:
-                # QueryLexer.g:332:24: 'L'
+                # QueryLexer.g:295:24: 'L'
                 pass 
                 self.match(76)
 
@@ -2552,8 +2523,8 @@ class QueryLexer(Lexer):
             _type = DOLLARVAR
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:335:11: ( DOLLAR INTEGER )
-            # QueryLexer.g:335:13: DOLLAR INTEGER
+            # QueryLexer.g:298:11: ( DOLLAR INTEGER )
+            # QueryLexer.g:298:13: DOLLAR INTEGER
             pass 
             self.mDOLLAR()
             self.mINTEGER()
@@ -2578,21 +2549,21 @@ class QueryLexer(Lexer):
             _type = DOUBLENUMBER
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:338:14: ( FLOATINGPOINT ( 'E' ( MINUS | PLUS )? INTEGER )? )
-            # QueryLexer.g:338:16: FLOATINGPOINT ( 'E' ( MINUS | PLUS )? INTEGER )?
+            # QueryLexer.g:301:14: ( FLOATINGPOINT ( 'E' ( MINUS | PLUS )? INTEGER )? )
+            # QueryLexer.g:301:16: FLOATINGPOINT ( 'E' ( MINUS | PLUS )? INTEGER )?
             pass 
             self.mFLOATINGPOINT()
-            # QueryLexer.g:338:30: ( 'E' ( MINUS | PLUS )? INTEGER )?
+            # QueryLexer.g:301:30: ( 'E' ( MINUS | PLUS )? INTEGER )?
             alt8 = 2
             LA8_0 = self.input.LA(1)
 
             if (LA8_0 == 69) :
                 alt8 = 1
             if alt8 == 1:
-                # QueryLexer.g:338:32: 'E' ( MINUS | PLUS )? INTEGER
+                # QueryLexer.g:301:32: 'E' ( MINUS | PLUS )? INTEGER
                 pass 
                 self.match(69)
-                # QueryLexer.g:338:36: ( MINUS | PLUS )?
+                # QueryLexer.g:301:36: ( MINUS | PLUS )?
                 alt7 = 2
                 LA7_0 = self.input.LA(1)
 
@@ -2639,18 +2610,18 @@ class QueryLexer(Lexer):
             _type = FLOATNUMBER
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:341:13: ( DOUBLENUMBER ( 'F' )? )
-            # QueryLexer.g:341:15: DOUBLENUMBER ( 'F' )?
+            # QueryLexer.g:304:13: ( DOUBLENUMBER ( 'F' )? )
+            # QueryLexer.g:304:15: DOUBLENUMBER ( 'F' )?
             pass 
             self.mDOUBLENUMBER()
-            # QueryLexer.g:341:28: ( 'F' )?
+            # QueryLexer.g:304:28: ( 'F' )?
             alt9 = 2
             LA9_0 = self.input.LA(1)
 
             if (LA9_0 == 70) :
                 alt9 = 1
             if alt9 == 1:
-                # QueryLexer.g:341:30: 'F'
+                # QueryLexer.g:304:30: 'F'
                 pass 
                 self.match(70)
 
@@ -2677,11 +2648,11 @@ class QueryLexer(Lexer):
             _type = QUOTEDSTRING
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:344:14: ( '\\'' ( (~ ( '\\'' | '\\\\' | '\\n' | '\\r' ) ) | ( '\\\\' ( ( 'N' | 'T' | 'B' | 'R' | 'F' | '\\\\' | '\\'' ) ) ) | ( '\\\\U' ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ) )* '\\'' )
-            # QueryLexer.g:344:17: '\\'' ( (~ ( '\\'' | '\\\\' | '\\n' | '\\r' ) ) | ( '\\\\' ( ( 'N' | 'T' | 'B' | 'R' | 'F' | '\\\\' | '\\'' ) ) ) | ( '\\\\U' ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ) )* '\\''
+            # QueryLexer.g:307:14: ( '\\'' ( (~ ( '\\'' | '\\\\' | '\\n' | '\\r' ) ) | ( '\\\\' ( ( 'N' | 'T' | 'B' | 'R' | 'F' | '\\\\' | '\\'' ) ) ) | ( '\\\\U' ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ) )* '\\'' )
+            # QueryLexer.g:307:17: '\\'' ( (~ ( '\\'' | '\\\\' | '\\n' | '\\r' ) ) | ( '\\\\' ( ( 'N' | 'T' | 'B' | 'R' | 'F' | '\\\\' | '\\'' ) ) ) | ( '\\\\U' ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ) )* '\\''
             pass 
             self.match(39)
-            # QueryLexer.g:344:22: ( (~ ( '\\'' | '\\\\' | '\\n' | '\\r' ) ) | ( '\\\\' ( ( 'N' | 'T' | 'B' | 'R' | 'F' | '\\\\' | '\\'' ) ) ) | ( '\\\\U' ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ) )*
+            # QueryLexer.g:307:22: ( (~ ( '\\'' | '\\\\' | '\\n' | '\\r' ) ) | ( '\\\\' ( ( 'N' | 'T' | 'B' | 'R' | 'F' | '\\\\' | '\\'' ) ) ) | ( '\\\\U' ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ) )*
             while True: #loop10
                 alt10 = 4
                 LA10_0 = self.input.LA(1)
@@ -2700,10 +2671,10 @@ class QueryLexer(Lexer):
 
 
                 if alt10 == 1:
-                    # QueryLexer.g:344:26: (~ ( '\\'' | '\\\\' | '\\n' | '\\r' ) )
+                    # QueryLexer.g:307:26: (~ ( '\\'' | '\\\\' | '\\n' | '\\r' ) )
                     pass 
-                    # QueryLexer.g:344:26: (~ ( '\\'' | '\\\\' | '\\n' | '\\r' ) )
-                    # QueryLexer.g:344:28: ~ ( '\\'' | '\\\\' | '\\n' | '\\r' )
+                    # QueryLexer.g:307:26: (~ ( '\\'' | '\\\\' | '\\n' | '\\r' ) )
+                    # QueryLexer.g:307:28: ~ ( '\\'' | '\\\\' | '\\n' | '\\r' )
                     pass 
                     if (0 <= self.input.LA(1) <= 9) or (11 <= self.input.LA(1) <= 12) or (14 <= self.input.LA(1) <= 38) or (40 <= self.input.LA(1) <= 91) or (93 <= self.input.LA(1) <= 65535):
                         self.input.consume()
@@ -2721,14 +2692,14 @@ class QueryLexer(Lexer):
 
 
                 elif alt10 == 2:
-                    # QueryLexer.g:345:26: ( '\\\\' ( ( 'N' | 'T' | 'B' | 'R' | 'F' | '\\\\' | '\\'' ) ) )
+                    # QueryLexer.g:308:26: ( '\\\\' ( ( 'N' | 'T' | 'B' | 'R' | 'F' | '\\\\' | '\\'' ) ) )
                     pass 
-                    # QueryLexer.g:345:26: ( '\\\\' ( ( 'N' | 'T' | 'B' | 'R' | 'F' | '\\\\' | '\\'' ) ) )
-                    # QueryLexer.g:345:28: '\\\\' ( ( 'N' | 'T' | 'B' | 'R' | 'F' | '\\\\' | '\\'' ) )
+                    # QueryLexer.g:308:26: ( '\\\\' ( ( 'N' | 'T' | 'B' | 'R' | 'F' | '\\\\' | '\\'' ) ) )
+                    # QueryLexer.g:308:28: '\\\\' ( ( 'N' | 'T' | 'B' | 'R' | 'F' | '\\\\' | '\\'' ) )
                     pass 
                     self.match(92)
-                    # QueryLexer.g:345:33: ( ( 'N' | 'T' | 'B' | 'R' | 'F' | '\\\\' | '\\'' ) )
-                    # QueryLexer.g:345:35: ( 'N' | 'T' | 'B' | 'R' | 'F' | '\\\\' | '\\'' )
+                    # QueryLexer.g:308:33: ( ( 'N' | 'T' | 'B' | 'R' | 'F' | '\\\\' | '\\'' ) )
+                    # QueryLexer.g:308:35: ( 'N' | 'T' | 'B' | 'R' | 'F' | '\\\\' | '\\'' )
                     pass 
                     if self.input.LA(1) == 39 or self.input.LA(1) == 66 or self.input.LA(1) == 70 or self.input.LA(1) == 78 or self.input.LA(1) == 82 or self.input.LA(1) == 84 or self.input.LA(1) == 92:
                         self.input.consume()
@@ -2749,10 +2720,10 @@ class QueryLexer(Lexer):
 
 
                 elif alt10 == 3:
-                    # QueryLexer.g:346:26: ( '\\\\U' ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) )
+                    # QueryLexer.g:309:26: ( '\\\\U' ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) )
                     pass 
-                    # QueryLexer.g:346:26: ( '\\\\U' ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) )
-                    # QueryLexer.g:346:28: '\\\\U' ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' )
+                    # QueryLexer.g:309:26: ( '\\\\U' ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) )
+                    # QueryLexer.g:309:28: '\\\\U' ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' )
                     pass 
                     self.match("\\U")
                     if (48 <= self.input.LA(1) <= 57) or (65 <= self.input.LA(1) <= 70):
@@ -2824,11 +2795,11 @@ class QueryLexer(Lexer):
             _type = MULTILINE_QUOTEDSTRING
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:354:24: ( '\\'' ( (~ ( '\\'' | '\\\\' ) ) | ( '\\\\' ( ( 'N' | 'T' | 'B' | 'R' | 'F' | '\\\\' | '\\'' | 'n' | 'r' ) ) ) | ( '\\\\U' ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ) )* '\\'' )
-            # QueryLexer.g:354:27: '\\'' ( (~ ( '\\'' | '\\\\' ) ) | ( '\\\\' ( ( 'N' | 'T' | 'B' | 'R' | 'F' | '\\\\' | '\\'' | 'n' | 'r' ) ) ) | ( '\\\\U' ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ) )* '\\''
+            # QueryLexer.g:317:24: ( '\\'' ( (~ ( '\\'' | '\\\\' ) ) | ( '\\\\' ( ( 'N' | 'T' | 'B' | 'R' | 'F' | '\\\\' | '\\'' | 'n' | 'r' ) ) ) | ( '\\\\U' ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ) )* '\\'' )
+            # QueryLexer.g:317:27: '\\'' ( (~ ( '\\'' | '\\\\' ) ) | ( '\\\\' ( ( 'N' | 'T' | 'B' | 'R' | 'F' | '\\\\' | '\\'' | 'n' | 'r' ) ) ) | ( '\\\\U' ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ) )* '\\''
             pass 
             self.match(39)
-            # QueryLexer.g:354:32: ( (~ ( '\\'' | '\\\\' ) ) | ( '\\\\' ( ( 'N' | 'T' | 'B' | 'R' | 'F' | '\\\\' | '\\'' | 'n' | 'r' ) ) ) | ( '\\\\U' ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ) )*
+            # QueryLexer.g:317:32: ( (~ ( '\\'' | '\\\\' ) ) | ( '\\\\' ( ( 'N' | 'T' | 'B' | 'R' | 'F' | '\\\\' | '\\'' | 'n' | 'r' ) ) ) | ( '\\\\U' ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ) )*
             while True: #loop11
                 alt11 = 4
                 LA11_0 = self.input.LA(1)
@@ -2847,10 +2818,10 @@ class QueryLexer(Lexer):
 
 
                 if alt11 == 1:
-                    # QueryLexer.g:354:36: (~ ( '\\'' | '\\\\' ) )
+                    # QueryLexer.g:317:36: (~ ( '\\'' | '\\\\' ) )
                     pass 
-                    # QueryLexer.g:354:36: (~ ( '\\'' | '\\\\' ) )
-                    # QueryLexer.g:354:38: ~ ( '\\'' | '\\\\' )
+                    # QueryLexer.g:317:36: (~ ( '\\'' | '\\\\' ) )
+                    # QueryLexer.g:317:38: ~ ( '\\'' | '\\\\' )
                     pass 
                     if (0 <= self.input.LA(1) <= 38) or (40 <= self.input.LA(1) <= 91) or (93 <= self.input.LA(1) <= 65535):
                         self.input.consume()
@@ -2868,14 +2839,14 @@ class QueryLexer(Lexer):
 
 
                 elif alt11 == 2:
-                    # QueryLexer.g:355:36: ( '\\\\' ( ( 'N' | 'T' | 'B' | 'R' | 'F' | '\\\\' | '\\'' | 'n' | 'r' ) ) )
+                    # QueryLexer.g:318:36: ( '\\\\' ( ( 'N' | 'T' | 'B' | 'R' | 'F' | '\\\\' | '\\'' | 'n' | 'r' ) ) )
                     pass 
-                    # QueryLexer.g:355:36: ( '\\\\' ( ( 'N' | 'T' | 'B' | 'R' | 'F' | '\\\\' | '\\'' | 'n' | 'r' ) ) )
-                    # QueryLexer.g:355:38: '\\\\' ( ( 'N' | 'T' | 'B' | 'R' | 'F' | '\\\\' | '\\'' | 'n' | 'r' ) )
+                    # QueryLexer.g:318:36: ( '\\\\' ( ( 'N' | 'T' | 'B' | 'R' | 'F' | '\\\\' | '\\'' | 'n' | 'r' ) ) )
+                    # QueryLexer.g:318:38: '\\\\' ( ( 'N' | 'T' | 'B' | 'R' | 'F' | '\\\\' | '\\'' | 'n' | 'r' ) )
                     pass 
                     self.match(92)
-                    # QueryLexer.g:355:43: ( ( 'N' | 'T' | 'B' | 'R' | 'F' | '\\\\' | '\\'' | 'n' | 'r' ) )
-                    # QueryLexer.g:355:45: ( 'N' | 'T' | 'B' | 'R' | 'F' | '\\\\' | '\\'' | 'n' | 'r' )
+                    # QueryLexer.g:318:43: ( ( 'N' | 'T' | 'B' | 'R' | 'F' | '\\\\' | '\\'' | 'n' | 'r' ) )
+                    # QueryLexer.g:318:45: ( 'N' | 'T' | 'B' | 'R' | 'F' | '\\\\' | '\\'' | 'n' | 'r' )
                     pass 
                     if self.input.LA(1) == 39 or self.input.LA(1) == 66 or self.input.LA(1) == 70 or self.input.LA(1) == 78 or self.input.LA(1) == 82 or self.input.LA(1) == 84 or self.input.LA(1) == 92 or self.input.LA(1) == 110 or self.input.LA(1) == 114:
                         self.input.consume()
@@ -2896,10 +2867,10 @@ class QueryLexer(Lexer):
 
 
                 elif alt11 == 3:
-                    # QueryLexer.g:356:36: ( '\\\\U' ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) )
+                    # QueryLexer.g:319:36: ( '\\\\U' ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) )
                     pass 
-                    # QueryLexer.g:356:36: ( '\\\\U' ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) )
-                    # QueryLexer.g:356:38: '\\\\U' ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' )
+                    # QueryLexer.g:319:36: ( '\\\\U' ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) )
+                    # QueryLexer.g:319:38: '\\\\U' ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' ) ( '0' .. '9' | 'A' .. 'F' )
                     pass 
                     self.match("\\U")
                     if (48 <= self.input.LA(1) <= 57) or (65 <= self.input.LA(1) <= 70):
@@ -2971,11 +2942,11 @@ class QueryLexer(Lexer):
             _type = EXECCOMMAND
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:364:13: ( '`' (~ ( '`' ) )* '`' )
-            # QueryLexer.g:364:15: '`' (~ ( '`' ) )* '`'
+            # QueryLexer.g:327:13: ( '`' (~ ( '`' ) )* '`' )
+            # QueryLexer.g:327:15: '`' (~ ( '`' ) )* '`'
             pass 
             self.match(96)
-            # QueryLexer.g:364:19: (~ ( '`' ) )*
+            # QueryLexer.g:327:19: (~ ( '`' ) )*
             while True: #loop12
                 alt12 = 2
                 LA12_0 = self.input.LA(1)
@@ -2985,7 +2956,7 @@ class QueryLexer(Lexer):
 
 
                 if alt12 == 1:
-                    # QueryLexer.g:364:21: ~ ( '`' )
+                    # QueryLexer.g:327:21: ~ ( '`' )
                     pass 
                     if (0 <= self.input.LA(1) <= 95) or (97 <= self.input.LA(1) <= 65535):
                         self.input.consume()
@@ -3023,8 +2994,8 @@ class QueryLexer(Lexer):
             _type = STAR
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:367:6: ( '*' )
-            # QueryLexer.g:367:8: '*'
+            # QueryLexer.g:330:6: ( '*' )
+            # QueryLexer.g:330:8: '*'
             pass 
             self.match(42)
 
@@ -3048,8 +3019,8 @@ class QueryLexer(Lexer):
             _type = COLON
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:370:7: ( ':' )
-            # QueryLexer.g:370:9: ':'
+            # QueryLexer.g:333:7: ( ':' )
+            # QueryLexer.g:333:9: ':'
             pass 
             self.match(58)
 
@@ -3073,8 +3044,8 @@ class QueryLexer(Lexer):
             _type = DOLLAR
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:373:8: ( '$' )
-            # QueryLexer.g:373:10: '$'
+            # QueryLexer.g:336:8: ( '$' )
+            # QueryLexer.g:336:10: '$'
             pass 
             self.match(36)
 
@@ -3098,8 +3069,8 @@ class QueryLexer(Lexer):
             _type = WS
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:376:5: ( ( ' ' | '\\r' | '\\t' | '\\u000C' | '\\n' ) )
-            # QueryLexer.g:376:8: ( ' ' | '\\r' | '\\t' | '\\u000C' | '\\n' )
+            # QueryLexer.g:339:5: ( ( ' ' | '\\r' | '\\t' | '\\u000C' | '\\n' ) )
+            # QueryLexer.g:339:8: ( ' ' | '\\r' | '\\t' | '\\u000C' | '\\n' )
             pass 
             if (9 <= self.input.LA(1) <= 10) or (12 <= self.input.LA(1) <= 13) or self.input.LA(1) == 32:
                 self.input.consume()
@@ -3135,11 +3106,11 @@ class QueryLexer(Lexer):
             _type = SL_COMMENT
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:379:12: ( '--' (~ ( '\\r' | '\\n' ) )* )
-            # QueryLexer.g:379:14: '--' (~ ( '\\r' | '\\n' ) )*
+            # QueryLexer.g:342:12: ( '--' (~ ( '\\r' | '\\n' ) )* )
+            # QueryLexer.g:342:14: '--' (~ ( '\\r' | '\\n' ) )*
             pass 
             self.match("--")
-            # QueryLexer.g:379:19: (~ ( '\\r' | '\\n' ) )*
+            # QueryLexer.g:342:19: (~ ( '\\r' | '\\n' ) )*
             while True: #loop13
                 alt13 = 2
                 LA13_0 = self.input.LA(1)
@@ -3149,7 +3120,7 @@ class QueryLexer(Lexer):
 
 
                 if alt13 == 1:
-                    # QueryLexer.g:379:21: ~ ( '\\r' | '\\n' )
+                    # QueryLexer.g:342:21: ~ ( '\\r' | '\\n' )
                     pass 
                     if (0 <= self.input.LA(1) <= 9) or (11 <= self.input.LA(1) <= 12) or (14 <= self.input.LA(1) <= 65535):
                         self.input.consume()
@@ -3189,11 +3160,11 @@ class QueryLexer(Lexer):
             _type = ML_COMMENT
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:382:12: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            # QueryLexer.g:382:14: '/*' ( options {greedy=false; } : . )* '*/'
+            # QueryLexer.g:345:12: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            # QueryLexer.g:345:14: '/*' ( options {greedy=false; } : . )* '*/'
             pass 
             self.match("/*")
-            # QueryLexer.g:382:19: ( options {greedy=false; } : . )*
+            # QueryLexer.g:345:19: ( options {greedy=false; } : . )*
             while True: #loop14
                 alt14 = 2
                 LA14_0 = self.input.LA(1)
@@ -3212,7 +3183,7 @@ class QueryLexer(Lexer):
 
 
                 if alt14 == 1:
-                    # QueryLexer.g:382:49: .
+                    # QueryLexer.g:345:49: .
                     pass 
                     self.matchAny()
 
@@ -3244,8 +3215,8 @@ class QueryLexer(Lexer):
             _type = SEMI_COLON
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:385:12: ( ';' )
-            # QueryLexer.g:385:14: ';'
+            # QueryLexer.g:348:12: ( ';' )
+            # QueryLexer.g:348:14: ';'
             pass 
             self.match(59)
 
@@ -3269,8 +3240,8 @@ class QueryLexer(Lexer):
             _type = LEFT_PAREN
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:388:12: ( '(' )
-            # QueryLexer.g:388:14: '('
+            # QueryLexer.g:351:12: ( '(' )
+            # QueryLexer.g:351:14: '('
             pass 
             self.match(40)
 
@@ -3294,8 +3265,8 @@ class QueryLexer(Lexer):
             _type = RIGHT_PAREN
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:391:13: ( ')' )
-            # QueryLexer.g:391:15: ')'
+            # QueryLexer.g:354:13: ( ')' )
+            # QueryLexer.g:354:15: ')'
             pass 
             self.match(41)
 
@@ -3319,8 +3290,8 @@ class QueryLexer(Lexer):
             _type = LEFT_CURLY
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:394:12: ( '{' )
-            # QueryLexer.g:394:14: '{'
+            # QueryLexer.g:357:12: ( '{' )
+            # QueryLexer.g:357:14: '{'
             pass 
             self.match(123)
 
@@ -3344,8 +3315,8 @@ class QueryLexer(Lexer):
             _type = RIGHT_CURLY
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:397:13: ( '}' )
-            # QueryLexer.g:397:15: '}'
+            # QueryLexer.g:360:13: ( '}' )
+            # QueryLexer.g:360:15: '}'
             pass 
             self.match(125)
 
@@ -3369,8 +3340,8 @@ class QueryLexer(Lexer):
             _type = LEFT_BRACKET
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:400:14: ( '[' )
-            # QueryLexer.g:400:16: '['
+            # QueryLexer.g:363:14: ( '[' )
+            # QueryLexer.g:363:16: '['
             pass 
             self.match(91)
 
@@ -3394,8 +3365,8 @@ class QueryLexer(Lexer):
             _type = RIGHT_BRACKET
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:403:15: ( ']' )
-            # QueryLexer.g:403:17: ']'
+            # QueryLexer.g:366:15: ( ']' )
+            # QueryLexer.g:366:17: ']'
             pass 
             self.match(93)
 
@@ -3419,8 +3390,8 @@ class QueryLexer(Lexer):
             _type = POUND
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:406:7: ( '#' )
-            # QueryLexer.g:406:9: '#'
+            # QueryLexer.g:369:7: ( '#' )
+            # QueryLexer.g:369:9: '#'
             pass 
             self.match(35)
 
@@ -3444,8 +3415,8 @@ class QueryLexer(Lexer):
             _type = EQUAL
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:409:7: ( '=' )
-            # QueryLexer.g:409:9: '='
+            # QueryLexer.g:372:7: ( '=' )
+            # QueryLexer.g:372:9: '='
             pass 
             self.match(61)
 
@@ -3469,8 +3440,8 @@ class QueryLexer(Lexer):
             _type = COMMA
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:412:7: ( ',' )
-            # QueryLexer.g:412:9: ','
+            # QueryLexer.g:375:7: ( ',' )
+            # QueryLexer.g:375:9: ','
             pass 
             self.match(44)
 
@@ -3494,8 +3465,8 @@ class QueryLexer(Lexer):
             _type = PERIOD
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:415:8: ( '.' )
-            # QueryLexer.g:415:10: '.'
+            # QueryLexer.g:378:8: ( '.' )
+            # QueryLexer.g:378:10: '.'
             pass 
             self.match(46)
 
@@ -3519,8 +3490,8 @@ class QueryLexer(Lexer):
             _type = DOUBLE_PERIOD
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:418:15: ( '..' )
-            # QueryLexer.g:418:17: '..'
+            # QueryLexer.g:381:15: ( '..' )
+            # QueryLexer.g:381:17: '..'
             pass 
             self.match("..")
 
@@ -3544,8 +3515,8 @@ class QueryLexer(Lexer):
             _type = DIV
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:421:5: ( '/' )
-            # QueryLexer.g:421:7: '/'
+            # QueryLexer.g:384:5: ( '/' )
+            # QueryLexer.g:384:7: '/'
             pass 
             self.match(47)
 
@@ -3569,8 +3540,8 @@ class QueryLexer(Lexer):
             _type = PERCENT
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:424:9: ( '%' )
-            # QueryLexer.g:424:11: '%'
+            # QueryLexer.g:387:9: ( '%' )
+            # QueryLexer.g:387:11: '%'
             pass 
             self.match(37)
 
@@ -3594,8 +3565,8 @@ class QueryLexer(Lexer):
             _type = PLUS
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:427:6: ( '+' )
-            # QueryLexer.g:427:8: '+'
+            # QueryLexer.g:390:6: ( '+' )
+            # QueryLexer.g:390:8: '+'
             pass 
             self.match(43)
 
@@ -3619,8 +3590,8 @@ class QueryLexer(Lexer):
             _type = MINUS
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:430:7: ( '-' )
-            # QueryLexer.g:430:9: '-'
+            # QueryLexer.g:393:7: ( '-' )
+            # QueryLexer.g:393:9: '-'
             pass 
             self.match(45)
 
@@ -3644,8 +3615,8 @@ class QueryLexer(Lexer):
             _type = QMARK
             _channel = DEFAULT_CHANNEL
 
-            # QueryLexer.g:433:7: ( '?' )
-            # QueryLexer.g:433:9: '?'
+            # QueryLexer.g:396:7: ( '?' )
+            # QueryLexer.g:396:9: '?'
             pass 
             self.match(63)
 
@@ -4356,8 +4327,8 @@ class QueryLexer(Lexer):
 
     # $ANTLR start "synpred1_QueryLexer"
     def synpred1_QueryLexer_fragment(self, ):
-        # QueryLexer.g:322:16: ( ID DCOLON )
-        # QueryLexer.g:322:18: ID DCOLON
+        # QueryLexer.g:285:16: ( ID DCOLON )
+        # QueryLexer.g:285:18: ID DCOLON
         pass 
         self.mID()
         self.mDCOLON()

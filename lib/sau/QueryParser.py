@@ -1,4 +1,4 @@
-# $ANTLR 3.1.3 Mar 18, 2009 10:09:25 QueryParser.g 2012-09-15 21:46:01
+# $ANTLR 3.1.3 Mar 18, 2009 10:09:25 QueryParser.g 2012-09-15 22:27:00
 
 import sys
 from antlr3 import *
@@ -7,14 +7,6 @@ from antlr3.compat import set, frozenset
 from antlr3.tree import *
 
          
-package org.apache.pig.parser;
-
-import java.util.Set;
-import java.util.HashSet;
-import java.util.Collections;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.pig.parser.PigMacro;
 
 
 
@@ -447,54 +439,6 @@ class QueryParser(Parser):
     adaptor = property(getTreeAdaptor, setTreeAdaptor)
 
               
-    private static Log log = LogFactory.getLog( QueryParser.class );
-
-    private Set<String> memory = new HashSet<String>();
-
-    @Override
-    protected Object recoverFromMismatchedToken(IntStream input, int ttype, BitSet follow) 
-    throws RecognitionException {
-        throw new MismatchedTokenException( ttype, input );
-    }
-
-    @Override
-    public Object recoverFromMismatchedSet(IntStream input, RecognitionException e, BitSet follow)
-    throws RecognitionException {
-        throw e;
-    }
-
-    @Override
-    public String getErrorMessage(RecognitionException e, String[] tokenNames ) {
-        if( !log.isDebugEnabled() ) {
-            if( e instanceof NoViableAltException ) {
-                return "Syntax error, unexpected symbol at or near " + getTokenErrorDisplay( e.token );
-            } else {
-                return super.getErrorMessage( e, tokenNames );
-            }
-        }
-        
-        List stack =  getRuleInvocationStack( e, this.getClass().getName() );
-        String msg = null;
-        if( e instanceof NoViableAltException ) {
-            NoViableAltException nvae = (NoViableAltException)e;
-            msg = " no viable alt; token = " + e.token + " (decision=" + nvae.decisionNumber + " state " + nvae.stateNumber + ")" +
-                " decision=<<" + nvae.grammarDecisionDescription + ">>";
-        } else {
-            msg =  super.getErrorMessage( e, tokenNames );
-        }
-        return stack + " " + msg;
-    }
-
-    @Override
-    public String getTokenErrorDisplay(Token t) {
-        return "'" + t.getText() + "'";
-    }
-
-    @Override
-    public String getErrorHeader(RecognitionException ex) {
-    	return QueryParserUtils.generateErrorHeader( ex, this.getSourceName() );
-    }
-
 
 
     class query_return(ParserRuleReturnScope):
@@ -507,7 +451,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "query"
-    # QueryParser.g:149:1: query : ( statement )* EOF -> ^( QUERY ( statement )* ) ;
+    # QueryParser.g:73:1: query : ( statement )* EOF -> ^( QUERY ( statement )* ) ;
     def query(self, ):
 
         retval = self.query_return()
@@ -524,10 +468,10 @@ class QueryParser(Parser):
         stream_statement = RewriteRuleSubtreeStream(self._adaptor, "rule statement")
         try:
             try:
-                # QueryParser.g:149:7: ( ( statement )* EOF -> ^( QUERY ( statement )* ) )
-                # QueryParser.g:149:9: ( statement )* EOF
+                # QueryParser.g:73:7: ( ( statement )* EOF -> ^( QUERY ( statement )* ) )
+                # QueryParser.g:73:9: ( statement )* EOF
                 pass 
-                # QueryParser.g:149:9: ( statement )*
+                # QueryParser.g:73:9: ( statement )*
                 while True: #loop1
                     alt1 = 2
                     LA1_0 = self.input.LA(1)
@@ -539,7 +483,7 @@ class QueryParser(Parser):
                     if alt1 == 1:
                         # QueryParser.g:0:0: statement
                         pass 
-                        self._state.following.append(self.FOLLOW_statement_in_query372)
+                        self._state.following.append(self.FOLLOW_statement_in_query367)
                         statement1 = self.statement()
 
                         self._state.following.pop()
@@ -549,7 +493,7 @@ class QueryParser(Parser):
 
                     else:
                         break #loop1
-                EOF2=self.match(self.input, EOF, self.FOLLOW_EOF_in_query375) 
+                EOF2=self.match(self.input, EOF, self.FOLLOW_EOF_in_query370) 
                 if self._state.backtracking == 0:
                     stream_EOF.add(EOF2)
 
@@ -571,12 +515,12 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 150:6: -> ^( QUERY ( statement )* )
-                    # QueryParser.g:150:9: ^( QUERY ( statement )* )
+                    # 74:6: -> ^( QUERY ( statement )* )
+                    # QueryParser.g:74:9: ^( QUERY ( statement )* )
                     root_1 = self._adaptor.nil()
                     root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(QUERY, "QUERY"), root_1)
 
-                    # QueryParser.g:150:18: ( statement )*
+                    # QueryParser.g:74:18: ( statement )*
                     while stream_statement.hasNext():
                         self._adaptor.addChild(root_1, stream_statement.nextTree())
 
@@ -600,9 +544,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -620,7 +561,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "statement"
-    # QueryParser.g:153:1: statement : ( SEMI_COLON | general_statement | foreach_statement | split_statement | inline_statement | import_statement | realias_statement );
+    # QueryParser.g:77:1: statement : ( SEMI_COLON | general_statement | foreach_statement | split_statement | inline_statement | import_statement | realias_statement );
     def statement(self, ):
 
         retval = self.statement_return()
@@ -646,23 +587,23 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:153:11: ( SEMI_COLON | general_statement | foreach_statement | split_statement | inline_statement | import_statement | realias_statement )
+                # QueryParser.g:77:11: ( SEMI_COLON | general_statement | foreach_statement | split_statement | inline_statement | import_statement | realias_statement )
                 alt2 = 7
                 alt2 = self.dfa2.predict(self.input)
                 if alt2 == 1:
-                    # QueryParser.g:153:13: SEMI_COLON
+                    # QueryParser.g:77:13: SEMI_COLON
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    SEMI_COLON3=self.match(self.input, SEMI_COLON, self.FOLLOW_SEMI_COLON_in_statement400)
+                    SEMI_COLON3=self.match(self.input, SEMI_COLON, self.FOLLOW_SEMI_COLON_in_statement395)
 
 
                 elif alt2 == 2:
-                    # QueryParser.g:154:13: general_statement
+                    # QueryParser.g:78:13: general_statement
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_general_statement_in_statement415)
+                    self._state.following.append(self.FOLLOW_general_statement_in_statement410)
                     general_statement4 = self.general_statement()
 
                     self._state.following.pop()
@@ -671,11 +612,11 @@ class QueryParser(Parser):
 
 
                 elif alt2 == 3:
-                    # QueryParser.g:155:13: foreach_statement
+                    # QueryParser.g:79:13: foreach_statement
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_foreach_statement_in_statement429)
+                    self._state.following.append(self.FOLLOW_foreach_statement_in_statement424)
                     foreach_statement5 = self.foreach_statement()
 
                     self._state.following.pop()
@@ -684,11 +625,11 @@ class QueryParser(Parser):
 
 
                 elif alt2 == 4:
-                    # QueryParser.g:156:13: split_statement
+                    # QueryParser.g:80:13: split_statement
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_split_statement_in_statement443)
+                    self._state.following.append(self.FOLLOW_split_statement_in_statement438)
                     split_statement6 = self.split_statement()
 
                     self._state.following.pop()
@@ -697,11 +638,11 @@ class QueryParser(Parser):
 
 
                 elif alt2 == 5:
-                    # QueryParser.g:157:13: inline_statement
+                    # QueryParser.g:81:13: inline_statement
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_inline_statement_in_statement459)
+                    self._state.following.append(self.FOLLOW_inline_statement_in_statement454)
                     inline_statement7 = self.inline_statement()
 
                     self._state.following.pop()
@@ -710,11 +651,11 @@ class QueryParser(Parser):
 
 
                 elif alt2 == 6:
-                    # QueryParser.g:158:13: import_statement
+                    # QueryParser.g:82:13: import_statement
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_import_statement_in_statement481)
+                    self._state.following.append(self.FOLLOW_import_statement_in_statement476)
                     import_statement8 = self.import_statement()
 
                     self._state.following.pop()
@@ -723,11 +664,11 @@ class QueryParser(Parser):
 
 
                 elif alt2 == 7:
-                    # QueryParser.g:159:13: realias_statement
+                    # QueryParser.g:83:13: realias_statement
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_realias_statement_in_statement495)
+                    self._state.following.append(self.FOLLOW_realias_statement_in_statement490)
                     realias_statement9 = self.realias_statement()
 
                     self._state.following.pop()
@@ -744,9 +685,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -764,7 +702,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "import_statement"
-    # QueryParser.g:162:1: import_statement : import_clause SEMI_COLON ;
+    # QueryParser.g:86:1: import_statement : import_clause SEMI_COLON ;
     def import_statement(self, ):
 
         retval = self.import_statement_return()
@@ -780,18 +718,18 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:162:18: ( import_clause SEMI_COLON )
-                # QueryParser.g:162:20: import_clause SEMI_COLON
+                # QueryParser.g:86:18: ( import_clause SEMI_COLON )
+                # QueryParser.g:86:20: import_clause SEMI_COLON
                 pass 
                 root_0 = self._adaptor.nil()
 
-                self._state.following.append(self.FOLLOW_import_clause_in_import_statement504)
+                self._state.following.append(self.FOLLOW_import_clause_in_import_statement499)
                 import_clause10 = self.import_clause()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, import_clause10.tree)
-                SEMI_COLON11=self.match(self.input, SEMI_COLON, self.FOLLOW_SEMI_COLON_in_import_statement506)
+                SEMI_COLON11=self.match(self.input, SEMI_COLON, self.FOLLOW_SEMI_COLON_in_import_statement501)
 
 
 
@@ -804,9 +742,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -824,7 +759,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "inline_statement"
-    # QueryParser.g:165:1: inline_statement : inline_clause SEMI_COLON ;
+    # QueryParser.g:89:1: inline_statement : inline_clause SEMI_COLON ;
     def inline_statement(self, ):
 
         retval = self.inline_statement_return()
@@ -840,18 +775,18 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:165:18: ( inline_clause SEMI_COLON )
-                # QueryParser.g:165:20: inline_clause SEMI_COLON
+                # QueryParser.g:89:18: ( inline_clause SEMI_COLON )
+                # QueryParser.g:89:20: inline_clause SEMI_COLON
                 pass 
                 root_0 = self._adaptor.nil()
 
-                self._state.following.append(self.FOLLOW_inline_clause_in_inline_statement516)
+                self._state.following.append(self.FOLLOW_inline_clause_in_inline_statement511)
                 inline_clause12 = self.inline_clause()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, inline_clause12.tree)
-                SEMI_COLON13=self.match(self.input, SEMI_COLON, self.FOLLOW_SEMI_COLON_in_inline_statement518)
+                SEMI_COLON13=self.match(self.input, SEMI_COLON, self.FOLLOW_SEMI_COLON_in_inline_statement513)
 
 
 
@@ -864,9 +799,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -884,7 +816,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "split_statement"
-    # QueryParser.g:168:1: split_statement : split_clause SEMI_COLON ;
+    # QueryParser.g:92:1: split_statement : split_clause SEMI_COLON ;
     def split_statement(self, ):
 
         retval = self.split_statement_return()
@@ -900,18 +832,18 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:168:17: ( split_clause SEMI_COLON )
-                # QueryParser.g:168:19: split_clause SEMI_COLON
+                # QueryParser.g:92:17: ( split_clause SEMI_COLON )
+                # QueryParser.g:92:19: split_clause SEMI_COLON
                 pass 
                 root_0 = self._adaptor.nil()
 
-                self._state.following.append(self.FOLLOW_split_clause_in_split_statement528)
+                self._state.following.append(self.FOLLOW_split_clause_in_split_statement523)
                 split_clause14 = self.split_clause()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, split_clause14.tree)
-                SEMI_COLON15=self.match(self.input, SEMI_COLON, self.FOLLOW_SEMI_COLON_in_split_statement530)
+                SEMI_COLON15=self.match(self.input, SEMI_COLON, self.FOLLOW_SEMI_COLON_in_split_statement525)
 
 
 
@@ -924,9 +856,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -944,7 +873,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "general_statement"
-    # QueryParser.g:171:1: general_statement : ( alias EQUAL )? ( op_clause ( parallel_clause )? | LEFT_PAREN op_clause ( parallel_clause )? RIGHT_PAREN ) SEMI_COLON -> ^( STATEMENT ( alias )? op_clause ( parallel_clause )? ) ;
+    # QueryParser.g:95:1: general_statement : ( alias EQUAL )? ( op_clause ( parallel_clause )? | LEFT_PAREN op_clause ( parallel_clause )? RIGHT_PAREN ) SEMI_COLON -> ^( STATEMENT ( alias )? op_clause ( parallel_clause )? ) ;
     def general_statement(self, ):
 
         retval = self.general_statement_return()
@@ -980,31 +909,31 @@ class QueryParser(Parser):
         stream_op_clause = RewriteRuleSubtreeStream(self._adaptor, "rule op_clause")
         try:
             try:
-                # QueryParser.g:171:19: ( ( alias EQUAL )? ( op_clause ( parallel_clause )? | LEFT_PAREN op_clause ( parallel_clause )? RIGHT_PAREN ) SEMI_COLON -> ^( STATEMENT ( alias )? op_clause ( parallel_clause )? ) )
-                # QueryParser.g:171:21: ( alias EQUAL )? ( op_clause ( parallel_clause )? | LEFT_PAREN op_clause ( parallel_clause )? RIGHT_PAREN ) SEMI_COLON
+                # QueryParser.g:95:19: ( ( alias EQUAL )? ( op_clause ( parallel_clause )? | LEFT_PAREN op_clause ( parallel_clause )? RIGHT_PAREN ) SEMI_COLON -> ^( STATEMENT ( alias )? op_clause ( parallel_clause )? ) )
+                # QueryParser.g:95:21: ( alias EQUAL )? ( op_clause ( parallel_clause )? | LEFT_PAREN op_clause ( parallel_clause )? RIGHT_PAREN ) SEMI_COLON
                 pass 
-                # QueryParser.g:171:21: ( alias EQUAL )?
+                # QueryParser.g:95:21: ( alias EQUAL )?
                 alt3 = 2
                 LA3_0 = self.input.LA(1)
 
                 if (LA3_0 == IDENTIFIER_L) :
                     alt3 = 1
                 if alt3 == 1:
-                    # QueryParser.g:171:23: alias EQUAL
+                    # QueryParser.g:95:23: alias EQUAL
                     pass 
-                    self._state.following.append(self.FOLLOW_alias_in_general_statement542)
+                    self._state.following.append(self.FOLLOW_alias_in_general_statement537)
                     alias16 = self.alias()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         stream_alias.add(alias16.tree)
-                    EQUAL17=self.match(self.input, EQUAL, self.FOLLOW_EQUAL_in_general_statement544) 
+                    EQUAL17=self.match(self.input, EQUAL, self.FOLLOW_EQUAL_in_general_statement539) 
                     if self._state.backtracking == 0:
                         stream_EQUAL.add(EQUAL17)
 
 
 
-                # QueryParser.g:171:38: ( op_clause ( parallel_clause )? | LEFT_PAREN op_clause ( parallel_clause )? RIGHT_PAREN )
+                # QueryParser.g:95:38: ( op_clause ( parallel_clause )? | LEFT_PAREN op_clause ( parallel_clause )? RIGHT_PAREN )
                 alt6 = 2
                 LA6_0 = self.input.LA(1)
 
@@ -1021,15 +950,15 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt6 == 1:
-                    # QueryParser.g:171:39: op_clause ( parallel_clause )?
+                    # QueryParser.g:95:39: op_clause ( parallel_clause )?
                     pass 
-                    self._state.following.append(self.FOLLOW_op_clause_in_general_statement550)
+                    self._state.following.append(self.FOLLOW_op_clause_in_general_statement545)
                     op_clause18 = self.op_clause()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         stream_op_clause.add(op_clause18.tree)
-                    # QueryParser.g:171:49: ( parallel_clause )?
+                    # QueryParser.g:95:49: ( parallel_clause )?
                     alt4 = 2
                     LA4_0 = self.input.LA(1)
 
@@ -1038,7 +967,7 @@ class QueryParser(Parser):
                     if alt4 == 1:
                         # QueryParser.g:0:0: parallel_clause
                         pass 
-                        self._state.following.append(self.FOLLOW_parallel_clause_in_general_statement552)
+                        self._state.following.append(self.FOLLOW_parallel_clause_in_general_statement547)
                         parallel_clause19 = self.parallel_clause()
 
                         self._state.following.pop()
@@ -1050,18 +979,18 @@ class QueryParser(Parser):
 
 
                 elif alt6 == 2:
-                    # QueryParser.g:171:68: LEFT_PAREN op_clause ( parallel_clause )? RIGHT_PAREN
+                    # QueryParser.g:95:68: LEFT_PAREN op_clause ( parallel_clause )? RIGHT_PAREN
                     pass 
-                    LEFT_PAREN20=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_general_statement557) 
+                    LEFT_PAREN20=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_general_statement552) 
                     if self._state.backtracking == 0:
                         stream_LEFT_PAREN.add(LEFT_PAREN20)
-                    self._state.following.append(self.FOLLOW_op_clause_in_general_statement559)
+                    self._state.following.append(self.FOLLOW_op_clause_in_general_statement554)
                     op_clause21 = self.op_clause()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         stream_op_clause.add(op_clause21.tree)
-                    # QueryParser.g:171:89: ( parallel_clause )?
+                    # QueryParser.g:95:89: ( parallel_clause )?
                     alt5 = 2
                     LA5_0 = self.input.LA(1)
 
@@ -1070,7 +999,7 @@ class QueryParser(Parser):
                     if alt5 == 1:
                         # QueryParser.g:0:0: parallel_clause
                         pass 
-                        self._state.following.append(self.FOLLOW_parallel_clause_in_general_statement561)
+                        self._state.following.append(self.FOLLOW_parallel_clause_in_general_statement556)
                         parallel_clause22 = self.parallel_clause()
 
                         self._state.following.pop()
@@ -1079,13 +1008,13 @@ class QueryParser(Parser):
 
 
 
-                    RIGHT_PAREN23=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_general_statement564) 
+                    RIGHT_PAREN23=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_general_statement559) 
                     if self._state.backtracking == 0:
                         stream_RIGHT_PAREN.add(RIGHT_PAREN23)
 
 
 
-                SEMI_COLON24=self.match(self.input, SEMI_COLON, self.FOLLOW_SEMI_COLON_in_general_statement567) 
+                SEMI_COLON24=self.match(self.input, SEMI_COLON, self.FOLLOW_SEMI_COLON_in_general_statement562) 
                 if self._state.backtracking == 0:
                     stream_SEMI_COLON.add(SEMI_COLON24)
 
@@ -1107,19 +1036,19 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 172:18: -> ^( STATEMENT ( alias )? op_clause ( parallel_clause )? )
-                    # QueryParser.g:172:21: ^( STATEMENT ( alias )? op_clause ( parallel_clause )? )
+                    # 96:18: -> ^( STATEMENT ( alias )? op_clause ( parallel_clause )? )
+                    # QueryParser.g:96:21: ^( STATEMENT ( alias )? op_clause ( parallel_clause )? )
                     root_1 = self._adaptor.nil()
                     root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(STATEMENT, "STATEMENT"), root_1)
 
-                    # QueryParser.g:172:34: ( alias )?
+                    # QueryParser.g:96:34: ( alias )?
                     if stream_alias.hasNext():
                         self._adaptor.addChild(root_1, stream_alias.nextTree())
 
 
                     stream_alias.reset();
                     self._adaptor.addChild(root_1, stream_op_clause.nextTree())
-                    # QueryParser.g:172:51: ( parallel_clause )?
+                    # QueryParser.g:96:51: ( parallel_clause )?
                     if stream_parallel_clause.hasNext():
                         self._adaptor.addChild(root_1, stream_parallel_clause.nextTree())
 
@@ -1143,9 +1072,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -1163,7 +1089,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "realias_statement"
-    # QueryParser.g:175:1: realias_statement : realias_clause SEMI_COLON ;
+    # QueryParser.g:99:1: realias_statement : realias_clause SEMI_COLON ;
     def realias_statement(self, ):
 
         retval = self.realias_statement_return()
@@ -1179,18 +1105,18 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:175:19: ( realias_clause SEMI_COLON )
-                # QueryParser.g:175:21: realias_clause SEMI_COLON
+                # QueryParser.g:99:19: ( realias_clause SEMI_COLON )
+                # QueryParser.g:99:21: realias_clause SEMI_COLON
                 pass 
                 root_0 = self._adaptor.nil()
 
-                self._state.following.append(self.FOLLOW_realias_clause_in_realias_statement610)
+                self._state.following.append(self.FOLLOW_realias_clause_in_realias_statement605)
                 realias_clause25 = self.realias_clause()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, realias_clause25.tree)
-                SEMI_COLON26=self.match(self.input, SEMI_COLON, self.FOLLOW_SEMI_COLON_in_realias_statement612)
+                SEMI_COLON26=self.match(self.input, SEMI_COLON, self.FOLLOW_SEMI_COLON_in_realias_statement607)
 
 
 
@@ -1203,9 +1129,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -1223,7 +1146,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "realias_clause"
-    # QueryParser.g:178:1: realias_clause : alias EQUAL identifier -> ^( REALIAS alias identifier ) ;
+    # QueryParser.g:102:1: realias_clause : alias EQUAL identifier -> ^( REALIAS alias identifier ) ;
     def realias_clause(self, ):
 
         retval = self.realias_clause_return()
@@ -1243,19 +1166,19 @@ class QueryParser(Parser):
         stream_identifier = RewriteRuleSubtreeStream(self._adaptor, "rule identifier")
         try:
             try:
-                # QueryParser.g:178:16: ( alias EQUAL identifier -> ^( REALIAS alias identifier ) )
-                # QueryParser.g:178:18: alias EQUAL identifier
+                # QueryParser.g:102:16: ( alias EQUAL identifier -> ^( REALIAS alias identifier ) )
+                # QueryParser.g:102:18: alias EQUAL identifier
                 pass 
-                self._state.following.append(self.FOLLOW_alias_in_realias_clause622)
+                self._state.following.append(self.FOLLOW_alias_in_realias_clause617)
                 alias27 = self.alias()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     stream_alias.add(alias27.tree)
-                EQUAL28=self.match(self.input, EQUAL, self.FOLLOW_EQUAL_in_realias_clause624) 
+                EQUAL28=self.match(self.input, EQUAL, self.FOLLOW_EQUAL_in_realias_clause619) 
                 if self._state.backtracking == 0:
                     stream_EQUAL.add(EQUAL28)
-                self._state.following.append(self.FOLLOW_identifier_in_realias_clause626)
+                self._state.following.append(self.FOLLOW_identifier_in_realias_clause621)
                 identifier29 = self.identifier()
 
                 self._state.following.pop()
@@ -1280,8 +1203,8 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 179:5: -> ^( REALIAS alias identifier )
-                    # QueryParser.g:179:8: ^( REALIAS alias identifier )
+                    # 103:5: -> ^( REALIAS alias identifier )
+                    # QueryParser.g:103:8: ^( REALIAS alias identifier )
                     root_1 = self._adaptor.nil()
                     root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(REALIAS, "REALIAS"), root_1)
 
@@ -1305,9 +1228,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -1325,7 +1245,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "parallel_clause"
-    # QueryParser.g:182:1: parallel_clause : PARALLEL INTEGER ;
+    # QueryParser.g:106:1: parallel_clause : PARALLEL INTEGER ;
     def parallel_clause(self, ):
 
         retval = self.parallel_clause_return()
@@ -1341,18 +1261,18 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:182:17: ( PARALLEL INTEGER )
-                # QueryParser.g:182:19: PARALLEL INTEGER
+                # QueryParser.g:106:17: ( PARALLEL INTEGER )
+                # QueryParser.g:106:19: PARALLEL INTEGER
                 pass 
                 root_0 = self._adaptor.nil()
 
-                PARALLEL30=self.match(self.input, PARALLEL, self.FOLLOW_PARALLEL_in_parallel_clause650)
+                PARALLEL30=self.match(self.input, PARALLEL, self.FOLLOW_PARALLEL_in_parallel_clause645)
                 if self._state.backtracking == 0:
 
                     PARALLEL30_tree = self._adaptor.createWithPayload(PARALLEL30)
                     root_0 = self._adaptor.becomeRoot(PARALLEL30_tree, root_0)
 
-                INTEGER31=self.match(self.input, INTEGER, self.FOLLOW_INTEGER_in_parallel_clause653)
+                INTEGER31=self.match(self.input, INTEGER, self.FOLLOW_INTEGER_in_parallel_clause648)
                 if self._state.backtracking == 0:
 
                     INTEGER31_tree = self._adaptor.createWithPayload(INTEGER31)
@@ -1370,9 +1290,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -1390,7 +1307,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "foreach_statement"
-    # QueryParser.g:189:1: foreach_statement : ( ( ( alias EQUAL )? FOREACH rel LEFT_CURLY )=> foreach_complex_statement | foreach_simple_statement );
+    # QueryParser.g:113:1: foreach_statement : ( ( ( alias EQUAL )? FOREACH rel LEFT_CURLY )=> foreach_complex_statement | foreach_simple_statement );
     def foreach_statement(self, ):
 
         retval = self.foreach_statement_return()
@@ -1406,7 +1323,7 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:189:19: ( ( ( alias EQUAL )? FOREACH rel LEFT_CURLY )=> foreach_complex_statement | foreach_simple_statement )
+                # QueryParser.g:113:19: ( ( ( alias EQUAL )? FOREACH rel LEFT_CURLY )=> foreach_complex_statement | foreach_simple_statement )
                 alt7 = 2
                 LA7 = self.input.LA(1)
                 if LA7 == IDENTIFIER_L:
@@ -1450,11 +1367,11 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt7 == 1:
-                    # QueryParser.g:189:21: ( ( alias EQUAL )? FOREACH rel LEFT_CURLY )=> foreach_complex_statement
+                    # QueryParser.g:113:21: ( ( alias EQUAL )? FOREACH rel LEFT_CURLY )=> foreach_complex_statement
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_foreach_complex_statement_in_foreach_statement688)
+                    self._state.following.append(self.FOLLOW_foreach_complex_statement_in_foreach_statement683)
                     foreach_complex_statement32 = self.foreach_complex_statement()
 
                     self._state.following.pop()
@@ -1463,11 +1380,11 @@ class QueryParser(Parser):
 
 
                 elif alt7 == 2:
-                    # QueryParser.g:190:21: foreach_simple_statement
+                    # QueryParser.g:114:21: foreach_simple_statement
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_foreach_simple_statement_in_foreach_statement710)
+                    self._state.following.append(self.FOLLOW_foreach_simple_statement_in_foreach_statement705)
                     foreach_simple_statement33 = self.foreach_simple_statement()
 
                     self._state.following.pop()
@@ -1484,9 +1401,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -1504,7 +1418,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "foreach_complex_statement"
-    # QueryParser.g:193:1: foreach_complex_statement : ( alias EQUAL )? foreach_clause_complex ( SEMI_COLON )? -> ^( STATEMENT ( alias )? foreach_clause_complex ) ;
+    # QueryParser.g:117:1: foreach_complex_statement : ( alias EQUAL )? foreach_clause_complex ( SEMI_COLON )? -> ^( STATEMENT ( alias )? foreach_clause_complex ) ;
     def foreach_complex_statement(self, ):
 
         retval = self.foreach_complex_statement_return()
@@ -1527,37 +1441,37 @@ class QueryParser(Parser):
         stream_foreach_clause_complex = RewriteRuleSubtreeStream(self._adaptor, "rule foreach_clause_complex")
         try:
             try:
-                # QueryParser.g:193:27: ( ( alias EQUAL )? foreach_clause_complex ( SEMI_COLON )? -> ^( STATEMENT ( alias )? foreach_clause_complex ) )
-                # QueryParser.g:193:29: ( alias EQUAL )? foreach_clause_complex ( SEMI_COLON )?
+                # QueryParser.g:117:27: ( ( alias EQUAL )? foreach_clause_complex ( SEMI_COLON )? -> ^( STATEMENT ( alias )? foreach_clause_complex ) )
+                # QueryParser.g:117:29: ( alias EQUAL )? foreach_clause_complex ( SEMI_COLON )?
                 pass 
-                # QueryParser.g:193:29: ( alias EQUAL )?
+                # QueryParser.g:117:29: ( alias EQUAL )?
                 alt8 = 2
                 LA8_0 = self.input.LA(1)
 
                 if (LA8_0 == IDENTIFIER_L) :
                     alt8 = 1
                 if alt8 == 1:
-                    # QueryParser.g:193:31: alias EQUAL
+                    # QueryParser.g:117:31: alias EQUAL
                     pass 
-                    self._state.following.append(self.FOLLOW_alias_in_foreach_complex_statement721)
+                    self._state.following.append(self.FOLLOW_alias_in_foreach_complex_statement716)
                     alias34 = self.alias()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         stream_alias.add(alias34.tree)
-                    EQUAL35=self.match(self.input, EQUAL, self.FOLLOW_EQUAL_in_foreach_complex_statement723) 
+                    EQUAL35=self.match(self.input, EQUAL, self.FOLLOW_EQUAL_in_foreach_complex_statement718) 
                     if self._state.backtracking == 0:
                         stream_EQUAL.add(EQUAL35)
 
 
 
-                self._state.following.append(self.FOLLOW_foreach_clause_complex_in_foreach_complex_statement728)
+                self._state.following.append(self.FOLLOW_foreach_clause_complex_in_foreach_complex_statement723)
                 foreach_clause_complex36 = self.foreach_clause_complex()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     stream_foreach_clause_complex.add(foreach_clause_complex36.tree)
-                # QueryParser.g:193:69: ( SEMI_COLON )?
+                # QueryParser.g:117:69: ( SEMI_COLON )?
                 alt9 = 2
                 LA9_0 = self.input.LA(1)
 
@@ -1569,7 +1483,7 @@ class QueryParser(Parser):
                 if alt9 == 1:
                     # QueryParser.g:0:0: SEMI_COLON
                     pass 
-                    SEMI_COLON37=self.match(self.input, SEMI_COLON, self.FOLLOW_SEMI_COLON_in_foreach_complex_statement730) 
+                    SEMI_COLON37=self.match(self.input, SEMI_COLON, self.FOLLOW_SEMI_COLON_in_foreach_complex_statement725) 
                     if self._state.backtracking == 0:
                         stream_SEMI_COLON.add(SEMI_COLON37)
 
@@ -1594,12 +1508,12 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 194:26: -> ^( STATEMENT ( alias )? foreach_clause_complex )
-                    # QueryParser.g:194:29: ^( STATEMENT ( alias )? foreach_clause_complex )
+                    # 118:26: -> ^( STATEMENT ( alias )? foreach_clause_complex )
+                    # QueryParser.g:118:29: ^( STATEMENT ( alias )? foreach_clause_complex )
                     root_1 = self._adaptor.nil()
                     root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(STATEMENT, "STATEMENT"), root_1)
 
-                    # QueryParser.g:194:42: ( alias )?
+                    # QueryParser.g:118:42: ( alias )?
                     if stream_alias.hasNext():
                         self._adaptor.addChild(root_1, stream_alias.nextTree())
 
@@ -1624,9 +1538,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -1644,7 +1555,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "foreach_simple_statement"
-    # QueryParser.g:197:1: foreach_simple_statement : ( alias EQUAL )? ( foreach_clause_simple ( parallel_clause )? | LEFT_PAREN foreach_clause_simple ( parallel_clause )? RIGHT_PAREN ) SEMI_COLON -> ^( STATEMENT ( alias )? foreach_clause_simple ( parallel_clause )? ) ;
+    # QueryParser.g:121:1: foreach_simple_statement : ( alias EQUAL )? ( foreach_clause_simple ( parallel_clause )? | LEFT_PAREN foreach_clause_simple ( parallel_clause )? RIGHT_PAREN ) SEMI_COLON -> ^( STATEMENT ( alias )? foreach_clause_simple ( parallel_clause )? ) ;
     def foreach_simple_statement(self, ):
 
         retval = self.foreach_simple_statement_return()
@@ -1680,31 +1591,31 @@ class QueryParser(Parser):
         stream_foreach_clause_simple = RewriteRuleSubtreeStream(self._adaptor, "rule foreach_clause_simple")
         try:
             try:
-                # QueryParser.g:197:26: ( ( alias EQUAL )? ( foreach_clause_simple ( parallel_clause )? | LEFT_PAREN foreach_clause_simple ( parallel_clause )? RIGHT_PAREN ) SEMI_COLON -> ^( STATEMENT ( alias )? foreach_clause_simple ( parallel_clause )? ) )
-                # QueryParser.g:197:28: ( alias EQUAL )? ( foreach_clause_simple ( parallel_clause )? | LEFT_PAREN foreach_clause_simple ( parallel_clause )? RIGHT_PAREN ) SEMI_COLON
+                # QueryParser.g:121:26: ( ( alias EQUAL )? ( foreach_clause_simple ( parallel_clause )? | LEFT_PAREN foreach_clause_simple ( parallel_clause )? RIGHT_PAREN ) SEMI_COLON -> ^( STATEMENT ( alias )? foreach_clause_simple ( parallel_clause )? ) )
+                # QueryParser.g:121:28: ( alias EQUAL )? ( foreach_clause_simple ( parallel_clause )? | LEFT_PAREN foreach_clause_simple ( parallel_clause )? RIGHT_PAREN ) SEMI_COLON
                 pass 
-                # QueryParser.g:197:28: ( alias EQUAL )?
+                # QueryParser.g:121:28: ( alias EQUAL )?
                 alt10 = 2
                 LA10_0 = self.input.LA(1)
 
                 if (LA10_0 == IDENTIFIER_L) :
                     alt10 = 1
                 if alt10 == 1:
-                    # QueryParser.g:197:30: alias EQUAL
+                    # QueryParser.g:121:30: alias EQUAL
                     pass 
-                    self._state.following.append(self.FOLLOW_alias_in_foreach_simple_statement780)
+                    self._state.following.append(self.FOLLOW_alias_in_foreach_simple_statement775)
                     alias38 = self.alias()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         stream_alias.add(alias38.tree)
-                    EQUAL39=self.match(self.input, EQUAL, self.FOLLOW_EQUAL_in_foreach_simple_statement782) 
+                    EQUAL39=self.match(self.input, EQUAL, self.FOLLOW_EQUAL_in_foreach_simple_statement777) 
                     if self._state.backtracking == 0:
                         stream_EQUAL.add(EQUAL39)
 
 
 
-                # QueryParser.g:197:45: ( foreach_clause_simple ( parallel_clause )? | LEFT_PAREN foreach_clause_simple ( parallel_clause )? RIGHT_PAREN )
+                # QueryParser.g:121:45: ( foreach_clause_simple ( parallel_clause )? | LEFT_PAREN foreach_clause_simple ( parallel_clause )? RIGHT_PAREN )
                 alt13 = 2
                 LA13_0 = self.input.LA(1)
 
@@ -1721,15 +1632,15 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt13 == 1:
-                    # QueryParser.g:197:46: foreach_clause_simple ( parallel_clause )?
+                    # QueryParser.g:121:46: foreach_clause_simple ( parallel_clause )?
                     pass 
-                    self._state.following.append(self.FOLLOW_foreach_clause_simple_in_foreach_simple_statement788)
+                    self._state.following.append(self.FOLLOW_foreach_clause_simple_in_foreach_simple_statement783)
                     foreach_clause_simple40 = self.foreach_clause_simple()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         stream_foreach_clause_simple.add(foreach_clause_simple40.tree)
-                    # QueryParser.g:197:68: ( parallel_clause )?
+                    # QueryParser.g:121:68: ( parallel_clause )?
                     alt11 = 2
                     LA11_0 = self.input.LA(1)
 
@@ -1738,7 +1649,7 @@ class QueryParser(Parser):
                     if alt11 == 1:
                         # QueryParser.g:0:0: parallel_clause
                         pass 
-                        self._state.following.append(self.FOLLOW_parallel_clause_in_foreach_simple_statement790)
+                        self._state.following.append(self.FOLLOW_parallel_clause_in_foreach_simple_statement785)
                         parallel_clause41 = self.parallel_clause()
 
                         self._state.following.pop()
@@ -1750,18 +1661,18 @@ class QueryParser(Parser):
 
 
                 elif alt13 == 2:
-                    # QueryParser.g:198:51: LEFT_PAREN foreach_clause_simple ( parallel_clause )? RIGHT_PAREN
+                    # QueryParser.g:122:51: LEFT_PAREN foreach_clause_simple ( parallel_clause )? RIGHT_PAREN
                     pass 
-                    LEFT_PAREN42=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_foreach_simple_statement844) 
+                    LEFT_PAREN42=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_foreach_simple_statement839) 
                     if self._state.backtracking == 0:
                         stream_LEFT_PAREN.add(LEFT_PAREN42)
-                    self._state.following.append(self.FOLLOW_foreach_clause_simple_in_foreach_simple_statement846)
+                    self._state.following.append(self.FOLLOW_foreach_clause_simple_in_foreach_simple_statement841)
                     foreach_clause_simple43 = self.foreach_clause_simple()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         stream_foreach_clause_simple.add(foreach_clause_simple43.tree)
-                    # QueryParser.g:198:84: ( parallel_clause )?
+                    # QueryParser.g:122:84: ( parallel_clause )?
                     alt12 = 2
                     LA12_0 = self.input.LA(1)
 
@@ -1770,7 +1681,7 @@ class QueryParser(Parser):
                     if alt12 == 1:
                         # QueryParser.g:0:0: parallel_clause
                         pass 
-                        self._state.following.append(self.FOLLOW_parallel_clause_in_foreach_simple_statement848)
+                        self._state.following.append(self.FOLLOW_parallel_clause_in_foreach_simple_statement843)
                         parallel_clause44 = self.parallel_clause()
 
                         self._state.following.pop()
@@ -1779,18 +1690,18 @@ class QueryParser(Parser):
 
 
 
-                    RIGHT_PAREN45=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_foreach_simple_statement851) 
+                    RIGHT_PAREN45=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_foreach_simple_statement846) 
                     if self._state.backtracking == 0:
                         stream_RIGHT_PAREN.add(RIGHT_PAREN45)
 
 
 
-                SEMI_COLON46=self.match(self.input, SEMI_COLON, self.FOLLOW_SEMI_COLON_in_foreach_simple_statement854) 
+                SEMI_COLON46=self.match(self.input, SEMI_COLON, self.FOLLOW_SEMI_COLON_in_foreach_simple_statement849) 
                 if self._state.backtracking == 0:
                     stream_SEMI_COLON.add(SEMI_COLON46)
 
                 # AST Rewrite
-                # elements: alias, parallel_clause, foreach_clause_simple
+                # elements: foreach_clause_simple, alias, parallel_clause
                 # token labels: 
                 # rule labels: retval
                 # token list labels: 
@@ -1807,19 +1718,19 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 199:25: -> ^( STATEMENT ( alias )? foreach_clause_simple ( parallel_clause )? )
-                    # QueryParser.g:199:28: ^( STATEMENT ( alias )? foreach_clause_simple ( parallel_clause )? )
+                    # 123:25: -> ^( STATEMENT ( alias )? foreach_clause_simple ( parallel_clause )? )
+                    # QueryParser.g:123:28: ^( STATEMENT ( alias )? foreach_clause_simple ( parallel_clause )? )
                     root_1 = self._adaptor.nil()
                     root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(STATEMENT, "STATEMENT"), root_1)
 
-                    # QueryParser.g:199:41: ( alias )?
+                    # QueryParser.g:123:41: ( alias )?
                     if stream_alias.hasNext():
                         self._adaptor.addChild(root_1, stream_alias.nextTree())
 
 
                     stream_alias.reset();
                     self._adaptor.addChild(root_1, stream_foreach_clause_simple.nextTree())
-                    # QueryParser.g:199:70: ( parallel_clause )?
+                    # QueryParser.g:123:70: ( parallel_clause )?
                     if stream_parallel_clause.hasNext():
                         self._adaptor.addChild(root_1, stream_parallel_clause.nextTree())
 
@@ -1843,9 +1754,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -1863,7 +1771,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "alias"
-    # QueryParser.g:202:1: alias : identifier ;
+    # QueryParser.g:126:1: alias : identifier ;
     def alias(self, ):
 
         retval = self.alias_return()
@@ -1877,12 +1785,12 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:202:7: ( identifier )
-                # QueryParser.g:202:9: identifier
+                # QueryParser.g:126:7: ( identifier )
+                # QueryParser.g:126:9: identifier
                 pass 
                 root_0 = self._adaptor.nil()
 
-                self._state.following.append(self.FOLLOW_identifier_in_alias903)
+                self._state.following.append(self.FOLLOW_identifier_in_alias898)
                 identifier47 = self.identifier()
 
                 self._state.following.pop()
@@ -1900,9 +1808,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -1920,7 +1825,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "parameter"
-    # QueryParser.g:205:1: parameter : ( identifier | INTEGER | DOUBLENUMBER | QUOTEDSTRING | DOLLARVAR );
+    # QueryParser.g:129:1: parameter : ( identifier | INTEGER | DOUBLENUMBER | QUOTEDSTRING | DOLLARVAR );
     def parameter(self, ):
 
         retval = self.parameter_return()
@@ -1942,7 +1847,7 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:206:5: ( identifier | INTEGER | DOUBLENUMBER | QUOTEDSTRING | DOLLARVAR )
+                # QueryParser.g:130:5: ( identifier | INTEGER | DOUBLENUMBER | QUOTEDSTRING | DOLLARVAR )
                 alt14 = 5
                 LA14 = self.input.LA(1)
                 if LA14 == IDENTIFIER_L:
@@ -1964,11 +1869,11 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt14 == 1:
-                    # QueryParser.g:206:7: identifier
+                    # QueryParser.g:130:7: identifier
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_identifier_in_parameter917)
+                    self._state.following.append(self.FOLLOW_identifier_in_parameter912)
                     identifier48 = self.identifier()
 
                     self._state.following.pop()
@@ -1977,11 +1882,11 @@ class QueryParser(Parser):
 
 
                 elif alt14 == 2:
-                    # QueryParser.g:207:7: INTEGER
+                    # QueryParser.g:131:7: INTEGER
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    INTEGER49=self.match(self.input, INTEGER, self.FOLLOW_INTEGER_in_parameter926)
+                    INTEGER49=self.match(self.input, INTEGER, self.FOLLOW_INTEGER_in_parameter921)
                     if self._state.backtracking == 0:
 
                         INTEGER49_tree = self._adaptor.createWithPayload(INTEGER49)
@@ -1990,11 +1895,11 @@ class QueryParser(Parser):
 
 
                 elif alt14 == 3:
-                    # QueryParser.g:208:7: DOUBLENUMBER
+                    # QueryParser.g:132:7: DOUBLENUMBER
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    DOUBLENUMBER50=self.match(self.input, DOUBLENUMBER, self.FOLLOW_DOUBLENUMBER_in_parameter935)
+                    DOUBLENUMBER50=self.match(self.input, DOUBLENUMBER, self.FOLLOW_DOUBLENUMBER_in_parameter930)
                     if self._state.backtracking == 0:
 
                         DOUBLENUMBER50_tree = self._adaptor.createWithPayload(DOUBLENUMBER50)
@@ -2003,11 +1908,11 @@ class QueryParser(Parser):
 
 
                 elif alt14 == 4:
-                    # QueryParser.g:209:7: QUOTEDSTRING
+                    # QueryParser.g:133:7: QUOTEDSTRING
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    QUOTEDSTRING51=self.match(self.input, QUOTEDSTRING, self.FOLLOW_QUOTEDSTRING_in_parameter943)
+                    QUOTEDSTRING51=self.match(self.input, QUOTEDSTRING, self.FOLLOW_QUOTEDSTRING_in_parameter938)
                     if self._state.backtracking == 0:
 
                         QUOTEDSTRING51_tree = self._adaptor.createWithPayload(QUOTEDSTRING51)
@@ -2016,11 +1921,11 @@ class QueryParser(Parser):
 
 
                 elif alt14 == 5:
-                    # QueryParser.g:210:7: DOLLARVAR
+                    # QueryParser.g:134:7: DOLLARVAR
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    DOLLARVAR52=self.match(self.input, DOLLARVAR, self.FOLLOW_DOLLARVAR_in_parameter951)
+                    DOLLARVAR52=self.match(self.input, DOLLARVAR, self.FOLLOW_DOLLARVAR_in_parameter946)
                     if self._state.backtracking == 0:
 
                         DOLLARVAR52_tree = self._adaptor.createWithPayload(DOLLARVAR52)
@@ -2037,9 +1942,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -2057,7 +1959,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "content"
-    # QueryParser.g:213:1: content : LEFT_CURLY ( content | ~ ( LEFT_CURLY | RIGHT_CURLY ) )* RIGHT_CURLY ;
+    # QueryParser.g:137:1: content : LEFT_CURLY ( content | ~ ( LEFT_CURLY | RIGHT_CURLY ) )* RIGHT_CURLY ;
     def content(self, ):
 
         retval = self.content_return()
@@ -2077,18 +1979,18 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:213:9: ( LEFT_CURLY ( content | ~ ( LEFT_CURLY | RIGHT_CURLY ) )* RIGHT_CURLY )
-                # QueryParser.g:213:11: LEFT_CURLY ( content | ~ ( LEFT_CURLY | RIGHT_CURLY ) )* RIGHT_CURLY
+                # QueryParser.g:137:9: ( LEFT_CURLY ( content | ~ ( LEFT_CURLY | RIGHT_CURLY ) )* RIGHT_CURLY )
+                # QueryParser.g:137:11: LEFT_CURLY ( content | ~ ( LEFT_CURLY | RIGHT_CURLY ) )* RIGHT_CURLY
                 pass 
                 root_0 = self._adaptor.nil()
 
-                LEFT_CURLY53=self.match(self.input, LEFT_CURLY, self.FOLLOW_LEFT_CURLY_in_content960)
+                LEFT_CURLY53=self.match(self.input, LEFT_CURLY, self.FOLLOW_LEFT_CURLY_in_content955)
                 if self._state.backtracking == 0:
 
                     LEFT_CURLY53_tree = self._adaptor.createWithPayload(LEFT_CURLY53)
                     self._adaptor.addChild(root_0, LEFT_CURLY53_tree)
 
-                # QueryParser.g:213:22: ( content | ~ ( LEFT_CURLY | RIGHT_CURLY ) )*
+                # QueryParser.g:137:22: ( content | ~ ( LEFT_CURLY | RIGHT_CURLY ) )*
                 while True: #loop15
                     alt15 = 3
                     LA15_0 = self.input.LA(1)
@@ -2100,9 +2002,9 @@ class QueryParser(Parser):
 
 
                     if alt15 == 1:
-                        # QueryParser.g:213:24: content
+                        # QueryParser.g:137:24: content
                         pass 
-                        self._state.following.append(self.FOLLOW_content_in_content964)
+                        self._state.following.append(self.FOLLOW_content_in_content959)
                         content54 = self.content()
 
                         self._state.following.pop()
@@ -2111,7 +2013,7 @@ class QueryParser(Parser):
 
 
                     elif alt15 == 2:
-                        # QueryParser.g:213:34: ~ ( LEFT_CURLY | RIGHT_CURLY )
+                        # QueryParser.g:137:34: ~ ( LEFT_CURLY | RIGHT_CURLY )
                         pass 
                         set55 = self.input.LT(1)
                         if (VOID <= self.input.LA(1) <= RIGHT_PAREN) or (LEFT_BRACKET <= self.input.LA(1) <= REALIAS):
@@ -2132,7 +2034,7 @@ class QueryParser(Parser):
 
                     else:
                         break #loop15
-                RIGHT_CURLY56=self.match(self.input, RIGHT_CURLY, self.FOLLOW_RIGHT_CURLY_in_content980)
+                RIGHT_CURLY56=self.match(self.input, RIGHT_CURLY, self.FOLLOW_RIGHT_CURLY_in_content975)
                 if self._state.backtracking == 0:
 
                     RIGHT_CURLY56_tree = self._adaptor.createWithPayload(RIGHT_CURLY56)
@@ -2150,9 +2052,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -2170,7 +2069,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "op_clause"
-    # QueryParser.g:216:1: op_clause : ( define_clause | load_clause | group_clause | cube_clause | store_clause | filter_clause | distinct_clause | limit_clause | sample_clause | order_clause | rank_clause | cross_clause | join_clause | union_clause | stream_clause | mr_clause );
+    # QueryParser.g:140:1: op_clause : ( define_clause | load_clause | group_clause | cube_clause | store_clause | filter_clause | distinct_clause | limit_clause | sample_clause | order_clause | rank_clause | cross_clause | join_clause | union_clause | stream_clause | mr_clause );
     def op_clause(self, ):
 
         retval = self.op_clause_return()
@@ -2214,7 +2113,7 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:216:11: ( define_clause | load_clause | group_clause | cube_clause | store_clause | filter_clause | distinct_clause | limit_clause | sample_clause | order_clause | rank_clause | cross_clause | join_clause | union_clause | stream_clause | mr_clause )
+                # QueryParser.g:140:11: ( define_clause | load_clause | group_clause | cube_clause | store_clause | filter_clause | distinct_clause | limit_clause | sample_clause | order_clause | rank_clause | cross_clause | join_clause | union_clause | stream_clause | mr_clause )
                 alt16 = 16
                 LA16 = self.input.LA(1)
                 if LA16 == DEFINE:
@@ -2258,11 +2157,11 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt16 == 1:
-                    # QueryParser.g:216:13: define_clause
+                    # QueryParser.g:140:13: define_clause
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_define_clause_in_op_clause989)
+                    self._state.following.append(self.FOLLOW_define_clause_in_op_clause984)
                     define_clause57 = self.define_clause()
 
                     self._state.following.pop()
@@ -2271,11 +2170,11 @@ class QueryParser(Parser):
 
 
                 elif alt16 == 2:
-                    # QueryParser.g:217:13: load_clause
+                    # QueryParser.g:141:13: load_clause
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_load_clause_in_op_clause1004)
+                    self._state.following.append(self.FOLLOW_load_clause_in_op_clause999)
                     load_clause58 = self.load_clause()
 
                     self._state.following.pop()
@@ -2284,11 +2183,11 @@ class QueryParser(Parser):
 
 
                 elif alt16 == 3:
-                    # QueryParser.g:218:13: group_clause
+                    # QueryParser.g:142:13: group_clause
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_group_clause_in_op_clause1018)
+                    self._state.following.append(self.FOLLOW_group_clause_in_op_clause1013)
                     group_clause59 = self.group_clause()
 
                     self._state.following.pop()
@@ -2297,11 +2196,11 @@ class QueryParser(Parser):
 
 
                 elif alt16 == 4:
-                    # QueryParser.g:219:13: cube_clause
+                    # QueryParser.g:143:13: cube_clause
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_cube_clause_in_op_clause1032)
+                    self._state.following.append(self.FOLLOW_cube_clause_in_op_clause1027)
                     cube_clause60 = self.cube_clause()
 
                     self._state.following.pop()
@@ -2310,11 +2209,11 @@ class QueryParser(Parser):
 
 
                 elif alt16 == 5:
-                    # QueryParser.g:220:13: store_clause
+                    # QueryParser.g:144:13: store_clause
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_store_clause_in_op_clause1046)
+                    self._state.following.append(self.FOLLOW_store_clause_in_op_clause1041)
                     store_clause61 = self.store_clause()
 
                     self._state.following.pop()
@@ -2323,11 +2222,11 @@ class QueryParser(Parser):
 
 
                 elif alt16 == 6:
-                    # QueryParser.g:221:13: filter_clause
+                    # QueryParser.g:145:13: filter_clause
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_filter_clause_in_op_clause1060)
+                    self._state.following.append(self.FOLLOW_filter_clause_in_op_clause1055)
                     filter_clause62 = self.filter_clause()
 
                     self._state.following.pop()
@@ -2336,11 +2235,11 @@ class QueryParser(Parser):
 
 
                 elif alt16 == 7:
-                    # QueryParser.g:222:13: distinct_clause
+                    # QueryParser.g:146:13: distinct_clause
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_distinct_clause_in_op_clause1074)
+                    self._state.following.append(self.FOLLOW_distinct_clause_in_op_clause1069)
                     distinct_clause63 = self.distinct_clause()
 
                     self._state.following.pop()
@@ -2349,11 +2248,11 @@ class QueryParser(Parser):
 
 
                 elif alt16 == 8:
-                    # QueryParser.g:223:13: limit_clause
+                    # QueryParser.g:147:13: limit_clause
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_limit_clause_in_op_clause1088)
+                    self._state.following.append(self.FOLLOW_limit_clause_in_op_clause1083)
                     limit_clause64 = self.limit_clause()
 
                     self._state.following.pop()
@@ -2362,11 +2261,11 @@ class QueryParser(Parser):
 
 
                 elif alt16 == 9:
-                    # QueryParser.g:224:13: sample_clause
+                    # QueryParser.g:148:13: sample_clause
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_sample_clause_in_op_clause1102)
+                    self._state.following.append(self.FOLLOW_sample_clause_in_op_clause1097)
                     sample_clause65 = self.sample_clause()
 
                     self._state.following.pop()
@@ -2375,11 +2274,11 @@ class QueryParser(Parser):
 
 
                 elif alt16 == 10:
-                    # QueryParser.g:225:13: order_clause
+                    # QueryParser.g:149:13: order_clause
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_order_clause_in_op_clause1116)
+                    self._state.following.append(self.FOLLOW_order_clause_in_op_clause1111)
                     order_clause66 = self.order_clause()
 
                     self._state.following.pop()
@@ -2388,11 +2287,11 @@ class QueryParser(Parser):
 
 
                 elif alt16 == 11:
-                    # QueryParser.g:226:13: rank_clause
+                    # QueryParser.g:150:13: rank_clause
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_rank_clause_in_op_clause1130)
+                    self._state.following.append(self.FOLLOW_rank_clause_in_op_clause1125)
                     rank_clause67 = self.rank_clause()
 
                     self._state.following.pop()
@@ -2401,11 +2300,11 @@ class QueryParser(Parser):
 
 
                 elif alt16 == 12:
-                    # QueryParser.g:227:13: cross_clause
+                    # QueryParser.g:151:13: cross_clause
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_cross_clause_in_op_clause1144)
+                    self._state.following.append(self.FOLLOW_cross_clause_in_op_clause1139)
                     cross_clause68 = self.cross_clause()
 
                     self._state.following.pop()
@@ -2414,11 +2313,11 @@ class QueryParser(Parser):
 
 
                 elif alt16 == 13:
-                    # QueryParser.g:228:13: join_clause
+                    # QueryParser.g:152:13: join_clause
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_join_clause_in_op_clause1158)
+                    self._state.following.append(self.FOLLOW_join_clause_in_op_clause1153)
                     join_clause69 = self.join_clause()
 
                     self._state.following.pop()
@@ -2427,11 +2326,11 @@ class QueryParser(Parser):
 
 
                 elif alt16 == 14:
-                    # QueryParser.g:229:13: union_clause
+                    # QueryParser.g:153:13: union_clause
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_union_clause_in_op_clause1172)
+                    self._state.following.append(self.FOLLOW_union_clause_in_op_clause1167)
                     union_clause70 = self.union_clause()
 
                     self._state.following.pop()
@@ -2440,11 +2339,11 @@ class QueryParser(Parser):
 
 
                 elif alt16 == 15:
-                    # QueryParser.g:230:13: stream_clause
+                    # QueryParser.g:154:13: stream_clause
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_stream_clause_in_op_clause1186)
+                    self._state.following.append(self.FOLLOW_stream_clause_in_op_clause1181)
                     stream_clause71 = self.stream_clause()
 
                     self._state.following.pop()
@@ -2453,11 +2352,11 @@ class QueryParser(Parser):
 
 
                 elif alt16 == 16:
-                    # QueryParser.g:231:13: mr_clause
+                    # QueryParser.g:155:13: mr_clause
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_mr_clause_in_op_clause1200)
+                    self._state.following.append(self.FOLLOW_mr_clause_in_op_clause1195)
                     mr_clause72 = self.mr_clause()
 
                     self._state.following.pop()
@@ -2474,9 +2373,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -2494,7 +2390,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "macro_param_clause"
-    # QueryParser.g:234:1: macro_param_clause : LEFT_PAREN ( alias ( COMMA alias )* )? RIGHT_PAREN -> ^( PARAMS ( alias )* ) ;
+    # QueryParser.g:158:1: macro_param_clause : LEFT_PAREN ( alias ( COMMA alias )* )? RIGHT_PAREN -> ^( PARAMS ( alias )* ) ;
     def macro_param_clause(self, ):
 
         retval = self.macro_param_clause_return()
@@ -2519,28 +2415,28 @@ class QueryParser(Parser):
         stream_alias = RewriteRuleSubtreeStream(self._adaptor, "rule alias")
         try:
             try:
-                # QueryParser.g:234:20: ( LEFT_PAREN ( alias ( COMMA alias )* )? RIGHT_PAREN -> ^( PARAMS ( alias )* ) )
-                # QueryParser.g:234:22: LEFT_PAREN ( alias ( COMMA alias )* )? RIGHT_PAREN
+                # QueryParser.g:158:20: ( LEFT_PAREN ( alias ( COMMA alias )* )? RIGHT_PAREN -> ^( PARAMS ( alias )* ) )
+                # QueryParser.g:158:22: LEFT_PAREN ( alias ( COMMA alias )* )? RIGHT_PAREN
                 pass 
-                LEFT_PAREN73=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_macro_param_clause1209) 
+                LEFT_PAREN73=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_macro_param_clause1204) 
                 if self._state.backtracking == 0:
                     stream_LEFT_PAREN.add(LEFT_PAREN73)
-                # QueryParser.g:234:33: ( alias ( COMMA alias )* )?
+                # QueryParser.g:158:33: ( alias ( COMMA alias )* )?
                 alt18 = 2
                 LA18_0 = self.input.LA(1)
 
                 if (LA18_0 == IDENTIFIER_L) :
                     alt18 = 1
                 if alt18 == 1:
-                    # QueryParser.g:234:35: alias ( COMMA alias )*
+                    # QueryParser.g:158:35: alias ( COMMA alias )*
                     pass 
-                    self._state.following.append(self.FOLLOW_alias_in_macro_param_clause1213)
+                    self._state.following.append(self.FOLLOW_alias_in_macro_param_clause1208)
                     alias74 = self.alias()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         stream_alias.add(alias74.tree)
-                    # QueryParser.g:234:41: ( COMMA alias )*
+                    # QueryParser.g:158:41: ( COMMA alias )*
                     while True: #loop17
                         alt17 = 2
                         LA17_0 = self.input.LA(1)
@@ -2550,12 +2446,12 @@ class QueryParser(Parser):
 
 
                         if alt17 == 1:
-                            # QueryParser.g:234:42: COMMA alias
+                            # QueryParser.g:158:42: COMMA alias
                             pass 
-                            COMMA75=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_macro_param_clause1216) 
+                            COMMA75=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_macro_param_clause1211) 
                             if self._state.backtracking == 0:
                                 stream_COMMA.add(COMMA75)
-                            self._state.following.append(self.FOLLOW_alias_in_macro_param_clause1218)
+                            self._state.following.append(self.FOLLOW_alias_in_macro_param_clause1213)
                             alias76 = self.alias()
 
                             self._state.following.pop()
@@ -2568,7 +2464,7 @@ class QueryParser(Parser):
 
 
 
-                RIGHT_PAREN77=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_macro_param_clause1225) 
+                RIGHT_PAREN77=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_macro_param_clause1220) 
                 if self._state.backtracking == 0:
                     stream_RIGHT_PAREN.add(RIGHT_PAREN77)
 
@@ -2590,12 +2486,12 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 235:5: -> ^( PARAMS ( alias )* )
-                    # QueryParser.g:235:8: ^( PARAMS ( alias )* )
+                    # 159:5: -> ^( PARAMS ( alias )* )
+                    # QueryParser.g:159:8: ^( PARAMS ( alias )* )
                     root_1 = self._adaptor.nil()
                     root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(PARAMS, "PARAMS"), root_1)
 
-                    # QueryParser.g:235:17: ( alias )*
+                    # QueryParser.g:159:17: ( alias )*
                     while stream_alias.hasNext():
                         self._adaptor.addChild(root_1, stream_alias.nextTree())
 
@@ -2619,9 +2515,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -2639,7 +2532,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "macro_return_clause"
-    # QueryParser.g:238:1: macro_return_clause : RETURNS ( ( alias ( COMMA alias )* ) | VOID ) -> ^( RETURN_VAL ( alias )* ) ;
+    # QueryParser.g:162:1: macro_return_clause : RETURNS ( ( alias ( COMMA alias )* ) | VOID ) -> ^( RETURN_VAL ( alias )* ) ;
     def macro_return_clause(self, ):
 
         retval = self.macro_return_clause_return()
@@ -2664,13 +2557,13 @@ class QueryParser(Parser):
         stream_alias = RewriteRuleSubtreeStream(self._adaptor, "rule alias")
         try:
             try:
-                # QueryParser.g:239:5: ( RETURNS ( ( alias ( COMMA alias )* ) | VOID ) -> ^( RETURN_VAL ( alias )* ) )
-                # QueryParser.g:239:7: RETURNS ( ( alias ( COMMA alias )* ) | VOID )
+                # QueryParser.g:163:5: ( RETURNS ( ( alias ( COMMA alias )* ) | VOID ) -> ^( RETURN_VAL ( alias )* ) )
+                # QueryParser.g:163:7: RETURNS ( ( alias ( COMMA alias )* ) | VOID )
                 pass 
-                RETURNS78=self.match(self.input, RETURNS, self.FOLLOW_RETURNS_in_macro_return_clause1252) 
+                RETURNS78=self.match(self.input, RETURNS, self.FOLLOW_RETURNS_in_macro_return_clause1247) 
                 if self._state.backtracking == 0:
                     stream_RETURNS.add(RETURNS78)
-                # QueryParser.g:239:15: ( ( alias ( COMMA alias )* ) | VOID )
+                # QueryParser.g:163:15: ( ( alias ( COMMA alias )* ) | VOID )
                 alt20 = 2
                 LA20_0 = self.input.LA(1)
 
@@ -2687,18 +2580,18 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt20 == 1:
-                    # QueryParser.g:239:16: ( alias ( COMMA alias )* )
+                    # QueryParser.g:163:16: ( alias ( COMMA alias )* )
                     pass 
-                    # QueryParser.g:239:16: ( alias ( COMMA alias )* )
-                    # QueryParser.g:239:17: alias ( COMMA alias )*
+                    # QueryParser.g:163:16: ( alias ( COMMA alias )* )
+                    # QueryParser.g:163:17: alias ( COMMA alias )*
                     pass 
-                    self._state.following.append(self.FOLLOW_alias_in_macro_return_clause1256)
+                    self._state.following.append(self.FOLLOW_alias_in_macro_return_clause1251)
                     alias79 = self.alias()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         stream_alias.add(alias79.tree)
-                    # QueryParser.g:239:23: ( COMMA alias )*
+                    # QueryParser.g:163:23: ( COMMA alias )*
                     while True: #loop19
                         alt19 = 2
                         LA19_0 = self.input.LA(1)
@@ -2708,12 +2601,12 @@ class QueryParser(Parser):
 
 
                         if alt19 == 1:
-                            # QueryParser.g:239:24: COMMA alias
+                            # QueryParser.g:163:24: COMMA alias
                             pass 
-                            COMMA80=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_macro_return_clause1259) 
+                            COMMA80=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_macro_return_clause1254) 
                             if self._state.backtracking == 0:
                                 stream_COMMA.add(COMMA80)
-                            self._state.following.append(self.FOLLOW_alias_in_macro_return_clause1261)
+                            self._state.following.append(self.FOLLOW_alias_in_macro_return_clause1256)
                             alias81 = self.alias()
 
                             self._state.following.pop()
@@ -2729,9 +2622,9 @@ class QueryParser(Parser):
 
 
                 elif alt20 == 2:
-                    # QueryParser.g:239:41: VOID
+                    # QueryParser.g:163:41: VOID
                     pass 
-                    VOID82=self.match(self.input, VOID, self.FOLLOW_VOID_in_macro_return_clause1268) 
+                    VOID82=self.match(self.input, VOID, self.FOLLOW_VOID_in_macro_return_clause1263) 
                     if self._state.backtracking == 0:
                         stream_VOID.add(VOID82)
 
@@ -2756,12 +2649,12 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 240:9: -> ^( RETURN_VAL ( alias )* )
-                    # QueryParser.g:240:12: ^( RETURN_VAL ( alias )* )
+                    # 164:9: -> ^( RETURN_VAL ( alias )* )
+                    # QueryParser.g:164:12: ^( RETURN_VAL ( alias )* )
                     root_1 = self._adaptor.nil()
                     root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(RETURN_VAL, "RETURN_VAL"), root_1)
 
-                    # QueryParser.g:240:25: ( alias )*
+                    # QueryParser.g:164:25: ( alias )*
                     while stream_alias.hasNext():
                         self._adaptor.addChild(root_1, stream_alias.nextTree())
 
@@ -2785,9 +2678,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -2805,7 +2695,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "macro_body_clause"
-    # QueryParser.g:243:1: macro_body_clause : content -> ^( MACRO_BODY ) ;
+    # QueryParser.g:167:1: macro_body_clause : content -> ^( MACRO_BODY ) ;
     def macro_body_clause(self, ):
 
         retval = self.macro_body_clause_return()
@@ -2819,10 +2709,10 @@ class QueryParser(Parser):
         stream_content = RewriteRuleSubtreeStream(self._adaptor, "rule content")
         try:
             try:
-                # QueryParser.g:243:19: ( content -> ^( MACRO_BODY ) )
-                # QueryParser.g:243:21: content
+                # QueryParser.g:167:19: ( content -> ^( MACRO_BODY ) )
+                # QueryParser.g:167:21: content
                 pass 
-                self._state.following.append(self.FOLLOW_content_in_macro_body_clause1295)
+                self._state.following.append(self.FOLLOW_content_in_macro_body_clause1290)
                 content83 = self.content()
 
                 self._state.following.pop()
@@ -2847,8 +2737,8 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 244:5: -> ^( MACRO_BODY )
-                    # QueryParser.g:244:8: ^( MACRO_BODY )
+                    # 168:5: -> ^( MACRO_BODY )
+                    # QueryParser.g:168:8: ^( MACRO_BODY )
                     root_1 = self._adaptor.nil()
                     root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(MACRO_BODY, "MACRO_BODY"), root_1)
 
@@ -2871,9 +2761,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -2891,7 +2778,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "macro_clause"
-    # QueryParser.g:247:1: macro_clause : macro_param_clause macro_return_clause macro_body_clause -> ^( MACRO_DEF macro_param_clause macro_return_clause macro_body_clause ) ;
+    # QueryParser.g:171:1: macro_clause : macro_param_clause macro_return_clause macro_body_clause -> ^( MACRO_DEF macro_param_clause macro_return_clause macro_body_clause ) ;
     def macro_clause(self, ):
 
         retval = self.macro_clause_return()
@@ -2911,22 +2798,22 @@ class QueryParser(Parser):
         stream_macro_return_clause = RewriteRuleSubtreeStream(self._adaptor, "rule macro_return_clause")
         try:
             try:
-                # QueryParser.g:247:14: ( macro_param_clause macro_return_clause macro_body_clause -> ^( MACRO_DEF macro_param_clause macro_return_clause macro_body_clause ) )
-                # QueryParser.g:247:16: macro_param_clause macro_return_clause macro_body_clause
+                # QueryParser.g:171:14: ( macro_param_clause macro_return_clause macro_body_clause -> ^( MACRO_DEF macro_param_clause macro_return_clause macro_body_clause ) )
+                # QueryParser.g:171:16: macro_param_clause macro_return_clause macro_body_clause
                 pass 
-                self._state.following.append(self.FOLLOW_macro_param_clause_in_macro_clause1317)
+                self._state.following.append(self.FOLLOW_macro_param_clause_in_macro_clause1312)
                 macro_param_clause84 = self.macro_param_clause()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     stream_macro_param_clause.add(macro_param_clause84.tree)
-                self._state.following.append(self.FOLLOW_macro_return_clause_in_macro_clause1319)
+                self._state.following.append(self.FOLLOW_macro_return_clause_in_macro_clause1314)
                 macro_return_clause85 = self.macro_return_clause()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     stream_macro_return_clause.add(macro_return_clause85.tree)
-                self._state.following.append(self.FOLLOW_macro_body_clause_in_macro_clause1321)
+                self._state.following.append(self.FOLLOW_macro_body_clause_in_macro_clause1316)
                 macro_body_clause86 = self.macro_body_clause()
 
                 self._state.following.pop()
@@ -2934,7 +2821,7 @@ class QueryParser(Parser):
                     stream_macro_body_clause.add(macro_body_clause86.tree)
 
                 # AST Rewrite
-                # elements: macro_body_clause, macro_return_clause, macro_param_clause
+                # elements: macro_return_clause, macro_body_clause, macro_param_clause
                 # token labels: 
                 # rule labels: retval
                 # token list labels: 
@@ -2951,8 +2838,8 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 248:5: -> ^( MACRO_DEF macro_param_clause macro_return_clause macro_body_clause )
-                    # QueryParser.g:248:8: ^( MACRO_DEF macro_param_clause macro_return_clause macro_body_clause )
+                    # 172:5: -> ^( MACRO_DEF macro_param_clause macro_return_clause macro_body_clause )
+                    # QueryParser.g:172:8: ^( MACRO_DEF macro_param_clause macro_return_clause macro_body_clause )
                     root_1 = self._adaptor.nil()
                     root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(MACRO_DEF, "MACRO_DEF"), root_1)
 
@@ -2977,9 +2864,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -2997,7 +2881,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "inline_return_clause"
-    # QueryParser.g:251:1: inline_return_clause : ( alias EQUAL -> ^( RETURN_VAL alias ) | alias ( COMMA alias )+ EQUAL -> ^( RETURN_VAL ( alias )+ ) | -> ^( RETURN_VAL ) );
+    # QueryParser.g:175:1: inline_return_clause : ( alias EQUAL -> ^( RETURN_VAL alias ) | alias ( COMMA alias )+ EQUAL -> ^( RETURN_VAL ( alias )+ ) | -> ^( RETURN_VAL ) );
     def inline_return_clause(self, ):
 
         retval = self.inline_return_clause_return()
@@ -3023,7 +2907,7 @@ class QueryParser(Parser):
         stream_alias = RewriteRuleSubtreeStream(self._adaptor, "rule alias")
         try:
             try:
-                # QueryParser.g:252:5: ( alias EQUAL -> ^( RETURN_VAL alias ) | alias ( COMMA alias )+ EQUAL -> ^( RETURN_VAL ( alias )+ ) | -> ^( RETURN_VAL ) )
+                # QueryParser.g:176:5: ( alias EQUAL -> ^( RETURN_VAL alias ) | alias ( COMMA alias )+ EQUAL -> ^( RETURN_VAL ( alias )+ ) | -> ^( RETURN_VAL ) )
                 alt22 = 3
                 LA22_0 = self.input.LA(1)
 
@@ -3052,15 +2936,15 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt22 == 1:
-                    # QueryParser.g:252:7: alias EQUAL
+                    # QueryParser.g:176:7: alias EQUAL
                     pass 
-                    self._state.following.append(self.FOLLOW_alias_in_inline_return_clause1351)
+                    self._state.following.append(self.FOLLOW_alias_in_inline_return_clause1346)
                     alias87 = self.alias()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         stream_alias.add(alias87.tree)
-                    EQUAL88=self.match(self.input, EQUAL, self.FOLLOW_EQUAL_in_inline_return_clause1353) 
+                    EQUAL88=self.match(self.input, EQUAL, self.FOLLOW_EQUAL_in_inline_return_clause1348) 
                     if self._state.backtracking == 0:
                         stream_EQUAL.add(EQUAL88)
 
@@ -3082,8 +2966,8 @@ class QueryParser(Parser):
 
 
                         root_0 = self._adaptor.nil()
-                        # 252:19: -> ^( RETURN_VAL alias )
-                        # QueryParser.g:252:22: ^( RETURN_VAL alias )
+                        # 176:19: -> ^( RETURN_VAL alias )
+                        # QueryParser.g:176:22: ^( RETURN_VAL alias )
                         root_1 = self._adaptor.nil()
                         root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(RETURN_VAL, "RETURN_VAL"), root_1)
 
@@ -3097,15 +2981,15 @@ class QueryParser(Parser):
 
 
                 elif alt22 == 2:
-                    # QueryParser.g:253:4: alias ( COMMA alias )+ EQUAL
+                    # QueryParser.g:177:4: alias ( COMMA alias )+ EQUAL
                     pass 
-                    self._state.following.append(self.FOLLOW_alias_in_inline_return_clause1366)
+                    self._state.following.append(self.FOLLOW_alias_in_inline_return_clause1361)
                     alias89 = self.alias()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         stream_alias.add(alias89.tree)
-                    # QueryParser.g:253:10: ( COMMA alias )+
+                    # QueryParser.g:177:10: ( COMMA alias )+
                     cnt21 = 0
                     while True: #loop21
                         alt21 = 2
@@ -3116,12 +3000,12 @@ class QueryParser(Parser):
 
 
                         if alt21 == 1:
-                            # QueryParser.g:253:11: COMMA alias
+                            # QueryParser.g:177:11: COMMA alias
                             pass 
-                            COMMA90=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_inline_return_clause1369) 
+                            COMMA90=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_inline_return_clause1364) 
                             if self._state.backtracking == 0:
                                 stream_COMMA.add(COMMA90)
-                            self._state.following.append(self.FOLLOW_alias_in_inline_return_clause1371)
+                            self._state.following.append(self.FOLLOW_alias_in_inline_return_clause1366)
                             alias91 = self.alias()
 
                             self._state.following.pop()
@@ -3140,7 +3024,7 @@ class QueryParser(Parser):
                             raise eee
 
                         cnt21 += 1
-                    EQUAL92=self.match(self.input, EQUAL, self.FOLLOW_EQUAL_in_inline_return_clause1375) 
+                    EQUAL92=self.match(self.input, EQUAL, self.FOLLOW_EQUAL_in_inline_return_clause1370) 
                     if self._state.backtracking == 0:
                         stream_EQUAL.add(EQUAL92)
 
@@ -3162,12 +3046,12 @@ class QueryParser(Parser):
 
 
                         root_0 = self._adaptor.nil()
-                        # 253:31: -> ^( RETURN_VAL ( alias )+ )
-                        # QueryParser.g:253:34: ^( RETURN_VAL ( alias )+ )
+                        # 177:31: -> ^( RETURN_VAL ( alias )+ )
+                        # QueryParser.g:177:34: ^( RETURN_VAL ( alias )+ )
                         root_1 = self._adaptor.nil()
                         root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(RETURN_VAL, "RETURN_VAL"), root_1)
 
-                        # QueryParser.g:253:47: ( alias )+
+                        # QueryParser.g:177:47: ( alias )+
                         if not (stream_alias.hasNext()):
                             raise RewriteEarlyExitException()
 
@@ -3185,7 +3069,7 @@ class QueryParser(Parser):
 
 
                 elif alt22 == 3:
-                    # QueryParser.g:254:4: 
+                    # QueryParser.g:178:4: 
                     pass 
                     # AST Rewrite
                     # elements: 
@@ -3205,8 +3089,8 @@ class QueryParser(Parser):
 
 
                         root_0 = self._adaptor.nil()
-                        # 254:4: -> ^( RETURN_VAL )
-                        # QueryParser.g:254:7: ^( RETURN_VAL )
+                        # 178:4: -> ^( RETURN_VAL )
+                        # QueryParser.g:178:7: ^( RETURN_VAL )
                         root_1 = self._adaptor.nil()
                         root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(RETURN_VAL, "RETURN_VAL"), root_1)
 
@@ -3226,9 +3110,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -3246,7 +3127,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "inline_param_clause"
-    # QueryParser.g:257:1: inline_param_clause : LEFT_PAREN ( parameter ( COMMA parameter )* )? RIGHT_PAREN -> ^( PARAMS ( parameter )* ) ;
+    # QueryParser.g:181:1: inline_param_clause : LEFT_PAREN ( parameter ( COMMA parameter )* )? RIGHT_PAREN -> ^( PARAMS ( parameter )* ) ;
     def inline_param_clause(self, ):
 
         retval = self.inline_param_clause_return()
@@ -3271,28 +3152,28 @@ class QueryParser(Parser):
         stream_parameter = RewriteRuleSubtreeStream(self._adaptor, "rule parameter")
         try:
             try:
-                # QueryParser.g:257:21: ( LEFT_PAREN ( parameter ( COMMA parameter )* )? RIGHT_PAREN -> ^( PARAMS ( parameter )* ) )
-                # QueryParser.g:257:23: LEFT_PAREN ( parameter ( COMMA parameter )* )? RIGHT_PAREN
+                # QueryParser.g:181:21: ( LEFT_PAREN ( parameter ( COMMA parameter )* )? RIGHT_PAREN -> ^( PARAMS ( parameter )* ) )
+                # QueryParser.g:181:23: LEFT_PAREN ( parameter ( COMMA parameter )* )? RIGHT_PAREN
                 pass 
-                LEFT_PAREN93=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_inline_param_clause1404) 
+                LEFT_PAREN93=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_inline_param_clause1399) 
                 if self._state.backtracking == 0:
                     stream_LEFT_PAREN.add(LEFT_PAREN93)
-                # QueryParser.g:257:34: ( parameter ( COMMA parameter )* )?
+                # QueryParser.g:181:34: ( parameter ( COMMA parameter )* )?
                 alt24 = 2
                 LA24_0 = self.input.LA(1)
 
                 if ((IDENTIFIER_L <= LA24_0 <= INTEGER) or LA24_0 == DOLLARVAR or LA24_0 == DOUBLENUMBER or LA24_0 == QUOTEDSTRING) :
                     alt24 = 1
                 if alt24 == 1:
-                    # QueryParser.g:257:36: parameter ( COMMA parameter )*
+                    # QueryParser.g:181:36: parameter ( COMMA parameter )*
                     pass 
-                    self._state.following.append(self.FOLLOW_parameter_in_inline_param_clause1408)
+                    self._state.following.append(self.FOLLOW_parameter_in_inline_param_clause1403)
                     parameter94 = self.parameter()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         stream_parameter.add(parameter94.tree)
-                    # QueryParser.g:257:46: ( COMMA parameter )*
+                    # QueryParser.g:181:46: ( COMMA parameter )*
                     while True: #loop23
                         alt23 = 2
                         LA23_0 = self.input.LA(1)
@@ -3302,12 +3183,12 @@ class QueryParser(Parser):
 
 
                         if alt23 == 1:
-                            # QueryParser.g:257:47: COMMA parameter
+                            # QueryParser.g:181:47: COMMA parameter
                             pass 
-                            COMMA95=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_inline_param_clause1411) 
+                            COMMA95=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_inline_param_clause1406) 
                             if self._state.backtracking == 0:
                                 stream_COMMA.add(COMMA95)
-                            self._state.following.append(self.FOLLOW_parameter_in_inline_param_clause1413)
+                            self._state.following.append(self.FOLLOW_parameter_in_inline_param_clause1408)
                             parameter96 = self.parameter()
 
                             self._state.following.pop()
@@ -3320,7 +3201,7 @@ class QueryParser(Parser):
 
 
 
-                RIGHT_PAREN97=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_inline_param_clause1420) 
+                RIGHT_PAREN97=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_inline_param_clause1415) 
                 if self._state.backtracking == 0:
                     stream_RIGHT_PAREN.add(RIGHT_PAREN97)
 
@@ -3342,12 +3223,12 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 258:5: -> ^( PARAMS ( parameter )* )
-                    # QueryParser.g:258:8: ^( PARAMS ( parameter )* )
+                    # 182:5: -> ^( PARAMS ( parameter )* )
+                    # QueryParser.g:182:8: ^( PARAMS ( parameter )* )
                     root_1 = self._adaptor.nil()
                     root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(PARAMS, "PARAMS"), root_1)
 
-                    # QueryParser.g:258:17: ( parameter )*
+                    # QueryParser.g:182:17: ( parameter )*
                     while stream_parameter.hasNext():
                         self._adaptor.addChild(root_1, stream_parameter.nextTree())
 
@@ -3371,9 +3252,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -3391,7 +3269,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "inline_clause"
-    # QueryParser.g:261:1: inline_clause : inline_return_clause alias inline_param_clause -> ^( MACRO_INLINE alias inline_return_clause inline_param_clause ) ;
+    # QueryParser.g:185:1: inline_clause : inline_return_clause alias inline_param_clause -> ^( MACRO_INLINE alias inline_return_clause inline_param_clause ) ;
     def inline_clause(self, ):
 
         retval = self.inline_clause_return()
@@ -3411,22 +3289,22 @@ class QueryParser(Parser):
         stream_inline_param_clause = RewriteRuleSubtreeStream(self._adaptor, "rule inline_param_clause")
         try:
             try:
-                # QueryParser.g:261:15: ( inline_return_clause alias inline_param_clause -> ^( MACRO_INLINE alias inline_return_clause inline_param_clause ) )
-                # QueryParser.g:261:17: inline_return_clause alias inline_param_clause
+                # QueryParser.g:185:15: ( inline_return_clause alias inline_param_clause -> ^( MACRO_INLINE alias inline_return_clause inline_param_clause ) )
+                # QueryParser.g:185:17: inline_return_clause alias inline_param_clause
                 pass 
-                self._state.following.append(self.FOLLOW_inline_return_clause_in_inline_clause1442)
+                self._state.following.append(self.FOLLOW_inline_return_clause_in_inline_clause1437)
                 inline_return_clause98 = self.inline_return_clause()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     stream_inline_return_clause.add(inline_return_clause98.tree)
-                self._state.following.append(self.FOLLOW_alias_in_inline_clause1444)
+                self._state.following.append(self.FOLLOW_alias_in_inline_clause1439)
                 alias99 = self.alias()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     stream_alias.add(alias99.tree)
-                self._state.following.append(self.FOLLOW_inline_param_clause_in_inline_clause1446)
+                self._state.following.append(self.FOLLOW_inline_param_clause_in_inline_clause1441)
                 inline_param_clause100 = self.inline_param_clause()
 
                 self._state.following.pop()
@@ -3434,7 +3312,7 @@ class QueryParser(Parser):
                     stream_inline_param_clause.add(inline_param_clause100.tree)
 
                 # AST Rewrite
-                # elements: alias, inline_return_clause, inline_param_clause
+                # elements: inline_return_clause, alias, inline_param_clause
                 # token labels: 
                 # rule labels: retval
                 # token list labels: 
@@ -3451,8 +3329,8 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 262:5: -> ^( MACRO_INLINE alias inline_return_clause inline_param_clause )
-                    # QueryParser.g:262:8: ^( MACRO_INLINE alias inline_return_clause inline_param_clause )
+                    # 186:5: -> ^( MACRO_INLINE alias inline_return_clause inline_param_clause )
+                    # QueryParser.g:186:8: ^( MACRO_INLINE alias inline_return_clause inline_param_clause )
                     root_1 = self._adaptor.nil()
                     root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(MACRO_INLINE, "MACRO_INLINE"), root_1)
 
@@ -3477,9 +3355,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -3497,7 +3372,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "import_clause"
-    # QueryParser.g:265:1: import_clause : IMPORT QUOTEDSTRING ;
+    # QueryParser.g:189:1: import_clause : IMPORT QUOTEDSTRING ;
     def import_clause(self, ):
 
         retval = self.import_clause_return()
@@ -3513,18 +3388,18 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:265:15: ( IMPORT QUOTEDSTRING )
-                # QueryParser.g:265:17: IMPORT QUOTEDSTRING
+                # QueryParser.g:189:15: ( IMPORT QUOTEDSTRING )
+                # QueryParser.g:189:17: IMPORT QUOTEDSTRING
                 pass 
                 root_0 = self._adaptor.nil()
 
-                IMPORT101=self.match(self.input, IMPORT, self.FOLLOW_IMPORT_in_import_clause1471)
+                IMPORT101=self.match(self.input, IMPORT, self.FOLLOW_IMPORT_in_import_clause1466)
                 if self._state.backtracking == 0:
 
                     IMPORT101_tree = self._adaptor.createWithPayload(IMPORT101)
                     root_0 = self._adaptor.becomeRoot(IMPORT101_tree, root_0)
 
-                QUOTEDSTRING102=self.match(self.input, QUOTEDSTRING, self.FOLLOW_QUOTEDSTRING_in_import_clause1474)
+                QUOTEDSTRING102=self.match(self.input, QUOTEDSTRING, self.FOLLOW_QUOTEDSTRING_in_import_clause1469)
                 if self._state.backtracking == 0:
 
                     QUOTEDSTRING102_tree = self._adaptor.createWithPayload(QUOTEDSTRING102)
@@ -3542,9 +3417,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -3562,7 +3434,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "define_clause"
-    # QueryParser.g:268:1: define_clause : DEFINE alias ( cmd | func_clause | macro_clause ) ;
+    # QueryParser.g:192:1: define_clause : DEFINE alias ( cmd | func_clause | macro_clause ) ;
     def define_clause(self, ):
 
         retval = self.define_clause_return()
@@ -3584,24 +3456,24 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:268:15: ( DEFINE alias ( cmd | func_clause | macro_clause ) )
-                # QueryParser.g:268:17: DEFINE alias ( cmd | func_clause | macro_clause )
+                # QueryParser.g:192:15: ( DEFINE alias ( cmd | func_clause | macro_clause ) )
+                # QueryParser.g:192:17: DEFINE alias ( cmd | func_clause | macro_clause )
                 pass 
                 root_0 = self._adaptor.nil()
 
-                DEFINE103=self.match(self.input, DEFINE, self.FOLLOW_DEFINE_in_define_clause1483)
+                DEFINE103=self.match(self.input, DEFINE, self.FOLLOW_DEFINE_in_define_clause1478)
                 if self._state.backtracking == 0:
 
                     DEFINE103_tree = self._adaptor.createWithPayload(DEFINE103)
                     root_0 = self._adaptor.becomeRoot(DEFINE103_tree, root_0)
 
-                self._state.following.append(self.FOLLOW_alias_in_define_clause1486)
+                self._state.following.append(self.FOLLOW_alias_in_define_clause1481)
                 alias104 = self.alias()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, alias104.tree)
-                # QueryParser.g:268:31: ( cmd | func_clause | macro_clause )
+                # QueryParser.g:192:31: ( cmd | func_clause | macro_clause )
                 alt25 = 3
                 LA25 = self.input.LA(1)
                 if LA25 == EXECCOMMAND:
@@ -3619,9 +3491,9 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt25 == 1:
-                    # QueryParser.g:268:33: cmd
+                    # QueryParser.g:192:33: cmd
                     pass 
-                    self._state.following.append(self.FOLLOW_cmd_in_define_clause1490)
+                    self._state.following.append(self.FOLLOW_cmd_in_define_clause1485)
                     cmd105 = self.cmd()
 
                     self._state.following.pop()
@@ -3630,9 +3502,9 @@ class QueryParser(Parser):
 
 
                 elif alt25 == 2:
-                    # QueryParser.g:268:39: func_clause
+                    # QueryParser.g:192:39: func_clause
                     pass 
-                    self._state.following.append(self.FOLLOW_func_clause_in_define_clause1494)
+                    self._state.following.append(self.FOLLOW_func_clause_in_define_clause1489)
                     func_clause106 = self.func_clause()
 
                     self._state.following.pop()
@@ -3641,9 +3513,9 @@ class QueryParser(Parser):
 
 
                 elif alt25 == 3:
-                    # QueryParser.g:268:53: macro_clause
+                    # QueryParser.g:192:53: macro_clause
                     pass 
-                    self._state.following.append(self.FOLLOW_macro_clause_in_define_clause1498)
+                    self._state.following.append(self.FOLLOW_macro_clause_in_define_clause1493)
                     macro_clause107 = self.macro_clause()
 
                     self._state.following.pop()
@@ -3664,9 +3536,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -3684,7 +3553,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "cmd"
-    # QueryParser.g:271:1: cmd : EXECCOMMAND ( ship_clause | cache_clause | input_clause | output_clause | error_clause )* ;
+    # QueryParser.g:195:1: cmd : EXECCOMMAND ( ship_clause | cache_clause | input_clause | output_clause | error_clause )* ;
     def cmd(self, ):
 
         retval = self.cmd_return()
@@ -3708,18 +3577,18 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:271:5: ( EXECCOMMAND ( ship_clause | cache_clause | input_clause | output_clause | error_clause )* )
-                # QueryParser.g:271:7: EXECCOMMAND ( ship_clause | cache_clause | input_clause | output_clause | error_clause )*
+                # QueryParser.g:195:5: ( EXECCOMMAND ( ship_clause | cache_clause | input_clause | output_clause | error_clause )* )
+                # QueryParser.g:195:7: EXECCOMMAND ( ship_clause | cache_clause | input_clause | output_clause | error_clause )*
                 pass 
                 root_0 = self._adaptor.nil()
 
-                EXECCOMMAND108=self.match(self.input, EXECCOMMAND, self.FOLLOW_EXECCOMMAND_in_cmd1508)
+                EXECCOMMAND108=self.match(self.input, EXECCOMMAND, self.FOLLOW_EXECCOMMAND_in_cmd1503)
                 if self._state.backtracking == 0:
 
                     EXECCOMMAND108_tree = self._adaptor.createWithPayload(EXECCOMMAND108)
                     root_0 = self._adaptor.becomeRoot(EXECCOMMAND108_tree, root_0)
 
-                # QueryParser.g:271:20: ( ship_clause | cache_clause | input_clause | output_clause | error_clause )*
+                # QueryParser.g:195:20: ( ship_clause | cache_clause | input_clause | output_clause | error_clause )*
                 while True: #loop26
                     alt26 = 6
                     LA26 = self.input.LA(1)
@@ -3735,9 +3604,9 @@ class QueryParser(Parser):
                         alt26 = 5
 
                     if alt26 == 1:
-                        # QueryParser.g:271:22: ship_clause
+                        # QueryParser.g:195:22: ship_clause
                         pass 
-                        self._state.following.append(self.FOLLOW_ship_clause_in_cmd1513)
+                        self._state.following.append(self.FOLLOW_ship_clause_in_cmd1508)
                         ship_clause109 = self.ship_clause()
 
                         self._state.following.pop()
@@ -3746,9 +3615,9 @@ class QueryParser(Parser):
 
 
                     elif alt26 == 2:
-                        # QueryParser.g:271:36: cache_clause
+                        # QueryParser.g:195:36: cache_clause
                         pass 
-                        self._state.following.append(self.FOLLOW_cache_clause_in_cmd1517)
+                        self._state.following.append(self.FOLLOW_cache_clause_in_cmd1512)
                         cache_clause110 = self.cache_clause()
 
                         self._state.following.pop()
@@ -3757,9 +3626,9 @@ class QueryParser(Parser):
 
 
                     elif alt26 == 3:
-                        # QueryParser.g:271:51: input_clause
+                        # QueryParser.g:195:51: input_clause
                         pass 
-                        self._state.following.append(self.FOLLOW_input_clause_in_cmd1521)
+                        self._state.following.append(self.FOLLOW_input_clause_in_cmd1516)
                         input_clause111 = self.input_clause()
 
                         self._state.following.pop()
@@ -3768,9 +3637,9 @@ class QueryParser(Parser):
 
 
                     elif alt26 == 4:
-                        # QueryParser.g:271:66: output_clause
+                        # QueryParser.g:195:66: output_clause
                         pass 
-                        self._state.following.append(self.FOLLOW_output_clause_in_cmd1525)
+                        self._state.following.append(self.FOLLOW_output_clause_in_cmd1520)
                         output_clause112 = self.output_clause()
 
                         self._state.following.pop()
@@ -3779,9 +3648,9 @@ class QueryParser(Parser):
 
 
                     elif alt26 == 5:
-                        # QueryParser.g:271:82: error_clause
+                        # QueryParser.g:195:82: error_clause
                         pass 
-                        self._state.following.append(self.FOLLOW_error_clause_in_cmd1529)
+                        self._state.following.append(self.FOLLOW_error_clause_in_cmd1524)
                         error_clause113 = self.error_clause()
 
                         self._state.following.pop()
@@ -3803,9 +3672,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -3823,7 +3689,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "ship_clause"
-    # QueryParser.g:274:1: ship_clause : SHIP LEFT_PAREN ( path_list )? RIGHT_PAREN ;
+    # QueryParser.g:198:1: ship_clause : SHIP LEFT_PAREN ( path_list )? RIGHT_PAREN ;
     def ship_clause(self, ):
 
         retval = self.ship_clause_return()
@@ -3843,19 +3709,19 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:274:13: ( SHIP LEFT_PAREN ( path_list )? RIGHT_PAREN )
-                # QueryParser.g:274:15: SHIP LEFT_PAREN ( path_list )? RIGHT_PAREN
+                # QueryParser.g:198:13: ( SHIP LEFT_PAREN ( path_list )? RIGHT_PAREN )
+                # QueryParser.g:198:15: SHIP LEFT_PAREN ( path_list )? RIGHT_PAREN
                 pass 
                 root_0 = self._adaptor.nil()
 
-                SHIP114=self.match(self.input, SHIP, self.FOLLOW_SHIP_in_ship_clause1541)
+                SHIP114=self.match(self.input, SHIP, self.FOLLOW_SHIP_in_ship_clause1536)
                 if self._state.backtracking == 0:
 
                     SHIP114_tree = self._adaptor.createWithPayload(SHIP114)
                     root_0 = self._adaptor.becomeRoot(SHIP114_tree, root_0)
 
-                LEFT_PAREN115=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_ship_clause1544)
-                # QueryParser.g:274:33: ( path_list )?
+                LEFT_PAREN115=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_ship_clause1539)
+                # QueryParser.g:198:33: ( path_list )?
                 alt27 = 2
                 LA27_0 = self.input.LA(1)
 
@@ -3864,7 +3730,7 @@ class QueryParser(Parser):
                 if alt27 == 1:
                     # QueryParser.g:0:0: path_list
                     pass 
-                    self._state.following.append(self.FOLLOW_path_list_in_ship_clause1547)
+                    self._state.following.append(self.FOLLOW_path_list_in_ship_clause1542)
                     path_list116 = self.path_list()
 
                     self._state.following.pop()
@@ -3873,7 +3739,7 @@ class QueryParser(Parser):
 
 
 
-                RIGHT_PAREN117=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_ship_clause1550)
+                RIGHT_PAREN117=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_ship_clause1545)
 
 
 
@@ -3886,9 +3752,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -3906,7 +3769,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "path_list"
-    # QueryParser.g:277:1: path_list : QUOTEDSTRING ( COMMA QUOTEDSTRING )* -> ( QUOTEDSTRING )+ ;
+    # QueryParser.g:201:1: path_list : QUOTEDSTRING ( COMMA QUOTEDSTRING )* -> ( QUOTEDSTRING )+ ;
     def path_list(self, ):
 
         retval = self.path_list_return()
@@ -3926,13 +3789,13 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:277:11: ( QUOTEDSTRING ( COMMA QUOTEDSTRING )* -> ( QUOTEDSTRING )+ )
-                # QueryParser.g:277:13: QUOTEDSTRING ( COMMA QUOTEDSTRING )*
+                # QueryParser.g:201:11: ( QUOTEDSTRING ( COMMA QUOTEDSTRING )* -> ( QUOTEDSTRING )+ )
+                # QueryParser.g:201:13: QUOTEDSTRING ( COMMA QUOTEDSTRING )*
                 pass 
-                QUOTEDSTRING118=self.match(self.input, QUOTEDSTRING, self.FOLLOW_QUOTEDSTRING_in_path_list1560) 
+                QUOTEDSTRING118=self.match(self.input, QUOTEDSTRING, self.FOLLOW_QUOTEDSTRING_in_path_list1555) 
                 if self._state.backtracking == 0:
                     stream_QUOTEDSTRING.add(QUOTEDSTRING118)
-                # QueryParser.g:277:26: ( COMMA QUOTEDSTRING )*
+                # QueryParser.g:201:26: ( COMMA QUOTEDSTRING )*
                 while True: #loop28
                     alt28 = 2
                     LA28_0 = self.input.LA(1)
@@ -3942,12 +3805,12 @@ class QueryParser(Parser):
 
 
                     if alt28 == 1:
-                        # QueryParser.g:277:28: COMMA QUOTEDSTRING
+                        # QueryParser.g:201:28: COMMA QUOTEDSTRING
                         pass 
-                        COMMA119=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_path_list1564) 
+                        COMMA119=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_path_list1559) 
                         if self._state.backtracking == 0:
                             stream_COMMA.add(COMMA119)
-                        QUOTEDSTRING120=self.match(self.input, QUOTEDSTRING, self.FOLLOW_QUOTEDSTRING_in_path_list1566) 
+                        QUOTEDSTRING120=self.match(self.input, QUOTEDSTRING, self.FOLLOW_QUOTEDSTRING_in_path_list1561) 
                         if self._state.backtracking == 0:
                             stream_QUOTEDSTRING.add(QUOTEDSTRING120)
 
@@ -3973,8 +3836,8 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 278:10: -> ( QUOTEDSTRING )+
-                    # QueryParser.g:278:13: ( QUOTEDSTRING )+
+                    # 202:10: -> ( QUOTEDSTRING )+
+                    # QueryParser.g:202:13: ( QUOTEDSTRING )+
                     if not (stream_QUOTEDSTRING.hasNext()):
                         raise RewriteEarlyExitException()
 
@@ -3999,9 +3862,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -4019,7 +3879,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "cache_clause"
-    # QueryParser.g:281:1: cache_clause : CACHE LEFT_PAREN path_list RIGHT_PAREN ;
+    # QueryParser.g:205:1: cache_clause : CACHE LEFT_PAREN path_list RIGHT_PAREN ;
     def cache_clause(self, ):
 
         retval = self.cache_clause_return()
@@ -4039,25 +3899,25 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:281:14: ( CACHE LEFT_PAREN path_list RIGHT_PAREN )
-                # QueryParser.g:281:16: CACHE LEFT_PAREN path_list RIGHT_PAREN
+                # QueryParser.g:205:14: ( CACHE LEFT_PAREN path_list RIGHT_PAREN )
+                # QueryParser.g:205:16: CACHE LEFT_PAREN path_list RIGHT_PAREN
                 pass 
                 root_0 = self._adaptor.nil()
 
-                CACHE121=self.match(self.input, CACHE, self.FOLLOW_CACHE_in_cache_clause1593)
+                CACHE121=self.match(self.input, CACHE, self.FOLLOW_CACHE_in_cache_clause1588)
                 if self._state.backtracking == 0:
 
                     CACHE121_tree = self._adaptor.createWithPayload(CACHE121)
                     root_0 = self._adaptor.becomeRoot(CACHE121_tree, root_0)
 
-                LEFT_PAREN122=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_cache_clause1596)
-                self._state.following.append(self.FOLLOW_path_list_in_cache_clause1599)
+                LEFT_PAREN122=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_cache_clause1591)
+                self._state.following.append(self.FOLLOW_path_list_in_cache_clause1594)
                 path_list123 = self.path_list()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, path_list123.tree)
-                RIGHT_PAREN124=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_cache_clause1601)
+                RIGHT_PAREN124=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_cache_clause1596)
 
 
 
@@ -4070,9 +3930,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -4090,7 +3947,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "input_clause"
-    # QueryParser.g:284:1: input_clause : INPUT LEFT_PAREN stream_cmd_list RIGHT_PAREN ;
+    # QueryParser.g:208:1: input_clause : INPUT LEFT_PAREN stream_cmd_list RIGHT_PAREN ;
     def input_clause(self, ):
 
         retval = self.input_clause_return()
@@ -4110,25 +3967,25 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:284:14: ( INPUT LEFT_PAREN stream_cmd_list RIGHT_PAREN )
-                # QueryParser.g:284:16: INPUT LEFT_PAREN stream_cmd_list RIGHT_PAREN
+                # QueryParser.g:208:14: ( INPUT LEFT_PAREN stream_cmd_list RIGHT_PAREN )
+                # QueryParser.g:208:16: INPUT LEFT_PAREN stream_cmd_list RIGHT_PAREN
                 pass 
                 root_0 = self._adaptor.nil()
 
-                INPUT125=self.match(self.input, INPUT, self.FOLLOW_INPUT_in_input_clause1611)
+                INPUT125=self.match(self.input, INPUT, self.FOLLOW_INPUT_in_input_clause1606)
                 if self._state.backtracking == 0:
 
                     INPUT125_tree = self._adaptor.createWithPayload(INPUT125)
                     root_0 = self._adaptor.becomeRoot(INPUT125_tree, root_0)
 
-                LEFT_PAREN126=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_input_clause1614)
-                self._state.following.append(self.FOLLOW_stream_cmd_list_in_input_clause1617)
+                LEFT_PAREN126=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_input_clause1609)
+                self._state.following.append(self.FOLLOW_stream_cmd_list_in_input_clause1612)
                 stream_cmd_list127 = self.stream_cmd_list()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, stream_cmd_list127.tree)
-                RIGHT_PAREN128=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_input_clause1619)
+                RIGHT_PAREN128=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_input_clause1614)
 
 
 
@@ -4141,9 +3998,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -4161,7 +4015,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "stream_cmd_list"
-    # QueryParser.g:287:1: stream_cmd_list : stream_cmd ( COMMA stream_cmd )* -> ( stream_cmd )+ ;
+    # QueryParser.g:211:1: stream_cmd_list : stream_cmd ( COMMA stream_cmd )* -> ( stream_cmd )+ ;
     def stream_cmd_list(self, ):
 
         retval = self.stream_cmd_list_return()
@@ -4180,16 +4034,16 @@ class QueryParser(Parser):
         stream_stream_cmd = RewriteRuleSubtreeStream(self._adaptor, "rule stream_cmd")
         try:
             try:
-                # QueryParser.g:287:17: ( stream_cmd ( COMMA stream_cmd )* -> ( stream_cmd )+ )
-                # QueryParser.g:287:19: stream_cmd ( COMMA stream_cmd )*
+                # QueryParser.g:211:17: ( stream_cmd ( COMMA stream_cmd )* -> ( stream_cmd )+ )
+                # QueryParser.g:211:19: stream_cmd ( COMMA stream_cmd )*
                 pass 
-                self._state.following.append(self.FOLLOW_stream_cmd_in_stream_cmd_list1629)
+                self._state.following.append(self.FOLLOW_stream_cmd_in_stream_cmd_list1624)
                 stream_cmd129 = self.stream_cmd()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     stream_stream_cmd.add(stream_cmd129.tree)
-                # QueryParser.g:287:30: ( COMMA stream_cmd )*
+                # QueryParser.g:211:30: ( COMMA stream_cmd )*
                 while True: #loop29
                     alt29 = 2
                     LA29_0 = self.input.LA(1)
@@ -4199,12 +4053,12 @@ class QueryParser(Parser):
 
 
                     if alt29 == 1:
-                        # QueryParser.g:287:32: COMMA stream_cmd
+                        # QueryParser.g:211:32: COMMA stream_cmd
                         pass 
-                        COMMA130=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_stream_cmd_list1633) 
+                        COMMA130=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_stream_cmd_list1628) 
                         if self._state.backtracking == 0:
                             stream_COMMA.add(COMMA130)
-                        self._state.following.append(self.FOLLOW_stream_cmd_in_stream_cmd_list1635)
+                        self._state.following.append(self.FOLLOW_stream_cmd_in_stream_cmd_list1630)
                         stream_cmd131 = self.stream_cmd()
 
                         self._state.following.pop()
@@ -4233,8 +4087,8 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 288:16: -> ( stream_cmd )+
-                    # QueryParser.g:288:19: ( stream_cmd )+
+                    # 212:16: -> ( stream_cmd )+
+                    # QueryParser.g:212:19: ( stream_cmd )+
                     if not (stream_stream_cmd.hasNext()):
                         raise RewriteEarlyExitException()
 
@@ -4259,9 +4113,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -4279,7 +4130,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "stream_cmd"
-    # QueryParser.g:291:1: stream_cmd : ( STDIN | STDOUT | QUOTEDSTRING ) ( USING ( func_clause ) )? ;
+    # QueryParser.g:215:1: stream_cmd : ( STDIN | STDOUT | QUOTEDSTRING ) ( USING ( func_clause ) )? ;
     def stream_cmd(self, ):
 
         retval = self.stream_cmd_return()
@@ -4297,8 +4148,8 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:291:12: ( ( STDIN | STDOUT | QUOTEDSTRING ) ( USING ( func_clause ) )? )
-                # QueryParser.g:291:14: ( STDIN | STDOUT | QUOTEDSTRING ) ( USING ( func_clause ) )?
+                # QueryParser.g:215:12: ( ( STDIN | STDOUT | QUOTEDSTRING ) ( USING ( func_clause ) )? )
+                # QueryParser.g:215:14: ( STDIN | STDOUT | QUOTEDSTRING ) ( USING ( func_clause ) )?
                 pass 
                 root_0 = self._adaptor.nil()
 
@@ -4318,20 +4169,20 @@ class QueryParser(Parser):
                     raise mse
 
 
-                # QueryParser.g:291:49: ( USING ( func_clause ) )?
+                # QueryParser.g:215:49: ( USING ( func_clause ) )?
                 alt30 = 2
                 LA30_0 = self.input.LA(1)
 
                 if (LA30_0 == USING) :
                     alt30 = 1
                 if alt30 == 1:
-                    # QueryParser.g:291:51: USING ( func_clause )
+                    # QueryParser.g:215:51: USING ( func_clause )
                     pass 
-                    USING133=self.match(self.input, USING, self.FOLLOW_USING_in_stream_cmd1684)
-                    # QueryParser.g:291:58: ( func_clause )
-                    # QueryParser.g:291:60: func_clause
+                    USING133=self.match(self.input, USING, self.FOLLOW_USING_in_stream_cmd1679)
+                    # QueryParser.g:215:58: ( func_clause )
+                    # QueryParser.g:215:60: func_clause
                     pass 
-                    self._state.following.append(self.FOLLOW_func_clause_in_stream_cmd1689)
+                    self._state.following.append(self.FOLLOW_func_clause_in_stream_cmd1684)
                     func_clause134 = self.func_clause()
 
                     self._state.following.pop()
@@ -4355,9 +4206,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -4375,7 +4223,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "output_clause"
-    # QueryParser.g:294:1: output_clause : OUTPUT LEFT_PAREN stream_cmd_list RIGHT_PAREN ;
+    # QueryParser.g:218:1: output_clause : OUTPUT LEFT_PAREN stream_cmd_list RIGHT_PAREN ;
     def output_clause(self, ):
 
         retval = self.output_clause_return()
@@ -4395,25 +4243,25 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:294:15: ( OUTPUT LEFT_PAREN stream_cmd_list RIGHT_PAREN )
-                # QueryParser.g:294:17: OUTPUT LEFT_PAREN stream_cmd_list RIGHT_PAREN
+                # QueryParser.g:218:15: ( OUTPUT LEFT_PAREN stream_cmd_list RIGHT_PAREN )
+                # QueryParser.g:218:17: OUTPUT LEFT_PAREN stream_cmd_list RIGHT_PAREN
                 pass 
                 root_0 = self._adaptor.nil()
 
-                OUTPUT135=self.match(self.input, OUTPUT, self.FOLLOW_OUTPUT_in_output_clause1703)
+                OUTPUT135=self.match(self.input, OUTPUT, self.FOLLOW_OUTPUT_in_output_clause1698)
                 if self._state.backtracking == 0:
 
                     OUTPUT135_tree = self._adaptor.createWithPayload(OUTPUT135)
                     root_0 = self._adaptor.becomeRoot(OUTPUT135_tree, root_0)
 
-                LEFT_PAREN136=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_output_clause1706)
-                self._state.following.append(self.FOLLOW_stream_cmd_list_in_output_clause1709)
+                LEFT_PAREN136=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_output_clause1701)
+                self._state.following.append(self.FOLLOW_stream_cmd_list_in_output_clause1704)
                 stream_cmd_list137 = self.stream_cmd_list()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, stream_cmd_list137.tree)
-                RIGHT_PAREN138=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_output_clause1711)
+                RIGHT_PAREN138=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_output_clause1706)
 
 
 
@@ -4426,9 +4274,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -4446,7 +4291,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "error_clause"
-    # QueryParser.g:297:1: error_clause : STDERROR LEFT_PAREN ( QUOTEDSTRING ( LIMIT INTEGER )? )? RIGHT_PAREN ;
+    # QueryParser.g:221:1: error_clause : STDERROR LEFT_PAREN ( QUOTEDSTRING ( LIMIT INTEGER )? )? RIGHT_PAREN ;
     def error_clause(self, ):
 
         retval = self.error_clause_return()
@@ -4470,44 +4315,44 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:297:14: ( STDERROR LEFT_PAREN ( QUOTEDSTRING ( LIMIT INTEGER )? )? RIGHT_PAREN )
-                # QueryParser.g:297:16: STDERROR LEFT_PAREN ( QUOTEDSTRING ( LIMIT INTEGER )? )? RIGHT_PAREN
+                # QueryParser.g:221:14: ( STDERROR LEFT_PAREN ( QUOTEDSTRING ( LIMIT INTEGER )? )? RIGHT_PAREN )
+                # QueryParser.g:221:16: STDERROR LEFT_PAREN ( QUOTEDSTRING ( LIMIT INTEGER )? )? RIGHT_PAREN
                 pass 
                 root_0 = self._adaptor.nil()
 
-                STDERROR139=self.match(self.input, STDERROR, self.FOLLOW_STDERROR_in_error_clause1721)
+                STDERROR139=self.match(self.input, STDERROR, self.FOLLOW_STDERROR_in_error_clause1716)
                 if self._state.backtracking == 0:
 
                     STDERROR139_tree = self._adaptor.createWithPayload(STDERROR139)
                     root_0 = self._adaptor.becomeRoot(STDERROR139_tree, root_0)
 
-                LEFT_PAREN140=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_error_clause1724)
-                # QueryParser.g:297:38: ( QUOTEDSTRING ( LIMIT INTEGER )? )?
+                LEFT_PAREN140=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_error_clause1719)
+                # QueryParser.g:221:38: ( QUOTEDSTRING ( LIMIT INTEGER )? )?
                 alt32 = 2
                 LA32_0 = self.input.LA(1)
 
                 if (LA32_0 == QUOTEDSTRING) :
                     alt32 = 1
                 if alt32 == 1:
-                    # QueryParser.g:297:40: QUOTEDSTRING ( LIMIT INTEGER )?
+                    # QueryParser.g:221:40: QUOTEDSTRING ( LIMIT INTEGER )?
                     pass 
-                    QUOTEDSTRING141=self.match(self.input, QUOTEDSTRING, self.FOLLOW_QUOTEDSTRING_in_error_clause1729)
+                    QUOTEDSTRING141=self.match(self.input, QUOTEDSTRING, self.FOLLOW_QUOTEDSTRING_in_error_clause1724)
                     if self._state.backtracking == 0:
 
                         QUOTEDSTRING141_tree = self._adaptor.createWithPayload(QUOTEDSTRING141)
                         self._adaptor.addChild(root_0, QUOTEDSTRING141_tree)
 
-                    # QueryParser.g:297:53: ( LIMIT INTEGER )?
+                    # QueryParser.g:221:53: ( LIMIT INTEGER )?
                     alt31 = 2
                     LA31_0 = self.input.LA(1)
 
                     if (LA31_0 == LIMIT) :
                         alt31 = 1
                     if alt31 == 1:
-                        # QueryParser.g:297:55: LIMIT INTEGER
+                        # QueryParser.g:221:55: LIMIT INTEGER
                         pass 
-                        LIMIT142=self.match(self.input, LIMIT, self.FOLLOW_LIMIT_in_error_clause1733)
-                        INTEGER143=self.match(self.input, INTEGER, self.FOLLOW_INTEGER_in_error_clause1736)
+                        LIMIT142=self.match(self.input, LIMIT, self.FOLLOW_LIMIT_in_error_clause1728)
+                        INTEGER143=self.match(self.input, INTEGER, self.FOLLOW_INTEGER_in_error_clause1731)
                         if self._state.backtracking == 0:
 
                             INTEGER143_tree = self._adaptor.createWithPayload(INTEGER143)
@@ -4519,7 +4364,7 @@ class QueryParser(Parser):
 
 
 
-                RIGHT_PAREN144=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_error_clause1744)
+                RIGHT_PAREN144=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_error_clause1739)
 
 
 
@@ -4532,9 +4377,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -4552,7 +4394,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "load_clause"
-    # QueryParser.g:300:1: load_clause : LOAD filename ( USING func_clause )? ( as_clause )? ;
+    # QueryParser.g:224:1: load_clause : LOAD filename ( USING func_clause )? ( as_clause )? ;
     def load_clause(self, ):
 
         retval = self.load_clause_return()
@@ -4574,34 +4416,34 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:300:13: ( LOAD filename ( USING func_clause )? ( as_clause )? )
-                # QueryParser.g:300:15: LOAD filename ( USING func_clause )? ( as_clause )?
+                # QueryParser.g:224:13: ( LOAD filename ( USING func_clause )? ( as_clause )? )
+                # QueryParser.g:224:15: LOAD filename ( USING func_clause )? ( as_clause )?
                 pass 
                 root_0 = self._adaptor.nil()
 
-                LOAD145=self.match(self.input, LOAD, self.FOLLOW_LOAD_in_load_clause1754)
+                LOAD145=self.match(self.input, LOAD, self.FOLLOW_LOAD_in_load_clause1749)
                 if self._state.backtracking == 0:
 
                     LOAD145_tree = self._adaptor.createWithPayload(LOAD145)
                     root_0 = self._adaptor.becomeRoot(LOAD145_tree, root_0)
 
-                self._state.following.append(self.FOLLOW_filename_in_load_clause1757)
+                self._state.following.append(self.FOLLOW_filename_in_load_clause1752)
                 filename146 = self.filename()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, filename146.tree)
-                # QueryParser.g:300:30: ( USING func_clause )?
+                # QueryParser.g:224:30: ( USING func_clause )?
                 alt33 = 2
                 LA33_0 = self.input.LA(1)
 
                 if (LA33_0 == USING) :
                     alt33 = 1
                 if alt33 == 1:
-                    # QueryParser.g:300:32: USING func_clause
+                    # QueryParser.g:224:32: USING func_clause
                     pass 
-                    USING147=self.match(self.input, USING, self.FOLLOW_USING_in_load_clause1761)
-                    self._state.following.append(self.FOLLOW_func_clause_in_load_clause1764)
+                    USING147=self.match(self.input, USING, self.FOLLOW_USING_in_load_clause1756)
+                    self._state.following.append(self.FOLLOW_func_clause_in_load_clause1759)
                     func_clause148 = self.func_clause()
 
                     self._state.following.pop()
@@ -4610,7 +4452,7 @@ class QueryParser(Parser):
 
 
 
-                # QueryParser.g:300:54: ( as_clause )?
+                # QueryParser.g:224:54: ( as_clause )?
                 alt34 = 2
                 LA34_0 = self.input.LA(1)
 
@@ -4619,7 +4461,7 @@ class QueryParser(Parser):
                 if alt34 == 1:
                     # QueryParser.g:0:0: as_clause
                     pass 
-                    self._state.following.append(self.FOLLOW_as_clause_in_load_clause1769)
+                    self._state.following.append(self.FOLLOW_as_clause_in_load_clause1764)
                     as_clause149 = self.as_clause()
 
                     self._state.following.pop()
@@ -4640,9 +4482,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -4660,7 +4499,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "filename"
-    # QueryParser.g:303:1: filename : QUOTEDSTRING ;
+    # QueryParser.g:227:1: filename : QUOTEDSTRING ;
     def filename(self, ):
 
         retval = self.filename_return()
@@ -4674,12 +4513,12 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:303:10: ( QUOTEDSTRING )
-                # QueryParser.g:303:12: QUOTEDSTRING
+                # QueryParser.g:227:10: ( QUOTEDSTRING )
+                # QueryParser.g:227:12: QUOTEDSTRING
                 pass 
                 root_0 = self._adaptor.nil()
 
-                QUOTEDSTRING150=self.match(self.input, QUOTEDSTRING, self.FOLLOW_QUOTEDSTRING_in_filename1779)
+                QUOTEDSTRING150=self.match(self.input, QUOTEDSTRING, self.FOLLOW_QUOTEDSTRING_in_filename1774)
                 if self._state.backtracking == 0:
 
                     QUOTEDSTRING150_tree = self._adaptor.createWithPayload(QUOTEDSTRING150)
@@ -4697,9 +4536,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -4717,7 +4553,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "as_clause"
-    # QueryParser.g:306:1: as_clause : AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) ;
+    # QueryParser.g:230:1: as_clause : AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) ;
     def as_clause(self, ):
 
         retval = self.as_clause_return()
@@ -4739,43 +4575,43 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:306:10: ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )
-                # QueryParser.g:306:12: AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def )
+                # QueryParser.g:230:10: ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )
+                # QueryParser.g:230:12: AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def )
                 pass 
                 root_0 = self._adaptor.nil()
 
-                AS151=self.match(self.input, AS, self.FOLLOW_AS_in_as_clause1787)
+                AS151=self.match(self.input, AS, self.FOLLOW_AS_in_as_clause1782)
                 if self._state.backtracking == 0:
 
                     AS151_tree = self._adaptor.createWithPayload(AS151)
                     root_0 = self._adaptor.becomeRoot(AS151_tree, root_0)
 
-                # QueryParser.g:306:16: ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def )
+                # QueryParser.g:230:16: ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def )
                 alt35 = 2
                 alt35 = self.dfa35.predict(self.input)
                 if alt35 == 1:
-                    # QueryParser.g:306:18: ( LEFT_PAREN field_def_list RIGHT_PAREN )
+                    # QueryParser.g:230:18: ( LEFT_PAREN field_def_list RIGHT_PAREN )
                     pass 
-                    # QueryParser.g:306:18: ( LEFT_PAREN field_def_list RIGHT_PAREN )
-                    # QueryParser.g:306:20: LEFT_PAREN field_def_list RIGHT_PAREN
+                    # QueryParser.g:230:18: ( LEFT_PAREN field_def_list RIGHT_PAREN )
+                    # QueryParser.g:230:20: LEFT_PAREN field_def_list RIGHT_PAREN
                     pass 
-                    LEFT_PAREN152=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_as_clause1794)
-                    self._state.following.append(self.FOLLOW_field_def_list_in_as_clause1797)
+                    LEFT_PAREN152=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_as_clause1789)
+                    self._state.following.append(self.FOLLOW_field_def_list_in_as_clause1792)
                     field_def_list153 = self.field_def_list()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         self._adaptor.addChild(root_0, field_def_list153.tree)
-                    RIGHT_PAREN154=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_as_clause1799)
+                    RIGHT_PAREN154=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_as_clause1794)
 
 
 
 
 
                 elif alt35 == 2:
-                    # QueryParser.g:306:64: field_def
+                    # QueryParser.g:230:64: field_def
                     pass 
-                    self._state.following.append(self.FOLLOW_field_def_in_as_clause1806)
+                    self._state.following.append(self.FOLLOW_field_def_in_as_clause1801)
                     field_def155 = self.field_def()
 
                     self._state.following.pop()
@@ -4796,9 +4632,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -4816,7 +4649,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "field_def"
-    # QueryParser.g:309:1: field_def : ( identifier ( COLON type )? -> ^( FIELD_DEF identifier ( type )? ) | type -> ^( FIELD_DEF_WITHOUT_IDENTIFIER type ) );
+    # QueryParser.g:233:1: field_def : ( identifier ( COLON type )? -> ^( FIELD_DEF identifier ( type )? ) | type -> ^( FIELD_DEF_WITHOUT_IDENTIFIER type ) );
     def field_def(self, ):
 
         retval = self.field_def_return()
@@ -4838,7 +4671,7 @@ class QueryParser(Parser):
         stream_identifier = RewriteRuleSubtreeStream(self._adaptor, "rule identifier")
         try:
             try:
-                # QueryParser.g:309:11: ( identifier ( COLON type )? -> ^( FIELD_DEF identifier ( type )? ) | type -> ^( FIELD_DEF_WITHOUT_IDENTIFIER type ) )
+                # QueryParser.g:233:11: ( identifier ( COLON type )? -> ^( FIELD_DEF identifier ( type )? ) | type -> ^( FIELD_DEF_WITHOUT_IDENTIFIER type ) )
                 alt37 = 2
                 LA37_0 = self.input.LA(1)
 
@@ -4855,27 +4688,27 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt37 == 1:
-                    # QueryParser.g:309:13: identifier ( COLON type )?
+                    # QueryParser.g:233:13: identifier ( COLON type )?
                     pass 
-                    self._state.following.append(self.FOLLOW_identifier_in_field_def1817)
+                    self._state.following.append(self.FOLLOW_identifier_in_field_def1812)
                     identifier156 = self.identifier()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         stream_identifier.add(identifier156.tree)
-                    # QueryParser.g:309:24: ( COLON type )?
+                    # QueryParser.g:233:24: ( COLON type )?
                     alt36 = 2
                     LA36_0 = self.input.LA(1)
 
                     if (LA36_0 == COLON) :
                         alt36 = 1
                     if alt36 == 1:
-                        # QueryParser.g:309:26: COLON type
+                        # QueryParser.g:233:26: COLON type
                         pass 
-                        COLON157=self.match(self.input, COLON, self.FOLLOW_COLON_in_field_def1821) 
+                        COLON157=self.match(self.input, COLON, self.FOLLOW_COLON_in_field_def1816) 
                         if self._state.backtracking == 0:
                             stream_COLON.add(COLON157)
-                        self._state.following.append(self.FOLLOW_type_in_field_def1823)
+                        self._state.following.append(self.FOLLOW_type_in_field_def1818)
                         type158 = self.type()
 
                         self._state.following.pop()
@@ -4903,13 +4736,13 @@ class QueryParser(Parser):
 
 
                         root_0 = self._adaptor.nil()
-                        # 310:10: -> ^( FIELD_DEF identifier ( type )? )
-                        # QueryParser.g:310:13: ^( FIELD_DEF identifier ( type )? )
+                        # 234:10: -> ^( FIELD_DEF identifier ( type )? )
+                        # QueryParser.g:234:13: ^( FIELD_DEF identifier ( type )? )
                         root_1 = self._adaptor.nil()
                         root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(FIELD_DEF, "FIELD_DEF"), root_1)
 
                         self._adaptor.addChild(root_1, stream_identifier.nextTree())
-                        # QueryParser.g:310:37: ( type )?
+                        # QueryParser.g:234:37: ( type )?
                         if stream_type.hasNext():
                             self._adaptor.addChild(root_1, stream_type.nextTree())
 
@@ -4924,9 +4757,9 @@ class QueryParser(Parser):
 
 
                 elif alt37 == 2:
-                    # QueryParser.g:311:13: type
+                    # QueryParser.g:235:13: type
                     pass 
-                    self._state.following.append(self.FOLLOW_type_in_field_def1862)
+                    self._state.following.append(self.FOLLOW_type_in_field_def1857)
                     type159 = self.type()
 
                     self._state.following.pop()
@@ -4951,8 +4784,8 @@ class QueryParser(Parser):
 
 
                         root_0 = self._adaptor.nil()
-                        # 312:10: -> ^( FIELD_DEF_WITHOUT_IDENTIFIER type )
-                        # QueryParser.g:312:13: ^( FIELD_DEF_WITHOUT_IDENTIFIER type )
+                        # 236:10: -> ^( FIELD_DEF_WITHOUT_IDENTIFIER type )
+                        # QueryParser.g:236:13: ^( FIELD_DEF_WITHOUT_IDENTIFIER type )
                         root_1 = self._adaptor.nil()
                         root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(FIELD_DEF_WITHOUT_IDENTIFIER, "FIELD_DEF_WITHOUT_IDENTIFIER"), root_1)
 
@@ -4974,9 +4807,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -4994,7 +4824,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "field_def_list"
-    # QueryParser.g:315:1: field_def_list : field_def ( COMMA field_def )* -> ( field_def )+ ;
+    # QueryParser.g:239:1: field_def_list : field_def ( COMMA field_def )* -> ( field_def )+ ;
     def field_def_list(self, ):
 
         retval = self.field_def_list_return()
@@ -5013,16 +4843,16 @@ class QueryParser(Parser):
         stream_field_def = RewriteRuleSubtreeStream(self._adaptor, "rule field_def")
         try:
             try:
-                # QueryParser.g:315:16: ( field_def ( COMMA field_def )* -> ( field_def )+ )
-                # QueryParser.g:315:18: field_def ( COMMA field_def )*
+                # QueryParser.g:239:16: ( field_def ( COMMA field_def )* -> ( field_def )+ )
+                # QueryParser.g:239:18: field_def ( COMMA field_def )*
                 pass 
-                self._state.following.append(self.FOLLOW_field_def_in_field_def_list1890)
+                self._state.following.append(self.FOLLOW_field_def_in_field_def_list1885)
                 field_def160 = self.field_def()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     stream_field_def.add(field_def160.tree)
-                # QueryParser.g:315:28: ( COMMA field_def )*
+                # QueryParser.g:239:28: ( COMMA field_def )*
                 while True: #loop38
                     alt38 = 2
                     LA38_0 = self.input.LA(1)
@@ -5032,12 +4862,12 @@ class QueryParser(Parser):
 
 
                     if alt38 == 1:
-                        # QueryParser.g:315:30: COMMA field_def
+                        # QueryParser.g:239:30: COMMA field_def
                         pass 
-                        COMMA161=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_field_def_list1894) 
+                        COMMA161=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_field_def_list1889) 
                         if self._state.backtracking == 0:
                             stream_COMMA.add(COMMA161)
-                        self._state.following.append(self.FOLLOW_field_def_in_field_def_list1896)
+                        self._state.following.append(self.FOLLOW_field_def_in_field_def_list1891)
                         field_def162 = self.field_def()
 
                         self._state.following.pop()
@@ -5066,8 +4896,8 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 316:15: -> ( field_def )+
-                    # QueryParser.g:316:18: ( field_def )+
+                    # 240:15: -> ( field_def )+
+                    # QueryParser.g:240:18: ( field_def )+
                     if not (stream_field_def.hasNext()):
                         raise RewriteEarlyExitException()
 
@@ -5092,9 +4922,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -5112,7 +4939,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "type"
-    # QueryParser.g:319:1: type : ( simple_type | tuple_type | bag_type | map_type );
+    # QueryParser.g:243:1: type : ( simple_type | tuple_type | bag_type | map_type );
     def type(self, ):
 
         retval = self.type_return()
@@ -5132,7 +4959,7 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:319:6: ( simple_type | tuple_type | bag_type | map_type )
+                # QueryParser.g:243:6: ( simple_type | tuple_type | bag_type | map_type )
                 alt39 = 4
                 LA39 = self.input.LA(1)
                 if LA39 == BOOLEAN or LA39 == INT or LA39 == LONG or LA39 == FLOAT or LA39 == DOUBLE or LA39 == DATETIME or LA39 == CHARARRAY or LA39 == BYTEARRAY:
@@ -5152,11 +4979,11 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt39 == 1:
-                    # QueryParser.g:319:8: simple_type
+                    # QueryParser.g:243:8: simple_type
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_simple_type_in_type1927)
+                    self._state.following.append(self.FOLLOW_simple_type_in_type1922)
                     simple_type163 = self.simple_type()
 
                     self._state.following.pop()
@@ -5165,11 +4992,11 @@ class QueryParser(Parser):
 
 
                 elif alt39 == 2:
-                    # QueryParser.g:319:22: tuple_type
+                    # QueryParser.g:243:22: tuple_type
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_tuple_type_in_type1931)
+                    self._state.following.append(self.FOLLOW_tuple_type_in_type1926)
                     tuple_type164 = self.tuple_type()
 
                     self._state.following.pop()
@@ -5178,11 +5005,11 @@ class QueryParser(Parser):
 
 
                 elif alt39 == 3:
-                    # QueryParser.g:319:35: bag_type
+                    # QueryParser.g:243:35: bag_type
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_bag_type_in_type1935)
+                    self._state.following.append(self.FOLLOW_bag_type_in_type1930)
                     bag_type165 = self.bag_type()
 
                     self._state.following.pop()
@@ -5191,11 +5018,11 @@ class QueryParser(Parser):
 
 
                 elif alt39 == 4:
-                    # QueryParser.g:319:46: map_type
+                    # QueryParser.g:243:46: map_type
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_map_type_in_type1939)
+                    self._state.following.append(self.FOLLOW_map_type_in_type1934)
                     map_type166 = self.map_type()
 
                     self._state.following.pop()
@@ -5212,9 +5039,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -5232,7 +5056,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "simple_type"
-    # QueryParser.g:322:1: simple_type : ( BOOLEAN | INT | LONG | FLOAT | DOUBLE | DATETIME | CHARARRAY | BYTEARRAY );
+    # QueryParser.g:246:1: simple_type : ( BOOLEAN | INT | LONG | FLOAT | DOUBLE | DATETIME | CHARARRAY | BYTEARRAY );
     def simple_type(self, ):
 
         retval = self.simple_type_return()
@@ -5246,7 +5070,7 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:322:13: ( BOOLEAN | INT | LONG | FLOAT | DOUBLE | DATETIME | CHARARRAY | BYTEARRAY )
+                # QueryParser.g:246:13: ( BOOLEAN | INT | LONG | FLOAT | DOUBLE | DATETIME | CHARARRAY | BYTEARRAY )
                 # QueryParser.g:
                 pass 
                 root_0 = self._adaptor.nil()
@@ -5278,9 +5102,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -5298,7 +5119,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "tuple_type"
-    # QueryParser.g:325:1: tuple_type : ( TUPLE )? LEFT_PAREN ( field_def_list )? RIGHT_PAREN -> ^( TUPLE_TYPE ( field_def_list )? ) ;
+    # QueryParser.g:249:1: tuple_type : ( TUPLE )? LEFT_PAREN ( field_def_list )? RIGHT_PAREN -> ^( TUPLE_TYPE ( field_def_list )? ) ;
     def tuple_type(self, ):
 
         retval = self.tuple_type_return()
@@ -5321,10 +5142,10 @@ class QueryParser(Parser):
         stream_field_def_list = RewriteRuleSubtreeStream(self._adaptor, "rule field_def_list")
         try:
             try:
-                # QueryParser.g:325:12: ( ( TUPLE )? LEFT_PAREN ( field_def_list )? RIGHT_PAREN -> ^( TUPLE_TYPE ( field_def_list )? ) )
-                # QueryParser.g:325:14: ( TUPLE )? LEFT_PAREN ( field_def_list )? RIGHT_PAREN
+                # QueryParser.g:249:12: ( ( TUPLE )? LEFT_PAREN ( field_def_list )? RIGHT_PAREN -> ^( TUPLE_TYPE ( field_def_list )? ) )
+                # QueryParser.g:249:14: ( TUPLE )? LEFT_PAREN ( field_def_list )? RIGHT_PAREN
                 pass 
-                # QueryParser.g:325:14: ( TUPLE )?
+                # QueryParser.g:249:14: ( TUPLE )?
                 alt40 = 2
                 LA40_0 = self.input.LA(1)
 
@@ -5333,16 +5154,16 @@ class QueryParser(Parser):
                 if alt40 == 1:
                     # QueryParser.g:0:0: TUPLE
                     pass 
-                    TUPLE168=self.match(self.input, TUPLE, self.FOLLOW_TUPLE_in_tuple_type1985) 
+                    TUPLE168=self.match(self.input, TUPLE, self.FOLLOW_TUPLE_in_tuple_type1980) 
                     if self._state.backtracking == 0:
                         stream_TUPLE.add(TUPLE168)
 
 
 
-                LEFT_PAREN169=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_tuple_type1988) 
+                LEFT_PAREN169=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_tuple_type1983) 
                 if self._state.backtracking == 0:
                     stream_LEFT_PAREN.add(LEFT_PAREN169)
-                # QueryParser.g:325:32: ( field_def_list )?
+                # QueryParser.g:249:32: ( field_def_list )?
                 alt41 = 2
                 LA41_0 = self.input.LA(1)
 
@@ -5351,7 +5172,7 @@ class QueryParser(Parser):
                 if alt41 == 1:
                     # QueryParser.g:0:0: field_def_list
                     pass 
-                    self._state.following.append(self.FOLLOW_field_def_list_in_tuple_type1990)
+                    self._state.following.append(self.FOLLOW_field_def_list_in_tuple_type1985)
                     field_def_list170 = self.field_def_list()
 
                     self._state.following.pop()
@@ -5360,7 +5181,7 @@ class QueryParser(Parser):
 
 
 
-                RIGHT_PAREN171=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_tuple_type1993) 
+                RIGHT_PAREN171=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_tuple_type1988) 
                 if self._state.backtracking == 0:
                     stream_RIGHT_PAREN.add(RIGHT_PAREN171)
 
@@ -5382,12 +5203,12 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 326:11: -> ^( TUPLE_TYPE ( field_def_list )? )
-                    # QueryParser.g:326:14: ^( TUPLE_TYPE ( field_def_list )? )
+                    # 250:11: -> ^( TUPLE_TYPE ( field_def_list )? )
+                    # QueryParser.g:250:14: ^( TUPLE_TYPE ( field_def_list )? )
                     root_1 = self._adaptor.nil()
                     root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(TUPLE_TYPE, "TUPLE_TYPE"), root_1)
 
-                    # QueryParser.g:326:28: ( field_def_list )?
+                    # QueryParser.g:250:28: ( field_def_list )?
                     if stream_field_def_list.hasNext():
                         self._adaptor.addChild(root_1, stream_field_def_list.nextTree())
 
@@ -5411,9 +5232,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -5431,7 +5249,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "bag_type"
-    # QueryParser.g:329:1: bag_type : ( ( BAG )? LEFT_CURLY ( null_keyword COLON ( tuple_type )? ) RIGHT_CURLY -> ^( BAG_TYPE ( tuple_type )? ) | ( BAG )? LEFT_CURLY ( ( identifier COLON )? tuple_type )? RIGHT_CURLY -> ^( BAG_TYPE ( identifier )? ( tuple_type )? ) );
+    # QueryParser.g:253:1: bag_type : ( ( BAG )? LEFT_CURLY ( null_keyword COLON ( tuple_type )? ) RIGHT_CURLY -> ^( BAG_TYPE ( tuple_type )? ) | ( BAG )? LEFT_CURLY ( ( identifier COLON )? tuple_type )? RIGHT_CURLY -> ^( BAG_TYPE ( identifier )? ( tuple_type )? ) );
     def bag_type(self, ):
 
         retval = self.bag_type_return()
@@ -5473,7 +5291,7 @@ class QueryParser(Parser):
         stream_identifier = RewriteRuleSubtreeStream(self._adaptor, "rule identifier")
         try:
             try:
-                # QueryParser.g:329:10: ( ( BAG )? LEFT_CURLY ( null_keyword COLON ( tuple_type )? ) RIGHT_CURLY -> ^( BAG_TYPE ( tuple_type )? ) | ( BAG )? LEFT_CURLY ( ( identifier COLON )? tuple_type )? RIGHT_CURLY -> ^( BAG_TYPE ( identifier )? ( tuple_type )? ) )
+                # QueryParser.g:253:10: ( ( BAG )? LEFT_CURLY ( null_keyword COLON ( tuple_type )? ) RIGHT_CURLY -> ^( BAG_TYPE ( tuple_type )? ) | ( BAG )? LEFT_CURLY ( ( identifier COLON )? tuple_type )? RIGHT_CURLY -> ^( BAG_TYPE ( identifier )? ( tuple_type )? ) )
                 alt47 = 2
                 LA47_0 = self.input.LA(1)
 
@@ -5516,9 +5334,9 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt47 == 1:
-                    # QueryParser.g:329:12: ( BAG )? LEFT_CURLY ( null_keyword COLON ( tuple_type )? ) RIGHT_CURLY
+                    # QueryParser.g:253:12: ( BAG )? LEFT_CURLY ( null_keyword COLON ( tuple_type )? ) RIGHT_CURLY
                     pass 
-                    # QueryParser.g:329:12: ( BAG )?
+                    # QueryParser.g:253:12: ( BAG )?
                     alt42 = 2
                     LA42_0 = self.input.LA(1)
 
@@ -5527,28 +5345,28 @@ class QueryParser(Parser):
                     if alt42 == 1:
                         # QueryParser.g:0:0: BAG
                         pass 
-                        BAG172=self.match(self.input, BAG, self.FOLLOW_BAG_in_bag_type2023) 
+                        BAG172=self.match(self.input, BAG, self.FOLLOW_BAG_in_bag_type2018) 
                         if self._state.backtracking == 0:
                             stream_BAG.add(BAG172)
 
 
 
-                    LEFT_CURLY173=self.match(self.input, LEFT_CURLY, self.FOLLOW_LEFT_CURLY_in_bag_type2026) 
+                    LEFT_CURLY173=self.match(self.input, LEFT_CURLY, self.FOLLOW_LEFT_CURLY_in_bag_type2021) 
                     if self._state.backtracking == 0:
                         stream_LEFT_CURLY.add(LEFT_CURLY173)
-                    # QueryParser.g:329:28: ( null_keyword COLON ( tuple_type )? )
-                    # QueryParser.g:329:30: null_keyword COLON ( tuple_type )?
+                    # QueryParser.g:253:28: ( null_keyword COLON ( tuple_type )? )
+                    # QueryParser.g:253:30: null_keyword COLON ( tuple_type )?
                     pass 
-                    self._state.following.append(self.FOLLOW_null_keyword_in_bag_type2030)
+                    self._state.following.append(self.FOLLOW_null_keyword_in_bag_type2025)
                     null_keyword174 = self.null_keyword()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         stream_null_keyword.add(null_keyword174.tree)
-                    COLON175=self.match(self.input, COLON, self.FOLLOW_COLON_in_bag_type2032) 
+                    COLON175=self.match(self.input, COLON, self.FOLLOW_COLON_in_bag_type2027) 
                     if self._state.backtracking == 0:
                         stream_COLON.add(COLON175)
-                    # QueryParser.g:329:49: ( tuple_type )?
+                    # QueryParser.g:253:49: ( tuple_type )?
                     alt43 = 2
                     LA43_0 = self.input.LA(1)
 
@@ -5557,7 +5375,7 @@ class QueryParser(Parser):
                     if alt43 == 1:
                         # QueryParser.g:0:0: tuple_type
                         pass 
-                        self._state.following.append(self.FOLLOW_tuple_type_in_bag_type2034)
+                        self._state.following.append(self.FOLLOW_tuple_type_in_bag_type2029)
                         tuple_type176 = self.tuple_type()
 
                         self._state.following.pop()
@@ -5569,7 +5387,7 @@ class QueryParser(Parser):
 
 
 
-                    RIGHT_CURLY177=self.match(self.input, RIGHT_CURLY, self.FOLLOW_RIGHT_CURLY_in_bag_type2039) 
+                    RIGHT_CURLY177=self.match(self.input, RIGHT_CURLY, self.FOLLOW_RIGHT_CURLY_in_bag_type2034) 
                     if self._state.backtracking == 0:
                         stream_RIGHT_CURLY.add(RIGHT_CURLY177)
 
@@ -5591,12 +5409,12 @@ class QueryParser(Parser):
 
 
                         root_0 = self._adaptor.nil()
-                        # 330:9: -> ^( BAG_TYPE ( tuple_type )? )
-                        # QueryParser.g:330:12: ^( BAG_TYPE ( tuple_type )? )
+                        # 254:9: -> ^( BAG_TYPE ( tuple_type )? )
+                        # QueryParser.g:254:12: ^( BAG_TYPE ( tuple_type )? )
                         root_1 = self._adaptor.nil()
                         root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(BAG_TYPE, "BAG_TYPE"), root_1)
 
-                        # QueryParser.g:330:24: ( tuple_type )?
+                        # QueryParser.g:254:24: ( tuple_type )?
                         if stream_tuple_type.hasNext():
                             self._adaptor.addChild(root_1, stream_tuple_type.nextTree())
 
@@ -5611,9 +5429,9 @@ class QueryParser(Parser):
 
 
                 elif alt47 == 2:
-                    # QueryParser.g:331:12: ( BAG )? LEFT_CURLY ( ( identifier COLON )? tuple_type )? RIGHT_CURLY
+                    # QueryParser.g:255:12: ( BAG )? LEFT_CURLY ( ( identifier COLON )? tuple_type )? RIGHT_CURLY
                     pass 
-                    # QueryParser.g:331:12: ( BAG )?
+                    # QueryParser.g:255:12: ( BAG )?
                     alt44 = 2
                     LA44_0 = self.input.LA(1)
 
@@ -5622,46 +5440,46 @@ class QueryParser(Parser):
                     if alt44 == 1:
                         # QueryParser.g:0:0: BAG
                         pass 
-                        BAG178=self.match(self.input, BAG, self.FOLLOW_BAG_in_bag_type2071) 
+                        BAG178=self.match(self.input, BAG, self.FOLLOW_BAG_in_bag_type2066) 
                         if self._state.backtracking == 0:
                             stream_BAG.add(BAG178)
 
 
 
-                    LEFT_CURLY179=self.match(self.input, LEFT_CURLY, self.FOLLOW_LEFT_CURLY_in_bag_type2074) 
+                    LEFT_CURLY179=self.match(self.input, LEFT_CURLY, self.FOLLOW_LEFT_CURLY_in_bag_type2069) 
                     if self._state.backtracking == 0:
                         stream_LEFT_CURLY.add(LEFT_CURLY179)
-                    # QueryParser.g:331:28: ( ( identifier COLON )? tuple_type )?
+                    # QueryParser.g:255:28: ( ( identifier COLON )? tuple_type )?
                     alt46 = 2
                     LA46_0 = self.input.LA(1)
 
                     if (LA46_0 == TUPLE or LA46_0 == IDENTIFIER_L or LA46_0 == LEFT_PAREN) :
                         alt46 = 1
                     if alt46 == 1:
-                        # QueryParser.g:331:30: ( identifier COLON )? tuple_type
+                        # QueryParser.g:255:30: ( identifier COLON )? tuple_type
                         pass 
-                        # QueryParser.g:331:30: ( identifier COLON )?
+                        # QueryParser.g:255:30: ( identifier COLON )?
                         alt45 = 2
                         LA45_0 = self.input.LA(1)
 
                         if (LA45_0 == IDENTIFIER_L) :
                             alt45 = 1
                         if alt45 == 1:
-                            # QueryParser.g:331:32: identifier COLON
+                            # QueryParser.g:255:32: identifier COLON
                             pass 
-                            self._state.following.append(self.FOLLOW_identifier_in_bag_type2080)
+                            self._state.following.append(self.FOLLOW_identifier_in_bag_type2075)
                             identifier180 = self.identifier()
 
                             self._state.following.pop()
                             if self._state.backtracking == 0:
                                 stream_identifier.add(identifier180.tree)
-                            COLON181=self.match(self.input, COLON, self.FOLLOW_COLON_in_bag_type2082) 
+                            COLON181=self.match(self.input, COLON, self.FOLLOW_COLON_in_bag_type2077) 
                             if self._state.backtracking == 0:
                                 stream_COLON.add(COLON181)
 
 
 
-                        self._state.following.append(self.FOLLOW_tuple_type_in_bag_type2087)
+                        self._state.following.append(self.FOLLOW_tuple_type_in_bag_type2082)
                         tuple_type182 = self.tuple_type()
 
                         self._state.following.pop()
@@ -5670,12 +5488,12 @@ class QueryParser(Parser):
 
 
 
-                    RIGHT_CURLY183=self.match(self.input, RIGHT_CURLY, self.FOLLOW_RIGHT_CURLY_in_bag_type2092) 
+                    RIGHT_CURLY183=self.match(self.input, RIGHT_CURLY, self.FOLLOW_RIGHT_CURLY_in_bag_type2087) 
                     if self._state.backtracking == 0:
                         stream_RIGHT_CURLY.add(RIGHT_CURLY183)
 
                     # AST Rewrite
-                    # elements: tuple_type, identifier
+                    # elements: identifier, tuple_type
                     # token labels: 
                     # rule labels: retval
                     # token list labels: 
@@ -5692,18 +5510,18 @@ class QueryParser(Parser):
 
 
                         root_0 = self._adaptor.nil()
-                        # 332:9: -> ^( BAG_TYPE ( identifier )? ( tuple_type )? )
-                        # QueryParser.g:332:12: ^( BAG_TYPE ( identifier )? ( tuple_type )? )
+                        # 256:9: -> ^( BAG_TYPE ( identifier )? ( tuple_type )? )
+                        # QueryParser.g:256:12: ^( BAG_TYPE ( identifier )? ( tuple_type )? )
                         root_1 = self._adaptor.nil()
                         root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(BAG_TYPE, "BAG_TYPE"), root_1)
 
-                        # QueryParser.g:332:24: ( identifier )?
+                        # QueryParser.g:256:24: ( identifier )?
                         if stream_identifier.hasNext():
                             self._adaptor.addChild(root_1, stream_identifier.nextTree())
 
 
                         stream_identifier.reset();
-                        # QueryParser.g:332:36: ( tuple_type )?
+                        # QueryParser.g:256:36: ( tuple_type )?
                         if stream_tuple_type.hasNext():
                             self._adaptor.addChild(root_1, stream_tuple_type.nextTree())
 
@@ -5726,9 +5544,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -5746,7 +5561,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "map_type"
-    # QueryParser.g:335:1: map_type : ( MAP )? LEFT_BRACKET ( type )? RIGHT_BRACKET -> ^( MAP_TYPE ( type )? ) ;
+    # QueryParser.g:259:1: map_type : ( MAP )? LEFT_BRACKET ( type )? RIGHT_BRACKET -> ^( MAP_TYPE ( type )? ) ;
     def map_type(self, ):
 
         retval = self.map_type_return()
@@ -5769,10 +5584,10 @@ class QueryParser(Parser):
         stream_type = RewriteRuleSubtreeStream(self._adaptor, "rule type")
         try:
             try:
-                # QueryParser.g:335:10: ( ( MAP )? LEFT_BRACKET ( type )? RIGHT_BRACKET -> ^( MAP_TYPE ( type )? ) )
-                # QueryParser.g:335:12: ( MAP )? LEFT_BRACKET ( type )? RIGHT_BRACKET
+                # QueryParser.g:259:10: ( ( MAP )? LEFT_BRACKET ( type )? RIGHT_BRACKET -> ^( MAP_TYPE ( type )? ) )
+                # QueryParser.g:259:12: ( MAP )? LEFT_BRACKET ( type )? RIGHT_BRACKET
                 pass 
-                # QueryParser.g:335:12: ( MAP )?
+                # QueryParser.g:259:12: ( MAP )?
                 alt48 = 2
                 LA48_0 = self.input.LA(1)
 
@@ -5781,16 +5596,16 @@ class QueryParser(Parser):
                 if alt48 == 1:
                     # QueryParser.g:0:0: MAP
                     pass 
-                    MAP184=self.match(self.input, MAP, self.FOLLOW_MAP_in_map_type2123) 
+                    MAP184=self.match(self.input, MAP, self.FOLLOW_MAP_in_map_type2118) 
                     if self._state.backtracking == 0:
                         stream_MAP.add(MAP184)
 
 
 
-                LEFT_BRACKET185=self.match(self.input, LEFT_BRACKET, self.FOLLOW_LEFT_BRACKET_in_map_type2126) 
+                LEFT_BRACKET185=self.match(self.input, LEFT_BRACKET, self.FOLLOW_LEFT_BRACKET_in_map_type2121) 
                 if self._state.backtracking == 0:
                     stream_LEFT_BRACKET.add(LEFT_BRACKET185)
-                # QueryParser.g:335:30: ( type )?
+                # QueryParser.g:259:30: ( type )?
                 alt49 = 2
                 LA49_0 = self.input.LA(1)
 
@@ -5799,7 +5614,7 @@ class QueryParser(Parser):
                 if alt49 == 1:
                     # QueryParser.g:0:0: type
                     pass 
-                    self._state.following.append(self.FOLLOW_type_in_map_type2128)
+                    self._state.following.append(self.FOLLOW_type_in_map_type2123)
                     type186 = self.type()
 
                     self._state.following.pop()
@@ -5808,7 +5623,7 @@ class QueryParser(Parser):
 
 
 
-                RIGHT_BRACKET187=self.match(self.input, RIGHT_BRACKET, self.FOLLOW_RIGHT_BRACKET_in_map_type2131) 
+                RIGHT_BRACKET187=self.match(self.input, RIGHT_BRACKET, self.FOLLOW_RIGHT_BRACKET_in_map_type2126) 
                 if self._state.backtracking == 0:
                     stream_RIGHT_BRACKET.add(RIGHT_BRACKET187)
 
@@ -5830,12 +5645,12 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 336:9: -> ^( MAP_TYPE ( type )? )
-                    # QueryParser.g:336:12: ^( MAP_TYPE ( type )? )
+                    # 260:9: -> ^( MAP_TYPE ( type )? )
+                    # QueryParser.g:260:12: ^( MAP_TYPE ( type )? )
                     root_1 = self._adaptor.nil()
                     root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(MAP_TYPE, "MAP_TYPE"), root_1)
 
-                    # QueryParser.g:336:24: ( type )?
+                    # QueryParser.g:260:24: ( type )?
                     if stream_type.hasNext():
                         self._adaptor.addChild(root_1, stream_type.nextTree())
 
@@ -5859,9 +5674,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -5879,7 +5691,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "func_clause"
-    # QueryParser.g:339:1: func_clause : ( func_name -> ^( FUNC_REF func_name ) | func_name LEFT_PAREN ( func_args )? RIGHT_PAREN -> ^( FUNC func_name ( func_args )? ) );
+    # QueryParser.g:263:1: func_clause : ( func_name -> ^( FUNC_REF func_name ) | func_name LEFT_PAREN ( func_args )? RIGHT_PAREN -> ^( FUNC func_name ( func_args )? ) );
     def func_clause(self, ):
 
         retval = self.func_clause_return()
@@ -5904,13 +5716,13 @@ class QueryParser(Parser):
         stream_func_name = RewriteRuleSubtreeStream(self._adaptor, "rule func_name")
         try:
             try:
-                # QueryParser.g:339:13: ( func_name -> ^( FUNC_REF func_name ) | func_name LEFT_PAREN ( func_args )? RIGHT_PAREN -> ^( FUNC func_name ( func_args )? ) )
+                # QueryParser.g:263:13: ( func_name -> ^( FUNC_REF func_name ) | func_name LEFT_PAREN ( func_args )? RIGHT_PAREN -> ^( FUNC func_name ( func_args )? ) )
                 alt51 = 2
                 alt51 = self.dfa51.predict(self.input)
                 if alt51 == 1:
-                    # QueryParser.g:339:15: func_name
+                    # QueryParser.g:263:15: func_name
                     pass 
-                    self._state.following.append(self.FOLLOW_func_name_in_func_clause2159)
+                    self._state.following.append(self.FOLLOW_func_name_in_func_clause2154)
                     func_name188 = self.func_name()
 
                     self._state.following.pop()
@@ -5935,8 +5747,8 @@ class QueryParser(Parser):
 
 
                         root_0 = self._adaptor.nil()
-                        # 340:12: -> ^( FUNC_REF func_name )
-                        # QueryParser.g:340:15: ^( FUNC_REF func_name )
+                        # 264:12: -> ^( FUNC_REF func_name )
+                        # QueryParser.g:264:15: ^( FUNC_REF func_name )
                         root_1 = self._adaptor.nil()
                         root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(FUNC_REF, "FUNC_REF"), root_1)
 
@@ -5950,18 +5762,18 @@ class QueryParser(Parser):
 
 
                 elif alt51 == 2:
-                    # QueryParser.g:341:15: func_name LEFT_PAREN ( func_args )? RIGHT_PAREN
+                    # QueryParser.g:265:15: func_name LEFT_PAREN ( func_args )? RIGHT_PAREN
                     pass 
-                    self._state.following.append(self.FOLLOW_func_name_in_func_clause2196)
+                    self._state.following.append(self.FOLLOW_func_name_in_func_clause2191)
                     func_name189 = self.func_name()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         stream_func_name.add(func_name189.tree)
-                    LEFT_PAREN190=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_func_clause2198) 
+                    LEFT_PAREN190=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_func_clause2193) 
                     if self._state.backtracking == 0:
                         stream_LEFT_PAREN.add(LEFT_PAREN190)
-                    # QueryParser.g:341:36: ( func_args )?
+                    # QueryParser.g:265:36: ( func_args )?
                     alt50 = 2
                     LA50_0 = self.input.LA(1)
 
@@ -5970,7 +5782,7 @@ class QueryParser(Parser):
                     if alt50 == 1:
                         # QueryParser.g:0:0: func_args
                         pass 
-                        self._state.following.append(self.FOLLOW_func_args_in_func_clause2200)
+                        self._state.following.append(self.FOLLOW_func_args_in_func_clause2195)
                         func_args191 = self.func_args()
 
                         self._state.following.pop()
@@ -5979,12 +5791,12 @@ class QueryParser(Parser):
 
 
 
-                    RIGHT_PAREN192=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_func_clause2203) 
+                    RIGHT_PAREN192=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_func_clause2198) 
                     if self._state.backtracking == 0:
                         stream_RIGHT_PAREN.add(RIGHT_PAREN192)
 
                     # AST Rewrite
-                    # elements: func_args, func_name
+                    # elements: func_name, func_args
                     # token labels: 
                     # rule labels: retval
                     # token list labels: 
@@ -6001,13 +5813,13 @@ class QueryParser(Parser):
 
 
                         root_0 = self._adaptor.nil()
-                        # 342:12: -> ^( FUNC func_name ( func_args )? )
-                        # QueryParser.g:342:15: ^( FUNC func_name ( func_args )? )
+                        # 266:12: -> ^( FUNC func_name ( func_args )? )
+                        # QueryParser.g:266:15: ^( FUNC func_name ( func_args )? )
                         root_1 = self._adaptor.nil()
                         root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(FUNC, "FUNC"), root_1)
 
                         self._adaptor.addChild(root_1, stream_func_name.nextTree())
-                        # QueryParser.g:342:33: ( func_args )?
+                        # QueryParser.g:266:33: ( func_args )?
                         if stream_func_args.hasNext():
                             self._adaptor.addChild(root_1, stream_func_args.nextTree())
 
@@ -6030,9 +5842,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -6050,7 +5859,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "func_name"
-    # QueryParser.g:345:1: func_name : eid ( ( PERIOD | DOLLAR ) eid )* ;
+    # QueryParser.g:269:1: func_name : eid ( ( PERIOD | DOLLAR ) eid )* ;
     def func_name(self, ):
 
         retval = self.func_name_return()
@@ -6068,18 +5877,18 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:345:11: ( eid ( ( PERIOD | DOLLAR ) eid )* )
-                # QueryParser.g:345:13: eid ( ( PERIOD | DOLLAR ) eid )*
+                # QueryParser.g:269:11: ( eid ( ( PERIOD | DOLLAR ) eid )* )
+                # QueryParser.g:269:13: eid ( ( PERIOD | DOLLAR ) eid )*
                 pass 
                 root_0 = self._adaptor.nil()
 
-                self._state.following.append(self.FOLLOW_eid_in_func_name2236)
+                self._state.following.append(self.FOLLOW_eid_in_func_name2231)
                 eid193 = self.eid()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, eid193.tree)
-                # QueryParser.g:345:17: ( ( PERIOD | DOLLAR ) eid )*
+                # QueryParser.g:269:17: ( ( PERIOD | DOLLAR ) eid )*
                 while True: #loop52
                     alt52 = 2
                     LA52_0 = self.input.LA(1)
@@ -6089,7 +5898,7 @@ class QueryParser(Parser):
 
 
                     if alt52 == 1:
-                        # QueryParser.g:345:19: ( PERIOD | DOLLAR ) eid
+                        # QueryParser.g:269:19: ( PERIOD | DOLLAR ) eid
                         pass 
                         set194 = self.input.LT(1)
                         if self.input.LA(1) == PERIOD or self.input.LA(1) == DOLLAR:
@@ -6106,7 +5915,7 @@ class QueryParser(Parser):
                             raise mse
 
 
-                        self._state.following.append(self.FOLLOW_eid_in_func_name2250)
+                        self._state.following.append(self.FOLLOW_eid_in_func_name2245)
                         eid195 = self.eid()
 
                         self._state.following.pop()
@@ -6128,9 +5937,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -6148,7 +5954,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "func_args_string"
-    # QueryParser.g:348:1: func_args_string : ( QUOTEDSTRING | MULTILINE_QUOTEDSTRING );
+    # QueryParser.g:272:1: func_args_string : ( QUOTEDSTRING | MULTILINE_QUOTEDSTRING );
     def func_args_string(self, ):
 
         retval = self.func_args_string_return()
@@ -6162,7 +5968,7 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:348:18: ( QUOTEDSTRING | MULTILINE_QUOTEDSTRING )
+                # QueryParser.g:272:18: ( QUOTEDSTRING | MULTILINE_QUOTEDSTRING )
                 # QueryParser.g:
                 pass 
                 root_0 = self._adaptor.nil()
@@ -6194,9 +6000,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -6214,7 +6017,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "func_args"
-    # QueryParser.g:351:1: func_args : func_args_string ( COMMA func_args_string )* -> ( func_args_string )+ ;
+    # QueryParser.g:275:1: func_args : func_args_string ( COMMA func_args_string )* -> ( func_args_string )+ ;
     def func_args(self, ):
 
         retval = self.func_args_return()
@@ -6233,16 +6036,16 @@ class QueryParser(Parser):
         stream_func_args_string = RewriteRuleSubtreeStream(self._adaptor, "rule func_args_string")
         try:
             try:
-                # QueryParser.g:351:11: ( func_args_string ( COMMA func_args_string )* -> ( func_args_string )+ )
-                # QueryParser.g:351:13: func_args_string ( COMMA func_args_string )*
+                # QueryParser.g:275:11: ( func_args_string ( COMMA func_args_string )* -> ( func_args_string )+ )
+                # QueryParser.g:275:13: func_args_string ( COMMA func_args_string )*
                 pass 
-                self._state.following.append(self.FOLLOW_func_args_string_in_func_args2275)
+                self._state.following.append(self.FOLLOW_func_args_string_in_func_args2270)
                 func_args_string197 = self.func_args_string()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     stream_func_args_string.add(func_args_string197.tree)
-                # QueryParser.g:351:30: ( COMMA func_args_string )*
+                # QueryParser.g:275:30: ( COMMA func_args_string )*
                 while True: #loop53
                     alt53 = 2
                     LA53_0 = self.input.LA(1)
@@ -6252,12 +6055,12 @@ class QueryParser(Parser):
 
 
                     if alt53 == 1:
-                        # QueryParser.g:351:32: COMMA func_args_string
+                        # QueryParser.g:275:32: COMMA func_args_string
                         pass 
-                        COMMA198=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_func_args2279) 
+                        COMMA198=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_func_args2274) 
                         if self._state.backtracking == 0:
                             stream_COMMA.add(COMMA198)
-                        self._state.following.append(self.FOLLOW_func_args_string_in_func_args2281)
+                        self._state.following.append(self.FOLLOW_func_args_string_in_func_args2276)
                         func_args_string199 = self.func_args_string()
 
                         self._state.following.pop()
@@ -6286,8 +6089,8 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 352:10: -> ( func_args_string )+
-                    # QueryParser.g:352:13: ( func_args_string )+
+                    # 276:10: -> ( func_args_string )+
+                    # QueryParser.g:276:13: ( func_args_string )+
                     if not (stream_func_args_string.hasNext()):
                         raise RewriteEarlyExitException()
 
@@ -6312,9 +6115,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -6332,7 +6132,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "group_clause"
-    # QueryParser.g:355:1: group_clause : ( GROUP | COGROUP ) group_item_list ( USING group_type )? ( partition_clause )? ;
+    # QueryParser.g:279:1: group_clause : ( GROUP | COGROUP ) group_item_list ( USING group_type )? ( partition_clause )? ;
     def group_clause(self, ):
 
         retval = self.group_clause_return()
@@ -6354,8 +6154,8 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:355:14: ( ( GROUP | COGROUP ) group_item_list ( USING group_type )? ( partition_clause )? )
-                # QueryParser.g:355:16: ( GROUP | COGROUP ) group_item_list ( USING group_type )? ( partition_clause )?
+                # QueryParser.g:279:14: ( ( GROUP | COGROUP ) group_item_list ( USING group_type )? ( partition_clause )? )
+                # QueryParser.g:279:16: ( GROUP | COGROUP ) group_item_list ( USING group_type )? ( partition_clause )?
                 pass 
                 root_0 = self._adaptor.nil()
 
@@ -6375,23 +6175,23 @@ class QueryParser(Parser):
                     raise mse
 
 
-                self._state.following.append(self.FOLLOW_group_item_list_in_group_clause2318)
+                self._state.following.append(self.FOLLOW_group_item_list_in_group_clause2313)
                 group_item_list201 = self.group_item_list()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, group_item_list201.tree)
-                # QueryParser.g:355:53: ( USING group_type )?
+                # QueryParser.g:279:53: ( USING group_type )?
                 alt54 = 2
                 LA54_0 = self.input.LA(1)
 
                 if (LA54_0 == USING) :
                     alt54 = 1
                 if alt54 == 1:
-                    # QueryParser.g:355:55: USING group_type
+                    # QueryParser.g:279:55: USING group_type
                     pass 
-                    USING202=self.match(self.input, USING, self.FOLLOW_USING_in_group_clause2322)
-                    self._state.following.append(self.FOLLOW_group_type_in_group_clause2325)
+                    USING202=self.match(self.input, USING, self.FOLLOW_USING_in_group_clause2317)
+                    self._state.following.append(self.FOLLOW_group_type_in_group_clause2320)
                     group_type203 = self.group_type()
 
                     self._state.following.pop()
@@ -6400,7 +6200,7 @@ class QueryParser(Parser):
 
 
 
-                # QueryParser.g:355:76: ( partition_clause )?
+                # QueryParser.g:279:76: ( partition_clause )?
                 alt55 = 2
                 LA55_0 = self.input.LA(1)
 
@@ -6409,7 +6209,7 @@ class QueryParser(Parser):
                 if alt55 == 1:
                     # QueryParser.g:0:0: partition_clause
                     pass 
-                    self._state.following.append(self.FOLLOW_partition_clause_in_group_clause2330)
+                    self._state.following.append(self.FOLLOW_partition_clause_in_group_clause2325)
                     partition_clause204 = self.partition_clause()
 
                     self._state.following.pop()
@@ -6430,9 +6230,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -6450,7 +6247,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "group_type"
-    # QueryParser.g:358:1: group_type : QUOTEDSTRING ;
+    # QueryParser.g:282:1: group_type : QUOTEDSTRING ;
     def group_type(self, ):
 
         retval = self.group_type_return()
@@ -6464,12 +6261,12 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:358:12: ( QUOTEDSTRING )
-                # QueryParser.g:358:14: QUOTEDSTRING
+                # QueryParser.g:282:12: ( QUOTEDSTRING )
+                # QueryParser.g:282:14: QUOTEDSTRING
                 pass 
                 root_0 = self._adaptor.nil()
 
-                QUOTEDSTRING205=self.match(self.input, QUOTEDSTRING, self.FOLLOW_QUOTEDSTRING_in_group_type2340)
+                QUOTEDSTRING205=self.match(self.input, QUOTEDSTRING, self.FOLLOW_QUOTEDSTRING_in_group_type2335)
                 if self._state.backtracking == 0:
 
                     QUOTEDSTRING205_tree = self._adaptor.createWithPayload(QUOTEDSTRING205)
@@ -6487,9 +6284,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -6507,7 +6301,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "group_item_list"
-    # QueryParser.g:361:1: group_item_list : group_item ( COMMA group_item )* -> ( group_item )+ ;
+    # QueryParser.g:285:1: group_item_list : group_item ( COMMA group_item )* -> ( group_item )+ ;
     def group_item_list(self, ):
 
         retval = self.group_item_list_return()
@@ -6526,16 +6320,16 @@ class QueryParser(Parser):
         stream_group_item = RewriteRuleSubtreeStream(self._adaptor, "rule group_item")
         try:
             try:
-                # QueryParser.g:361:17: ( group_item ( COMMA group_item )* -> ( group_item )+ )
-                # QueryParser.g:361:19: group_item ( COMMA group_item )*
+                # QueryParser.g:285:17: ( group_item ( COMMA group_item )* -> ( group_item )+ )
+                # QueryParser.g:285:19: group_item ( COMMA group_item )*
                 pass 
-                self._state.following.append(self.FOLLOW_group_item_in_group_item_list2349)
+                self._state.following.append(self.FOLLOW_group_item_in_group_item_list2344)
                 group_item206 = self.group_item()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     stream_group_item.add(group_item206.tree)
-                # QueryParser.g:361:30: ( COMMA group_item )*
+                # QueryParser.g:285:30: ( COMMA group_item )*
                 while True: #loop56
                     alt56 = 2
                     LA56_0 = self.input.LA(1)
@@ -6545,12 +6339,12 @@ class QueryParser(Parser):
 
 
                     if alt56 == 1:
-                        # QueryParser.g:361:32: COMMA group_item
+                        # QueryParser.g:285:32: COMMA group_item
                         pass 
-                        COMMA207=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_group_item_list2353) 
+                        COMMA207=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_group_item_list2348) 
                         if self._state.backtracking == 0:
                             stream_COMMA.add(COMMA207)
-                        self._state.following.append(self.FOLLOW_group_item_in_group_item_list2355)
+                        self._state.following.append(self.FOLLOW_group_item_in_group_item_list2350)
                         group_item208 = self.group_item()
 
                         self._state.following.pop()
@@ -6579,8 +6373,8 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 362:16: -> ( group_item )+
-                    # QueryParser.g:362:19: ( group_item )+
+                    # 286:16: -> ( group_item )+
+                    # QueryParser.g:286:19: ( group_item )+
                     if not (stream_group_item.hasNext()):
                         raise RewriteEarlyExitException()
 
@@ -6605,9 +6399,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -6625,7 +6416,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "group_item"
-    # QueryParser.g:365:1: group_item : rel ( join_group_by_clause | ALL | ANY ) ( INNER | OUTER )? ;
+    # QueryParser.g:289:1: group_item : rel ( join_group_by_clause | ALL | ANY ) ( INNER | OUTER )? ;
     def group_item(self, ):
 
         retval = self.group_item_return()
@@ -6647,18 +6438,18 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:365:12: ( rel ( join_group_by_clause | ALL | ANY ) ( INNER | OUTER )? )
-                # QueryParser.g:365:14: rel ( join_group_by_clause | ALL | ANY ) ( INNER | OUTER )?
+                # QueryParser.g:289:12: ( rel ( join_group_by_clause | ALL | ANY ) ( INNER | OUTER )? )
+                # QueryParser.g:289:14: rel ( join_group_by_clause | ALL | ANY ) ( INNER | OUTER )?
                 pass 
                 root_0 = self._adaptor.nil()
 
-                self._state.following.append(self.FOLLOW_rel_in_group_item2387)
+                self._state.following.append(self.FOLLOW_rel_in_group_item2382)
                 rel209 = self.rel()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, rel209.tree)
-                # QueryParser.g:365:18: ( join_group_by_clause | ALL | ANY )
+                # QueryParser.g:289:18: ( join_group_by_clause | ALL | ANY )
                 alt57 = 3
                 LA57 = self.input.LA(1)
                 if LA57 == BY:
@@ -6676,9 +6467,9 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt57 == 1:
-                    # QueryParser.g:365:20: join_group_by_clause
+                    # QueryParser.g:289:20: join_group_by_clause
                     pass 
-                    self._state.following.append(self.FOLLOW_join_group_by_clause_in_group_item2391)
+                    self._state.following.append(self.FOLLOW_join_group_by_clause_in_group_item2386)
                     join_group_by_clause210 = self.join_group_by_clause()
 
                     self._state.following.pop()
@@ -6687,9 +6478,9 @@ class QueryParser(Parser):
 
 
                 elif alt57 == 2:
-                    # QueryParser.g:365:43: ALL
+                    # QueryParser.g:289:43: ALL
                     pass 
-                    ALL211=self.match(self.input, ALL, self.FOLLOW_ALL_in_group_item2395)
+                    ALL211=self.match(self.input, ALL, self.FOLLOW_ALL_in_group_item2390)
                     if self._state.backtracking == 0:
 
                         ALL211_tree = self._adaptor.createWithPayload(ALL211)
@@ -6698,9 +6489,9 @@ class QueryParser(Parser):
 
 
                 elif alt57 == 3:
-                    # QueryParser.g:365:49: ANY
+                    # QueryParser.g:289:49: ANY
                     pass 
-                    ANY212=self.match(self.input, ANY, self.FOLLOW_ANY_in_group_item2399)
+                    ANY212=self.match(self.input, ANY, self.FOLLOW_ANY_in_group_item2394)
                     if self._state.backtracking == 0:
 
                         ANY212_tree = self._adaptor.createWithPayload(ANY212)
@@ -6709,7 +6500,7 @@ class QueryParser(Parser):
 
 
 
-                # QueryParser.g:365:55: ( INNER | OUTER )?
+                # QueryParser.g:289:55: ( INNER | OUTER )?
                 alt58 = 2
                 LA58_0 = self.input.LA(1)
 
@@ -6748,9 +6539,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -6768,7 +6556,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "rel"
-    # QueryParser.g:368:1: rel : ( alias | LEFT_PAREN ( foreach_clause_complex | ( ( op_clause | foreach_clause_simple ) ( parallel_clause )? ) ) RIGHT_PAREN );
+    # QueryParser.g:292:1: rel : ( alias | LEFT_PAREN ( foreach_clause_complex | ( ( op_clause | foreach_clause_simple ) ( parallel_clause )? ) ) RIGHT_PAREN );
     def rel(self, ):
 
         retval = self.rel_return()
@@ -6794,7 +6582,7 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:368:5: ( alias | LEFT_PAREN ( foreach_clause_complex | ( ( op_clause | foreach_clause_simple ) ( parallel_clause )? ) ) RIGHT_PAREN )
+                # QueryParser.g:292:5: ( alias | LEFT_PAREN ( foreach_clause_complex | ( ( op_clause | foreach_clause_simple ) ( parallel_clause )? ) ) RIGHT_PAREN )
                 alt62 = 2
                 LA62_0 = self.input.LA(1)
 
@@ -6811,11 +6599,11 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt62 == 1:
-                    # QueryParser.g:368:7: alias
+                    # QueryParser.g:292:7: alias
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_alias_in_rel2421)
+                    self._state.following.append(self.FOLLOW_alias_in_rel2416)
                     alias214 = self.alias()
 
                     self._state.following.pop()
@@ -6824,18 +6612,18 @@ class QueryParser(Parser):
 
 
                 elif alt62 == 2:
-                    # QueryParser.g:369:7: LEFT_PAREN ( foreach_clause_complex | ( ( op_clause | foreach_clause_simple ) ( parallel_clause )? ) ) RIGHT_PAREN
+                    # QueryParser.g:293:7: LEFT_PAREN ( foreach_clause_complex | ( ( op_clause | foreach_clause_simple ) ( parallel_clause )? ) ) RIGHT_PAREN
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    LEFT_PAREN215=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_rel2430)
-                    # QueryParser.g:369:19: ( foreach_clause_complex | ( ( op_clause | foreach_clause_simple ) ( parallel_clause )? ) )
+                    LEFT_PAREN215=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_rel2425)
+                    # QueryParser.g:293:19: ( foreach_clause_complex | ( ( op_clause | foreach_clause_simple ) ( parallel_clause )? ) )
                     alt61 = 2
                     alt61 = self.dfa61.predict(self.input)
                     if alt61 == 1:
-                        # QueryParser.g:369:21: foreach_clause_complex
+                        # QueryParser.g:293:21: foreach_clause_complex
                         pass 
-                        self._state.following.append(self.FOLLOW_foreach_clause_complex_in_rel2435)
+                        self._state.following.append(self.FOLLOW_foreach_clause_complex_in_rel2430)
                         foreach_clause_complex216 = self.foreach_clause_complex()
 
                         self._state.following.pop()
@@ -6844,12 +6632,12 @@ class QueryParser(Parser):
 
 
                     elif alt61 == 2:
-                        # QueryParser.g:369:46: ( ( op_clause | foreach_clause_simple ) ( parallel_clause )? )
+                        # QueryParser.g:293:46: ( ( op_clause | foreach_clause_simple ) ( parallel_clause )? )
                         pass 
-                        # QueryParser.g:369:46: ( ( op_clause | foreach_clause_simple ) ( parallel_clause )? )
-                        # QueryParser.g:369:48: ( op_clause | foreach_clause_simple ) ( parallel_clause )?
+                        # QueryParser.g:293:46: ( ( op_clause | foreach_clause_simple ) ( parallel_clause )? )
+                        # QueryParser.g:293:48: ( op_clause | foreach_clause_simple ) ( parallel_clause )?
                         pass 
-                        # QueryParser.g:369:48: ( op_clause | foreach_clause_simple )
+                        # QueryParser.g:293:48: ( op_clause | foreach_clause_simple )
                         alt59 = 2
                         LA59_0 = self.input.LA(1)
 
@@ -6866,9 +6654,9 @@ class QueryParser(Parser):
                             raise nvae
 
                         if alt59 == 1:
-                            # QueryParser.g:369:50: op_clause
+                            # QueryParser.g:293:50: op_clause
                             pass 
-                            self._state.following.append(self.FOLLOW_op_clause_in_rel2443)
+                            self._state.following.append(self.FOLLOW_op_clause_in_rel2438)
                             op_clause217 = self.op_clause()
 
                             self._state.following.pop()
@@ -6877,9 +6665,9 @@ class QueryParser(Parser):
 
 
                         elif alt59 == 2:
-                            # QueryParser.g:369:62: foreach_clause_simple
+                            # QueryParser.g:293:62: foreach_clause_simple
                             pass 
-                            self._state.following.append(self.FOLLOW_foreach_clause_simple_in_rel2447)
+                            self._state.following.append(self.FOLLOW_foreach_clause_simple_in_rel2442)
                             foreach_clause_simple218 = self.foreach_clause_simple()
 
                             self._state.following.pop()
@@ -6888,7 +6676,7 @@ class QueryParser(Parser):
 
 
 
-                        # QueryParser.g:369:86: ( parallel_clause )?
+                        # QueryParser.g:293:86: ( parallel_clause )?
                         alt60 = 2
                         LA60_0 = self.input.LA(1)
 
@@ -6897,7 +6685,7 @@ class QueryParser(Parser):
                         if alt60 == 1:
                             # QueryParser.g:0:0: parallel_clause
                             pass 
-                            self._state.following.append(self.FOLLOW_parallel_clause_in_rel2451)
+                            self._state.following.append(self.FOLLOW_parallel_clause_in_rel2446)
                             parallel_clause219 = self.parallel_clause()
 
                             self._state.following.pop()
@@ -6912,7 +6700,7 @@ class QueryParser(Parser):
 
 
 
-                    RIGHT_PAREN220=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_rel2458)
+                    RIGHT_PAREN220=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_rel2453)
 
 
                 retval.stop = self.input.LT(-1)
@@ -6924,9 +6712,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -6944,7 +6729,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "flatten_generated_item"
-    # QueryParser.g:372:1: flatten_generated_item : ( flatten_clause ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )? | col_range ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )? | expr ( AS field_def )? | STAR ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )? );
+    # QueryParser.g:296:1: flatten_generated_item : ( flatten_clause ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )? | col_range ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )? | expr ( AS field_def )? | STAR ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )? );
     def flatten_generated_item(self, ):
 
         retval = self.flatten_generated_item_return()
@@ -6998,56 +6783,56 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:372:24: ( flatten_clause ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )? | col_range ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )? | expr ( AS field_def )? | STAR ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )? )
+                # QueryParser.g:296:24: ( flatten_clause ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )? | col_range ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )? | expr ( AS field_def )? | STAR ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )? )
                 alt70 = 4
                 alt70 = self.dfa70.predict(self.input)
                 if alt70 == 1:
-                    # QueryParser.g:372:26: flatten_clause ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )?
+                    # QueryParser.g:296:26: flatten_clause ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )?
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_flatten_clause_in_flatten_generated_item2468)
+                    self._state.following.append(self.FOLLOW_flatten_clause_in_flatten_generated_item2463)
                     flatten_clause221 = self.flatten_clause()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         self._adaptor.addChild(root_0, flatten_clause221.tree)
-                    # QueryParser.g:372:41: ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )?
+                    # QueryParser.g:296:41: ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )?
                     alt64 = 2
                     LA64_0 = self.input.LA(1)
 
                     if (LA64_0 == AS) :
                         alt64 = 1
                     if alt64 == 1:
-                        # QueryParser.g:372:43: AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def )
+                        # QueryParser.g:296:43: AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def )
                         pass 
-                        AS222=self.match(self.input, AS, self.FOLLOW_AS_in_flatten_generated_item2472)
-                        # QueryParser.g:372:47: ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def )
+                        AS222=self.match(self.input, AS, self.FOLLOW_AS_in_flatten_generated_item2467)
+                        # QueryParser.g:296:47: ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def )
                         alt63 = 2
                         alt63 = self.dfa63.predict(self.input)
                         if alt63 == 1:
-                            # QueryParser.g:372:49: ( LEFT_PAREN field_def_list RIGHT_PAREN )
+                            # QueryParser.g:296:49: ( LEFT_PAREN field_def_list RIGHT_PAREN )
                             pass 
-                            # QueryParser.g:372:49: ( LEFT_PAREN field_def_list RIGHT_PAREN )
-                            # QueryParser.g:372:51: LEFT_PAREN field_def_list RIGHT_PAREN
+                            # QueryParser.g:296:49: ( LEFT_PAREN field_def_list RIGHT_PAREN )
+                            # QueryParser.g:296:51: LEFT_PAREN field_def_list RIGHT_PAREN
                             pass 
-                            LEFT_PAREN223=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_flatten_generated_item2479)
-                            self._state.following.append(self.FOLLOW_field_def_list_in_flatten_generated_item2482)
+                            LEFT_PAREN223=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_flatten_generated_item2474)
+                            self._state.following.append(self.FOLLOW_field_def_list_in_flatten_generated_item2477)
                             field_def_list224 = self.field_def_list()
 
                             self._state.following.pop()
                             if self._state.backtracking == 0:
                                 self._adaptor.addChild(root_0, field_def_list224.tree)
-                            RIGHT_PAREN225=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_flatten_generated_item2484)
+                            RIGHT_PAREN225=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_flatten_generated_item2479)
 
 
 
 
 
                         elif alt63 == 2:
-                            # QueryParser.g:372:95: field_def
+                            # QueryParser.g:296:95: field_def
                             pass 
-                            self._state.following.append(self.FOLLOW_field_def_in_flatten_generated_item2491)
+                            self._state.following.append(self.FOLLOW_field_def_in_flatten_generated_item2486)
                             field_def226 = self.field_def()
 
                             self._state.following.pop()
@@ -7062,52 +6847,52 @@ class QueryParser(Parser):
 
 
                 elif alt70 == 2:
-                    # QueryParser.g:373:26: col_range ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )?
+                    # QueryParser.g:297:26: col_range ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )?
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_col_range_in_flatten_generated_item2523)
+                    self._state.following.append(self.FOLLOW_col_range_in_flatten_generated_item2518)
                     col_range227 = self.col_range()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         self._adaptor.addChild(root_0, col_range227.tree)
-                    # QueryParser.g:373:36: ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )?
+                    # QueryParser.g:297:36: ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )?
                     alt66 = 2
                     LA66_0 = self.input.LA(1)
 
                     if (LA66_0 == AS) :
                         alt66 = 1
                     if alt66 == 1:
-                        # QueryParser.g:373:38: AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def )
+                        # QueryParser.g:297:38: AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def )
                         pass 
-                        AS228=self.match(self.input, AS, self.FOLLOW_AS_in_flatten_generated_item2527)
-                        # QueryParser.g:373:42: ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def )
+                        AS228=self.match(self.input, AS, self.FOLLOW_AS_in_flatten_generated_item2522)
+                        # QueryParser.g:297:42: ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def )
                         alt65 = 2
                         alt65 = self.dfa65.predict(self.input)
                         if alt65 == 1:
-                            # QueryParser.g:373:44: ( LEFT_PAREN field_def_list RIGHT_PAREN )
+                            # QueryParser.g:297:44: ( LEFT_PAREN field_def_list RIGHT_PAREN )
                             pass 
-                            # QueryParser.g:373:44: ( LEFT_PAREN field_def_list RIGHT_PAREN )
-                            # QueryParser.g:373:46: LEFT_PAREN field_def_list RIGHT_PAREN
+                            # QueryParser.g:297:44: ( LEFT_PAREN field_def_list RIGHT_PAREN )
+                            # QueryParser.g:297:46: LEFT_PAREN field_def_list RIGHT_PAREN
                             pass 
-                            LEFT_PAREN229=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_flatten_generated_item2534)
-                            self._state.following.append(self.FOLLOW_field_def_list_in_flatten_generated_item2537)
+                            LEFT_PAREN229=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_flatten_generated_item2529)
+                            self._state.following.append(self.FOLLOW_field_def_list_in_flatten_generated_item2532)
                             field_def_list230 = self.field_def_list()
 
                             self._state.following.pop()
                             if self._state.backtracking == 0:
                                 self._adaptor.addChild(root_0, field_def_list230.tree)
-                            RIGHT_PAREN231=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_flatten_generated_item2539)
+                            RIGHT_PAREN231=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_flatten_generated_item2534)
 
 
 
 
 
                         elif alt65 == 2:
-                            # QueryParser.g:373:90: field_def
+                            # QueryParser.g:297:90: field_def
                             pass 
-                            self._state.following.append(self.FOLLOW_field_def_in_flatten_generated_item2546)
+                            self._state.following.append(self.FOLLOW_field_def_in_flatten_generated_item2541)
                             field_def232 = self.field_def()
 
                             self._state.following.pop()
@@ -7122,27 +6907,27 @@ class QueryParser(Parser):
 
 
                 elif alt70 == 3:
-                    # QueryParser.g:374:26: expr ( AS field_def )?
+                    # QueryParser.g:298:26: expr ( AS field_def )?
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_expr_in_flatten_generated_item2578)
+                    self._state.following.append(self.FOLLOW_expr_in_flatten_generated_item2573)
                     expr233 = self.expr()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         self._adaptor.addChild(root_0, expr233.tree)
-                    # QueryParser.g:374:31: ( AS field_def )?
+                    # QueryParser.g:298:31: ( AS field_def )?
                     alt67 = 2
                     LA67_0 = self.input.LA(1)
 
                     if (LA67_0 == AS) :
                         alt67 = 1
                     if alt67 == 1:
-                        # QueryParser.g:374:33: AS field_def
+                        # QueryParser.g:298:33: AS field_def
                         pass 
-                        AS234=self.match(self.input, AS, self.FOLLOW_AS_in_flatten_generated_item2582)
-                        self._state.following.append(self.FOLLOW_field_def_in_flatten_generated_item2585)
+                        AS234=self.match(self.input, AS, self.FOLLOW_AS_in_flatten_generated_item2577)
+                        self._state.following.append(self.FOLLOW_field_def_in_flatten_generated_item2580)
                         field_def235 = self.field_def()
 
                         self._state.following.pop()
@@ -7154,52 +6939,52 @@ class QueryParser(Parser):
 
 
                 elif alt70 == 4:
-                    # QueryParser.g:375:26: STAR ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )?
+                    # QueryParser.g:299:26: STAR ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )?
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    STAR236=self.match(self.input, STAR, self.FOLLOW_STAR_in_flatten_generated_item2615)
+                    STAR236=self.match(self.input, STAR, self.FOLLOW_STAR_in_flatten_generated_item2610)
                     if self._state.backtracking == 0:
 
                         STAR236_tree = self._adaptor.createWithPayload(STAR236)
                         self._adaptor.addChild(root_0, STAR236_tree)
 
-                    # QueryParser.g:375:31: ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )?
+                    # QueryParser.g:299:31: ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )?
                     alt69 = 2
                     LA69_0 = self.input.LA(1)
 
                     if (LA69_0 == AS) :
                         alt69 = 1
                     if alt69 == 1:
-                        # QueryParser.g:375:33: AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def )
+                        # QueryParser.g:299:33: AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def )
                         pass 
-                        AS237=self.match(self.input, AS, self.FOLLOW_AS_in_flatten_generated_item2619)
-                        # QueryParser.g:375:37: ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def )
+                        AS237=self.match(self.input, AS, self.FOLLOW_AS_in_flatten_generated_item2614)
+                        # QueryParser.g:299:37: ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def )
                         alt68 = 2
                         alt68 = self.dfa68.predict(self.input)
                         if alt68 == 1:
-                            # QueryParser.g:375:39: ( LEFT_PAREN field_def_list RIGHT_PAREN )
+                            # QueryParser.g:299:39: ( LEFT_PAREN field_def_list RIGHT_PAREN )
                             pass 
-                            # QueryParser.g:375:39: ( LEFT_PAREN field_def_list RIGHT_PAREN )
-                            # QueryParser.g:375:41: LEFT_PAREN field_def_list RIGHT_PAREN
+                            # QueryParser.g:299:39: ( LEFT_PAREN field_def_list RIGHT_PAREN )
+                            # QueryParser.g:299:41: LEFT_PAREN field_def_list RIGHT_PAREN
                             pass 
-                            LEFT_PAREN238=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_flatten_generated_item2626)
-                            self._state.following.append(self.FOLLOW_field_def_list_in_flatten_generated_item2629)
+                            LEFT_PAREN238=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_flatten_generated_item2621)
+                            self._state.following.append(self.FOLLOW_field_def_list_in_flatten_generated_item2624)
                             field_def_list239 = self.field_def_list()
 
                             self._state.following.pop()
                             if self._state.backtracking == 0:
                                 self._adaptor.addChild(root_0, field_def_list239.tree)
-                            RIGHT_PAREN240=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_flatten_generated_item2631)
+                            RIGHT_PAREN240=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_flatten_generated_item2626)
 
 
 
 
 
                         elif alt68 == 2:
-                            # QueryParser.g:375:85: field_def
+                            # QueryParser.g:299:85: field_def
                             pass 
-                            self._state.following.append(self.FOLLOW_field_def_in_flatten_generated_item2638)
+                            self._state.following.append(self.FOLLOW_field_def_in_flatten_generated_item2633)
                             field_def241 = self.field_def()
 
                             self._state.following.pop()
@@ -7222,9 +7007,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -7242,7 +7024,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "flatten_clause"
-    # QueryParser.g:378:1: flatten_clause : FLATTEN LEFT_PAREN expr RIGHT_PAREN ;
+    # QueryParser.g:302:1: flatten_clause : FLATTEN LEFT_PAREN expr RIGHT_PAREN ;
     def flatten_clause(self, ):
 
         retval = self.flatten_clause_return()
@@ -7262,25 +7044,25 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:378:16: ( FLATTEN LEFT_PAREN expr RIGHT_PAREN )
-                # QueryParser.g:378:18: FLATTEN LEFT_PAREN expr RIGHT_PAREN
+                # QueryParser.g:302:16: ( FLATTEN LEFT_PAREN expr RIGHT_PAREN )
+                # QueryParser.g:302:18: FLATTEN LEFT_PAREN expr RIGHT_PAREN
                 pass 
                 root_0 = self._adaptor.nil()
 
-                FLATTEN242=self.match(self.input, FLATTEN, self.FOLLOW_FLATTEN_in_flatten_clause2653)
+                FLATTEN242=self.match(self.input, FLATTEN, self.FOLLOW_FLATTEN_in_flatten_clause2648)
                 if self._state.backtracking == 0:
 
                     FLATTEN242_tree = self._adaptor.createWithPayload(FLATTEN242)
                     root_0 = self._adaptor.becomeRoot(FLATTEN242_tree, root_0)
 
-                LEFT_PAREN243=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_flatten_clause2656)
-                self._state.following.append(self.FOLLOW_expr_in_flatten_clause2659)
+                LEFT_PAREN243=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_flatten_clause2651)
+                self._state.following.append(self.FOLLOW_expr_in_flatten_clause2654)
                 expr244 = self.expr()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, expr244.tree)
-                RIGHT_PAREN245=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_flatten_clause2661)
+                RIGHT_PAREN245=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_flatten_clause2656)
 
 
 
@@ -7293,9 +7075,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -7313,7 +7092,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "store_clause"
-    # QueryParser.g:381:1: store_clause : STORE rel INTO filename ( USING func_clause )? ;
+    # QueryParser.g:305:1: store_clause : STORE rel INTO filename ( USING func_clause )? ;
     def store_clause(self, ):
 
         retval = self.store_clause_return()
@@ -7337,41 +7116,41 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:381:14: ( STORE rel INTO filename ( USING func_clause )? )
-                # QueryParser.g:381:16: STORE rel INTO filename ( USING func_clause )?
+                # QueryParser.g:305:14: ( STORE rel INTO filename ( USING func_clause )? )
+                # QueryParser.g:305:16: STORE rel INTO filename ( USING func_clause )?
                 pass 
                 root_0 = self._adaptor.nil()
 
-                STORE246=self.match(self.input, STORE, self.FOLLOW_STORE_in_store_clause2671)
+                STORE246=self.match(self.input, STORE, self.FOLLOW_STORE_in_store_clause2666)
                 if self._state.backtracking == 0:
 
                     STORE246_tree = self._adaptor.createWithPayload(STORE246)
                     root_0 = self._adaptor.becomeRoot(STORE246_tree, root_0)
 
-                self._state.following.append(self.FOLLOW_rel_in_store_clause2674)
+                self._state.following.append(self.FOLLOW_rel_in_store_clause2669)
                 rel247 = self.rel()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, rel247.tree)
-                INTO248=self.match(self.input, INTO, self.FOLLOW_INTO_in_store_clause2676)
-                self._state.following.append(self.FOLLOW_filename_in_store_clause2679)
+                INTO248=self.match(self.input, INTO, self.FOLLOW_INTO_in_store_clause2671)
+                self._state.following.append(self.FOLLOW_filename_in_store_clause2674)
                 filename249 = self.filename()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, filename249.tree)
-                # QueryParser.g:381:42: ( USING func_clause )?
+                # QueryParser.g:305:42: ( USING func_clause )?
                 alt71 = 2
                 LA71_0 = self.input.LA(1)
 
                 if (LA71_0 == USING) :
                     alt71 = 1
                 if alt71 == 1:
-                    # QueryParser.g:381:44: USING func_clause
+                    # QueryParser.g:305:44: USING func_clause
                     pass 
-                    USING250=self.match(self.input, USING, self.FOLLOW_USING_in_store_clause2683)
-                    self._state.following.append(self.FOLLOW_func_clause_in_store_clause2686)
+                    USING250=self.match(self.input, USING, self.FOLLOW_USING_in_store_clause2678)
+                    self._state.following.append(self.FOLLOW_func_clause_in_store_clause2681)
                     func_clause251 = self.func_clause()
 
                     self._state.following.pop()
@@ -7392,9 +7171,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -7412,7 +7188,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "filter_clause"
-    # QueryParser.g:384:1: filter_clause : FILTER rel BY cond ;
+    # QueryParser.g:308:1: filter_clause : FILTER rel BY cond ;
     def filter_clause(self, ):
 
         retval = self.filter_clause_return()
@@ -7432,25 +7208,25 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:384:15: ( FILTER rel BY cond )
-                # QueryParser.g:384:17: FILTER rel BY cond
+                # QueryParser.g:308:15: ( FILTER rel BY cond )
+                # QueryParser.g:308:17: FILTER rel BY cond
                 pass 
                 root_0 = self._adaptor.nil()
 
-                FILTER252=self.match(self.input, FILTER, self.FOLLOW_FILTER_in_filter_clause2698)
+                FILTER252=self.match(self.input, FILTER, self.FOLLOW_FILTER_in_filter_clause2693)
                 if self._state.backtracking == 0:
 
                     FILTER252_tree = self._adaptor.createWithPayload(FILTER252)
                     root_0 = self._adaptor.becomeRoot(FILTER252_tree, root_0)
 
-                self._state.following.append(self.FOLLOW_rel_in_filter_clause2701)
+                self._state.following.append(self.FOLLOW_rel_in_filter_clause2696)
                 rel253 = self.rel()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, rel253.tree)
-                BY254=self.match(self.input, BY, self.FOLLOW_BY_in_filter_clause2703)
-                self._state.following.append(self.FOLLOW_cond_in_filter_clause2706)
+                BY254=self.match(self.input, BY, self.FOLLOW_BY_in_filter_clause2698)
+                self._state.following.append(self.FOLLOW_cond_in_filter_clause2701)
                 cond255 = self.cond()
 
                 self._state.following.pop()
@@ -7468,9 +7244,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -7488,7 +7261,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "cond"
-    # QueryParser.g:387:1: cond : or_cond ;
+    # QueryParser.g:311:1: cond : or_cond ;
     def cond(self, ):
 
         retval = self.cond_return()
@@ -7502,12 +7275,12 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:387:6: ( or_cond )
-                # QueryParser.g:387:8: or_cond
+                # QueryParser.g:311:6: ( or_cond )
+                # QueryParser.g:311:8: or_cond
                 pass 
                 root_0 = self._adaptor.nil()
 
-                self._state.following.append(self.FOLLOW_or_cond_in_cond2715)
+                self._state.following.append(self.FOLLOW_or_cond_in_cond2710)
                 or_cond256 = self.or_cond()
 
                 self._state.following.pop()
@@ -7525,9 +7298,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -7545,7 +7315,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "or_cond"
-    # QueryParser.g:390:1: or_cond : and_cond ( OR and_cond )* ;
+    # QueryParser.g:314:1: or_cond : and_cond ( OR and_cond )* ;
     def or_cond(self, ):
 
         retval = self.or_cond_return()
@@ -7563,18 +7333,18 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:390:9: ( and_cond ( OR and_cond )* )
-                # QueryParser.g:390:11: and_cond ( OR and_cond )*
+                # QueryParser.g:314:9: ( and_cond ( OR and_cond )* )
+                # QueryParser.g:314:11: and_cond ( OR and_cond )*
                 pass 
                 root_0 = self._adaptor.nil()
 
-                self._state.following.append(self.FOLLOW_and_cond_in_or_cond2724)
+                self._state.following.append(self.FOLLOW_and_cond_in_or_cond2719)
                 and_cond257 = self.and_cond()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, and_cond257.tree)
-                # QueryParser.g:390:21: ( OR and_cond )*
+                # QueryParser.g:314:21: ( OR and_cond )*
                 while True: #loop72
                     alt72 = 2
                     LA72_0 = self.input.LA(1)
@@ -7584,15 +7354,15 @@ class QueryParser(Parser):
 
 
                     if alt72 == 1:
-                        # QueryParser.g:390:23: OR and_cond
+                        # QueryParser.g:314:23: OR and_cond
                         pass 
-                        OR258=self.match(self.input, OR, self.FOLLOW_OR_in_or_cond2729)
+                        OR258=self.match(self.input, OR, self.FOLLOW_OR_in_or_cond2724)
                         if self._state.backtracking == 0:
 
                             OR258_tree = self._adaptor.createWithPayload(OR258)
                             root_0 = self._adaptor.becomeRoot(OR258_tree, root_0)
 
-                        self._state.following.append(self.FOLLOW_and_cond_in_or_cond2732)
+                        self._state.following.append(self.FOLLOW_and_cond_in_or_cond2727)
                         and_cond259 = self.and_cond()
 
                         self._state.following.pop()
@@ -7614,9 +7384,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -7634,7 +7401,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "and_cond"
-    # QueryParser.g:393:1: and_cond : unary_cond ( AND unary_cond )* ;
+    # QueryParser.g:317:1: and_cond : unary_cond ( AND unary_cond )* ;
     def and_cond(self, ):
 
         retval = self.and_cond_return()
@@ -7652,18 +7419,18 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:393:10: ( unary_cond ( AND unary_cond )* )
-                # QueryParser.g:393:12: unary_cond ( AND unary_cond )*
+                # QueryParser.g:317:10: ( unary_cond ( AND unary_cond )* )
+                # QueryParser.g:317:12: unary_cond ( AND unary_cond )*
                 pass 
                 root_0 = self._adaptor.nil()
 
-                self._state.following.append(self.FOLLOW_unary_cond_in_and_cond2744)
+                self._state.following.append(self.FOLLOW_unary_cond_in_and_cond2739)
                 unary_cond260 = self.unary_cond()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, unary_cond260.tree)
-                # QueryParser.g:393:23: ( AND unary_cond )*
+                # QueryParser.g:317:23: ( AND unary_cond )*
                 while True: #loop73
                     alt73 = 2
                     LA73_0 = self.input.LA(1)
@@ -7673,15 +7440,15 @@ class QueryParser(Parser):
 
 
                     if alt73 == 1:
-                        # QueryParser.g:393:25: AND unary_cond
+                        # QueryParser.g:317:25: AND unary_cond
                         pass 
-                        AND261=self.match(self.input, AND, self.FOLLOW_AND_in_and_cond2748)
+                        AND261=self.match(self.input, AND, self.FOLLOW_AND_in_and_cond2743)
                         if self._state.backtracking == 0:
 
                             AND261_tree = self._adaptor.createWithPayload(AND261)
                             root_0 = self._adaptor.becomeRoot(AND261_tree, root_0)
 
-                        self._state.following.append(self.FOLLOW_unary_cond_in_and_cond2751)
+                        self._state.following.append(self.FOLLOW_unary_cond_in_and_cond2746)
                         unary_cond262 = self.unary_cond()
 
                         self._state.following.pop()
@@ -7703,9 +7470,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -7723,7 +7487,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "unary_cond"
-    # QueryParser.g:396:1: unary_cond : ( LEFT_PAREN cond RIGHT_PAREN | not_cond | expr rel_op expr | func_eval | null_check_cond );
+    # QueryParser.g:320:1: unary_cond : ( LEFT_PAREN cond RIGHT_PAREN | not_cond | expr rel_op expr | func_eval | null_check_cond );
     def unary_cond(self, ):
 
         retval = self.unary_cond_return()
@@ -7753,30 +7517,30 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:396:12: ( LEFT_PAREN cond RIGHT_PAREN | not_cond | expr rel_op expr | func_eval | null_check_cond )
+                # QueryParser.g:320:12: ( LEFT_PAREN cond RIGHT_PAREN | not_cond | expr rel_op expr | func_eval | null_check_cond )
                 alt74 = 5
                 alt74 = self.dfa74.predict(self.input)
                 if alt74 == 1:
-                    # QueryParser.g:396:14: LEFT_PAREN cond RIGHT_PAREN
+                    # QueryParser.g:320:14: LEFT_PAREN cond RIGHT_PAREN
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    LEFT_PAREN263=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_unary_cond2763)
-                    self._state.following.append(self.FOLLOW_cond_in_unary_cond2766)
+                    LEFT_PAREN263=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_unary_cond2758)
+                    self._state.following.append(self.FOLLOW_cond_in_unary_cond2761)
                     cond264 = self.cond()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         self._adaptor.addChild(root_0, cond264.tree)
-                    RIGHT_PAREN265=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_unary_cond2768)
+                    RIGHT_PAREN265=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_unary_cond2763)
 
 
                 elif alt74 == 2:
-                    # QueryParser.g:397:14: not_cond
+                    # QueryParser.g:321:14: not_cond
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_not_cond_in_unary_cond2784)
+                    self._state.following.append(self.FOLLOW_not_cond_in_unary_cond2779)
                     not_cond266 = self.not_cond()
 
                     self._state.following.pop()
@@ -7785,23 +7549,23 @@ class QueryParser(Parser):
 
 
                 elif alt74 == 3:
-                    # QueryParser.g:398:14: expr rel_op expr
+                    # QueryParser.g:322:14: expr rel_op expr
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_expr_in_unary_cond2799)
+                    self._state.following.append(self.FOLLOW_expr_in_unary_cond2794)
                     expr267 = self.expr()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         self._adaptor.addChild(root_0, expr267.tree)
-                    self._state.following.append(self.FOLLOW_rel_op_in_unary_cond2801)
+                    self._state.following.append(self.FOLLOW_rel_op_in_unary_cond2796)
                     rel_op268 = self.rel_op()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         root_0 = self._adaptor.becomeRoot(rel_op268.tree, root_0)
-                    self._state.following.append(self.FOLLOW_expr_in_unary_cond2804)
+                    self._state.following.append(self.FOLLOW_expr_in_unary_cond2799)
                     expr269 = self.expr()
 
                     self._state.following.pop()
@@ -7810,11 +7574,11 @@ class QueryParser(Parser):
 
 
                 elif alt74 == 4:
-                    # QueryParser.g:399:14: func_eval
+                    # QueryParser.g:323:14: func_eval
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_func_eval_in_unary_cond2819)
+                    self._state.following.append(self.FOLLOW_func_eval_in_unary_cond2814)
                     func_eval270 = self.func_eval()
 
                     self._state.following.pop()
@@ -7823,11 +7587,11 @@ class QueryParser(Parser):
 
 
                 elif alt74 == 5:
-                    # QueryParser.g:400:14: null_check_cond
+                    # QueryParser.g:324:14: null_check_cond
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_null_check_cond_in_unary_cond2834)
+                    self._state.following.append(self.FOLLOW_null_check_cond_in_unary_cond2829)
                     null_check_cond271 = self.null_check_cond()
 
                     self._state.following.pop()
@@ -7844,9 +7608,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -7864,7 +7625,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "not_cond"
-    # QueryParser.g:403:1: not_cond : NOT unary_cond ;
+    # QueryParser.g:327:1: not_cond : NOT unary_cond ;
     def not_cond(self, ):
 
         retval = self.not_cond_return()
@@ -7880,18 +7641,18 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:403:10: ( NOT unary_cond )
-                # QueryParser.g:403:12: NOT unary_cond
+                # QueryParser.g:327:10: ( NOT unary_cond )
+                # QueryParser.g:327:12: NOT unary_cond
                 pass 
                 root_0 = self._adaptor.nil()
 
-                NOT272=self.match(self.input, NOT, self.FOLLOW_NOT_in_not_cond2843)
+                NOT272=self.match(self.input, NOT, self.FOLLOW_NOT_in_not_cond2838)
                 if self._state.backtracking == 0:
 
                     NOT272_tree = self._adaptor.createWithPayload(NOT272)
                     root_0 = self._adaptor.becomeRoot(NOT272_tree, root_0)
 
-                self._state.following.append(self.FOLLOW_unary_cond_in_not_cond2846)
+                self._state.following.append(self.FOLLOW_unary_cond_in_not_cond2841)
                 unary_cond273 = self.unary_cond()
 
                 self._state.following.pop()
@@ -7909,9 +7670,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -7929,7 +7687,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "func_eval"
-    # QueryParser.g:406:1: func_eval : func_name LEFT_PAREN ( real_arg_list )? RIGHT_PAREN -> ^( FUNC_EVAL func_name ( real_arg_list )? ) ;
+    # QueryParser.g:330:1: func_eval : func_name LEFT_PAREN ( real_arg_list )? RIGHT_PAREN -> ^( FUNC_EVAL func_name ( real_arg_list )? ) ;
     def func_eval(self, ):
 
         retval = self.func_eval_return()
@@ -7952,19 +7710,19 @@ class QueryParser(Parser):
         stream_func_name = RewriteRuleSubtreeStream(self._adaptor, "rule func_name")
         try:
             try:
-                # QueryParser.g:406:11: ( func_name LEFT_PAREN ( real_arg_list )? RIGHT_PAREN -> ^( FUNC_EVAL func_name ( real_arg_list )? ) )
-                # QueryParser.g:406:13: func_name LEFT_PAREN ( real_arg_list )? RIGHT_PAREN
+                # QueryParser.g:330:11: ( func_name LEFT_PAREN ( real_arg_list )? RIGHT_PAREN -> ^( FUNC_EVAL func_name ( real_arg_list )? ) )
+                # QueryParser.g:330:13: func_name LEFT_PAREN ( real_arg_list )? RIGHT_PAREN
                 pass 
-                self._state.following.append(self.FOLLOW_func_name_in_func_eval2855)
+                self._state.following.append(self.FOLLOW_func_name_in_func_eval2850)
                 func_name274 = self.func_name()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     stream_func_name.add(func_name274.tree)
-                LEFT_PAREN275=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_func_eval2857) 
+                LEFT_PAREN275=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_func_eval2852) 
                 if self._state.backtracking == 0:
                     stream_LEFT_PAREN.add(LEFT_PAREN275)
-                # QueryParser.g:406:34: ( real_arg_list )?
+                # QueryParser.g:330:34: ( real_arg_list )?
                 alt75 = 2
                 LA75_0 = self.input.LA(1)
 
@@ -7973,7 +7731,7 @@ class QueryParser(Parser):
                 if alt75 == 1:
                     # QueryParser.g:0:0: real_arg_list
                     pass 
-                    self._state.following.append(self.FOLLOW_real_arg_list_in_func_eval2859)
+                    self._state.following.append(self.FOLLOW_real_arg_list_in_func_eval2854)
                     real_arg_list276 = self.real_arg_list()
 
                     self._state.following.pop()
@@ -7982,12 +7740,12 @@ class QueryParser(Parser):
 
 
 
-                RIGHT_PAREN277=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_func_eval2862) 
+                RIGHT_PAREN277=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_func_eval2857) 
                 if self._state.backtracking == 0:
                     stream_RIGHT_PAREN.add(RIGHT_PAREN277)
 
                 # AST Rewrite
-                # elements: func_name, real_arg_list
+                # elements: real_arg_list, func_name
                 # token labels: 
                 # rule labels: retval
                 # token list labels: 
@@ -8004,13 +7762,13 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 407:11: -> ^( FUNC_EVAL func_name ( real_arg_list )? )
-                    # QueryParser.g:407:14: ^( FUNC_EVAL func_name ( real_arg_list )? )
+                    # 331:11: -> ^( FUNC_EVAL func_name ( real_arg_list )? )
+                    # QueryParser.g:331:14: ^( FUNC_EVAL func_name ( real_arg_list )? )
                     root_1 = self._adaptor.nil()
                     root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(FUNC_EVAL, "FUNC_EVAL"), root_1)
 
                     self._adaptor.addChild(root_1, stream_func_name.nextTree())
-                    # QueryParser.g:407:37: ( real_arg_list )?
+                    # QueryParser.g:331:37: ( real_arg_list )?
                     if stream_real_arg_list.hasNext():
                         self._adaptor.addChild(root_1, stream_real_arg_list.nextTree())
 
@@ -8034,9 +7792,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -8054,7 +7809,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "real_arg_list"
-    # QueryParser.g:410:1: real_arg_list : real_arg ( COMMA real_arg )* -> ( real_arg )+ ;
+    # QueryParser.g:334:1: real_arg_list : real_arg ( COMMA real_arg )* -> ( real_arg )+ ;
     def real_arg_list(self, ):
 
         retval = self.real_arg_list_return()
@@ -8073,16 +7828,16 @@ class QueryParser(Parser):
         stream_real_arg = RewriteRuleSubtreeStream(self._adaptor, "rule real_arg")
         try:
             try:
-                # QueryParser.g:410:15: ( real_arg ( COMMA real_arg )* -> ( real_arg )+ )
-                # QueryParser.g:410:17: real_arg ( COMMA real_arg )*
+                # QueryParser.g:334:15: ( real_arg ( COMMA real_arg )* -> ( real_arg )+ )
+                # QueryParser.g:334:17: real_arg ( COMMA real_arg )*
                 pass 
-                self._state.following.append(self.FOLLOW_real_arg_in_real_arg_list2894)
+                self._state.following.append(self.FOLLOW_real_arg_in_real_arg_list2889)
                 real_arg278 = self.real_arg()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     stream_real_arg.add(real_arg278.tree)
-                # QueryParser.g:410:26: ( COMMA real_arg )*
+                # QueryParser.g:334:26: ( COMMA real_arg )*
                 while True: #loop76
                     alt76 = 2
                     LA76_0 = self.input.LA(1)
@@ -8092,12 +7847,12 @@ class QueryParser(Parser):
 
 
                     if alt76 == 1:
-                        # QueryParser.g:410:28: COMMA real_arg
+                        # QueryParser.g:334:28: COMMA real_arg
                         pass 
-                        COMMA279=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_real_arg_list2898) 
+                        COMMA279=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_real_arg_list2893) 
                         if self._state.backtracking == 0:
                             stream_COMMA.add(COMMA279)
-                        self._state.following.append(self.FOLLOW_real_arg_in_real_arg_list2900)
+                        self._state.following.append(self.FOLLOW_real_arg_in_real_arg_list2895)
                         real_arg280 = self.real_arg()
 
                         self._state.following.pop()
@@ -8126,8 +7881,8 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 411:14: -> ( real_arg )+
-                    # QueryParser.g:411:17: ( real_arg )+
+                    # 335:14: -> ( real_arg )+
+                    # QueryParser.g:335:17: ( real_arg )+
                     if not (stream_real_arg.hasNext()):
                         raise RewriteEarlyExitException()
 
@@ -8152,9 +7907,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -8172,7 +7924,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "real_arg"
-    # QueryParser.g:414:1: real_arg : ( expr | STAR | col_range );
+    # QueryParser.g:338:1: real_arg : ( expr | STAR | col_range );
     def real_arg(self, ):
 
         retval = self.real_arg_return()
@@ -8190,7 +7942,7 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:414:10: ( expr | STAR | col_range )
+                # QueryParser.g:338:10: ( expr | STAR | col_range )
                 alt77 = 3
                 LA77 = self.input.LA(1)
                 if LA77 == IMPORT or LA77 == RETURNS or LA77 == DEFINE or LA77 == LOAD or LA77 == FILTER or LA77 == FOREACH or LA77 == ORDER or LA77 == ROLLUP or LA77 == DISTINCT or LA77 == COGROUP or LA77 == JOIN or LA77 == CROSS or LA77 == UNION or LA77 == SPLIT or LA77 == INTO or LA77 == IF or LA77 == ALL or LA77 == AS or LA77 == BY or LA77 == USING or LA77 == INNER or LA77 == OUTER or LA77 == PARALLEL or LA77 == PARTITION or LA77 == AND or LA77 == OR or LA77 == NOT or LA77 == GENERATE or LA77 == FLATTEN or LA77 == ASC or LA77 == DESC or LA77 == INT or LA77 == LONG or LA77 == FLOAT or LA77 == DOUBLE or LA77 == DATETIME or LA77 == CHARARRAY or LA77 == BYTEARRAY or LA77 == BAG or LA77 == TUPLE or LA77 == MAP or LA77 == IS or LA77 == STREAM or LA77 == THROUGH or LA77 == STORE or LA77 == MAPREDUCE or LA77 == SHIP or LA77 == CACHE or LA77 == INPUT or LA77 == OUTPUT or LA77 == STDERROR or LA77 == STDIN or LA77 == STDOUT or LA77 == LIMIT or LA77 == SAMPLE or LA77 == LEFT or LA77 == RIGHT or LA77 == FULL or LA77 == STR_OP_EQ or LA77 == STR_OP_GT or LA77 == STR_OP_LT or LA77 == STR_OP_GTE or LA77 == STR_OP_LTE or LA77 == STR_OP_NE or LA77 == STR_OP_MATCHES or LA77 == TRUE or LA77 == FALSE or LA77 == INTEGER or LA77 == LONGINTEGER or LA77 == MINUS or LA77 == DOUBLENUMBER or LA77 == FLOATNUMBER or LA77 == QUOTEDSTRING or LA77 == LEFT_PAREN or LA77 == LEFT_CURLY or LA77 == LEFT_BRACKET or LA77 == BOOL or LA77 == REALIAS:
@@ -8268,11 +8020,11 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt77 == 1:
-                    # QueryParser.g:414:12: expr
+                    # QueryParser.g:338:12: expr
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_expr_in_real_arg2930)
+                    self._state.following.append(self.FOLLOW_expr_in_real_arg2925)
                     expr281 = self.expr()
 
                     self._state.following.pop()
@@ -8281,11 +8033,11 @@ class QueryParser(Parser):
 
 
                 elif alt77 == 2:
-                    # QueryParser.g:414:19: STAR
+                    # QueryParser.g:338:19: STAR
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    STAR282=self.match(self.input, STAR, self.FOLLOW_STAR_in_real_arg2934)
+                    STAR282=self.match(self.input, STAR, self.FOLLOW_STAR_in_real_arg2929)
                     if self._state.backtracking == 0:
 
                         STAR282_tree = self._adaptor.createWithPayload(STAR282)
@@ -8294,11 +8046,11 @@ class QueryParser(Parser):
 
 
                 elif alt77 == 3:
-                    # QueryParser.g:414:26: col_range
+                    # QueryParser.g:338:26: col_range
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_col_range_in_real_arg2938)
+                    self._state.following.append(self.FOLLOW_col_range_in_real_arg2933)
                     col_range283 = self.col_range()
 
                     self._state.following.pop()
@@ -8315,9 +8067,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -8335,7 +8084,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "null_check_cond"
-    # QueryParser.g:417:1: null_check_cond : expr IS ( NOT )? null_keyword ;
+    # QueryParser.g:341:1: null_check_cond : expr IS ( NOT )? null_keyword ;
     def null_check_cond(self, ):
 
         retval = self.null_check_cond_return()
@@ -8355,19 +8104,19 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:417:17: ( expr IS ( NOT )? null_keyword )
-                # QueryParser.g:417:19: expr IS ( NOT )? null_keyword
+                # QueryParser.g:341:17: ( expr IS ( NOT )? null_keyword )
+                # QueryParser.g:341:19: expr IS ( NOT )? null_keyword
                 pass 
                 root_0 = self._adaptor.nil()
 
-                self._state.following.append(self.FOLLOW_expr_in_null_check_cond2947)
+                self._state.following.append(self.FOLLOW_expr_in_null_check_cond2942)
                 expr284 = self.expr()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, expr284.tree)
-                IS285=self.match(self.input, IS, self.FOLLOW_IS_in_null_check_cond2949)
-                # QueryParser.g:417:28: ( NOT )?
+                IS285=self.match(self.input, IS, self.FOLLOW_IS_in_null_check_cond2944)
+                # QueryParser.g:341:28: ( NOT )?
                 alt78 = 2
                 LA78_0 = self.input.LA(1)
 
@@ -8376,7 +8125,7 @@ class QueryParser(Parser):
                 if alt78 == 1:
                     # QueryParser.g:0:0: NOT
                     pass 
-                    NOT286=self.match(self.input, NOT, self.FOLLOW_NOT_in_null_check_cond2952)
+                    NOT286=self.match(self.input, NOT, self.FOLLOW_NOT_in_null_check_cond2947)
                     if self._state.backtracking == 0:
 
                         NOT286_tree = self._adaptor.createWithPayload(NOT286)
@@ -8385,7 +8134,7 @@ class QueryParser(Parser):
 
 
 
-                self._state.following.append(self.FOLLOW_null_keyword_in_null_check_cond2955)
+                self._state.following.append(self.FOLLOW_null_keyword_in_null_check_cond2950)
                 null_keyword287 = self.null_keyword()
 
                 self._state.following.pop()
@@ -8403,9 +8152,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -8423,7 +8169,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "expr"
-    # QueryParser.g:420:1: expr : add_expr ;
+    # QueryParser.g:344:1: expr : add_expr ;
     def expr(self, ):
 
         retval = self.expr_return()
@@ -8437,12 +8183,12 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:420:6: ( add_expr )
-                # QueryParser.g:420:8: add_expr
+                # QueryParser.g:344:6: ( add_expr )
+                # QueryParser.g:344:8: add_expr
                 pass 
                 root_0 = self._adaptor.nil()
 
-                self._state.following.append(self.FOLLOW_add_expr_in_expr2965)
+                self._state.following.append(self.FOLLOW_add_expr_in_expr2960)
                 add_expr288 = self.add_expr()
 
                 self._state.following.pop()
@@ -8460,9 +8206,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -8480,7 +8223,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "add_expr"
-    # QueryParser.g:423:1: add_expr : multi_expr ( ( PLUS | MINUS ) multi_expr )* ;
+    # QueryParser.g:347:1: add_expr : multi_expr ( ( PLUS | MINUS ) multi_expr )* ;
     def add_expr(self, ):
 
         retval = self.add_expr_return()
@@ -8498,18 +8241,18 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:423:10: ( multi_expr ( ( PLUS | MINUS ) multi_expr )* )
-                # QueryParser.g:423:12: multi_expr ( ( PLUS | MINUS ) multi_expr )*
+                # QueryParser.g:347:10: ( multi_expr ( ( PLUS | MINUS ) multi_expr )* )
+                # QueryParser.g:347:12: multi_expr ( ( PLUS | MINUS ) multi_expr )*
                 pass 
                 root_0 = self._adaptor.nil()
 
-                self._state.following.append(self.FOLLOW_multi_expr_in_add_expr2974)
+                self._state.following.append(self.FOLLOW_multi_expr_in_add_expr2969)
                 multi_expr289 = self.multi_expr()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, multi_expr289.tree)
-                # QueryParser.g:423:23: ( ( PLUS | MINUS ) multi_expr )*
+                # QueryParser.g:347:23: ( ( PLUS | MINUS ) multi_expr )*
                 while True: #loop79
                     alt79 = 2
                     LA79_0 = self.input.LA(1)
@@ -8519,7 +8262,7 @@ class QueryParser(Parser):
 
 
                     if alt79 == 1:
-                        # QueryParser.g:423:25: ( PLUS | MINUS ) multi_expr
+                        # QueryParser.g:347:25: ( PLUS | MINUS ) multi_expr
                         pass 
                         set290 = self.input.LT(1)
                         set290 = self.input.LT(1)
@@ -8537,7 +8280,7 @@ class QueryParser(Parser):
                             raise mse
 
 
-                        self._state.following.append(self.FOLLOW_multi_expr_in_add_expr2989)
+                        self._state.following.append(self.FOLLOW_multi_expr_in_add_expr2984)
                         multi_expr291 = self.multi_expr()
 
                         self._state.following.pop()
@@ -8559,9 +8302,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -8579,7 +8319,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "multi_expr"
-    # QueryParser.g:426:1: multi_expr : cast_expr ( ( STAR | DIV | PERCENT ) cast_expr )* ;
+    # QueryParser.g:350:1: multi_expr : cast_expr ( ( STAR | DIV | PERCENT ) cast_expr )* ;
     def multi_expr(self, ):
 
         retval = self.multi_expr_return()
@@ -8597,18 +8337,18 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:426:12: ( cast_expr ( ( STAR | DIV | PERCENT ) cast_expr )* )
-                # QueryParser.g:426:14: cast_expr ( ( STAR | DIV | PERCENT ) cast_expr )*
+                # QueryParser.g:350:12: ( cast_expr ( ( STAR | DIV | PERCENT ) cast_expr )* )
+                # QueryParser.g:350:14: cast_expr ( ( STAR | DIV | PERCENT ) cast_expr )*
                 pass 
                 root_0 = self._adaptor.nil()
 
-                self._state.following.append(self.FOLLOW_cast_expr_in_multi_expr3001)
+                self._state.following.append(self.FOLLOW_cast_expr_in_multi_expr2996)
                 cast_expr292 = self.cast_expr()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, cast_expr292.tree)
-                # QueryParser.g:426:24: ( ( STAR | DIV | PERCENT ) cast_expr )*
+                # QueryParser.g:350:24: ( ( STAR | DIV | PERCENT ) cast_expr )*
                 while True: #loop80
                     alt80 = 2
                     LA80_0 = self.input.LA(1)
@@ -8618,7 +8358,7 @@ class QueryParser(Parser):
 
 
                     if alt80 == 1:
-                        # QueryParser.g:426:26: ( STAR | DIV | PERCENT ) cast_expr
+                        # QueryParser.g:350:26: ( STAR | DIV | PERCENT ) cast_expr
                         pass 
                         set293 = self.input.LT(1)
                         set293 = self.input.LT(1)
@@ -8636,7 +8376,7 @@ class QueryParser(Parser):
                             raise mse
 
 
-                        self._state.following.append(self.FOLLOW_cast_expr_in_multi_expr3020)
+                        self._state.following.append(self.FOLLOW_cast_expr_in_multi_expr3015)
                         cast_expr294 = self.cast_expr()
 
                         self._state.following.pop()
@@ -8658,9 +8398,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -8678,7 +8415,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "cast_expr"
-    # QueryParser.g:429:1: cast_expr : ( LEFT_PAREN type_cast RIGHT_PAREN unary_expr -> ^( CAST_EXPR type_cast unary_expr ) | unary_expr );
+    # QueryParser.g:353:1: cast_expr : ( LEFT_PAREN type_cast RIGHT_PAREN unary_expr -> ^( CAST_EXPR type_cast unary_expr ) | unary_expr );
     def cast_expr(self, ):
 
         retval = self.cast_expr_return()
@@ -8703,25 +8440,25 @@ class QueryParser(Parser):
         stream_type_cast = RewriteRuleSubtreeStream(self._adaptor, "rule type_cast")
         try:
             try:
-                # QueryParser.g:429:11: ( LEFT_PAREN type_cast RIGHT_PAREN unary_expr -> ^( CAST_EXPR type_cast unary_expr ) | unary_expr )
+                # QueryParser.g:353:11: ( LEFT_PAREN type_cast RIGHT_PAREN unary_expr -> ^( CAST_EXPR type_cast unary_expr ) | unary_expr )
                 alt81 = 2
                 alt81 = self.dfa81.predict(self.input)
                 if alt81 == 1:
-                    # QueryParser.g:429:13: LEFT_PAREN type_cast RIGHT_PAREN unary_expr
+                    # QueryParser.g:353:13: LEFT_PAREN type_cast RIGHT_PAREN unary_expr
                     pass 
-                    LEFT_PAREN295=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_cast_expr3032) 
+                    LEFT_PAREN295=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_cast_expr3027) 
                     if self._state.backtracking == 0:
                         stream_LEFT_PAREN.add(LEFT_PAREN295)
-                    self._state.following.append(self.FOLLOW_type_cast_in_cast_expr3034)
+                    self._state.following.append(self.FOLLOW_type_cast_in_cast_expr3029)
                     type_cast296 = self.type_cast()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         stream_type_cast.add(type_cast296.tree)
-                    RIGHT_PAREN297=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_cast_expr3036) 
+                    RIGHT_PAREN297=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_cast_expr3031) 
                     if self._state.backtracking == 0:
                         stream_RIGHT_PAREN.add(RIGHT_PAREN297)
-                    self._state.following.append(self.FOLLOW_unary_expr_in_cast_expr3038)
+                    self._state.following.append(self.FOLLOW_unary_expr_in_cast_expr3033)
                     unary_expr298 = self.unary_expr()
 
                     self._state.following.pop()
@@ -8729,7 +8466,7 @@ class QueryParser(Parser):
                         stream_unary_expr.add(unary_expr298.tree)
 
                     # AST Rewrite
-                    # elements: type_cast, unary_expr
+                    # elements: unary_expr, type_cast
                     # token labels: 
                     # rule labels: retval
                     # token list labels: 
@@ -8746,8 +8483,8 @@ class QueryParser(Parser):
 
 
                         root_0 = self._adaptor.nil()
-                        # 430:10: -> ^( CAST_EXPR type_cast unary_expr )
-                        # QueryParser.g:430:13: ^( CAST_EXPR type_cast unary_expr )
+                        # 354:10: -> ^( CAST_EXPR type_cast unary_expr )
+                        # QueryParser.g:354:13: ^( CAST_EXPR type_cast unary_expr )
                         root_1 = self._adaptor.nil()
                         root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(CAST_EXPR, "CAST_EXPR"), root_1)
 
@@ -8762,11 +8499,11 @@ class QueryParser(Parser):
 
 
                 elif alt81 == 2:
-                    # QueryParser.g:431:13: unary_expr
+                    # QueryParser.g:355:13: unary_expr
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_unary_expr_in_cast_expr3073)
+                    self._state.following.append(self.FOLLOW_unary_expr_in_cast_expr3068)
                     unary_expr299 = self.unary_expr()
 
                     self._state.following.pop()
@@ -8783,9 +8520,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -8803,7 +8537,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "type_cast"
-    # QueryParser.g:434:1: type_cast : ( simple_type | map_type | tuple_type_cast | bag_type_cast );
+    # QueryParser.g:358:1: type_cast : ( simple_type | map_type | tuple_type_cast | bag_type_cast );
     def type_cast(self, ):
 
         retval = self.type_cast_return()
@@ -8823,7 +8557,7 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:434:11: ( simple_type | map_type | tuple_type_cast | bag_type_cast )
+                # QueryParser.g:358:11: ( simple_type | map_type | tuple_type_cast | bag_type_cast )
                 alt82 = 4
                 LA82 = self.input.LA(1)
                 if LA82 == BOOLEAN or LA82 == INT or LA82 == LONG or LA82 == FLOAT or LA82 == DOUBLE or LA82 == DATETIME or LA82 == CHARARRAY or LA82 == BYTEARRAY:
@@ -8843,11 +8577,11 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt82 == 1:
-                    # QueryParser.g:434:13: simple_type
+                    # QueryParser.g:358:13: simple_type
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_simple_type_in_type_cast3082)
+                    self._state.following.append(self.FOLLOW_simple_type_in_type_cast3077)
                     simple_type300 = self.simple_type()
 
                     self._state.following.pop()
@@ -8856,11 +8590,11 @@ class QueryParser(Parser):
 
 
                 elif alt82 == 2:
-                    # QueryParser.g:434:27: map_type
+                    # QueryParser.g:358:27: map_type
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_map_type_in_type_cast3086)
+                    self._state.following.append(self.FOLLOW_map_type_in_type_cast3081)
                     map_type301 = self.map_type()
 
                     self._state.following.pop()
@@ -8869,11 +8603,11 @@ class QueryParser(Parser):
 
 
                 elif alt82 == 3:
-                    # QueryParser.g:434:38: tuple_type_cast
+                    # QueryParser.g:358:38: tuple_type_cast
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_tuple_type_cast_in_type_cast3090)
+                    self._state.following.append(self.FOLLOW_tuple_type_cast_in_type_cast3085)
                     tuple_type_cast302 = self.tuple_type_cast()
 
                     self._state.following.pop()
@@ -8882,11 +8616,11 @@ class QueryParser(Parser):
 
 
                 elif alt82 == 4:
-                    # QueryParser.g:434:56: bag_type_cast
+                    # QueryParser.g:358:56: bag_type_cast
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_bag_type_cast_in_type_cast3094)
+                    self._state.following.append(self.FOLLOW_bag_type_cast_in_type_cast3089)
                     bag_type_cast303 = self.bag_type_cast()
 
                     self._state.following.pop()
@@ -8903,9 +8637,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -8923,7 +8654,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "tuple_type_cast"
-    # QueryParser.g:437:1: tuple_type_cast : TUPLE LEFT_PAREN ( type_cast ( COMMA type_cast )* )? RIGHT_PAREN -> ^( TUPLE_TYPE_CAST ( type_cast )* ) ;
+    # QueryParser.g:361:1: tuple_type_cast : TUPLE LEFT_PAREN ( type_cast ( COMMA type_cast )* )? RIGHT_PAREN -> ^( TUPLE_TYPE_CAST ( type_cast )* ) ;
     def tuple_type_cast(self, ):
 
         retval = self.tuple_type_cast_return()
@@ -8951,31 +8682,31 @@ class QueryParser(Parser):
         stream_type_cast = RewriteRuleSubtreeStream(self._adaptor, "rule type_cast")
         try:
             try:
-                # QueryParser.g:437:17: ( TUPLE LEFT_PAREN ( type_cast ( COMMA type_cast )* )? RIGHT_PAREN -> ^( TUPLE_TYPE_CAST ( type_cast )* ) )
-                # QueryParser.g:437:19: TUPLE LEFT_PAREN ( type_cast ( COMMA type_cast )* )? RIGHT_PAREN
+                # QueryParser.g:361:17: ( TUPLE LEFT_PAREN ( type_cast ( COMMA type_cast )* )? RIGHT_PAREN -> ^( TUPLE_TYPE_CAST ( type_cast )* ) )
+                # QueryParser.g:361:19: TUPLE LEFT_PAREN ( type_cast ( COMMA type_cast )* )? RIGHT_PAREN
                 pass 
-                TUPLE304=self.match(self.input, TUPLE, self.FOLLOW_TUPLE_in_tuple_type_cast3103) 
+                TUPLE304=self.match(self.input, TUPLE, self.FOLLOW_TUPLE_in_tuple_type_cast3098) 
                 if self._state.backtracking == 0:
                     stream_TUPLE.add(TUPLE304)
-                LEFT_PAREN305=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_tuple_type_cast3105) 
+                LEFT_PAREN305=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_tuple_type_cast3100) 
                 if self._state.backtracking == 0:
                     stream_LEFT_PAREN.add(LEFT_PAREN305)
-                # QueryParser.g:437:36: ( type_cast ( COMMA type_cast )* )?
+                # QueryParser.g:361:36: ( type_cast ( COMMA type_cast )* )?
                 alt84 = 2
                 LA84_0 = self.input.LA(1)
 
                 if ((BOOLEAN <= LA84_0 <= MAP) or LA84_0 == LEFT_BRACKET) :
                     alt84 = 1
                 if alt84 == 1:
-                    # QueryParser.g:437:38: type_cast ( COMMA type_cast )*
+                    # QueryParser.g:361:38: type_cast ( COMMA type_cast )*
                     pass 
-                    self._state.following.append(self.FOLLOW_type_cast_in_tuple_type_cast3109)
+                    self._state.following.append(self.FOLLOW_type_cast_in_tuple_type_cast3104)
                     type_cast306 = self.type_cast()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         stream_type_cast.add(type_cast306.tree)
-                    # QueryParser.g:437:48: ( COMMA type_cast )*
+                    # QueryParser.g:361:48: ( COMMA type_cast )*
                     while True: #loop83
                         alt83 = 2
                         LA83_0 = self.input.LA(1)
@@ -8985,12 +8716,12 @@ class QueryParser(Parser):
 
 
                         if alt83 == 1:
-                            # QueryParser.g:437:50: COMMA type_cast
+                            # QueryParser.g:361:50: COMMA type_cast
                             pass 
-                            COMMA307=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_tuple_type_cast3113) 
+                            COMMA307=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_tuple_type_cast3108) 
                             if self._state.backtracking == 0:
                                 stream_COMMA.add(COMMA307)
-                            self._state.following.append(self.FOLLOW_type_cast_in_tuple_type_cast3115)
+                            self._state.following.append(self.FOLLOW_type_cast_in_tuple_type_cast3110)
                             type_cast308 = self.type_cast()
 
                             self._state.following.pop()
@@ -9003,7 +8734,7 @@ class QueryParser(Parser):
 
 
 
-                RIGHT_PAREN309=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_tuple_type_cast3123) 
+                RIGHT_PAREN309=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_tuple_type_cast3118) 
                 if self._state.backtracking == 0:
                     stream_RIGHT_PAREN.add(RIGHT_PAREN309)
 
@@ -9025,12 +8756,12 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 438:16: -> ^( TUPLE_TYPE_CAST ( type_cast )* )
-                    # QueryParser.g:438:19: ^( TUPLE_TYPE_CAST ( type_cast )* )
+                    # 362:16: -> ^( TUPLE_TYPE_CAST ( type_cast )* )
+                    # QueryParser.g:362:19: ^( TUPLE_TYPE_CAST ( type_cast )* )
                     root_1 = self._adaptor.nil()
                     root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(TUPLE_TYPE_CAST, "TUPLE_TYPE_CAST"), root_1)
 
-                    # QueryParser.g:438:38: ( type_cast )*
+                    # QueryParser.g:362:38: ( type_cast )*
                     while stream_type_cast.hasNext():
                         self._adaptor.addChild(root_1, stream_type_cast.nextTree())
 
@@ -9054,9 +8785,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -9074,7 +8802,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "bag_type_cast"
-    # QueryParser.g:441:1: bag_type_cast : BAG LEFT_CURLY ( tuple_type_cast )? RIGHT_CURLY -> ^( BAG_TYPE_CAST ( tuple_type_cast )? ) ;
+    # QueryParser.g:365:1: bag_type_cast : BAG LEFT_CURLY ( tuple_type_cast )? RIGHT_CURLY -> ^( BAG_TYPE_CAST ( tuple_type_cast )? ) ;
     def bag_type_cast(self, ):
 
         retval = self.bag_type_cast_return()
@@ -9097,16 +8825,16 @@ class QueryParser(Parser):
         stream_tuple_type_cast = RewriteRuleSubtreeStream(self._adaptor, "rule tuple_type_cast")
         try:
             try:
-                # QueryParser.g:441:15: ( BAG LEFT_CURLY ( tuple_type_cast )? RIGHT_CURLY -> ^( BAG_TYPE_CAST ( tuple_type_cast )? ) )
-                # QueryParser.g:441:17: BAG LEFT_CURLY ( tuple_type_cast )? RIGHT_CURLY
+                # QueryParser.g:365:15: ( BAG LEFT_CURLY ( tuple_type_cast )? RIGHT_CURLY -> ^( BAG_TYPE_CAST ( tuple_type_cast )? ) )
+                # QueryParser.g:365:17: BAG LEFT_CURLY ( tuple_type_cast )? RIGHT_CURLY
                 pass 
-                BAG310=self.match(self.input, BAG, self.FOLLOW_BAG_in_bag_type_cast3158) 
+                BAG310=self.match(self.input, BAG, self.FOLLOW_BAG_in_bag_type_cast3153) 
                 if self._state.backtracking == 0:
                     stream_BAG.add(BAG310)
-                LEFT_CURLY311=self.match(self.input, LEFT_CURLY, self.FOLLOW_LEFT_CURLY_in_bag_type_cast3160) 
+                LEFT_CURLY311=self.match(self.input, LEFT_CURLY, self.FOLLOW_LEFT_CURLY_in_bag_type_cast3155) 
                 if self._state.backtracking == 0:
                     stream_LEFT_CURLY.add(LEFT_CURLY311)
-                # QueryParser.g:441:32: ( tuple_type_cast )?
+                # QueryParser.g:365:32: ( tuple_type_cast )?
                 alt85 = 2
                 LA85_0 = self.input.LA(1)
 
@@ -9115,7 +8843,7 @@ class QueryParser(Parser):
                 if alt85 == 1:
                     # QueryParser.g:0:0: tuple_type_cast
                     pass 
-                    self._state.following.append(self.FOLLOW_tuple_type_cast_in_bag_type_cast3162)
+                    self._state.following.append(self.FOLLOW_tuple_type_cast_in_bag_type_cast3157)
                     tuple_type_cast312 = self.tuple_type_cast()
 
                     self._state.following.pop()
@@ -9124,7 +8852,7 @@ class QueryParser(Parser):
 
 
 
-                RIGHT_CURLY313=self.match(self.input, RIGHT_CURLY, self.FOLLOW_RIGHT_CURLY_in_bag_type_cast3165) 
+                RIGHT_CURLY313=self.match(self.input, RIGHT_CURLY, self.FOLLOW_RIGHT_CURLY_in_bag_type_cast3160) 
                 if self._state.backtracking == 0:
                     stream_RIGHT_CURLY.add(RIGHT_CURLY313)
 
@@ -9146,12 +8874,12 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 442:14: -> ^( BAG_TYPE_CAST ( tuple_type_cast )? )
-                    # QueryParser.g:442:17: ^( BAG_TYPE_CAST ( tuple_type_cast )? )
+                    # 366:14: -> ^( BAG_TYPE_CAST ( tuple_type_cast )? )
+                    # QueryParser.g:366:17: ^( BAG_TYPE_CAST ( tuple_type_cast )? )
                     root_1 = self._adaptor.nil()
                     root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(BAG_TYPE_CAST, "BAG_TYPE_CAST"), root_1)
 
-                    # QueryParser.g:442:34: ( tuple_type_cast )?
+                    # QueryParser.g:366:34: ( tuple_type_cast )?
                     if stream_tuple_type_cast.hasNext():
                         self._adaptor.addChild(root_1, stream_tuple_type_cast.nextTree())
 
@@ -9175,9 +8903,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -9195,7 +8920,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "unary_expr"
-    # QueryParser.g:445:1: unary_expr : ( expr_eval | LEFT_PAREN expr RIGHT_PAREN -> ^( EXPR_IN_PAREN expr ) | neg_expr );
+    # QueryParser.g:369:1: unary_expr : ( expr_eval | LEFT_PAREN expr RIGHT_PAREN -> ^( EXPR_IN_PAREN expr ) | neg_expr );
     def unary_expr(self, ):
 
         retval = self.unary_expr_return()
@@ -9219,15 +8944,15 @@ class QueryParser(Parser):
         stream_expr = RewriteRuleSubtreeStream(self._adaptor, "rule expr")
         try:
             try:
-                # QueryParser.g:445:12: ( expr_eval | LEFT_PAREN expr RIGHT_PAREN -> ^( EXPR_IN_PAREN expr ) | neg_expr )
+                # QueryParser.g:369:12: ( expr_eval | LEFT_PAREN expr RIGHT_PAREN -> ^( EXPR_IN_PAREN expr ) | neg_expr )
                 alt86 = 3
                 alt86 = self.dfa86.predict(self.input)
                 if alt86 == 1:
-                    # QueryParser.g:445:14: expr_eval
+                    # QueryParser.g:369:14: expr_eval
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_expr_eval_in_unary_expr3198)
+                    self._state.following.append(self.FOLLOW_expr_eval_in_unary_expr3193)
                     expr_eval314 = self.expr_eval()
 
                     self._state.following.pop()
@@ -9236,18 +8961,18 @@ class QueryParser(Parser):
 
 
                 elif alt86 == 2:
-                    # QueryParser.g:446:14: LEFT_PAREN expr RIGHT_PAREN
+                    # QueryParser.g:370:14: LEFT_PAREN expr RIGHT_PAREN
                     pass 
-                    LEFT_PAREN315=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_unary_expr3214) 
+                    LEFT_PAREN315=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_unary_expr3209) 
                     if self._state.backtracking == 0:
                         stream_LEFT_PAREN.add(LEFT_PAREN315)
-                    self._state.following.append(self.FOLLOW_expr_in_unary_expr3216)
+                    self._state.following.append(self.FOLLOW_expr_in_unary_expr3211)
                     expr316 = self.expr()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         stream_expr.add(expr316.tree)
-                    RIGHT_PAREN317=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_unary_expr3218) 
+                    RIGHT_PAREN317=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_unary_expr3213) 
                     if self._state.backtracking == 0:
                         stream_RIGHT_PAREN.add(RIGHT_PAREN317)
 
@@ -9269,8 +8994,8 @@ class QueryParser(Parser):
 
 
                         root_0 = self._adaptor.nil()
-                        # 447:11: -> ^( EXPR_IN_PAREN expr )
-                        # QueryParser.g:447:14: ^( EXPR_IN_PAREN expr )
+                        # 371:11: -> ^( EXPR_IN_PAREN expr )
+                        # QueryParser.g:371:14: ^( EXPR_IN_PAREN expr )
                         root_1 = self._adaptor.nil()
                         root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(EXPR_IN_PAREN, "EXPR_IN_PAREN"), root_1)
 
@@ -9284,11 +9009,11 @@ class QueryParser(Parser):
 
 
                 elif alt86 == 3:
-                    # QueryParser.g:448:14: neg_expr
+                    # QueryParser.g:372:14: neg_expr
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_neg_expr_in_unary_expr3253)
+                    self._state.following.append(self.FOLLOW_neg_expr_in_unary_expr3248)
                     neg_expr318 = self.neg_expr()
 
                     self._state.following.pop()
@@ -9305,9 +9030,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -9325,7 +9047,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "expr_eval"
-    # QueryParser.g:451:1: expr_eval : ( const_expr | var_expr );
+    # QueryParser.g:375:1: expr_eval : ( const_expr | var_expr );
     def expr_eval(self, ):
 
         retval = self.expr_eval_return()
@@ -9341,15 +9063,15 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:451:11: ( const_expr | var_expr )
+                # QueryParser.g:375:11: ( const_expr | var_expr )
                 alt87 = 2
                 alt87 = self.dfa87.predict(self.input)
                 if alt87 == 1:
-                    # QueryParser.g:451:13: const_expr
+                    # QueryParser.g:375:13: const_expr
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_const_expr_in_expr_eval3262)
+                    self._state.following.append(self.FOLLOW_const_expr_in_expr_eval3257)
                     const_expr319 = self.const_expr()
 
                     self._state.following.pop()
@@ -9358,11 +9080,11 @@ class QueryParser(Parser):
 
 
                 elif alt87 == 2:
-                    # QueryParser.g:451:26: var_expr
+                    # QueryParser.g:375:26: var_expr
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_var_expr_in_expr_eval3266)
+                    self._state.following.append(self.FOLLOW_var_expr_in_expr_eval3261)
                     var_expr320 = self.var_expr()
 
                     self._state.following.pop()
@@ -9379,9 +9101,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -9399,7 +9118,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "var_expr"
-    # QueryParser.g:454:1: var_expr : projectable_expr ( dot_proj | pound_proj )* ;
+    # QueryParser.g:378:1: var_expr : projectable_expr ( dot_proj | pound_proj )* ;
     def var_expr(self, ):
 
         retval = self.var_expr_return()
@@ -9417,18 +9136,18 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:454:10: ( projectable_expr ( dot_proj | pound_proj )* )
-                # QueryParser.g:454:12: projectable_expr ( dot_proj | pound_proj )*
+                # QueryParser.g:378:10: ( projectable_expr ( dot_proj | pound_proj )* )
+                # QueryParser.g:378:12: projectable_expr ( dot_proj | pound_proj )*
                 pass 
                 root_0 = self._adaptor.nil()
 
-                self._state.following.append(self.FOLLOW_projectable_expr_in_var_expr3275)
+                self._state.following.append(self.FOLLOW_projectable_expr_in_var_expr3270)
                 projectable_expr321 = self.projectable_expr()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, projectable_expr321.tree)
-                # QueryParser.g:454:29: ( dot_proj | pound_proj )*
+                # QueryParser.g:378:29: ( dot_proj | pound_proj )*
                 while True: #loop88
                     alt88 = 3
                     LA88_0 = self.input.LA(1)
@@ -9440,9 +9159,9 @@ class QueryParser(Parser):
 
 
                     if alt88 == 1:
-                        # QueryParser.g:454:31: dot_proj
+                        # QueryParser.g:378:31: dot_proj
                         pass 
-                        self._state.following.append(self.FOLLOW_dot_proj_in_var_expr3279)
+                        self._state.following.append(self.FOLLOW_dot_proj_in_var_expr3274)
                         dot_proj322 = self.dot_proj()
 
                         self._state.following.pop()
@@ -9451,9 +9170,9 @@ class QueryParser(Parser):
 
 
                     elif alt88 == 2:
-                        # QueryParser.g:454:42: pound_proj
+                        # QueryParser.g:378:42: pound_proj
                         pass 
-                        self._state.following.append(self.FOLLOW_pound_proj_in_var_expr3283)
+                        self._state.following.append(self.FOLLOW_pound_proj_in_var_expr3278)
                         pound_proj323 = self.pound_proj()
 
                         self._state.following.pop()
@@ -9475,9 +9194,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -9495,7 +9211,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "projectable_expr"
-    # QueryParser.g:457:1: projectable_expr : ( func_eval | col_ref | bin_expr | type_conversion );
+    # QueryParser.g:381:1: projectable_expr : ( func_eval | col_ref | bin_expr | type_conversion );
     def projectable_expr(self, ):
 
         retval = self.projectable_expr_return()
@@ -9515,15 +9231,15 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:457:17: ( func_eval | col_ref | bin_expr | type_conversion )
+                # QueryParser.g:381:17: ( func_eval | col_ref | bin_expr | type_conversion )
                 alt89 = 4
                 alt89 = self.dfa89.predict(self.input)
                 if alt89 == 1:
-                    # QueryParser.g:457:19: func_eval
+                    # QueryParser.g:381:19: func_eval
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_func_eval_in_projectable_expr3294)
+                    self._state.following.append(self.FOLLOW_func_eval_in_projectable_expr3289)
                     func_eval324 = self.func_eval()
 
                     self._state.following.pop()
@@ -9532,11 +9248,11 @@ class QueryParser(Parser):
 
 
                 elif alt89 == 2:
-                    # QueryParser.g:457:31: col_ref
+                    # QueryParser.g:381:31: col_ref
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_col_ref_in_projectable_expr3298)
+                    self._state.following.append(self.FOLLOW_col_ref_in_projectable_expr3293)
                     col_ref325 = self.col_ref()
 
                     self._state.following.pop()
@@ -9545,11 +9261,11 @@ class QueryParser(Parser):
 
 
                 elif alt89 == 3:
-                    # QueryParser.g:457:41: bin_expr
+                    # QueryParser.g:381:41: bin_expr
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_bin_expr_in_projectable_expr3302)
+                    self._state.following.append(self.FOLLOW_bin_expr_in_projectable_expr3297)
                     bin_expr326 = self.bin_expr()
 
                     self._state.following.pop()
@@ -9558,11 +9274,11 @@ class QueryParser(Parser):
 
 
                 elif alt89 == 4:
-                    # QueryParser.g:457:52: type_conversion
+                    # QueryParser.g:381:52: type_conversion
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_type_conversion_in_projectable_expr3306)
+                    self._state.following.append(self.FOLLOW_type_conversion_in_projectable_expr3301)
                     type_conversion327 = self.type_conversion()
 
                     self._state.following.pop()
@@ -9579,9 +9295,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -9599,7 +9312,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "type_conversion"
-    # QueryParser.g:460:1: type_conversion : ( LEFT_CURLY real_arg_list RIGHT_CURLY -> ^( FUNC_EVAL TOBAG real_arg_list ) | LEFT_BRACKET real_arg_list RIGHT_BRACKET -> ^( FUNC_EVAL TOMAP real_arg_list ) | LEFT_PAREN real_arg ( COMMA real_arg )+ RIGHT_PAREN -> ^( FUNC_EVAL TOTUPLE ( real_arg )+ ) );
+    # QueryParser.g:384:1: type_conversion : ( LEFT_CURLY real_arg_list RIGHT_CURLY -> ^( FUNC_EVAL TOBAG real_arg_list ) | LEFT_BRACKET real_arg_list RIGHT_BRACKET -> ^( FUNC_EVAL TOMAP real_arg_list ) | LEFT_PAREN real_arg ( COMMA real_arg )+ RIGHT_PAREN -> ^( FUNC_EVAL TOTUPLE ( real_arg )+ ) );
     def type_conversion(self, ):
 
         retval = self.type_conversion_return()
@@ -9641,7 +9354,7 @@ class QueryParser(Parser):
         stream_real_arg = RewriteRuleSubtreeStream(self._adaptor, "rule real_arg")
         try:
             try:
-                # QueryParser.g:460:17: ( LEFT_CURLY real_arg_list RIGHT_CURLY -> ^( FUNC_EVAL TOBAG real_arg_list ) | LEFT_BRACKET real_arg_list RIGHT_BRACKET -> ^( FUNC_EVAL TOMAP real_arg_list ) | LEFT_PAREN real_arg ( COMMA real_arg )+ RIGHT_PAREN -> ^( FUNC_EVAL TOTUPLE ( real_arg )+ ) )
+                # QueryParser.g:384:17: ( LEFT_CURLY real_arg_list RIGHT_CURLY -> ^( FUNC_EVAL TOBAG real_arg_list ) | LEFT_BRACKET real_arg_list RIGHT_BRACKET -> ^( FUNC_EVAL TOMAP real_arg_list ) | LEFT_PAREN real_arg ( COMMA real_arg )+ RIGHT_PAREN -> ^( FUNC_EVAL TOTUPLE ( real_arg )+ ) )
                 alt91 = 3
                 LA91 = self.input.LA(1)
                 if LA91 == LEFT_CURLY:
@@ -9659,18 +9372,18 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt91 == 1:
-                    # QueryParser.g:460:19: LEFT_CURLY real_arg_list RIGHT_CURLY
+                    # QueryParser.g:384:19: LEFT_CURLY real_arg_list RIGHT_CURLY
                     pass 
-                    LEFT_CURLY328=self.match(self.input, LEFT_CURLY, self.FOLLOW_LEFT_CURLY_in_type_conversion3315) 
+                    LEFT_CURLY328=self.match(self.input, LEFT_CURLY, self.FOLLOW_LEFT_CURLY_in_type_conversion3310) 
                     if self._state.backtracking == 0:
                         stream_LEFT_CURLY.add(LEFT_CURLY328)
-                    self._state.following.append(self.FOLLOW_real_arg_list_in_type_conversion3317)
+                    self._state.following.append(self.FOLLOW_real_arg_list_in_type_conversion3312)
                     real_arg_list329 = self.real_arg_list()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         stream_real_arg_list.add(real_arg_list329.tree)
-                    RIGHT_CURLY330=self.match(self.input, RIGHT_CURLY, self.FOLLOW_RIGHT_CURLY_in_type_conversion3319) 
+                    RIGHT_CURLY330=self.match(self.input, RIGHT_CURLY, self.FOLLOW_RIGHT_CURLY_in_type_conversion3314) 
                     if self._state.backtracking == 0:
                         stream_RIGHT_CURLY.add(RIGHT_CURLY330)
 
@@ -9692,8 +9405,8 @@ class QueryParser(Parser):
 
 
                         root_0 = self._adaptor.nil()
-                        # 461:16: -> ^( FUNC_EVAL TOBAG real_arg_list )
-                        # QueryParser.g:461:19: ^( FUNC_EVAL TOBAG real_arg_list )
+                        # 385:16: -> ^( FUNC_EVAL TOBAG real_arg_list )
+                        # QueryParser.g:385:19: ^( FUNC_EVAL TOBAG real_arg_list )
                         root_1 = self._adaptor.nil()
                         root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(FUNC_EVAL, "FUNC_EVAL"), root_1)
 
@@ -9708,18 +9421,18 @@ class QueryParser(Parser):
 
 
                 elif alt91 == 2:
-                    # QueryParser.g:462:18: LEFT_BRACKET real_arg_list RIGHT_BRACKET
+                    # QueryParser.g:386:18: LEFT_BRACKET real_arg_list RIGHT_BRACKET
                     pass 
-                    LEFT_BRACKET331=self.match(self.input, LEFT_BRACKET, self.FOLLOW_LEFT_BRACKET_in_type_conversion3366) 
+                    LEFT_BRACKET331=self.match(self.input, LEFT_BRACKET, self.FOLLOW_LEFT_BRACKET_in_type_conversion3361) 
                     if self._state.backtracking == 0:
                         stream_LEFT_BRACKET.add(LEFT_BRACKET331)
-                    self._state.following.append(self.FOLLOW_real_arg_list_in_type_conversion3368)
+                    self._state.following.append(self.FOLLOW_real_arg_list_in_type_conversion3363)
                     real_arg_list332 = self.real_arg_list()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         stream_real_arg_list.add(real_arg_list332.tree)
-                    RIGHT_BRACKET333=self.match(self.input, RIGHT_BRACKET, self.FOLLOW_RIGHT_BRACKET_in_type_conversion3370) 
+                    RIGHT_BRACKET333=self.match(self.input, RIGHT_BRACKET, self.FOLLOW_RIGHT_BRACKET_in_type_conversion3365) 
                     if self._state.backtracking == 0:
                         stream_RIGHT_BRACKET.add(RIGHT_BRACKET333)
 
@@ -9741,8 +9454,8 @@ class QueryParser(Parser):
 
 
                         root_0 = self._adaptor.nil()
-                        # 463:16: -> ^( FUNC_EVAL TOMAP real_arg_list )
-                        # QueryParser.g:463:19: ^( FUNC_EVAL TOMAP real_arg_list )
+                        # 387:16: -> ^( FUNC_EVAL TOMAP real_arg_list )
+                        # QueryParser.g:387:19: ^( FUNC_EVAL TOMAP real_arg_list )
                         root_1 = self._adaptor.nil()
                         root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(FUNC_EVAL, "FUNC_EVAL"), root_1)
 
@@ -9757,18 +9470,18 @@ class QueryParser(Parser):
 
 
                 elif alt91 == 3:
-                    # QueryParser.g:464:18: LEFT_PAREN real_arg ( COMMA real_arg )+ RIGHT_PAREN
+                    # QueryParser.g:388:18: LEFT_PAREN real_arg ( COMMA real_arg )+ RIGHT_PAREN
                     pass 
-                    LEFT_PAREN334=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_type_conversion3417) 
+                    LEFT_PAREN334=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_type_conversion3412) 
                     if self._state.backtracking == 0:
                         stream_LEFT_PAREN.add(LEFT_PAREN334)
-                    self._state.following.append(self.FOLLOW_real_arg_in_type_conversion3419)
+                    self._state.following.append(self.FOLLOW_real_arg_in_type_conversion3414)
                     real_arg335 = self.real_arg()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         stream_real_arg.add(real_arg335.tree)
-                    # QueryParser.g:464:38: ( COMMA real_arg )+
+                    # QueryParser.g:388:38: ( COMMA real_arg )+
                     cnt90 = 0
                     while True: #loop90
                         alt90 = 2
@@ -9779,12 +9492,12 @@ class QueryParser(Parser):
 
 
                         if alt90 == 1:
-                            # QueryParser.g:464:40: COMMA real_arg
+                            # QueryParser.g:388:40: COMMA real_arg
                             pass 
-                            COMMA336=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_type_conversion3423) 
+                            COMMA336=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_type_conversion3418) 
                             if self._state.backtracking == 0:
                                 stream_COMMA.add(COMMA336)
-                            self._state.following.append(self.FOLLOW_real_arg_in_type_conversion3425)
+                            self._state.following.append(self.FOLLOW_real_arg_in_type_conversion3420)
                             real_arg337 = self.real_arg()
 
                             self._state.following.pop()
@@ -9803,7 +9516,7 @@ class QueryParser(Parser):
                             raise eee
 
                         cnt90 += 1
-                    RIGHT_PAREN338=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_type_conversion3430) 
+                    RIGHT_PAREN338=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_type_conversion3425) 
                     if self._state.backtracking == 0:
                         stream_RIGHT_PAREN.add(RIGHT_PAREN338)
 
@@ -9825,13 +9538,13 @@ class QueryParser(Parser):
 
 
                         root_0 = self._adaptor.nil()
-                        # 465:16: -> ^( FUNC_EVAL TOTUPLE ( real_arg )+ )
-                        # QueryParser.g:465:19: ^( FUNC_EVAL TOTUPLE ( real_arg )+ )
+                        # 389:16: -> ^( FUNC_EVAL TOTUPLE ( real_arg )+ )
+                        # QueryParser.g:389:19: ^( FUNC_EVAL TOTUPLE ( real_arg )+ )
                         root_1 = self._adaptor.nil()
                         root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(FUNC_EVAL, "FUNC_EVAL"), root_1)
 
                         self._adaptor.addChild(root_1, self._adaptor.createFromType(TOTUPLE, "TOTUPLE"))
-                        # QueryParser.g:465:40: ( real_arg )+
+                        # QueryParser.g:389:40: ( real_arg )+
                         if not (stream_real_arg.hasNext()):
                             raise RewriteEarlyExitException()
 
@@ -9857,9 +9570,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -9877,7 +9587,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "dot_proj"
-    # QueryParser.g:468:1: dot_proj : PERIOD ( col_alias_or_index | ( LEFT_PAREN col_alias_or_index ( COMMA col_alias_or_index )* RIGHT_PAREN ) ) -> ^( PERIOD ( col_alias_or_index )+ ) ;
+    # QueryParser.g:392:1: dot_proj : PERIOD ( col_alias_or_index | ( LEFT_PAREN col_alias_or_index ( COMMA col_alias_or_index )* RIGHT_PAREN ) ) -> ^( PERIOD ( col_alias_or_index )+ ) ;
     def dot_proj(self, ):
 
         retval = self.dot_proj_return()
@@ -9907,13 +9617,13 @@ class QueryParser(Parser):
         stream_col_alias_or_index = RewriteRuleSubtreeStream(self._adaptor, "rule col_alias_or_index")
         try:
             try:
-                # QueryParser.g:468:10: ( PERIOD ( col_alias_or_index | ( LEFT_PAREN col_alias_or_index ( COMMA col_alias_or_index )* RIGHT_PAREN ) ) -> ^( PERIOD ( col_alias_or_index )+ ) )
-                # QueryParser.g:468:12: PERIOD ( col_alias_or_index | ( LEFT_PAREN col_alias_or_index ( COMMA col_alias_or_index )* RIGHT_PAREN ) )
+                # QueryParser.g:392:10: ( PERIOD ( col_alias_or_index | ( LEFT_PAREN col_alias_or_index ( COMMA col_alias_or_index )* RIGHT_PAREN ) ) -> ^( PERIOD ( col_alias_or_index )+ ) )
+                # QueryParser.g:392:12: PERIOD ( col_alias_or_index | ( LEFT_PAREN col_alias_or_index ( COMMA col_alias_or_index )* RIGHT_PAREN ) )
                 pass 
-                PERIOD339=self.match(self.input, PERIOD, self.FOLLOW_PERIOD_in_dot_proj3468) 
+                PERIOD339=self.match(self.input, PERIOD, self.FOLLOW_PERIOD_in_dot_proj3463) 
                 if self._state.backtracking == 0:
                     stream_PERIOD.add(PERIOD339)
-                # QueryParser.g:468:19: ( col_alias_or_index | ( LEFT_PAREN col_alias_or_index ( COMMA col_alias_or_index )* RIGHT_PAREN ) )
+                # QueryParser.g:392:19: ( col_alias_or_index | ( LEFT_PAREN col_alias_or_index ( COMMA col_alias_or_index )* RIGHT_PAREN ) )
                 alt93 = 2
                 LA93_0 = self.input.LA(1)
 
@@ -9930,9 +9640,9 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt93 == 1:
-                    # QueryParser.g:468:21: col_alias_or_index
+                    # QueryParser.g:392:21: col_alias_or_index
                     pass 
-                    self._state.following.append(self.FOLLOW_col_alias_or_index_in_dot_proj3472)
+                    self._state.following.append(self.FOLLOW_col_alias_or_index_in_dot_proj3467)
                     col_alias_or_index340 = self.col_alias_or_index()
 
                     self._state.following.pop()
@@ -9941,21 +9651,21 @@ class QueryParser(Parser):
 
 
                 elif alt93 == 2:
-                    # QueryParser.g:469:21: ( LEFT_PAREN col_alias_or_index ( COMMA col_alias_or_index )* RIGHT_PAREN )
+                    # QueryParser.g:393:21: ( LEFT_PAREN col_alias_or_index ( COMMA col_alias_or_index )* RIGHT_PAREN )
                     pass 
-                    # QueryParser.g:469:21: ( LEFT_PAREN col_alias_or_index ( COMMA col_alias_or_index )* RIGHT_PAREN )
-                    # QueryParser.g:469:23: LEFT_PAREN col_alias_or_index ( COMMA col_alias_or_index )* RIGHT_PAREN
+                    # QueryParser.g:393:21: ( LEFT_PAREN col_alias_or_index ( COMMA col_alias_or_index )* RIGHT_PAREN )
+                    # QueryParser.g:393:23: LEFT_PAREN col_alias_or_index ( COMMA col_alias_or_index )* RIGHT_PAREN
                     pass 
-                    LEFT_PAREN341=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_dot_proj3497) 
+                    LEFT_PAREN341=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_dot_proj3492) 
                     if self._state.backtracking == 0:
                         stream_LEFT_PAREN.add(LEFT_PAREN341)
-                    self._state.following.append(self.FOLLOW_col_alias_or_index_in_dot_proj3499)
+                    self._state.following.append(self.FOLLOW_col_alias_or_index_in_dot_proj3494)
                     col_alias_or_index342 = self.col_alias_or_index()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         stream_col_alias_or_index.add(col_alias_or_index342.tree)
-                    # QueryParser.g:469:53: ( COMMA col_alias_or_index )*
+                    # QueryParser.g:393:53: ( COMMA col_alias_or_index )*
                     while True: #loop92
                         alt92 = 2
                         LA92_0 = self.input.LA(1)
@@ -9965,12 +9675,12 @@ class QueryParser(Parser):
 
 
                         if alt92 == 1:
-                            # QueryParser.g:469:55: COMMA col_alias_or_index
+                            # QueryParser.g:393:55: COMMA col_alias_or_index
                             pass 
-                            COMMA343=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_dot_proj3503) 
+                            COMMA343=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_dot_proj3498) 
                             if self._state.backtracking == 0:
                                 stream_COMMA.add(COMMA343)
-                            self._state.following.append(self.FOLLOW_col_alias_or_index_in_dot_proj3505)
+                            self._state.following.append(self.FOLLOW_col_alias_or_index_in_dot_proj3500)
                             col_alias_or_index344 = self.col_alias_or_index()
 
                             self._state.following.pop()
@@ -9980,7 +9690,7 @@ class QueryParser(Parser):
 
                         else:
                             break #loop92
-                    RIGHT_PAREN345=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_dot_proj3510) 
+                    RIGHT_PAREN345=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_dot_proj3505) 
                     if self._state.backtracking == 0:
                         stream_RIGHT_PAREN.add(RIGHT_PAREN345)
 
@@ -10008,12 +9718,12 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 470:9: -> ^( PERIOD ( col_alias_or_index )+ )
-                    # QueryParser.g:470:12: ^( PERIOD ( col_alias_or_index )+ )
+                    # 394:9: -> ^( PERIOD ( col_alias_or_index )+ )
+                    # QueryParser.g:394:12: ^( PERIOD ( col_alias_or_index )+ )
                     root_1 = self._adaptor.nil()
                     root_1 = self._adaptor.becomeRoot(stream_PERIOD.nextNode(), root_1)
 
-                    # QueryParser.g:470:22: ( col_alias_or_index )+
+                    # QueryParser.g:394:22: ( col_alias_or_index )+
                     if not (stream_col_alias_or_index.hasNext()):
                         raise RewriteEarlyExitException()
 
@@ -10040,9 +9750,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -10060,7 +9767,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "col_alias_or_index"
-    # QueryParser.g:473:1: col_alias_or_index : ( col_alias | col_index );
+    # QueryParser.g:397:1: col_alias_or_index : ( col_alias | col_index );
     def col_alias_or_index(self, ):
 
         retval = self.col_alias_or_index_return()
@@ -10076,7 +9783,7 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:473:20: ( col_alias | col_index )
+                # QueryParser.g:397:20: ( col_alias | col_index )
                 alt94 = 2
                 LA94_0 = self.input.LA(1)
 
@@ -10093,11 +9800,11 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt94 == 1:
-                    # QueryParser.g:473:22: col_alias
+                    # QueryParser.g:397:22: col_alias
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_col_alias_in_col_alias_or_index3542)
+                    self._state.following.append(self.FOLLOW_col_alias_in_col_alias_or_index3537)
                     col_alias346 = self.col_alias()
 
                     self._state.following.pop()
@@ -10106,11 +9813,11 @@ class QueryParser(Parser):
 
 
                 elif alt94 == 2:
-                    # QueryParser.g:473:34: col_index
+                    # QueryParser.g:397:34: col_index
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_col_index_in_col_alias_or_index3546)
+                    self._state.following.append(self.FOLLOW_col_index_in_col_alias_or_index3541)
                     col_index347 = self.col_index()
 
                     self._state.following.pop()
@@ -10127,9 +9834,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -10147,7 +9851,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "col_alias"
-    # QueryParser.g:476:1: col_alias : ( GROUP | CUBE | identifier );
+    # QueryParser.g:400:1: col_alias : ( GROUP | CUBE | identifier );
     def col_alias(self, ):
 
         retval = self.col_alias_return()
@@ -10165,7 +9869,7 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:476:11: ( GROUP | CUBE | identifier )
+                # QueryParser.g:400:11: ( GROUP | CUBE | identifier )
                 alt95 = 3
                 LA95 = self.input.LA(1)
                 if LA95 == GROUP:
@@ -10183,11 +9887,11 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt95 == 1:
-                    # QueryParser.g:476:13: GROUP
+                    # QueryParser.g:400:13: GROUP
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    GROUP348=self.match(self.input, GROUP, self.FOLLOW_GROUP_in_col_alias3555)
+                    GROUP348=self.match(self.input, GROUP, self.FOLLOW_GROUP_in_col_alias3550)
                     if self._state.backtracking == 0:
 
                         GROUP348_tree = self._adaptor.createWithPayload(GROUP348)
@@ -10196,11 +9900,11 @@ class QueryParser(Parser):
 
 
                 elif alt95 == 2:
-                    # QueryParser.g:476:21: CUBE
+                    # QueryParser.g:400:21: CUBE
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    CUBE349=self.match(self.input, CUBE, self.FOLLOW_CUBE_in_col_alias3559)
+                    CUBE349=self.match(self.input, CUBE, self.FOLLOW_CUBE_in_col_alias3554)
                     if self._state.backtracking == 0:
 
                         CUBE349_tree = self._adaptor.createWithPayload(CUBE349)
@@ -10209,11 +9913,11 @@ class QueryParser(Parser):
 
 
                 elif alt95 == 3:
-                    # QueryParser.g:476:28: identifier
+                    # QueryParser.g:400:28: identifier
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_identifier_in_col_alias3563)
+                    self._state.following.append(self.FOLLOW_identifier_in_col_alias3558)
                     identifier350 = self.identifier()
 
                     self._state.following.pop()
@@ -10230,9 +9934,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -10250,7 +9951,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "col_index"
-    # QueryParser.g:479:1: col_index : DOLLARVAR ;
+    # QueryParser.g:403:1: col_index : DOLLARVAR ;
     def col_index(self, ):
 
         retval = self.col_index_return()
@@ -10264,12 +9965,12 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:479:11: ( DOLLARVAR )
-                # QueryParser.g:479:13: DOLLARVAR
+                # QueryParser.g:403:11: ( DOLLARVAR )
+                # QueryParser.g:403:13: DOLLARVAR
                 pass 
                 root_0 = self._adaptor.nil()
 
-                DOLLARVAR351=self.match(self.input, DOLLARVAR, self.FOLLOW_DOLLARVAR_in_col_index3572)
+                DOLLARVAR351=self.match(self.input, DOLLARVAR, self.FOLLOW_DOLLARVAR_in_col_index3567)
                 if self._state.backtracking == 0:
 
                     DOLLARVAR351_tree = self._adaptor.createWithPayload(DOLLARVAR351)
@@ -10287,9 +9988,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -10307,7 +10005,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "col_range"
-    # QueryParser.g:482:1: col_range : (c1= col_ref DOUBLE_PERIOD (c2= col_ref )? -> ^( COL_RANGE $c1 DOUBLE_PERIOD ( $c2)? ) | DOUBLE_PERIOD col_ref -> ^( COL_RANGE DOUBLE_PERIOD col_ref ) );
+    # QueryParser.g:406:1: col_range : (c1= col_ref DOUBLE_PERIOD (c2= col_ref )? -> ^( COL_RANGE $c1 DOUBLE_PERIOD ( $c2)? ) | DOUBLE_PERIOD col_ref -> ^( COL_RANGE DOUBLE_PERIOD col_ref ) );
     def col_range(self, ):
 
         retval = self.col_range_return()
@@ -10330,7 +10028,7 @@ class QueryParser(Parser):
         stream_col_ref = RewriteRuleSubtreeStream(self._adaptor, "rule col_ref")
         try:
             try:
-                # QueryParser.g:482:11: (c1= col_ref DOUBLE_PERIOD (c2= col_ref )? -> ^( COL_RANGE $c1 DOUBLE_PERIOD ( $c2)? ) | DOUBLE_PERIOD col_ref -> ^( COL_RANGE DOUBLE_PERIOD col_ref ) )
+                # QueryParser.g:406:11: (c1= col_ref DOUBLE_PERIOD (c2= col_ref )? -> ^( COL_RANGE $c1 DOUBLE_PERIOD ( $c2)? ) | DOUBLE_PERIOD col_ref -> ^( COL_RANGE DOUBLE_PERIOD col_ref ) )
                 alt97 = 2
                 LA97_0 = self.input.LA(1)
 
@@ -10347,18 +10045,18 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt97 == 1:
-                    # QueryParser.g:482:13: c1= col_ref DOUBLE_PERIOD (c2= col_ref )?
+                    # QueryParser.g:406:13: c1= col_ref DOUBLE_PERIOD (c2= col_ref )?
                     pass 
-                    self._state.following.append(self.FOLLOW_col_ref_in_col_range3585)
+                    self._state.following.append(self.FOLLOW_col_ref_in_col_range3580)
                     c1 = self.col_ref()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         stream_col_ref.add(c1.tree)
-                    DOUBLE_PERIOD352=self.match(self.input, DOUBLE_PERIOD, self.FOLLOW_DOUBLE_PERIOD_in_col_range3587) 
+                    DOUBLE_PERIOD352=self.match(self.input, DOUBLE_PERIOD, self.FOLLOW_DOUBLE_PERIOD_in_col_range3582) 
                     if self._state.backtracking == 0:
                         stream_DOUBLE_PERIOD.add(DOUBLE_PERIOD352)
-                    # QueryParser.g:482:43: (c2= col_ref )?
+                    # QueryParser.g:406:43: (c2= col_ref )?
                     alt96 = 2
                     LA96_0 = self.input.LA(1)
 
@@ -10367,7 +10065,7 @@ class QueryParser(Parser):
                     if alt96 == 1:
                         # QueryParser.g:0:0: c2= col_ref
                         pass 
-                        self._state.following.append(self.FOLLOW_col_ref_in_col_range3593)
+                        self._state.following.append(self.FOLLOW_col_ref_in_col_range3588)
                         c2 = self.col_ref()
 
                         self._state.following.pop()
@@ -10378,7 +10076,7 @@ class QueryParser(Parser):
 
 
                     # AST Rewrite
-                    # elements: c1, DOUBLE_PERIOD, c2
+                    # elements: c2, c1, DOUBLE_PERIOD
                     # token labels: 
                     # rule labels: retval, c1, c2
                     # token list labels: 
@@ -10407,14 +10105,14 @@ class QueryParser(Parser):
 
 
                         root_0 = self._adaptor.nil()
-                        # 483:11: -> ^( COL_RANGE $c1 DOUBLE_PERIOD ( $c2)? )
-                        # QueryParser.g:483:14: ^( COL_RANGE $c1 DOUBLE_PERIOD ( $c2)? )
+                        # 407:11: -> ^( COL_RANGE $c1 DOUBLE_PERIOD ( $c2)? )
+                        # QueryParser.g:407:14: ^( COL_RANGE $c1 DOUBLE_PERIOD ( $c2)? )
                         root_1 = self._adaptor.nil()
                         root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(COL_RANGE, "COL_RANGE"), root_1)
 
                         self._adaptor.addChild(root_1, stream_c1.nextTree())
                         self._adaptor.addChild(root_1, stream_DOUBLE_PERIOD.nextNode())
-                        # QueryParser.g:483:44: ( $c2)?
+                        # QueryParser.g:407:44: ( $c2)?
                         if stream_c2.hasNext():
                             self._adaptor.addChild(root_1, stream_c2.nextTree())
 
@@ -10429,12 +10127,12 @@ class QueryParser(Parser):
 
 
                 elif alt97 == 2:
-                    # QueryParser.g:484:14: DOUBLE_PERIOD col_ref
+                    # QueryParser.g:408:14: DOUBLE_PERIOD col_ref
                     pass 
-                    DOUBLE_PERIOD353=self.match(self.input, DOUBLE_PERIOD, self.FOLLOW_DOUBLE_PERIOD_in_col_range3634) 
+                    DOUBLE_PERIOD353=self.match(self.input, DOUBLE_PERIOD, self.FOLLOW_DOUBLE_PERIOD_in_col_range3629) 
                     if self._state.backtracking == 0:
                         stream_DOUBLE_PERIOD.add(DOUBLE_PERIOD353)
-                    self._state.following.append(self.FOLLOW_col_ref_in_col_range3636)
+                    self._state.following.append(self.FOLLOW_col_ref_in_col_range3631)
                     col_ref354 = self.col_ref()
 
                     self._state.following.pop()
@@ -10459,8 +10157,8 @@ class QueryParser(Parser):
 
 
                         root_0 = self._adaptor.nil()
-                        # 485:11: -> ^( COL_RANGE DOUBLE_PERIOD col_ref )
-                        # QueryParser.g:485:14: ^( COL_RANGE DOUBLE_PERIOD col_ref )
+                        # 409:11: -> ^( COL_RANGE DOUBLE_PERIOD col_ref )
+                        # QueryParser.g:409:14: ^( COL_RANGE DOUBLE_PERIOD col_ref )
                         root_1 = self._adaptor.nil()
                         root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(COL_RANGE, "COL_RANGE"), root_1)
 
@@ -10483,9 +10181,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -10503,7 +10198,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "pound_proj"
-    # QueryParser.g:489:1: pound_proj : POUND ( QUOTEDSTRING | null_keyword ) ;
+    # QueryParser.g:413:1: pound_proj : POUND ( QUOTEDSTRING | null_keyword ) ;
     def pound_proj(self, ):
 
         retval = self.pound_proj_return()
@@ -10521,18 +10216,18 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:489:12: ( POUND ( QUOTEDSTRING | null_keyword ) )
-                # QueryParser.g:489:14: POUND ( QUOTEDSTRING | null_keyword )
+                # QueryParser.g:413:12: ( POUND ( QUOTEDSTRING | null_keyword ) )
+                # QueryParser.g:413:14: POUND ( QUOTEDSTRING | null_keyword )
                 pass 
                 root_0 = self._adaptor.nil()
 
-                POUND355=self.match(self.input, POUND, self.FOLLOW_POUND_in_pound_proj3667)
+                POUND355=self.match(self.input, POUND, self.FOLLOW_POUND_in_pound_proj3662)
                 if self._state.backtracking == 0:
 
                     POUND355_tree = self._adaptor.createWithPayload(POUND355)
                     root_0 = self._adaptor.becomeRoot(POUND355_tree, root_0)
 
-                # QueryParser.g:489:21: ( QUOTEDSTRING | null_keyword )
+                # QueryParser.g:413:21: ( QUOTEDSTRING | null_keyword )
                 alt98 = 2
                 LA98_0 = self.input.LA(1)
 
@@ -10549,9 +10244,9 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt98 == 1:
-                    # QueryParser.g:489:23: QUOTEDSTRING
+                    # QueryParser.g:413:23: QUOTEDSTRING
                     pass 
-                    QUOTEDSTRING356=self.match(self.input, QUOTEDSTRING, self.FOLLOW_QUOTEDSTRING_in_pound_proj3672)
+                    QUOTEDSTRING356=self.match(self.input, QUOTEDSTRING, self.FOLLOW_QUOTEDSTRING_in_pound_proj3667)
                     if self._state.backtracking == 0:
 
                         QUOTEDSTRING356_tree = self._adaptor.createWithPayload(QUOTEDSTRING356)
@@ -10560,9 +10255,9 @@ class QueryParser(Parser):
 
 
                 elif alt98 == 2:
-                    # QueryParser.g:489:38: null_keyword
+                    # QueryParser.g:413:38: null_keyword
                     pass 
-                    self._state.following.append(self.FOLLOW_null_keyword_in_pound_proj3676)
+                    self._state.following.append(self.FOLLOW_null_keyword_in_pound_proj3671)
                     null_keyword357 = self.null_keyword()
 
                     self._state.following.pop()
@@ -10583,9 +10278,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -10603,7 +10295,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "bin_expr"
-    # QueryParser.g:492:1: bin_expr : LEFT_PAREN cond QMARK exp1= expr COLON exp2= expr RIGHT_PAREN -> ^( BIN_EXPR cond $exp1 $exp2) ;
+    # QueryParser.g:416:1: bin_expr : LEFT_PAREN cond QMARK exp1= expr COLON exp2= expr RIGHT_PAREN -> ^( BIN_EXPR cond $exp1 $exp2) ;
     def bin_expr(self, ):
 
         retval = self.bin_expr_return()
@@ -10634,42 +10326,42 @@ class QueryParser(Parser):
         stream_cond = RewriteRuleSubtreeStream(self._adaptor, "rule cond")
         try:
             try:
-                # QueryParser.g:492:10: ( LEFT_PAREN cond QMARK exp1= expr COLON exp2= expr RIGHT_PAREN -> ^( BIN_EXPR cond $exp1 $exp2) )
-                # QueryParser.g:492:12: LEFT_PAREN cond QMARK exp1= expr COLON exp2= expr RIGHT_PAREN
+                # QueryParser.g:416:10: ( LEFT_PAREN cond QMARK exp1= expr COLON exp2= expr RIGHT_PAREN -> ^( BIN_EXPR cond $exp1 $exp2) )
+                # QueryParser.g:416:12: LEFT_PAREN cond QMARK exp1= expr COLON exp2= expr RIGHT_PAREN
                 pass 
-                LEFT_PAREN358=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_bin_expr3687) 
+                LEFT_PAREN358=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_bin_expr3682) 
                 if self._state.backtracking == 0:
                     stream_LEFT_PAREN.add(LEFT_PAREN358)
-                self._state.following.append(self.FOLLOW_cond_in_bin_expr3689)
+                self._state.following.append(self.FOLLOW_cond_in_bin_expr3684)
                 cond359 = self.cond()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     stream_cond.add(cond359.tree)
-                QMARK360=self.match(self.input, QMARK, self.FOLLOW_QMARK_in_bin_expr3691) 
+                QMARK360=self.match(self.input, QMARK, self.FOLLOW_QMARK_in_bin_expr3686) 
                 if self._state.backtracking == 0:
                     stream_QMARK.add(QMARK360)
-                self._state.following.append(self.FOLLOW_expr_in_bin_expr3697)
+                self._state.following.append(self.FOLLOW_expr_in_bin_expr3692)
                 exp1 = self.expr()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     stream_expr.add(exp1.tree)
-                COLON361=self.match(self.input, COLON, self.FOLLOW_COLON_in_bin_expr3699) 
+                COLON361=self.match(self.input, COLON, self.FOLLOW_COLON_in_bin_expr3694) 
                 if self._state.backtracking == 0:
                     stream_COLON.add(COLON361)
-                self._state.following.append(self.FOLLOW_expr_in_bin_expr3705)
+                self._state.following.append(self.FOLLOW_expr_in_bin_expr3700)
                 exp2 = self.expr()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     stream_expr.add(exp2.tree)
-                RIGHT_PAREN362=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_bin_expr3707) 
+                RIGHT_PAREN362=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_bin_expr3702) 
                 if self._state.backtracking == 0:
                     stream_RIGHT_PAREN.add(RIGHT_PAREN362)
 
                 # AST Rewrite
-                # elements: cond, exp2, exp1
+                # elements: exp2, exp1, cond
                 # token labels: 
                 # rule labels: retval, exp2, exp1
                 # token list labels: 
@@ -10698,8 +10390,8 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 493:9: -> ^( BIN_EXPR cond $exp1 $exp2)
-                    # QueryParser.g:493:12: ^( BIN_EXPR cond $exp1 $exp2)
+                    # 417:9: -> ^( BIN_EXPR cond $exp1 $exp2)
+                    # QueryParser.g:417:12: ^( BIN_EXPR cond $exp1 $exp2)
                     root_1 = self._adaptor.nil()
                     root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(BIN_EXPR, "BIN_EXPR"), root_1)
 
@@ -10724,9 +10416,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -10744,7 +10433,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "neg_expr"
-    # QueryParser.g:496:1: neg_expr : MINUS cast_expr -> ^( NEG cast_expr ) ;
+    # QueryParser.g:420:1: neg_expr : MINUS cast_expr -> ^( NEG cast_expr ) ;
     def neg_expr(self, ):
 
         retval = self.neg_expr_return()
@@ -10761,13 +10450,13 @@ class QueryParser(Parser):
         stream_cast_expr = RewriteRuleSubtreeStream(self._adaptor, "rule cast_expr")
         try:
             try:
-                # QueryParser.g:496:10: ( MINUS cast_expr -> ^( NEG cast_expr ) )
-                # QueryParser.g:496:12: MINUS cast_expr
+                # QueryParser.g:420:10: ( MINUS cast_expr -> ^( NEG cast_expr ) )
+                # QueryParser.g:420:12: MINUS cast_expr
                 pass 
-                MINUS363=self.match(self.input, MINUS, self.FOLLOW_MINUS_in_neg_expr3740) 
+                MINUS363=self.match(self.input, MINUS, self.FOLLOW_MINUS_in_neg_expr3735) 
                 if self._state.backtracking == 0:
                     stream_MINUS.add(MINUS363)
-                self._state.following.append(self.FOLLOW_cast_expr_in_neg_expr3742)
+                self._state.following.append(self.FOLLOW_cast_expr_in_neg_expr3737)
                 cast_expr364 = self.cast_expr()
 
                 self._state.following.pop()
@@ -10792,8 +10481,8 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 497:9: -> ^( NEG cast_expr )
-                    # QueryParser.g:497:12: ^( NEG cast_expr )
+                    # 421:9: -> ^( NEG cast_expr )
+                    # QueryParser.g:421:12: ^( NEG cast_expr )
                     root_1 = self._adaptor.nil()
                     root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(NEG, "NEG"), root_1)
 
@@ -10816,9 +10505,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -10836,7 +10522,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "limit_clause"
-    # QueryParser.g:500:1: limit_clause : LIMIT rel ( ( INTEGER SEMI_COLON )=> INTEGER | ( LONGINTEGER SEMI_COLON )=> LONGINTEGER | expr ) ;
+    # QueryParser.g:424:1: limit_clause : LIMIT rel ( ( INTEGER SEMI_COLON )=> INTEGER | ( LONGINTEGER SEMI_COLON )=> LONGINTEGER | expr ) ;
     def limit_clause(self, ):
 
         retval = self.limit_clause_return()
@@ -10858,24 +10544,24 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:500:14: ( LIMIT rel ( ( INTEGER SEMI_COLON )=> INTEGER | ( LONGINTEGER SEMI_COLON )=> LONGINTEGER | expr ) )
-                # QueryParser.g:500:16: LIMIT rel ( ( INTEGER SEMI_COLON )=> INTEGER | ( LONGINTEGER SEMI_COLON )=> LONGINTEGER | expr )
+                # QueryParser.g:424:14: ( LIMIT rel ( ( INTEGER SEMI_COLON )=> INTEGER | ( LONGINTEGER SEMI_COLON )=> LONGINTEGER | expr ) )
+                # QueryParser.g:424:16: LIMIT rel ( ( INTEGER SEMI_COLON )=> INTEGER | ( LONGINTEGER SEMI_COLON )=> LONGINTEGER | expr )
                 pass 
                 root_0 = self._adaptor.nil()
 
-                LIMIT365=self.match(self.input, LIMIT, self.FOLLOW_LIMIT_in_limit_clause3769)
+                LIMIT365=self.match(self.input, LIMIT, self.FOLLOW_LIMIT_in_limit_clause3764)
                 if self._state.backtracking == 0:
 
                     LIMIT365_tree = self._adaptor.createWithPayload(LIMIT365)
                     root_0 = self._adaptor.becomeRoot(LIMIT365_tree, root_0)
 
-                self._state.following.append(self.FOLLOW_rel_in_limit_clause3772)
+                self._state.following.append(self.FOLLOW_rel_in_limit_clause3767)
                 rel366 = self.rel()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, rel366.tree)
-                # QueryParser.g:500:27: ( ( INTEGER SEMI_COLON )=> INTEGER | ( LONGINTEGER SEMI_COLON )=> LONGINTEGER | expr )
+                # QueryParser.g:424:27: ( ( INTEGER SEMI_COLON )=> INTEGER | ( LONGINTEGER SEMI_COLON )=> LONGINTEGER | expr )
                 alt99 = 3
                 LA99 = self.input.LA(1)
                 if LA99 == INTEGER:
@@ -10919,9 +10605,9 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt99 == 1:
-                    # QueryParser.g:500:29: ( INTEGER SEMI_COLON )=> INTEGER
+                    # QueryParser.g:424:29: ( INTEGER SEMI_COLON )=> INTEGER
                     pass 
-                    INTEGER367=self.match(self.input, INTEGER, self.FOLLOW_INTEGER_in_limit_clause3784)
+                    INTEGER367=self.match(self.input, INTEGER, self.FOLLOW_INTEGER_in_limit_clause3779)
                     if self._state.backtracking == 0:
 
                         INTEGER367_tree = self._adaptor.createWithPayload(INTEGER367)
@@ -10930,9 +10616,9 @@ class QueryParser(Parser):
 
 
                 elif alt99 == 2:
-                    # QueryParser.g:500:63: ( LONGINTEGER SEMI_COLON )=> LONGINTEGER
+                    # QueryParser.g:424:63: ( LONGINTEGER SEMI_COLON )=> LONGINTEGER
                     pass 
-                    LONGINTEGER368=self.match(self.input, LONGINTEGER, self.FOLLOW_LONGINTEGER_in_limit_clause3796)
+                    LONGINTEGER368=self.match(self.input, LONGINTEGER, self.FOLLOW_LONGINTEGER_in_limit_clause3791)
                     if self._state.backtracking == 0:
 
                         LONGINTEGER368_tree = self._adaptor.createWithPayload(LONGINTEGER368)
@@ -10941,9 +10627,9 @@ class QueryParser(Parser):
 
 
                 elif alt99 == 3:
-                    # QueryParser.g:500:105: expr
+                    # QueryParser.g:424:105: expr
                     pass 
-                    self._state.following.append(self.FOLLOW_expr_in_limit_clause3800)
+                    self._state.following.append(self.FOLLOW_expr_in_limit_clause3795)
                     expr369 = self.expr()
 
                     self._state.following.pop()
@@ -10964,9 +10650,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -10984,7 +10667,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "sample_clause"
-    # QueryParser.g:503:1: sample_clause : SAMPLE rel ( ( DOUBLENUMBER SEMI_COLON )=> DOUBLENUMBER | expr ) ;
+    # QueryParser.g:427:1: sample_clause : SAMPLE rel ( ( DOUBLENUMBER SEMI_COLON )=> DOUBLENUMBER | expr ) ;
     def sample_clause(self, ):
 
         retval = self.sample_clause_return()
@@ -11004,24 +10687,24 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:503:15: ( SAMPLE rel ( ( DOUBLENUMBER SEMI_COLON )=> DOUBLENUMBER | expr ) )
-                # QueryParser.g:503:17: SAMPLE rel ( ( DOUBLENUMBER SEMI_COLON )=> DOUBLENUMBER | expr )
+                # QueryParser.g:427:15: ( SAMPLE rel ( ( DOUBLENUMBER SEMI_COLON )=> DOUBLENUMBER | expr ) )
+                # QueryParser.g:427:17: SAMPLE rel ( ( DOUBLENUMBER SEMI_COLON )=> DOUBLENUMBER | expr )
                 pass 
                 root_0 = self._adaptor.nil()
 
-                SAMPLE370=self.match(self.input, SAMPLE, self.FOLLOW_SAMPLE_in_sample_clause3811)
+                SAMPLE370=self.match(self.input, SAMPLE, self.FOLLOW_SAMPLE_in_sample_clause3806)
                 if self._state.backtracking == 0:
 
                     SAMPLE370_tree = self._adaptor.createWithPayload(SAMPLE370)
                     root_0 = self._adaptor.becomeRoot(SAMPLE370_tree, root_0)
 
-                self._state.following.append(self.FOLLOW_rel_in_sample_clause3814)
+                self._state.following.append(self.FOLLOW_rel_in_sample_clause3809)
                 rel371 = self.rel()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, rel371.tree)
-                # QueryParser.g:503:29: ( ( DOUBLENUMBER SEMI_COLON )=> DOUBLENUMBER | expr )
+                # QueryParser.g:427:29: ( ( DOUBLENUMBER SEMI_COLON )=> DOUBLENUMBER | expr )
                 alt100 = 2
                 LA100_0 = self.input.LA(1)
 
@@ -11051,9 +10734,9 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt100 == 1:
-                    # QueryParser.g:503:31: ( DOUBLENUMBER SEMI_COLON )=> DOUBLENUMBER
+                    # QueryParser.g:427:31: ( DOUBLENUMBER SEMI_COLON )=> DOUBLENUMBER
                     pass 
-                    DOUBLENUMBER372=self.match(self.input, DOUBLENUMBER, self.FOLLOW_DOUBLENUMBER_in_sample_clause3826)
+                    DOUBLENUMBER372=self.match(self.input, DOUBLENUMBER, self.FOLLOW_DOUBLENUMBER_in_sample_clause3821)
                     if self._state.backtracking == 0:
 
                         DOUBLENUMBER372_tree = self._adaptor.createWithPayload(DOUBLENUMBER372)
@@ -11062,9 +10745,9 @@ class QueryParser(Parser):
 
 
                 elif alt100 == 2:
-                    # QueryParser.g:503:75: expr
+                    # QueryParser.g:427:75: expr
                     pass 
-                    self._state.following.append(self.FOLLOW_expr_in_sample_clause3830)
+                    self._state.following.append(self.FOLLOW_expr_in_sample_clause3825)
                     expr373 = self.expr()
 
                     self._state.following.pop()
@@ -11085,9 +10768,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -11105,7 +10785,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "rank_clause"
-    # QueryParser.g:506:1: rank_clause : RANK rel ( rank_by_statement )? ;
+    # QueryParser.g:430:1: rank_clause : RANK rel ( rank_by_statement )? ;
     def rank_clause(self, ):
 
         retval = self.rank_clause_return()
@@ -11123,33 +10803,33 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:506:13: ( RANK rel ( rank_by_statement )? )
-                # QueryParser.g:506:15: RANK rel ( rank_by_statement )?
+                # QueryParser.g:430:13: ( RANK rel ( rank_by_statement )? )
+                # QueryParser.g:430:15: RANK rel ( rank_by_statement )?
                 pass 
                 root_0 = self._adaptor.nil()
 
-                RANK374=self.match(self.input, RANK, self.FOLLOW_RANK_in_rank_clause3841)
+                RANK374=self.match(self.input, RANK, self.FOLLOW_RANK_in_rank_clause3836)
                 if self._state.backtracking == 0:
 
                     RANK374_tree = self._adaptor.createWithPayload(RANK374)
                     root_0 = self._adaptor.becomeRoot(RANK374_tree, root_0)
 
-                self._state.following.append(self.FOLLOW_rel_in_rank_clause3844)
+                self._state.following.append(self.FOLLOW_rel_in_rank_clause3839)
                 rel375 = self.rel()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, rel375.tree)
-                # QueryParser.g:506:25: ( rank_by_statement )?
+                # QueryParser.g:430:25: ( rank_by_statement )?
                 alt101 = 2
                 LA101_0 = self.input.LA(1)
 
                 if (LA101_0 == BY) :
                     alt101 = 1
                 if alt101 == 1:
-                    # QueryParser.g:506:27: rank_by_statement
+                    # QueryParser.g:430:27: rank_by_statement
                     pass 
-                    self._state.following.append(self.FOLLOW_rank_by_statement_in_rank_clause3848)
+                    self._state.following.append(self.FOLLOW_rank_by_statement_in_rank_clause3843)
                     rank_by_statement376 = self.rank_by_statement()
 
                     self._state.following.pop()
@@ -11170,9 +10850,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -11190,7 +10867,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "rank_by_statement"
-    # QueryParser.g:509:1: rank_by_statement : BY rank_by_clause ( DENSE )? ;
+    # QueryParser.g:433:1: rank_by_statement : BY rank_by_clause ( DENSE )? ;
     def rank_by_statement(self, ):
 
         retval = self.rank_by_statement_return()
@@ -11208,33 +10885,33 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:509:19: ( BY rank_by_clause ( DENSE )? )
-                # QueryParser.g:509:21: BY rank_by_clause ( DENSE )?
+                # QueryParser.g:433:19: ( BY rank_by_clause ( DENSE )? )
+                # QueryParser.g:433:21: BY rank_by_clause ( DENSE )?
                 pass 
                 root_0 = self._adaptor.nil()
 
-                BY377=self.match(self.input, BY, self.FOLLOW_BY_in_rank_by_statement3860)
+                BY377=self.match(self.input, BY, self.FOLLOW_BY_in_rank_by_statement3855)
                 if self._state.backtracking == 0:
 
                     BY377_tree = self._adaptor.createWithPayload(BY377)
                     root_0 = self._adaptor.becomeRoot(BY377_tree, root_0)
 
-                self._state.following.append(self.FOLLOW_rank_by_clause_in_rank_by_statement3863)
+                self._state.following.append(self.FOLLOW_rank_by_clause_in_rank_by_statement3858)
                 rank_by_clause378 = self.rank_by_clause()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, rank_by_clause378.tree)
-                # QueryParser.g:509:40: ( DENSE )?
+                # QueryParser.g:433:40: ( DENSE )?
                 alt102 = 2
                 LA102_0 = self.input.LA(1)
 
                 if (LA102_0 == DENSE) :
                     alt102 = 1
                 if alt102 == 1:
-                    # QueryParser.g:509:42: DENSE
+                    # QueryParser.g:433:42: DENSE
                     pass 
-                    DENSE379=self.match(self.input, DENSE, self.FOLLOW_DENSE_in_rank_by_statement3867)
+                    DENSE379=self.match(self.input, DENSE, self.FOLLOW_DENSE_in_rank_by_statement3862)
                     if self._state.backtracking == 0:
 
                         DENSE379_tree = self._adaptor.createWithPayload(DENSE379)
@@ -11255,9 +10932,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -11275,7 +10949,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "rank_by_clause"
-    # QueryParser.g:512:1: rank_by_clause : ( STAR ( ASC | DESC )? | rank_list );
+    # QueryParser.g:436:1: rank_by_clause : ( STAR ( ASC | DESC )? | rank_list );
     def rank_by_clause(self, ):
 
         retval = self.rank_by_clause_return()
@@ -11293,7 +10967,7 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:512:16: ( STAR ( ASC | DESC )? | rank_list )
+                # QueryParser.g:436:16: ( STAR ( ASC | DESC )? | rank_list )
                 alt104 = 2
                 LA104_0 = self.input.LA(1)
 
@@ -11310,17 +10984,17 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt104 == 1:
-                    # QueryParser.g:512:18: STAR ( ASC | DESC )?
+                    # QueryParser.g:436:18: STAR ( ASC | DESC )?
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    STAR380=self.match(self.input, STAR, self.FOLLOW_STAR_in_rank_by_clause3879)
+                    STAR380=self.match(self.input, STAR, self.FOLLOW_STAR_in_rank_by_clause3874)
                     if self._state.backtracking == 0:
 
                         STAR380_tree = self._adaptor.createWithPayload(STAR380)
                         self._adaptor.addChild(root_0, STAR380_tree)
 
-                    # QueryParser.g:512:23: ( ASC | DESC )?
+                    # QueryParser.g:436:23: ( ASC | DESC )?
                     alt103 = 2
                     LA103_0 = self.input.LA(1)
 
@@ -11350,11 +11024,11 @@ class QueryParser(Parser):
 
 
                 elif alt104 == 2:
-                    # QueryParser.g:513:9: rank_list
+                    # QueryParser.g:437:9: rank_list
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_rank_list_in_rank_by_clause3900)
+                    self._state.following.append(self.FOLLOW_rank_list_in_rank_by_clause3895)
                     rank_list382 = self.rank_list()
 
                     self._state.following.pop()
@@ -11371,9 +11045,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -11391,7 +11062,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "rank_list"
-    # QueryParser.g:516:1: rank_list : rank_col ( COMMA rank_col )* -> ( rank_col )+ ;
+    # QueryParser.g:440:1: rank_list : rank_col ( COMMA rank_col )* -> ( rank_col )+ ;
     def rank_list(self, ):
 
         retval = self.rank_list_return()
@@ -11410,16 +11081,16 @@ class QueryParser(Parser):
         stream_rank_col = RewriteRuleSubtreeStream(self._adaptor, "rule rank_col")
         try:
             try:
-                # QueryParser.g:516:11: ( rank_col ( COMMA rank_col )* -> ( rank_col )+ )
-                # QueryParser.g:516:13: rank_col ( COMMA rank_col )*
+                # QueryParser.g:440:11: ( rank_col ( COMMA rank_col )* -> ( rank_col )+ )
+                # QueryParser.g:440:13: rank_col ( COMMA rank_col )*
                 pass 
-                self._state.following.append(self.FOLLOW_rank_col_in_rank_list3909)
+                self._state.following.append(self.FOLLOW_rank_col_in_rank_list3904)
                 rank_col383 = self.rank_col()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     stream_rank_col.add(rank_col383.tree)
-                # QueryParser.g:516:22: ( COMMA rank_col )*
+                # QueryParser.g:440:22: ( COMMA rank_col )*
                 while True: #loop105
                     alt105 = 2
                     LA105_0 = self.input.LA(1)
@@ -11429,12 +11100,12 @@ class QueryParser(Parser):
 
 
                     if alt105 == 1:
-                        # QueryParser.g:516:24: COMMA rank_col
+                        # QueryParser.g:440:24: COMMA rank_col
                         pass 
-                        COMMA384=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_rank_list3913) 
+                        COMMA384=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_rank_list3908) 
                         if self._state.backtracking == 0:
                             stream_COMMA.add(COMMA384)
-                        self._state.following.append(self.FOLLOW_rank_col_in_rank_list3915)
+                        self._state.following.append(self.FOLLOW_rank_col_in_rank_list3910)
                         rank_col385 = self.rank_col()
 
                         self._state.following.pop()
@@ -11463,8 +11134,8 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 517:10: -> ( rank_col )+
-                    # QueryParser.g:517:13: ( rank_col )+
+                    # 441:10: -> ( rank_col )+
+                    # QueryParser.g:441:13: ( rank_col )+
                     if not (stream_rank_col.hasNext()):
                         raise RewriteEarlyExitException()
 
@@ -11489,9 +11160,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -11509,7 +11177,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "rank_col"
-    # QueryParser.g:520:1: rank_col : ( col_range ( ASC | DESC )? | col_ref ( ASC | DESC )? );
+    # QueryParser.g:444:1: rank_col : ( col_range ( ASC | DESC )? | col_ref ( ASC | DESC )? );
     def rank_col(self, ):
 
         retval = self.rank_col_return()
@@ -11529,7 +11197,7 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:520:10: ( col_range ( ASC | DESC )? | col_ref ( ASC | DESC )? )
+                # QueryParser.g:444:10: ( col_range ( ASC | DESC )? | col_ref ( ASC | DESC )? )
                 alt108 = 2
                 LA108 = self.input.LA(1)
                 if LA108 == GROUP:
@@ -11603,17 +11271,17 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt108 == 1:
-                    # QueryParser.g:520:12: col_range ( ASC | DESC )?
+                    # QueryParser.g:444:12: col_range ( ASC | DESC )?
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_col_range_in_rank_col3941)
+                    self._state.following.append(self.FOLLOW_col_range_in_rank_col3936)
                     col_range386 = self.col_range()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         self._adaptor.addChild(root_0, col_range386.tree)
-                    # QueryParser.g:520:22: ( ASC | DESC )?
+                    # QueryParser.g:444:22: ( ASC | DESC )?
                     alt106 = 2
                     LA106_0 = self.input.LA(1)
 
@@ -11643,17 +11311,17 @@ class QueryParser(Parser):
 
 
                 elif alt108 == 2:
-                    # QueryParser.g:521:12: col_ref ( ASC | DESC )?
+                    # QueryParser.g:445:12: col_ref ( ASC | DESC )?
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_col_ref_in_rank_col3965)
+                    self._state.following.append(self.FOLLOW_col_ref_in_rank_col3960)
                     col_ref388 = self.col_ref()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         self._adaptor.addChild(root_0, col_ref388.tree)
-                    # QueryParser.g:521:20: ( ASC | DESC )?
+                    # QueryParser.g:445:20: ( ASC | DESC )?
                     alt107 = 2
                     LA107_0 = self.input.LA(1)
 
@@ -11691,9 +11359,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -11711,7 +11376,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "order_clause"
-    # QueryParser.g:524:1: order_clause : ORDER rel BY order_by_clause ( USING func_clause )? ;
+    # QueryParser.g:448:1: order_clause : ORDER rel BY order_by_clause ( USING func_clause )? ;
     def order_clause(self, ):
 
         retval = self.order_clause_return()
@@ -11735,41 +11400,41 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:524:14: ( ORDER rel BY order_by_clause ( USING func_clause )? )
-                # QueryParser.g:524:16: ORDER rel BY order_by_clause ( USING func_clause )?
+                # QueryParser.g:448:14: ( ORDER rel BY order_by_clause ( USING func_clause )? )
+                # QueryParser.g:448:16: ORDER rel BY order_by_clause ( USING func_clause )?
                 pass 
                 root_0 = self._adaptor.nil()
 
-                ORDER390=self.match(self.input, ORDER, self.FOLLOW_ORDER_in_order_clause3985)
+                ORDER390=self.match(self.input, ORDER, self.FOLLOW_ORDER_in_order_clause3980)
                 if self._state.backtracking == 0:
 
                     ORDER390_tree = self._adaptor.createWithPayload(ORDER390)
                     root_0 = self._adaptor.becomeRoot(ORDER390_tree, root_0)
 
-                self._state.following.append(self.FOLLOW_rel_in_order_clause3988)
+                self._state.following.append(self.FOLLOW_rel_in_order_clause3983)
                 rel391 = self.rel()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, rel391.tree)
-                BY392=self.match(self.input, BY, self.FOLLOW_BY_in_order_clause3990)
-                self._state.following.append(self.FOLLOW_order_by_clause_in_order_clause3993)
+                BY392=self.match(self.input, BY, self.FOLLOW_BY_in_order_clause3985)
+                self._state.following.append(self.FOLLOW_order_by_clause_in_order_clause3988)
                 order_by_clause393 = self.order_by_clause()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, order_by_clause393.tree)
-                # QueryParser.g:524:47: ( USING func_clause )?
+                # QueryParser.g:448:47: ( USING func_clause )?
                 alt109 = 2
                 LA109_0 = self.input.LA(1)
 
                 if (LA109_0 == USING) :
                     alt109 = 1
                 if alt109 == 1:
-                    # QueryParser.g:524:49: USING func_clause
+                    # QueryParser.g:448:49: USING func_clause
                     pass 
-                    USING394=self.match(self.input, USING, self.FOLLOW_USING_in_order_clause3997)
-                    self._state.following.append(self.FOLLOW_func_clause_in_order_clause4000)
+                    USING394=self.match(self.input, USING, self.FOLLOW_USING_in_order_clause3992)
+                    self._state.following.append(self.FOLLOW_func_clause_in_order_clause3995)
                     func_clause395 = self.func_clause()
 
                     self._state.following.pop()
@@ -11790,9 +11455,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -11810,7 +11472,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "order_by_clause"
-    # QueryParser.g:527:1: order_by_clause : ( STAR ( ASC | DESC )? | order_col_list );
+    # QueryParser.g:451:1: order_by_clause : ( STAR ( ASC | DESC )? | order_col_list );
     def order_by_clause(self, ):
 
         retval = self.order_by_clause_return()
@@ -11828,7 +11490,7 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:527:17: ( STAR ( ASC | DESC )? | order_col_list )
+                # QueryParser.g:451:17: ( STAR ( ASC | DESC )? | order_col_list )
                 alt111 = 2
                 LA111_0 = self.input.LA(1)
 
@@ -11845,17 +11507,17 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt111 == 1:
-                    # QueryParser.g:527:19: STAR ( ASC | DESC )?
+                    # QueryParser.g:451:19: STAR ( ASC | DESC )?
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    STAR396=self.match(self.input, STAR, self.FOLLOW_STAR_in_order_by_clause4012)
+                    STAR396=self.match(self.input, STAR, self.FOLLOW_STAR_in_order_by_clause4007)
                     if self._state.backtracking == 0:
 
                         STAR396_tree = self._adaptor.createWithPayload(STAR396)
                         self._adaptor.addChild(root_0, STAR396_tree)
 
-                    # QueryParser.g:527:24: ( ASC | DESC )?
+                    # QueryParser.g:451:24: ( ASC | DESC )?
                     alt110 = 2
                     LA110_0 = self.input.LA(1)
 
@@ -11885,11 +11547,11 @@ class QueryParser(Parser):
 
 
                 elif alt111 == 2:
-                    # QueryParser.g:528:19: order_col_list
+                    # QueryParser.g:452:19: order_col_list
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_order_col_list_in_order_by_clause4043)
+                    self._state.following.append(self.FOLLOW_order_col_list_in_order_by_clause4038)
                     order_col_list398 = self.order_col_list()
 
                     self._state.following.pop()
@@ -11906,9 +11568,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -11926,7 +11585,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "order_col_list"
-    # QueryParser.g:531:1: order_col_list : order_col ( COMMA order_col )* -> ( order_col )+ ;
+    # QueryParser.g:455:1: order_col_list : order_col ( COMMA order_col )* -> ( order_col )+ ;
     def order_col_list(self, ):
 
         retval = self.order_col_list_return()
@@ -11945,16 +11604,16 @@ class QueryParser(Parser):
         stream_order_col = RewriteRuleSubtreeStream(self._adaptor, "rule order_col")
         try:
             try:
-                # QueryParser.g:531:16: ( order_col ( COMMA order_col )* -> ( order_col )+ )
-                # QueryParser.g:531:18: order_col ( COMMA order_col )*
+                # QueryParser.g:455:16: ( order_col ( COMMA order_col )* -> ( order_col )+ )
+                # QueryParser.g:455:18: order_col ( COMMA order_col )*
                 pass 
-                self._state.following.append(self.FOLLOW_order_col_in_order_col_list4052)
+                self._state.following.append(self.FOLLOW_order_col_in_order_col_list4047)
                 order_col399 = self.order_col()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     stream_order_col.add(order_col399.tree)
-                # QueryParser.g:531:28: ( COMMA order_col )*
+                # QueryParser.g:455:28: ( COMMA order_col )*
                 while True: #loop112
                     alt112 = 2
                     LA112_0 = self.input.LA(1)
@@ -11964,12 +11623,12 @@ class QueryParser(Parser):
 
 
                     if alt112 == 1:
-                        # QueryParser.g:531:30: COMMA order_col
+                        # QueryParser.g:455:30: COMMA order_col
                         pass 
-                        COMMA400=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_order_col_list4056) 
+                        COMMA400=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_order_col_list4051) 
                         if self._state.backtracking == 0:
                             stream_COMMA.add(COMMA400)
-                        self._state.following.append(self.FOLLOW_order_col_in_order_col_list4058)
+                        self._state.following.append(self.FOLLOW_order_col_in_order_col_list4053)
                         order_col401 = self.order_col()
 
                         self._state.following.pop()
@@ -11998,8 +11657,8 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 532:15: -> ( order_col )+
-                    # QueryParser.g:532:18: ( order_col )+
+                    # 456:15: -> ( order_col )+
+                    # QueryParser.g:456:18: ( order_col )+
                     if not (stream_order_col.hasNext()):
                         raise RewriteEarlyExitException()
 
@@ -12024,9 +11683,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -12044,7 +11700,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "order_col"
-    # QueryParser.g:535:1: order_col : ( col_range ( ASC | DESC )? | col_ref ( ASC | DESC )? | LEFT_PAREN col_ref ( ASC | DESC )? RIGHT_PAREN );
+    # QueryParser.g:459:1: order_col : ( col_range ( ASC | DESC )? | col_ref ( ASC | DESC )? | LEFT_PAREN col_ref ( ASC | DESC )? RIGHT_PAREN );
     def order_col(self, ):
 
         retval = self.order_col_return()
@@ -12072,7 +11728,7 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:535:11: ( col_range ( ASC | DESC )? | col_ref ( ASC | DESC )? | LEFT_PAREN col_ref ( ASC | DESC )? RIGHT_PAREN )
+                # QueryParser.g:459:11: ( col_range ( ASC | DESC )? | col_ref ( ASC | DESC )? | LEFT_PAREN col_ref ( ASC | DESC )? RIGHT_PAREN )
                 alt116 = 3
                 LA116 = self.input.LA(1)
                 if LA116 == GROUP:
@@ -12148,17 +11804,17 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt116 == 1:
-                    # QueryParser.g:535:13: col_range ( ASC | DESC )?
+                    # QueryParser.g:459:13: col_range ( ASC | DESC )?
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_col_range_in_order_col4089)
+                    self._state.following.append(self.FOLLOW_col_range_in_order_col4084)
                     col_range402 = self.col_range()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         self._adaptor.addChild(root_0, col_range402.tree)
-                    # QueryParser.g:535:23: ( ASC | DESC )?
+                    # QueryParser.g:459:23: ( ASC | DESC )?
                     alt113 = 2
                     LA113_0 = self.input.LA(1)
 
@@ -12188,17 +11844,17 @@ class QueryParser(Parser):
 
 
                 elif alt116 == 2:
-                    # QueryParser.g:536:13: col_ref ( ASC | DESC )?
+                    # QueryParser.g:460:13: col_ref ( ASC | DESC )?
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_col_ref_in_order_col4112)
+                    self._state.following.append(self.FOLLOW_col_ref_in_order_col4107)
                     col_ref404 = self.col_ref()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         self._adaptor.addChild(root_0, col_ref404.tree)
-                    # QueryParser.g:536:21: ( ASC | DESC )?
+                    # QueryParser.g:460:21: ( ASC | DESC )?
                     alt114 = 2
                     LA114_0 = self.input.LA(1)
 
@@ -12228,18 +11884,18 @@ class QueryParser(Parser):
 
 
                 elif alt116 == 3:
-                    # QueryParser.g:537:13: LEFT_PAREN col_ref ( ASC | DESC )? RIGHT_PAREN
+                    # QueryParser.g:461:13: LEFT_PAREN col_ref ( ASC | DESC )? RIGHT_PAREN
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    LEFT_PAREN406=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_order_col4139)
-                    self._state.following.append(self.FOLLOW_col_ref_in_order_col4142)
+                    LEFT_PAREN406=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_order_col4134)
+                    self._state.following.append(self.FOLLOW_col_ref_in_order_col4137)
                     col_ref407 = self.col_ref()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         self._adaptor.addChild(root_0, col_ref407.tree)
-                    # QueryParser.g:537:33: ( ASC | DESC )?
+                    # QueryParser.g:461:33: ( ASC | DESC )?
                     alt115 = 2
                     LA115_0 = self.input.LA(1)
 
@@ -12266,7 +11922,7 @@ class QueryParser(Parser):
 
 
 
-                    RIGHT_PAREN409=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_order_col4155)
+                    RIGHT_PAREN409=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_order_col4150)
 
 
                 retval.stop = self.input.LT(-1)
@@ -12278,9 +11934,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -12298,7 +11951,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "distinct_clause"
-    # QueryParser.g:540:1: distinct_clause : DISTINCT rel ( partition_clause )? ;
+    # QueryParser.g:464:1: distinct_clause : DISTINCT rel ( partition_clause )? ;
     def distinct_clause(self, ):
 
         retval = self.distinct_clause_return()
@@ -12316,24 +11969,24 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:540:17: ( DISTINCT rel ( partition_clause )? )
-                # QueryParser.g:540:19: DISTINCT rel ( partition_clause )?
+                # QueryParser.g:464:17: ( DISTINCT rel ( partition_clause )? )
+                # QueryParser.g:464:19: DISTINCT rel ( partition_clause )?
                 pass 
                 root_0 = self._adaptor.nil()
 
-                DISTINCT410=self.match(self.input, DISTINCT, self.FOLLOW_DISTINCT_in_distinct_clause4165)
+                DISTINCT410=self.match(self.input, DISTINCT, self.FOLLOW_DISTINCT_in_distinct_clause4160)
                 if self._state.backtracking == 0:
 
                     DISTINCT410_tree = self._adaptor.createWithPayload(DISTINCT410)
                     root_0 = self._adaptor.becomeRoot(DISTINCT410_tree, root_0)
 
-                self._state.following.append(self.FOLLOW_rel_in_distinct_clause4168)
+                self._state.following.append(self.FOLLOW_rel_in_distinct_clause4163)
                 rel411 = self.rel()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, rel411.tree)
-                # QueryParser.g:540:33: ( partition_clause )?
+                # QueryParser.g:464:33: ( partition_clause )?
                 alt117 = 2
                 LA117_0 = self.input.LA(1)
 
@@ -12342,7 +11995,7 @@ class QueryParser(Parser):
                 if alt117 == 1:
                     # QueryParser.g:0:0: partition_clause
                     pass 
-                    self._state.following.append(self.FOLLOW_partition_clause_in_distinct_clause4170)
+                    self._state.following.append(self.FOLLOW_partition_clause_in_distinct_clause4165)
                     partition_clause412 = self.partition_clause()
 
                     self._state.following.pop()
@@ -12363,9 +12016,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -12383,7 +12033,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "partition_clause"
-    # QueryParser.g:543:1: partition_clause : PARTITION BY func_name ;
+    # QueryParser.g:467:1: partition_clause : PARTITION BY func_name ;
     def partition_clause(self, ):
 
         retval = self.partition_clause_return()
@@ -12401,19 +12051,19 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:543:18: ( PARTITION BY func_name )
-                # QueryParser.g:543:20: PARTITION BY func_name
+                # QueryParser.g:467:18: ( PARTITION BY func_name )
+                # QueryParser.g:467:20: PARTITION BY func_name
                 pass 
                 root_0 = self._adaptor.nil()
 
-                PARTITION413=self.match(self.input, PARTITION, self.FOLLOW_PARTITION_in_partition_clause4180)
+                PARTITION413=self.match(self.input, PARTITION, self.FOLLOW_PARTITION_in_partition_clause4175)
                 if self._state.backtracking == 0:
 
                     PARTITION413_tree = self._adaptor.createWithPayload(PARTITION413)
                     root_0 = self._adaptor.becomeRoot(PARTITION413_tree, root_0)
 
-                BY414=self.match(self.input, BY, self.FOLLOW_BY_in_partition_clause4183)
-                self._state.following.append(self.FOLLOW_func_name_in_partition_clause4186)
+                BY414=self.match(self.input, BY, self.FOLLOW_BY_in_partition_clause4178)
+                self._state.following.append(self.FOLLOW_func_name_in_partition_clause4181)
                 func_name415 = self.func_name()
 
                 self._state.following.pop()
@@ -12431,9 +12081,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -12451,7 +12098,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "cross_clause"
-    # QueryParser.g:546:1: cross_clause : CROSS rel_list ( partition_clause )? ;
+    # QueryParser.g:470:1: cross_clause : CROSS rel_list ( partition_clause )? ;
     def cross_clause(self, ):
 
         retval = self.cross_clause_return()
@@ -12469,24 +12116,24 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:546:14: ( CROSS rel_list ( partition_clause )? )
-                # QueryParser.g:546:16: CROSS rel_list ( partition_clause )?
+                # QueryParser.g:470:14: ( CROSS rel_list ( partition_clause )? )
+                # QueryParser.g:470:16: CROSS rel_list ( partition_clause )?
                 pass 
                 root_0 = self._adaptor.nil()
 
-                CROSS416=self.match(self.input, CROSS, self.FOLLOW_CROSS_in_cross_clause4195)
+                CROSS416=self.match(self.input, CROSS, self.FOLLOW_CROSS_in_cross_clause4190)
                 if self._state.backtracking == 0:
 
                     CROSS416_tree = self._adaptor.createWithPayload(CROSS416)
                     root_0 = self._adaptor.becomeRoot(CROSS416_tree, root_0)
 
-                self._state.following.append(self.FOLLOW_rel_list_in_cross_clause4198)
+                self._state.following.append(self.FOLLOW_rel_list_in_cross_clause4193)
                 rel_list417 = self.rel_list()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, rel_list417.tree)
-                # QueryParser.g:546:32: ( partition_clause )?
+                # QueryParser.g:470:32: ( partition_clause )?
                 alt118 = 2
                 LA118_0 = self.input.LA(1)
 
@@ -12495,7 +12142,7 @@ class QueryParser(Parser):
                 if alt118 == 1:
                     # QueryParser.g:0:0: partition_clause
                     pass 
-                    self._state.following.append(self.FOLLOW_partition_clause_in_cross_clause4200)
+                    self._state.following.append(self.FOLLOW_partition_clause_in_cross_clause4195)
                     partition_clause418 = self.partition_clause()
 
                     self._state.following.pop()
@@ -12516,9 +12163,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -12536,7 +12180,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "rel_list"
-    # QueryParser.g:549:1: rel_list : rel ( COMMA rel )* -> ( rel )+ ;
+    # QueryParser.g:473:1: rel_list : rel ( COMMA rel )* -> ( rel )+ ;
     def rel_list(self, ):
 
         retval = self.rel_list_return()
@@ -12555,16 +12199,16 @@ class QueryParser(Parser):
         stream_rel = RewriteRuleSubtreeStream(self._adaptor, "rule rel")
         try:
             try:
-                # QueryParser.g:549:10: ( rel ( COMMA rel )* -> ( rel )+ )
-                # QueryParser.g:549:12: rel ( COMMA rel )*
+                # QueryParser.g:473:10: ( rel ( COMMA rel )* -> ( rel )+ )
+                # QueryParser.g:473:12: rel ( COMMA rel )*
                 pass 
-                self._state.following.append(self.FOLLOW_rel_in_rel_list4210)
+                self._state.following.append(self.FOLLOW_rel_in_rel_list4205)
                 rel419 = self.rel()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     stream_rel.add(rel419.tree)
-                # QueryParser.g:549:16: ( COMMA rel )*
+                # QueryParser.g:473:16: ( COMMA rel )*
                 while True: #loop119
                     alt119 = 2
                     LA119_0 = self.input.LA(1)
@@ -12574,12 +12218,12 @@ class QueryParser(Parser):
 
 
                     if alt119 == 1:
-                        # QueryParser.g:549:18: COMMA rel
+                        # QueryParser.g:473:18: COMMA rel
                         pass 
-                        COMMA420=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_rel_list4214) 
+                        COMMA420=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_rel_list4209) 
                         if self._state.backtracking == 0:
                             stream_COMMA.add(COMMA420)
-                        self._state.following.append(self.FOLLOW_rel_in_rel_list4216)
+                        self._state.following.append(self.FOLLOW_rel_in_rel_list4211)
                         rel421 = self.rel()
 
                         self._state.following.pop()
@@ -12608,8 +12252,8 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 550:9: -> ( rel )+
-                    # QueryParser.g:550:12: ( rel )+
+                    # 474:9: -> ( rel )+
+                    # QueryParser.g:474:12: ( rel )+
                     if not (stream_rel.hasNext()):
                         raise RewriteEarlyExitException()
 
@@ -12634,9 +12278,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -12654,7 +12295,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "join_clause"
-    # QueryParser.g:553:1: join_clause : JOIN join_sub_clause ( USING join_type )? ( partition_clause )? ;
+    # QueryParser.g:477:1: join_clause : JOIN join_sub_clause ( USING join_type )? ( partition_clause )? ;
     def join_clause(self, ):
 
         retval = self.join_clause_return()
@@ -12676,34 +12317,34 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:553:13: ( JOIN join_sub_clause ( USING join_type )? ( partition_clause )? )
-                # QueryParser.g:553:15: JOIN join_sub_clause ( USING join_type )? ( partition_clause )?
+                # QueryParser.g:477:13: ( JOIN join_sub_clause ( USING join_type )? ( partition_clause )? )
+                # QueryParser.g:477:15: JOIN join_sub_clause ( USING join_type )? ( partition_clause )?
                 pass 
                 root_0 = self._adaptor.nil()
 
-                JOIN422=self.match(self.input, JOIN, self.FOLLOW_JOIN_in_join_clause4241)
+                JOIN422=self.match(self.input, JOIN, self.FOLLOW_JOIN_in_join_clause4236)
                 if self._state.backtracking == 0:
 
                     JOIN422_tree = self._adaptor.createWithPayload(JOIN422)
                     root_0 = self._adaptor.becomeRoot(JOIN422_tree, root_0)
 
-                self._state.following.append(self.FOLLOW_join_sub_clause_in_join_clause4244)
+                self._state.following.append(self.FOLLOW_join_sub_clause_in_join_clause4239)
                 join_sub_clause423 = self.join_sub_clause()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, join_sub_clause423.tree)
-                # QueryParser.g:553:37: ( USING join_type )?
+                # QueryParser.g:477:37: ( USING join_type )?
                 alt120 = 2
                 LA120_0 = self.input.LA(1)
 
                 if (LA120_0 == USING) :
                     alt120 = 1
                 if alt120 == 1:
-                    # QueryParser.g:553:39: USING join_type
+                    # QueryParser.g:477:39: USING join_type
                     pass 
-                    USING424=self.match(self.input, USING, self.FOLLOW_USING_in_join_clause4248)
-                    self._state.following.append(self.FOLLOW_join_type_in_join_clause4251)
+                    USING424=self.match(self.input, USING, self.FOLLOW_USING_in_join_clause4243)
+                    self._state.following.append(self.FOLLOW_join_type_in_join_clause4246)
                     join_type425 = self.join_type()
 
                     self._state.following.pop()
@@ -12712,7 +12353,7 @@ class QueryParser(Parser):
 
 
 
-                # QueryParser.g:553:59: ( partition_clause )?
+                # QueryParser.g:477:59: ( partition_clause )?
                 alt121 = 2
                 LA121_0 = self.input.LA(1)
 
@@ -12721,7 +12362,7 @@ class QueryParser(Parser):
                 if alt121 == 1:
                     # QueryParser.g:0:0: partition_clause
                     pass 
-                    self._state.following.append(self.FOLLOW_partition_clause_in_join_clause4256)
+                    self._state.following.append(self.FOLLOW_partition_clause_in_join_clause4251)
                     partition_clause426 = self.partition_clause()
 
                     self._state.following.pop()
@@ -12742,9 +12383,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -12762,7 +12400,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "join_type"
-    # QueryParser.g:556:1: join_type : QUOTEDSTRING ;
+    # QueryParser.g:480:1: join_type : QUOTEDSTRING ;
     def join_type(self, ):
 
         retval = self.join_type_return()
@@ -12776,12 +12414,12 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:556:11: ( QUOTEDSTRING )
-                # QueryParser.g:556:13: QUOTEDSTRING
+                # QueryParser.g:480:11: ( QUOTEDSTRING )
+                # QueryParser.g:480:13: QUOTEDSTRING
                 pass 
                 root_0 = self._adaptor.nil()
 
-                QUOTEDSTRING427=self.match(self.input, QUOTEDSTRING, self.FOLLOW_QUOTEDSTRING_in_join_type4266)
+                QUOTEDSTRING427=self.match(self.input, QUOTEDSTRING, self.FOLLOW_QUOTEDSTRING_in_join_type4261)
                 if self._state.backtracking == 0:
 
                     QUOTEDSTRING427_tree = self._adaptor.createWithPayload(QUOTEDSTRING427)
@@ -12799,9 +12437,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -12819,7 +12454,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "join_sub_clause"
-    # QueryParser.g:559:1: join_sub_clause : ( join_item ( LEFT | RIGHT | FULL ) ( OUTER )? COMMA join_item | join_item_list );
+    # QueryParser.g:483:1: join_sub_clause : ( join_item ( LEFT | RIGHT | FULL ) ( OUTER )? COMMA join_item | join_item_list );
     def join_sub_clause(self, ):
 
         retval = self.join_sub_clause_return()
@@ -12843,7 +12478,7 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:559:17: ( join_item ( LEFT | RIGHT | FULL ) ( OUTER )? COMMA join_item | join_item_list )
+                # QueryParser.g:483:17: ( join_item ( LEFT | RIGHT | FULL ) ( OUTER )? COMMA join_item | join_item_list )
                 alt123 = 2
                 LA123_0 = self.input.LA(1)
 
@@ -12886,11 +12521,11 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt123 == 1:
-                    # QueryParser.g:559:19: join_item ( LEFT | RIGHT | FULL ) ( OUTER )? COMMA join_item
+                    # QueryParser.g:483:19: join_item ( LEFT | RIGHT | FULL ) ( OUTER )? COMMA join_item
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_join_item_in_join_sub_clause4275)
+                    self._state.following.append(self.FOLLOW_join_item_in_join_sub_clause4270)
                     join_item428 = self.join_item()
 
                     self._state.following.pop()
@@ -12911,7 +12546,7 @@ class QueryParser(Parser):
                         raise mse
 
 
-                    # QueryParser.g:559:53: ( OUTER )?
+                    # QueryParser.g:483:53: ( OUTER )?
                     alt122 = 2
                     LA122_0 = self.input.LA(1)
 
@@ -12920,7 +12555,7 @@ class QueryParser(Parser):
                     if alt122 == 1:
                         # QueryParser.g:0:0: OUTER
                         pass 
-                        OUTER430=self.match(self.input, OUTER, self.FOLLOW_OUTER_in_join_sub_clause4291)
+                        OUTER430=self.match(self.input, OUTER, self.FOLLOW_OUTER_in_join_sub_clause4286)
                         if self._state.backtracking == 0:
 
                             OUTER430_tree = self._adaptor.createWithPayload(OUTER430)
@@ -12929,8 +12564,8 @@ class QueryParser(Parser):
 
 
 
-                    COMMA431=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_join_sub_clause4294)
-                    self._state.following.append(self.FOLLOW_join_item_in_join_sub_clause4297)
+                    COMMA431=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_join_sub_clause4289)
+                    self._state.following.append(self.FOLLOW_join_item_in_join_sub_clause4292)
                     join_item432 = self.join_item()
 
                     self._state.following.pop()
@@ -12939,11 +12574,11 @@ class QueryParser(Parser):
 
 
                 elif alt123 == 2:
-                    # QueryParser.g:560:19: join_item_list
+                    # QueryParser.g:484:19: join_item_list
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_join_item_list_in_join_sub_clause4317)
+                    self._state.following.append(self.FOLLOW_join_item_list_in_join_sub_clause4312)
                     join_item_list433 = self.join_item_list()
 
                     self._state.following.pop()
@@ -12960,9 +12595,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -12980,7 +12612,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "join_item_list"
-    # QueryParser.g:563:1: join_item_list : join_item ( COMMA join_item )+ ;
+    # QueryParser.g:487:1: join_item_list : join_item ( COMMA join_item )+ ;
     def join_item_list(self, ):
 
         retval = self.join_item_list_return()
@@ -12998,18 +12630,18 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:563:16: ( join_item ( COMMA join_item )+ )
-                # QueryParser.g:563:18: join_item ( COMMA join_item )+
+                # QueryParser.g:487:16: ( join_item ( COMMA join_item )+ )
+                # QueryParser.g:487:18: join_item ( COMMA join_item )+
                 pass 
                 root_0 = self._adaptor.nil()
 
-                self._state.following.append(self.FOLLOW_join_item_in_join_item_list4326)
+                self._state.following.append(self.FOLLOW_join_item_in_join_item_list4321)
                 join_item434 = self.join_item()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, join_item434.tree)
-                # QueryParser.g:563:28: ( COMMA join_item )+
+                # QueryParser.g:487:28: ( COMMA join_item )+
                 cnt124 = 0
                 while True: #loop124
                     alt124 = 2
@@ -13020,10 +12652,10 @@ class QueryParser(Parser):
 
 
                     if alt124 == 1:
-                        # QueryParser.g:563:30: COMMA join_item
+                        # QueryParser.g:487:30: COMMA join_item
                         pass 
-                        COMMA435=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_join_item_list4330)
-                        self._state.following.append(self.FOLLOW_join_item_in_join_item_list4333)
+                        COMMA435=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_join_item_list4325)
+                        self._state.following.append(self.FOLLOW_join_item_in_join_item_list4328)
                         join_item436 = self.join_item()
 
                         self._state.following.pop()
@@ -13054,9 +12686,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -13074,7 +12703,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "join_item"
-    # QueryParser.g:566:1: join_item : rel join_group_by_clause -> ^( JOIN_ITEM rel join_group_by_clause ) ;
+    # QueryParser.g:490:1: join_item : rel join_group_by_clause -> ^( JOIN_ITEM rel join_group_by_clause ) ;
     def join_item(self, ):
 
         retval = self.join_item_return()
@@ -13091,16 +12720,16 @@ class QueryParser(Parser):
         stream_join_group_by_clause = RewriteRuleSubtreeStream(self._adaptor, "rule join_group_by_clause")
         try:
             try:
-                # QueryParser.g:566:11: ( rel join_group_by_clause -> ^( JOIN_ITEM rel join_group_by_clause ) )
-                # QueryParser.g:566:13: rel join_group_by_clause
+                # QueryParser.g:490:11: ( rel join_group_by_clause -> ^( JOIN_ITEM rel join_group_by_clause ) )
+                # QueryParser.g:490:13: rel join_group_by_clause
                 pass 
-                self._state.following.append(self.FOLLOW_rel_in_join_item4345)
+                self._state.following.append(self.FOLLOW_rel_in_join_item4340)
                 rel437 = self.rel()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     stream_rel.add(rel437.tree)
-                self._state.following.append(self.FOLLOW_join_group_by_clause_in_join_item4347)
+                self._state.following.append(self.FOLLOW_join_group_by_clause_in_join_item4342)
                 join_group_by_clause438 = self.join_group_by_clause()
 
                 self._state.following.pop()
@@ -13125,8 +12754,8 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 567:10: -> ^( JOIN_ITEM rel join_group_by_clause )
-                    # QueryParser.g:567:13: ^( JOIN_ITEM rel join_group_by_clause )
+                    # 491:10: -> ^( JOIN_ITEM rel join_group_by_clause )
+                    # QueryParser.g:491:13: ^( JOIN_ITEM rel join_group_by_clause )
                     root_1 = self._adaptor.nil()
                     root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(JOIN_ITEM, "JOIN_ITEM"), root_1)
 
@@ -13150,9 +12779,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -13170,7 +12796,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "join_group_by_clause"
-    # QueryParser.g:570:1: join_group_by_clause : BY join_group_by_expr_list ;
+    # QueryParser.g:494:1: join_group_by_clause : BY join_group_by_expr_list ;
     def join_group_by_clause(self, ):
 
         retval = self.join_group_by_clause_return()
@@ -13186,18 +12812,18 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:570:22: ( BY join_group_by_expr_list )
-                # QueryParser.g:570:24: BY join_group_by_expr_list
+                # QueryParser.g:494:22: ( BY join_group_by_expr_list )
+                # QueryParser.g:494:24: BY join_group_by_expr_list
                 pass 
                 root_0 = self._adaptor.nil()
 
-                BY439=self.match(self.input, BY, self.FOLLOW_BY_in_join_group_by_clause4378)
+                BY439=self.match(self.input, BY, self.FOLLOW_BY_in_join_group_by_clause4373)
                 if self._state.backtracking == 0:
 
                     BY439_tree = self._adaptor.createWithPayload(BY439)
                     root_0 = self._adaptor.becomeRoot(BY439_tree, root_0)
 
-                self._state.following.append(self.FOLLOW_join_group_by_expr_list_in_join_group_by_clause4381)
+                self._state.following.append(self.FOLLOW_join_group_by_expr_list_in_join_group_by_clause4376)
                 join_group_by_expr_list440 = self.join_group_by_expr_list()
 
                 self._state.following.pop()
@@ -13215,9 +12841,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -13235,7 +12858,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "join_group_by_expr_list"
-    # QueryParser.g:573:1: join_group_by_expr_list : ( LEFT_PAREN join_group_by_expr ( COMMA join_group_by_expr )* RIGHT_PAREN -> ( join_group_by_expr )+ | join_group_by_expr );
+    # QueryParser.g:497:1: join_group_by_expr_list : ( LEFT_PAREN join_group_by_expr ( COMMA join_group_by_expr )* RIGHT_PAREN -> ( join_group_by_expr )+ | join_group_by_expr );
     def join_group_by_expr_list(self, ):
 
         retval = self.join_group_by_expr_list_return()
@@ -13262,22 +12885,22 @@ class QueryParser(Parser):
         stream_join_group_by_expr = RewriteRuleSubtreeStream(self._adaptor, "rule join_group_by_expr")
         try:
             try:
-                # QueryParser.g:573:25: ( LEFT_PAREN join_group_by_expr ( COMMA join_group_by_expr )* RIGHT_PAREN -> ( join_group_by_expr )+ | join_group_by_expr )
+                # QueryParser.g:497:25: ( LEFT_PAREN join_group_by_expr ( COMMA join_group_by_expr )* RIGHT_PAREN -> ( join_group_by_expr )+ | join_group_by_expr )
                 alt126 = 2
                 alt126 = self.dfa126.predict(self.input)
                 if alt126 == 1:
-                    # QueryParser.g:573:27: LEFT_PAREN join_group_by_expr ( COMMA join_group_by_expr )* RIGHT_PAREN
+                    # QueryParser.g:497:27: LEFT_PAREN join_group_by_expr ( COMMA join_group_by_expr )* RIGHT_PAREN
                     pass 
-                    LEFT_PAREN441=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_join_group_by_expr_list4390) 
+                    LEFT_PAREN441=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_join_group_by_expr_list4385) 
                     if self._state.backtracking == 0:
                         stream_LEFT_PAREN.add(LEFT_PAREN441)
-                    self._state.following.append(self.FOLLOW_join_group_by_expr_in_join_group_by_expr_list4392)
+                    self._state.following.append(self.FOLLOW_join_group_by_expr_in_join_group_by_expr_list4387)
                     join_group_by_expr442 = self.join_group_by_expr()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         stream_join_group_by_expr.add(join_group_by_expr442.tree)
-                    # QueryParser.g:573:57: ( COMMA join_group_by_expr )*
+                    # QueryParser.g:497:57: ( COMMA join_group_by_expr )*
                     while True: #loop125
                         alt125 = 2
                         LA125_0 = self.input.LA(1)
@@ -13287,12 +12910,12 @@ class QueryParser(Parser):
 
 
                         if alt125 == 1:
-                            # QueryParser.g:573:59: COMMA join_group_by_expr
+                            # QueryParser.g:497:59: COMMA join_group_by_expr
                             pass 
-                            COMMA443=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_join_group_by_expr_list4396) 
+                            COMMA443=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_join_group_by_expr_list4391) 
                             if self._state.backtracking == 0:
                                 stream_COMMA.add(COMMA443)
-                            self._state.following.append(self.FOLLOW_join_group_by_expr_in_join_group_by_expr_list4398)
+                            self._state.following.append(self.FOLLOW_join_group_by_expr_in_join_group_by_expr_list4393)
                             join_group_by_expr444 = self.join_group_by_expr()
 
                             self._state.following.pop()
@@ -13302,7 +12925,7 @@ class QueryParser(Parser):
 
                         else:
                             break #loop125
-                    RIGHT_PAREN445=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_join_group_by_expr_list4403) 
+                    RIGHT_PAREN445=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_join_group_by_expr_list4398) 
                     if self._state.backtracking == 0:
                         stream_RIGHT_PAREN.add(RIGHT_PAREN445)
 
@@ -13324,8 +12947,8 @@ class QueryParser(Parser):
 
 
                         root_0 = self._adaptor.nil()
-                        # 574:24: -> ( join_group_by_expr )+
-                        # QueryParser.g:574:27: ( join_group_by_expr )+
+                        # 498:24: -> ( join_group_by_expr )+
+                        # QueryParser.g:498:27: ( join_group_by_expr )+
                         if not (stream_join_group_by_expr.hasNext()):
                             raise RewriteEarlyExitException()
 
@@ -13341,11 +12964,11 @@ class QueryParser(Parser):
 
 
                 elif alt126 == 2:
-                    # QueryParser.g:575:27: join_group_by_expr
+                    # QueryParser.g:499:27: join_group_by_expr
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_join_group_by_expr_in_join_group_by_expr_list4459)
+                    self._state.following.append(self.FOLLOW_join_group_by_expr_in_join_group_by_expr_list4454)
                     join_group_by_expr446 = self.join_group_by_expr()
 
                     self._state.following.pop()
@@ -13362,9 +12985,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -13382,7 +13002,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "join_group_by_expr"
-    # QueryParser.g:578:1: join_group_by_expr : ( col_range | expr | STAR );
+    # QueryParser.g:502:1: join_group_by_expr : ( col_range | expr | STAR );
     def join_group_by_expr(self, ):
 
         retval = self.join_group_by_expr_return()
@@ -13400,7 +13020,7 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:578:20: ( col_range | expr | STAR )
+                # QueryParser.g:502:20: ( col_range | expr | STAR )
                 alt127 = 3
                 LA127 = self.input.LA(1)
                 if LA127 == GROUP:
@@ -13478,11 +13098,11 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt127 == 1:
-                    # QueryParser.g:578:22: col_range
+                    # QueryParser.g:502:22: col_range
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_col_range_in_join_group_by_expr4468)
+                    self._state.following.append(self.FOLLOW_col_range_in_join_group_by_expr4463)
                     col_range447 = self.col_range()
 
                     self._state.following.pop()
@@ -13491,11 +13111,11 @@ class QueryParser(Parser):
 
 
                 elif alt127 == 2:
-                    # QueryParser.g:578:35: expr
+                    # QueryParser.g:502:35: expr
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_expr_in_join_group_by_expr4473)
+                    self._state.following.append(self.FOLLOW_expr_in_join_group_by_expr4468)
                     expr448 = self.expr()
 
                     self._state.following.pop()
@@ -13504,11 +13124,11 @@ class QueryParser(Parser):
 
 
                 elif alt127 == 3:
-                    # QueryParser.g:578:42: STAR
+                    # QueryParser.g:502:42: STAR
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    STAR449=self.match(self.input, STAR, self.FOLLOW_STAR_in_join_group_by_expr4477)
+                    STAR449=self.match(self.input, STAR, self.FOLLOW_STAR_in_join_group_by_expr4472)
                     if self._state.backtracking == 0:
 
                         STAR449_tree = self._adaptor.createWithPayload(STAR449)
@@ -13525,9 +13145,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -13545,7 +13162,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "union_clause"
-    # QueryParser.g:581:1: union_clause : UNION ( ONSCHEMA )? rel_list ;
+    # QueryParser.g:505:1: union_clause : UNION ( ONSCHEMA )? rel_list ;
     def union_clause(self, ):
 
         retval = self.union_clause_return()
@@ -13563,18 +13180,18 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:581:14: ( UNION ( ONSCHEMA )? rel_list )
-                # QueryParser.g:581:16: UNION ( ONSCHEMA )? rel_list
+                # QueryParser.g:505:14: ( UNION ( ONSCHEMA )? rel_list )
+                # QueryParser.g:505:16: UNION ( ONSCHEMA )? rel_list
                 pass 
                 root_0 = self._adaptor.nil()
 
-                UNION450=self.match(self.input, UNION, self.FOLLOW_UNION_in_union_clause4486)
+                UNION450=self.match(self.input, UNION, self.FOLLOW_UNION_in_union_clause4481)
                 if self._state.backtracking == 0:
 
                     UNION450_tree = self._adaptor.createWithPayload(UNION450)
                     root_0 = self._adaptor.becomeRoot(UNION450_tree, root_0)
 
-                # QueryParser.g:581:23: ( ONSCHEMA )?
+                # QueryParser.g:505:23: ( ONSCHEMA )?
                 alt128 = 2
                 LA128_0 = self.input.LA(1)
 
@@ -13583,7 +13200,7 @@ class QueryParser(Parser):
                 if alt128 == 1:
                     # QueryParser.g:0:0: ONSCHEMA
                     pass 
-                    ONSCHEMA451=self.match(self.input, ONSCHEMA, self.FOLLOW_ONSCHEMA_in_union_clause4489)
+                    ONSCHEMA451=self.match(self.input, ONSCHEMA, self.FOLLOW_ONSCHEMA_in_union_clause4484)
                     if self._state.backtracking == 0:
 
                         ONSCHEMA451_tree = self._adaptor.createWithPayload(ONSCHEMA451)
@@ -13592,7 +13209,7 @@ class QueryParser(Parser):
 
 
 
-                self._state.following.append(self.FOLLOW_rel_list_in_union_clause4492)
+                self._state.following.append(self.FOLLOW_rel_list_in_union_clause4487)
                 rel_list452 = self.rel_list()
 
                 self._state.following.pop()
@@ -13610,9 +13227,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -13630,7 +13244,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "foreach_clause_simple"
-    # QueryParser.g:584:1: foreach_clause_simple : FOREACH rel foreach_plan_simple ;
+    # QueryParser.g:508:1: foreach_clause_simple : FOREACH rel foreach_plan_simple ;
     def foreach_clause_simple(self, ):
 
         retval = self.foreach_clause_simple_return()
@@ -13648,24 +13262,24 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:584:23: ( FOREACH rel foreach_plan_simple )
-                # QueryParser.g:584:25: FOREACH rel foreach_plan_simple
+                # QueryParser.g:508:23: ( FOREACH rel foreach_plan_simple )
+                # QueryParser.g:508:25: FOREACH rel foreach_plan_simple
                 pass 
                 root_0 = self._adaptor.nil()
 
-                FOREACH453=self.match(self.input, FOREACH, self.FOLLOW_FOREACH_in_foreach_clause_simple4501)
+                FOREACH453=self.match(self.input, FOREACH, self.FOLLOW_FOREACH_in_foreach_clause_simple4496)
                 if self._state.backtracking == 0:
 
                     FOREACH453_tree = self._adaptor.createWithPayload(FOREACH453)
                     root_0 = self._adaptor.becomeRoot(FOREACH453_tree, root_0)
 
-                self._state.following.append(self.FOLLOW_rel_in_foreach_clause_simple4504)
+                self._state.following.append(self.FOLLOW_rel_in_foreach_clause_simple4499)
                 rel454 = self.rel()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, rel454.tree)
-                self._state.following.append(self.FOLLOW_foreach_plan_simple_in_foreach_clause_simple4506)
+                self._state.following.append(self.FOLLOW_foreach_plan_simple_in_foreach_clause_simple4501)
                 foreach_plan_simple455 = self.foreach_plan_simple()
 
                 self._state.following.pop()
@@ -13683,9 +13297,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -13703,7 +13314,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "foreach_plan_simple"
-    # QueryParser.g:587:1: foreach_plan_simple : generate_clause -> ^( FOREACH_PLAN_SIMPLE generate_clause ) ;
+    # QueryParser.g:511:1: foreach_plan_simple : generate_clause -> ^( FOREACH_PLAN_SIMPLE generate_clause ) ;
     def foreach_plan_simple(self, ):
 
         retval = self.foreach_plan_simple_return()
@@ -13717,10 +13328,10 @@ class QueryParser(Parser):
         stream_generate_clause = RewriteRuleSubtreeStream(self._adaptor, "rule generate_clause")
         try:
             try:
-                # QueryParser.g:587:21: ( generate_clause -> ^( FOREACH_PLAN_SIMPLE generate_clause ) )
-                # QueryParser.g:587:23: generate_clause
+                # QueryParser.g:511:21: ( generate_clause -> ^( FOREACH_PLAN_SIMPLE generate_clause ) )
+                # QueryParser.g:511:23: generate_clause
                 pass 
-                self._state.following.append(self.FOLLOW_generate_clause_in_foreach_plan_simple4515)
+                self._state.following.append(self.FOLLOW_generate_clause_in_foreach_plan_simple4510)
                 generate_clause456 = self.generate_clause()
 
                 self._state.following.pop()
@@ -13745,8 +13356,8 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 588:20: -> ^( FOREACH_PLAN_SIMPLE generate_clause )
-                    # QueryParser.g:588:23: ^( FOREACH_PLAN_SIMPLE generate_clause )
+                    # 512:20: -> ^( FOREACH_PLAN_SIMPLE generate_clause )
+                    # QueryParser.g:512:23: ^( FOREACH_PLAN_SIMPLE generate_clause )
                     root_1 = self._adaptor.nil()
                     root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(FOREACH_PLAN_SIMPLE, "FOREACH_PLAN_SIMPLE"), root_1)
 
@@ -13769,9 +13380,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -13789,7 +13397,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "foreach_clause_complex"
-    # QueryParser.g:591:1: foreach_clause_complex : FOREACH rel foreach_plan_complex ;
+    # QueryParser.g:515:1: foreach_clause_complex : FOREACH rel foreach_plan_complex ;
     def foreach_clause_complex(self, ):
 
         retval = self.foreach_clause_complex_return()
@@ -13807,24 +13415,24 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:591:24: ( FOREACH rel foreach_plan_complex )
-                # QueryParser.g:591:26: FOREACH rel foreach_plan_complex
+                # QueryParser.g:515:24: ( FOREACH rel foreach_plan_complex )
+                # QueryParser.g:515:26: FOREACH rel foreach_plan_complex
                 pass 
                 root_0 = self._adaptor.nil()
 
-                FOREACH457=self.match(self.input, FOREACH, self.FOLLOW_FOREACH_in_foreach_clause_complex4553)
+                FOREACH457=self.match(self.input, FOREACH, self.FOLLOW_FOREACH_in_foreach_clause_complex4548)
                 if self._state.backtracking == 0:
 
                     FOREACH457_tree = self._adaptor.createWithPayload(FOREACH457)
                     root_0 = self._adaptor.becomeRoot(FOREACH457_tree, root_0)
 
-                self._state.following.append(self.FOLLOW_rel_in_foreach_clause_complex4556)
+                self._state.following.append(self.FOLLOW_rel_in_foreach_clause_complex4551)
                 rel458 = self.rel()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, rel458.tree)
-                self._state.following.append(self.FOLLOW_foreach_plan_complex_in_foreach_clause_complex4558)
+                self._state.following.append(self.FOLLOW_foreach_plan_complex_in_foreach_clause_complex4553)
                 foreach_plan_complex459 = self.foreach_plan_complex()
 
                 self._state.following.pop()
@@ -13842,9 +13450,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -13862,7 +13467,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "foreach_plan_complex"
-    # QueryParser.g:594:1: foreach_plan_complex : nested_blk -> ^( FOREACH_PLAN_COMPLEX nested_blk ) ;
+    # QueryParser.g:518:1: foreach_plan_complex : nested_blk -> ^( FOREACH_PLAN_COMPLEX nested_blk ) ;
     def foreach_plan_complex(self, ):
 
         retval = self.foreach_plan_complex_return()
@@ -13876,10 +13481,10 @@ class QueryParser(Parser):
         stream_nested_blk = RewriteRuleSubtreeStream(self._adaptor, "rule nested_blk")
         try:
             try:
-                # QueryParser.g:594:22: ( nested_blk -> ^( FOREACH_PLAN_COMPLEX nested_blk ) )
-                # QueryParser.g:594:24: nested_blk
+                # QueryParser.g:518:22: ( nested_blk -> ^( FOREACH_PLAN_COMPLEX nested_blk ) )
+                # QueryParser.g:518:24: nested_blk
                 pass 
-                self._state.following.append(self.FOLLOW_nested_blk_in_foreach_plan_complex4567)
+                self._state.following.append(self.FOLLOW_nested_blk_in_foreach_plan_complex4562)
                 nested_blk460 = self.nested_blk()
 
                 self._state.following.pop()
@@ -13904,8 +13509,8 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 595:21: -> ^( FOREACH_PLAN_COMPLEX nested_blk )
-                    # QueryParser.g:595:24: ^( FOREACH_PLAN_COMPLEX nested_blk )
+                    # 519:21: -> ^( FOREACH_PLAN_COMPLEX nested_blk )
+                    # QueryParser.g:519:24: ^( FOREACH_PLAN_COMPLEX nested_blk )
                     root_1 = self._adaptor.nil()
                     root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(FOREACH_PLAN_COMPLEX, "FOREACH_PLAN_COMPLEX"), root_1)
 
@@ -13928,9 +13533,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -13948,7 +13550,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "cube_clause"
-    # QueryParser.g:598:1: cube_clause : CUBE cube_item ;
+    # QueryParser.g:522:1: cube_clause : CUBE cube_item ;
     def cube_clause(self, ):
 
         retval = self.cube_clause_return()
@@ -13964,18 +13566,18 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:598:13: ( CUBE cube_item )
-                # QueryParser.g:598:15: CUBE cube_item
+                # QueryParser.g:522:13: ( CUBE cube_item )
+                # QueryParser.g:522:15: CUBE cube_item
                 pass 
                 root_0 = self._adaptor.nil()
 
-                CUBE461=self.match(self.input, CUBE, self.FOLLOW_CUBE_in_cube_clause4606)
+                CUBE461=self.match(self.input, CUBE, self.FOLLOW_CUBE_in_cube_clause4601)
                 if self._state.backtracking == 0:
 
                     CUBE461_tree = self._adaptor.createWithPayload(CUBE461)
                     root_0 = self._adaptor.becomeRoot(CUBE461_tree, root_0)
 
-                self._state.following.append(self.FOLLOW_cube_item_in_cube_clause4609)
+                self._state.following.append(self.FOLLOW_cube_item_in_cube_clause4604)
                 cube_item462 = self.cube_item()
 
                 self._state.following.pop()
@@ -13993,9 +13595,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -14013,7 +13612,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "cube_item"
-    # QueryParser.g:601:1: cube_item : rel ( cube_by_clause ) ;
+    # QueryParser.g:525:1: cube_item : rel ( cube_by_clause ) ;
     def cube_item(self, ):
 
         retval = self.cube_item_return()
@@ -14029,21 +13628,21 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:601:11: ( rel ( cube_by_clause ) )
-                # QueryParser.g:601:13: rel ( cube_by_clause )
+                # QueryParser.g:525:11: ( rel ( cube_by_clause ) )
+                # QueryParser.g:525:13: rel ( cube_by_clause )
                 pass 
                 root_0 = self._adaptor.nil()
 
-                self._state.following.append(self.FOLLOW_rel_in_cube_item4619)
+                self._state.following.append(self.FOLLOW_rel_in_cube_item4614)
                 rel463 = self.rel()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, rel463.tree)
-                # QueryParser.g:601:17: ( cube_by_clause )
-                # QueryParser.g:601:19: cube_by_clause
+                # QueryParser.g:525:17: ( cube_by_clause )
+                # QueryParser.g:525:19: cube_by_clause
                 pass 
-                self._state.following.append(self.FOLLOW_cube_by_clause_in_cube_item4623)
+                self._state.following.append(self.FOLLOW_cube_by_clause_in_cube_item4618)
                 cube_by_clause464 = self.cube_by_clause()
 
                 self._state.following.pop()
@@ -14064,9 +13663,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -14084,7 +13680,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "cube_by_clause"
-    # QueryParser.g:604:1: cube_by_clause : BY cube_or_rollup ;
+    # QueryParser.g:528:1: cube_by_clause : BY cube_or_rollup ;
     def cube_by_clause(self, ):
 
         retval = self.cube_by_clause_return()
@@ -14100,18 +13696,18 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:604:16: ( BY cube_or_rollup )
-                # QueryParser.g:604:18: BY cube_or_rollup
+                # QueryParser.g:528:16: ( BY cube_or_rollup )
+                # QueryParser.g:528:18: BY cube_or_rollup
                 pass 
                 root_0 = self._adaptor.nil()
 
-                BY465=self.match(self.input, BY, self.FOLLOW_BY_in_cube_by_clause4634)
+                BY465=self.match(self.input, BY, self.FOLLOW_BY_in_cube_by_clause4629)
                 if self._state.backtracking == 0:
 
                     BY465_tree = self._adaptor.createWithPayload(BY465)
                     root_0 = self._adaptor.becomeRoot(BY465_tree, root_0)
 
-                self._state.following.append(self.FOLLOW_cube_or_rollup_in_cube_by_clause4637)
+                self._state.following.append(self.FOLLOW_cube_or_rollup_in_cube_by_clause4632)
                 cube_or_rollup466 = self.cube_or_rollup()
 
                 self._state.following.pop()
@@ -14129,9 +13725,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -14149,7 +13742,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "cube_or_rollup"
-    # QueryParser.g:607:1: cube_or_rollup : cube_rollup_list ( COMMA cube_rollup_list )* -> ( cube_rollup_list )+ ;
+    # QueryParser.g:531:1: cube_or_rollup : cube_rollup_list ( COMMA cube_rollup_list )* -> ( cube_rollup_list )+ ;
     def cube_or_rollup(self, ):
 
         retval = self.cube_or_rollup_return()
@@ -14168,16 +13761,16 @@ class QueryParser(Parser):
         stream_cube_rollup_list = RewriteRuleSubtreeStream(self._adaptor, "rule cube_rollup_list")
         try:
             try:
-                # QueryParser.g:607:16: ( cube_rollup_list ( COMMA cube_rollup_list )* -> ( cube_rollup_list )+ )
-                # QueryParser.g:607:18: cube_rollup_list ( COMMA cube_rollup_list )*
+                # QueryParser.g:531:16: ( cube_rollup_list ( COMMA cube_rollup_list )* -> ( cube_rollup_list )+ )
+                # QueryParser.g:531:18: cube_rollup_list ( COMMA cube_rollup_list )*
                 pass 
-                self._state.following.append(self.FOLLOW_cube_rollup_list_in_cube_or_rollup4646)
+                self._state.following.append(self.FOLLOW_cube_rollup_list_in_cube_or_rollup4641)
                 cube_rollup_list467 = self.cube_rollup_list()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     stream_cube_rollup_list.add(cube_rollup_list467.tree)
-                # QueryParser.g:607:35: ( COMMA cube_rollup_list )*
+                # QueryParser.g:531:35: ( COMMA cube_rollup_list )*
                 while True: #loop129
                     alt129 = 2
                     LA129_0 = self.input.LA(1)
@@ -14187,12 +13780,12 @@ class QueryParser(Parser):
 
 
                     if alt129 == 1:
-                        # QueryParser.g:607:37: COMMA cube_rollup_list
+                        # QueryParser.g:531:37: COMMA cube_rollup_list
                         pass 
-                        COMMA468=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_cube_or_rollup4650) 
+                        COMMA468=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_cube_or_rollup4645) 
                         if self._state.backtracking == 0:
                             stream_COMMA.add(COMMA468)
-                        self._state.following.append(self.FOLLOW_cube_rollup_list_in_cube_or_rollup4652)
+                        self._state.following.append(self.FOLLOW_cube_rollup_list_in_cube_or_rollup4647)
                         cube_rollup_list469 = self.cube_rollup_list()
 
                         self._state.following.pop()
@@ -14221,8 +13814,8 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 608:17: -> ( cube_rollup_list )+
-                    # QueryParser.g:608:20: ( cube_rollup_list )+
+                    # 532:17: -> ( cube_rollup_list )+
+                    # QueryParser.g:532:20: ( cube_rollup_list )+
                     if not (stream_cube_rollup_list.hasNext()):
                         raise RewriteEarlyExitException()
 
@@ -14247,9 +13840,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -14267,7 +13857,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "cube_rollup_list"
-    # QueryParser.g:611:1: cube_rollup_list : ( CUBE | ROLLUP ) cube_by_expr_list ;
+    # QueryParser.g:535:1: cube_rollup_list : ( CUBE | ROLLUP ) cube_by_expr_list ;
     def cube_rollup_list(self, ):
 
         retval = self.cube_rollup_list_return()
@@ -14283,8 +13873,8 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:611:18: ( ( CUBE | ROLLUP ) cube_by_expr_list )
-                # QueryParser.g:611:20: ( CUBE | ROLLUP ) cube_by_expr_list
+                # QueryParser.g:535:18: ( ( CUBE | ROLLUP ) cube_by_expr_list )
+                # QueryParser.g:535:20: ( CUBE | ROLLUP ) cube_by_expr_list
                 pass 
                 root_0 = self._adaptor.nil()
 
@@ -14304,7 +13894,7 @@ class QueryParser(Parser):
                     raise mse
 
 
-                self._state.following.append(self.FOLLOW_cube_by_expr_list_in_cube_rollup_list4696)
+                self._state.following.append(self.FOLLOW_cube_by_expr_list_in_cube_rollup_list4691)
                 cube_by_expr_list471 = self.cube_by_expr_list()
 
                 self._state.following.pop()
@@ -14322,9 +13912,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -14342,7 +13929,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "cube_by_expr_list"
-    # QueryParser.g:614:1: cube_by_expr_list : LEFT_PAREN cube_by_expr ( COMMA cube_by_expr )* RIGHT_PAREN -> ( cube_by_expr )+ ;
+    # QueryParser.g:538:1: cube_by_expr_list : LEFT_PAREN cube_by_expr ( COMMA cube_by_expr )* RIGHT_PAREN -> ( cube_by_expr )+ ;
     def cube_by_expr_list(self, ):
 
         retval = self.cube_by_expr_list_return()
@@ -14367,19 +13954,19 @@ class QueryParser(Parser):
         stream_cube_by_expr = RewriteRuleSubtreeStream(self._adaptor, "rule cube_by_expr")
         try:
             try:
-                # QueryParser.g:614:19: ( LEFT_PAREN cube_by_expr ( COMMA cube_by_expr )* RIGHT_PAREN -> ( cube_by_expr )+ )
-                # QueryParser.g:614:21: LEFT_PAREN cube_by_expr ( COMMA cube_by_expr )* RIGHT_PAREN
+                # QueryParser.g:538:19: ( LEFT_PAREN cube_by_expr ( COMMA cube_by_expr )* RIGHT_PAREN -> ( cube_by_expr )+ )
+                # QueryParser.g:538:21: LEFT_PAREN cube_by_expr ( COMMA cube_by_expr )* RIGHT_PAREN
                 pass 
-                LEFT_PAREN472=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_cube_by_expr_list4705) 
+                LEFT_PAREN472=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_cube_by_expr_list4700) 
                 if self._state.backtracking == 0:
                     stream_LEFT_PAREN.add(LEFT_PAREN472)
-                self._state.following.append(self.FOLLOW_cube_by_expr_in_cube_by_expr_list4707)
+                self._state.following.append(self.FOLLOW_cube_by_expr_in_cube_by_expr_list4702)
                 cube_by_expr473 = self.cube_by_expr()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     stream_cube_by_expr.add(cube_by_expr473.tree)
-                # QueryParser.g:614:45: ( COMMA cube_by_expr )*
+                # QueryParser.g:538:45: ( COMMA cube_by_expr )*
                 while True: #loop130
                     alt130 = 2
                     LA130_0 = self.input.LA(1)
@@ -14389,12 +13976,12 @@ class QueryParser(Parser):
 
 
                     if alt130 == 1:
-                        # QueryParser.g:614:47: COMMA cube_by_expr
+                        # QueryParser.g:538:47: COMMA cube_by_expr
                         pass 
-                        COMMA474=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_cube_by_expr_list4711) 
+                        COMMA474=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_cube_by_expr_list4706) 
                         if self._state.backtracking == 0:
                             stream_COMMA.add(COMMA474)
-                        self._state.following.append(self.FOLLOW_cube_by_expr_in_cube_by_expr_list4713)
+                        self._state.following.append(self.FOLLOW_cube_by_expr_in_cube_by_expr_list4708)
                         cube_by_expr475 = self.cube_by_expr()
 
                         self._state.following.pop()
@@ -14404,7 +13991,7 @@ class QueryParser(Parser):
 
                     else:
                         break #loop130
-                RIGHT_PAREN476=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_cube_by_expr_list4718) 
+                RIGHT_PAREN476=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_cube_by_expr_list4713) 
                 if self._state.backtracking == 0:
                     stream_RIGHT_PAREN.add(RIGHT_PAREN476)
 
@@ -14426,8 +14013,8 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 615:20: -> ( cube_by_expr )+
-                    # QueryParser.g:615:23: ( cube_by_expr )+
+                    # 539:20: -> ( cube_by_expr )+
+                    # QueryParser.g:539:23: ( cube_by_expr )+
                     if not (stream_cube_by_expr.hasNext()):
                         raise RewriteEarlyExitException()
 
@@ -14452,9 +14039,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -14472,7 +14056,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "cube_by_expr"
-    # QueryParser.g:618:1: cube_by_expr : ( col_range | expr | STAR );
+    # QueryParser.g:542:1: cube_by_expr : ( col_range | expr | STAR );
     def cube_by_expr(self, ):
 
         retval = self.cube_by_expr_return()
@@ -14490,7 +14074,7 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:618:14: ( col_range | expr | STAR )
+                # QueryParser.g:542:14: ( col_range | expr | STAR )
                 alt131 = 3
                 LA131 = self.input.LA(1)
                 if LA131 == GROUP:
@@ -14568,11 +14152,11 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt131 == 1:
-                    # QueryParser.g:618:16: col_range
+                    # QueryParser.g:542:16: col_range
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_col_range_in_cube_by_expr4751)
+                    self._state.following.append(self.FOLLOW_col_range_in_cube_by_expr4746)
                     col_range477 = self.col_range()
 
                     self._state.following.pop()
@@ -14581,11 +14165,11 @@ class QueryParser(Parser):
 
 
                 elif alt131 == 2:
-                    # QueryParser.g:618:29: expr
+                    # QueryParser.g:542:29: expr
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_expr_in_cube_by_expr4756)
+                    self._state.following.append(self.FOLLOW_expr_in_cube_by_expr4751)
                     expr478 = self.expr()
 
                     self._state.following.pop()
@@ -14594,11 +14178,11 @@ class QueryParser(Parser):
 
 
                 elif alt131 == 3:
-                    # QueryParser.g:618:36: STAR
+                    # QueryParser.g:542:36: STAR
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    STAR479=self.match(self.input, STAR, self.FOLLOW_STAR_in_cube_by_expr4760)
+                    STAR479=self.match(self.input, STAR, self.FOLLOW_STAR_in_cube_by_expr4755)
                     if self._state.backtracking == 0:
 
                         STAR479_tree = self._adaptor.createWithPayload(STAR479)
@@ -14615,9 +14199,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -14635,7 +14216,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "nested_blk"
-    # QueryParser.g:621:1: nested_blk : LEFT_CURLY nested_command_list ( generate_clause SEMI_COLON ) RIGHT_CURLY ;
+    # QueryParser.g:545:1: nested_blk : LEFT_CURLY nested_command_list ( generate_clause SEMI_COLON ) RIGHT_CURLY ;
     def nested_blk(self, ):
 
         retval = self.nested_blk_return()
@@ -14657,32 +14238,32 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:621:12: ( LEFT_CURLY nested_command_list ( generate_clause SEMI_COLON ) RIGHT_CURLY )
-                # QueryParser.g:621:14: LEFT_CURLY nested_command_list ( generate_clause SEMI_COLON ) RIGHT_CURLY
+                # QueryParser.g:545:12: ( LEFT_CURLY nested_command_list ( generate_clause SEMI_COLON ) RIGHT_CURLY )
+                # QueryParser.g:545:14: LEFT_CURLY nested_command_list ( generate_clause SEMI_COLON ) RIGHT_CURLY
                 pass 
                 root_0 = self._adaptor.nil()
 
-                LEFT_CURLY480=self.match(self.input, LEFT_CURLY, self.FOLLOW_LEFT_CURLY_in_nested_blk4769)
-                self._state.following.append(self.FOLLOW_nested_command_list_in_nested_blk4772)
+                LEFT_CURLY480=self.match(self.input, LEFT_CURLY, self.FOLLOW_LEFT_CURLY_in_nested_blk4764)
+                self._state.following.append(self.FOLLOW_nested_command_list_in_nested_blk4767)
                 nested_command_list481 = self.nested_command_list()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, nested_command_list481.tree)
-                # QueryParser.g:621:46: ( generate_clause SEMI_COLON )
-                # QueryParser.g:621:48: generate_clause SEMI_COLON
+                # QueryParser.g:545:46: ( generate_clause SEMI_COLON )
+                # QueryParser.g:545:48: generate_clause SEMI_COLON
                 pass 
-                self._state.following.append(self.FOLLOW_generate_clause_in_nested_blk4776)
+                self._state.following.append(self.FOLLOW_generate_clause_in_nested_blk4771)
                 generate_clause482 = self.generate_clause()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, generate_clause482.tree)
-                SEMI_COLON483=self.match(self.input, SEMI_COLON, self.FOLLOW_SEMI_COLON_in_nested_blk4778)
+                SEMI_COLON483=self.match(self.input, SEMI_COLON, self.FOLLOW_SEMI_COLON_in_nested_blk4773)
 
 
 
-                RIGHT_CURLY484=self.match(self.input, RIGHT_CURLY, self.FOLLOW_RIGHT_CURLY_in_nested_blk4783)
+                RIGHT_CURLY484=self.match(self.input, RIGHT_CURLY, self.FOLLOW_RIGHT_CURLY_in_nested_blk4778)
 
 
 
@@ -14695,9 +14276,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -14715,7 +14293,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "generate_clause"
-    # QueryParser.g:624:1: generate_clause : GENERATE flatten_generated_item ( COMMA flatten_generated_item )* -> ^( GENERATE ( flatten_generated_item )+ ) ;
+    # QueryParser.g:548:1: generate_clause : GENERATE flatten_generated_item ( COMMA flatten_generated_item )* -> ^( GENERATE ( flatten_generated_item )+ ) ;
     def generate_clause(self, ):
 
         retval = self.generate_clause_return()
@@ -14737,19 +14315,19 @@ class QueryParser(Parser):
         stream_flatten_generated_item = RewriteRuleSubtreeStream(self._adaptor, "rule flatten_generated_item")
         try:
             try:
-                # QueryParser.g:624:17: ( GENERATE flatten_generated_item ( COMMA flatten_generated_item )* -> ^( GENERATE ( flatten_generated_item )+ ) )
-                # QueryParser.g:624:19: GENERATE flatten_generated_item ( COMMA flatten_generated_item )*
+                # QueryParser.g:548:17: ( GENERATE flatten_generated_item ( COMMA flatten_generated_item )* -> ^( GENERATE ( flatten_generated_item )+ ) )
+                # QueryParser.g:548:19: GENERATE flatten_generated_item ( COMMA flatten_generated_item )*
                 pass 
-                GENERATE485=self.match(self.input, GENERATE, self.FOLLOW_GENERATE_in_generate_clause4793) 
+                GENERATE485=self.match(self.input, GENERATE, self.FOLLOW_GENERATE_in_generate_clause4788) 
                 if self._state.backtracking == 0:
                     stream_GENERATE.add(GENERATE485)
-                self._state.following.append(self.FOLLOW_flatten_generated_item_in_generate_clause4795)
+                self._state.following.append(self.FOLLOW_flatten_generated_item_in_generate_clause4790)
                 flatten_generated_item486 = self.flatten_generated_item()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     stream_flatten_generated_item.add(flatten_generated_item486.tree)
-                # QueryParser.g:624:51: ( COMMA flatten_generated_item )*
+                # QueryParser.g:548:51: ( COMMA flatten_generated_item )*
                 while True: #loop132
                     alt132 = 2
                     LA132_0 = self.input.LA(1)
@@ -14759,12 +14337,12 @@ class QueryParser(Parser):
 
 
                     if alt132 == 1:
-                        # QueryParser.g:624:53: COMMA flatten_generated_item
+                        # QueryParser.g:548:53: COMMA flatten_generated_item
                         pass 
-                        COMMA487=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_generate_clause4799) 
+                        COMMA487=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_generate_clause4794) 
                         if self._state.backtracking == 0:
                             stream_COMMA.add(COMMA487)
-                        self._state.following.append(self.FOLLOW_flatten_generated_item_in_generate_clause4801)
+                        self._state.following.append(self.FOLLOW_flatten_generated_item_in_generate_clause4796)
                         flatten_generated_item488 = self.flatten_generated_item()
 
                         self._state.following.pop()
@@ -14776,7 +14354,7 @@ class QueryParser(Parser):
                         break #loop132
 
                 # AST Rewrite
-                # elements: GENERATE, flatten_generated_item
+                # elements: flatten_generated_item, GENERATE
                 # token labels: 
                 # rule labels: retval
                 # token list labels: 
@@ -14793,12 +14371,12 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 625:19: -> ^( GENERATE ( flatten_generated_item )+ )
-                    # QueryParser.g:625:22: ^( GENERATE ( flatten_generated_item )+ )
+                    # 549:19: -> ^( GENERATE ( flatten_generated_item )+ )
+                    # QueryParser.g:549:22: ^( GENERATE ( flatten_generated_item )+ )
                     root_1 = self._adaptor.nil()
                     root_1 = self._adaptor.becomeRoot(stream_GENERATE.nextNode(), root_1)
 
-                    # QueryParser.g:625:34: ( flatten_generated_item )+
+                    # QueryParser.g:549:34: ( flatten_generated_item )+
                     if not (stream_flatten_generated_item.hasNext()):
                         raise RewriteEarlyExitException()
 
@@ -14825,9 +14403,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -14845,7 +14420,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "nested_command_list"
-    # QueryParser.g:628:1: nested_command_list : ( ( nested_command SEMI_COLON )* -> ( nested_command )* | );
+    # QueryParser.g:552:1: nested_command_list : ( ( nested_command SEMI_COLON )* -> ( nested_command )* | );
     def nested_command_list(self, ):
 
         retval = self.nested_command_list_return()
@@ -14862,7 +14437,7 @@ class QueryParser(Parser):
         stream_nested_command = RewriteRuleSubtreeStream(self._adaptor, "rule nested_command")
         try:
             try:
-                # QueryParser.g:628:21: ( ( nested_command SEMI_COLON )* -> ( nested_command )* | )
+                # QueryParser.g:552:21: ( ( nested_command SEMI_COLON )* -> ( nested_command )* | )
                 alt134 = 2
                 LA134_0 = self.input.LA(1)
 
@@ -14892,9 +14467,9 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt134 == 1:
-                    # QueryParser.g:628:23: ( nested_command SEMI_COLON )*
+                    # QueryParser.g:552:23: ( nested_command SEMI_COLON )*
                     pass 
-                    # QueryParser.g:628:23: ( nested_command SEMI_COLON )*
+                    # QueryParser.g:552:23: ( nested_command SEMI_COLON )*
                     while True: #loop133
                         alt133 = 2
                         LA133_0 = self.input.LA(1)
@@ -14904,15 +14479,15 @@ class QueryParser(Parser):
 
 
                         if alt133 == 1:
-                            # QueryParser.g:628:25: nested_command SEMI_COLON
+                            # QueryParser.g:552:25: nested_command SEMI_COLON
                             pass 
-                            self._state.following.append(self.FOLLOW_nested_command_in_nested_command_list4844)
+                            self._state.following.append(self.FOLLOW_nested_command_in_nested_command_list4839)
                             nested_command489 = self.nested_command()
 
                             self._state.following.pop()
                             if self._state.backtracking == 0:
                                 stream_nested_command.add(nested_command489.tree)
-                            SEMI_COLON490=self.match(self.input, SEMI_COLON, self.FOLLOW_SEMI_COLON_in_nested_command_list4846) 
+                            SEMI_COLON490=self.match(self.input, SEMI_COLON, self.FOLLOW_SEMI_COLON_in_nested_command_list4841) 
                             if self._state.backtracking == 0:
                                 stream_SEMI_COLON.add(SEMI_COLON490)
 
@@ -14938,8 +14513,8 @@ class QueryParser(Parser):
 
 
                         root_0 = self._adaptor.nil()
-                        # 629:20: -> ( nested_command )*
-                        # QueryParser.g:629:23: ( nested_command )*
+                        # 553:20: -> ( nested_command )*
+                        # QueryParser.g:553:23: ( nested_command )*
                         while stream_nested_command.hasNext():
                             self._adaptor.addChild(root_0, stream_nested_command.nextTree())
 
@@ -14952,7 +14527,7 @@ class QueryParser(Parser):
 
 
                 elif alt134 == 2:
-                    # QueryParser.g:631:1: 
+                    # QueryParser.g:555:1: 
                     pass 
                     root_0 = self._adaptor.nil()
 
@@ -14966,9 +14541,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -14986,7 +14558,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "nested_command"
-    # QueryParser.g:633:1: nested_command : ( ( identifier EQUAL col_ref PERIOD col_ref_list {...}?)=> ( identifier EQUAL nested_proj ) -> ^( NESTED_CMD identifier nested_proj ) | identifier EQUAL expr -> ^( NESTED_CMD_ASSI identifier expr ) | identifier EQUAL nested_op -> ^( NESTED_CMD identifier nested_op ) );
+    # QueryParser.g:557:1: nested_command : ( ( identifier EQUAL col_ref PERIOD col_ref_list {...}?)=> ( identifier EQUAL nested_proj ) -> ^( NESTED_CMD identifier nested_proj ) | identifier EQUAL expr -> ^( NESTED_CMD_ASSI identifier expr ) | identifier EQUAL nested_op -> ^( NESTED_CMD identifier nested_op ) );
     def nested_command(self, ):
 
         retval = self.nested_command_return()
@@ -15020,25 +14592,25 @@ class QueryParser(Parser):
         stream_identifier = RewriteRuleSubtreeStream(self._adaptor, "rule identifier")
         try:
             try:
-                # QueryParser.g:633:16: ( ( identifier EQUAL col_ref PERIOD col_ref_list {...}?)=> ( identifier EQUAL nested_proj ) -> ^( NESTED_CMD identifier nested_proj ) | identifier EQUAL expr -> ^( NESTED_CMD_ASSI identifier expr ) | identifier EQUAL nested_op -> ^( NESTED_CMD identifier nested_op ) )
+                # QueryParser.g:557:16: ( ( identifier EQUAL col_ref PERIOD col_ref_list {...}?)=> ( identifier EQUAL nested_proj ) -> ^( NESTED_CMD identifier nested_proj ) | identifier EQUAL expr -> ^( NESTED_CMD_ASSI identifier expr ) | identifier EQUAL nested_op -> ^( NESTED_CMD identifier nested_op ) )
                 alt135 = 3
                 alt135 = self.dfa135.predict(self.input)
                 if alt135 == 1:
-                    # QueryParser.g:633:18: ( identifier EQUAL col_ref PERIOD col_ref_list {...}?)=> ( identifier EQUAL nested_proj )
+                    # QueryParser.g:557:18: ( identifier EQUAL col_ref PERIOD col_ref_list {...}?)=> ( identifier EQUAL nested_proj )
                     pass 
-                    # QueryParser.g:633:103: ( identifier EQUAL nested_proj )
-                    # QueryParser.g:633:105: identifier EQUAL nested_proj
+                    # QueryParser.g:557:103: ( identifier EQUAL nested_proj )
+                    # QueryParser.g:557:105: identifier EQUAL nested_proj
                     pass 
-                    self._state.following.append(self.FOLLOW_identifier_in_nested_command4924)
+                    self._state.following.append(self.FOLLOW_identifier_in_nested_command4919)
                     identifier491 = self.identifier()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         stream_identifier.add(identifier491.tree)
-                    EQUAL492=self.match(self.input, EQUAL, self.FOLLOW_EQUAL_in_nested_command4926) 
+                    EQUAL492=self.match(self.input, EQUAL, self.FOLLOW_EQUAL_in_nested_command4921) 
                     if self._state.backtracking == 0:
                         stream_EQUAL.add(EQUAL492)
-                    self._state.following.append(self.FOLLOW_nested_proj_in_nested_command4928)
+                    self._state.following.append(self.FOLLOW_nested_proj_in_nested_command4923)
                     nested_proj493 = self.nested_proj()
 
                     self._state.following.pop()
@@ -15049,7 +14621,7 @@ class QueryParser(Parser):
 
 
                     # AST Rewrite
-                    # elements: identifier, nested_proj
+                    # elements: nested_proj, identifier
                     # token labels: 
                     # rule labels: retval
                     # token list labels: 
@@ -15066,8 +14638,8 @@ class QueryParser(Parser):
 
 
                         root_0 = self._adaptor.nil()
-                        # 634:15: -> ^( NESTED_CMD identifier nested_proj )
-                        # QueryParser.g:634:18: ^( NESTED_CMD identifier nested_proj )
+                        # 558:15: -> ^( NESTED_CMD identifier nested_proj )
+                        # QueryParser.g:558:18: ^( NESTED_CMD identifier nested_proj )
                         root_1 = self._adaptor.nil()
                         root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(NESTED_CMD, "NESTED_CMD"), root_1)
 
@@ -15082,18 +14654,18 @@ class QueryParser(Parser):
 
 
                 elif alt135 == 2:
-                    # QueryParser.g:635:18: identifier EQUAL expr
+                    # QueryParser.g:559:18: identifier EQUAL expr
                     pass 
-                    self._state.following.append(self.FOLLOW_identifier_in_nested_command4975)
+                    self._state.following.append(self.FOLLOW_identifier_in_nested_command4970)
                     identifier494 = self.identifier()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         stream_identifier.add(identifier494.tree)
-                    EQUAL495=self.match(self.input, EQUAL, self.FOLLOW_EQUAL_in_nested_command4977) 
+                    EQUAL495=self.match(self.input, EQUAL, self.FOLLOW_EQUAL_in_nested_command4972) 
                     if self._state.backtracking == 0:
                         stream_EQUAL.add(EQUAL495)
-                    self._state.following.append(self.FOLLOW_expr_in_nested_command4979)
+                    self._state.following.append(self.FOLLOW_expr_in_nested_command4974)
                     expr496 = self.expr()
 
                     self._state.following.pop()
@@ -15118,8 +14690,8 @@ class QueryParser(Parser):
 
 
                         root_0 = self._adaptor.nil()
-                        # 636:15: -> ^( NESTED_CMD_ASSI identifier expr )
-                        # QueryParser.g:636:18: ^( NESTED_CMD_ASSI identifier expr )
+                        # 560:15: -> ^( NESTED_CMD_ASSI identifier expr )
+                        # QueryParser.g:560:18: ^( NESTED_CMD_ASSI identifier expr )
                         root_1 = self._adaptor.nil()
                         root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(NESTED_CMD_ASSI, "NESTED_CMD_ASSI"), root_1)
 
@@ -15134,18 +14706,18 @@ class QueryParser(Parser):
 
 
                 elif alt135 == 3:
-                    # QueryParser.g:637:18: identifier EQUAL nested_op
+                    # QueryParser.g:561:18: identifier EQUAL nested_op
                     pass 
-                    self._state.following.append(self.FOLLOW_identifier_in_nested_command5024)
+                    self._state.following.append(self.FOLLOW_identifier_in_nested_command5019)
                     identifier497 = self.identifier()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         stream_identifier.add(identifier497.tree)
-                    EQUAL498=self.match(self.input, EQUAL, self.FOLLOW_EQUAL_in_nested_command5026) 
+                    EQUAL498=self.match(self.input, EQUAL, self.FOLLOW_EQUAL_in_nested_command5021) 
                     if self._state.backtracking == 0:
                         stream_EQUAL.add(EQUAL498)
-                    self._state.following.append(self.FOLLOW_nested_op_in_nested_command5028)
+                    self._state.following.append(self.FOLLOW_nested_op_in_nested_command5023)
                     nested_op499 = self.nested_op()
 
                     self._state.following.pop()
@@ -15170,8 +14742,8 @@ class QueryParser(Parser):
 
 
                         root_0 = self._adaptor.nil()
-                        # 638:15: -> ^( NESTED_CMD identifier nested_op )
-                        # QueryParser.g:638:18: ^( NESTED_CMD identifier nested_op )
+                        # 562:15: -> ^( NESTED_CMD identifier nested_op )
+                        # QueryParser.g:562:18: ^( NESTED_CMD identifier nested_op )
                         root_1 = self._adaptor.nil()
                         root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(NESTED_CMD, "NESTED_CMD"), root_1)
 
@@ -15194,9 +14766,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -15214,7 +14783,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "nested_op"
-    # QueryParser.g:641:1: nested_op : ( nested_filter | nested_sort | nested_distinct | nested_limit | nested_cross | nested_foreach );
+    # QueryParser.g:565:1: nested_op : ( nested_filter | nested_sort | nested_distinct | nested_limit | nested_cross | nested_foreach );
     def nested_op(self, ):
 
         retval = self.nested_op_return()
@@ -15238,7 +14807,7 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:641:11: ( nested_filter | nested_sort | nested_distinct | nested_limit | nested_cross | nested_foreach )
+                # QueryParser.g:565:11: ( nested_filter | nested_sort | nested_distinct | nested_limit | nested_cross | nested_foreach )
                 alt136 = 6
                 LA136 = self.input.LA(1)
                 if LA136 == FILTER:
@@ -15262,11 +14831,11 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt136 == 1:
-                    # QueryParser.g:641:13: nested_filter
+                    # QueryParser.g:565:13: nested_filter
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_nested_filter_in_nested_op5063)
+                    self._state.following.append(self.FOLLOW_nested_filter_in_nested_op5058)
                     nested_filter500 = self.nested_filter()
 
                     self._state.following.pop()
@@ -15275,11 +14844,11 @@ class QueryParser(Parser):
 
 
                 elif alt136 == 2:
-                    # QueryParser.g:642:13: nested_sort
+                    # QueryParser.g:566:13: nested_sort
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_nested_sort_in_nested_op5077)
+                    self._state.following.append(self.FOLLOW_nested_sort_in_nested_op5072)
                     nested_sort501 = self.nested_sort()
 
                     self._state.following.pop()
@@ -15288,11 +14857,11 @@ class QueryParser(Parser):
 
 
                 elif alt136 == 3:
-                    # QueryParser.g:643:13: nested_distinct
+                    # QueryParser.g:567:13: nested_distinct
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_nested_distinct_in_nested_op5091)
+                    self._state.following.append(self.FOLLOW_nested_distinct_in_nested_op5086)
                     nested_distinct502 = self.nested_distinct()
 
                     self._state.following.pop()
@@ -15301,11 +14870,11 @@ class QueryParser(Parser):
 
 
                 elif alt136 == 4:
-                    # QueryParser.g:644:13: nested_limit
+                    # QueryParser.g:568:13: nested_limit
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_nested_limit_in_nested_op5105)
+                    self._state.following.append(self.FOLLOW_nested_limit_in_nested_op5100)
                     nested_limit503 = self.nested_limit()
 
                     self._state.following.pop()
@@ -15314,11 +14883,11 @@ class QueryParser(Parser):
 
 
                 elif alt136 == 5:
-                    # QueryParser.g:645:13: nested_cross
+                    # QueryParser.g:569:13: nested_cross
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_nested_cross_in_nested_op5119)
+                    self._state.following.append(self.FOLLOW_nested_cross_in_nested_op5114)
                     nested_cross504 = self.nested_cross()
 
                     self._state.following.pop()
@@ -15327,11 +14896,11 @@ class QueryParser(Parser):
 
 
                 elif alt136 == 6:
-                    # QueryParser.g:646:13: nested_foreach
+                    # QueryParser.g:570:13: nested_foreach
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_nested_foreach_in_nested_op5133)
+                    self._state.following.append(self.FOLLOW_nested_foreach_in_nested_op5128)
                     nested_foreach505 = self.nested_foreach()
 
                     self._state.following.pop()
@@ -15348,9 +14917,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -15368,7 +14934,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "nested_proj"
-    # QueryParser.g:649:1: nested_proj : col_ref PERIOD col_ref_list -> ^( NESTED_PROJ col_ref col_ref_list ) ;
+    # QueryParser.g:573:1: nested_proj : col_ref PERIOD col_ref_list -> ^( NESTED_PROJ col_ref col_ref_list ) ;
     def nested_proj(self, ):
 
         retval = self.nested_proj_return()
@@ -15388,19 +14954,19 @@ class QueryParser(Parser):
         stream_col_ref = RewriteRuleSubtreeStream(self._adaptor, "rule col_ref")
         try:
             try:
-                # QueryParser.g:649:13: ( col_ref PERIOD col_ref_list -> ^( NESTED_PROJ col_ref col_ref_list ) )
-                # QueryParser.g:649:15: col_ref PERIOD col_ref_list
+                # QueryParser.g:573:13: ( col_ref PERIOD col_ref_list -> ^( NESTED_PROJ col_ref col_ref_list ) )
+                # QueryParser.g:573:15: col_ref PERIOD col_ref_list
                 pass 
-                self._state.following.append(self.FOLLOW_col_ref_in_nested_proj5142)
+                self._state.following.append(self.FOLLOW_col_ref_in_nested_proj5137)
                 col_ref506 = self.col_ref()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     stream_col_ref.add(col_ref506.tree)
-                PERIOD507=self.match(self.input, PERIOD, self.FOLLOW_PERIOD_in_nested_proj5144) 
+                PERIOD507=self.match(self.input, PERIOD, self.FOLLOW_PERIOD_in_nested_proj5139) 
                 if self._state.backtracking == 0:
                     stream_PERIOD.add(PERIOD507)
-                self._state.following.append(self.FOLLOW_col_ref_list_in_nested_proj5146)
+                self._state.following.append(self.FOLLOW_col_ref_list_in_nested_proj5141)
                 col_ref_list508 = self.col_ref_list()
 
                 self._state.following.pop()
@@ -15425,8 +14991,8 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 650:12: -> ^( NESTED_PROJ col_ref col_ref_list )
-                    # QueryParser.g:650:15: ^( NESTED_PROJ col_ref col_ref_list )
+                    # 574:12: -> ^( NESTED_PROJ col_ref col_ref_list )
+                    # QueryParser.g:574:15: ^( NESTED_PROJ col_ref col_ref_list )
                     root_1 = self._adaptor.nil()
                     root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(NESTED_PROJ, "NESTED_PROJ"), root_1)
 
@@ -15450,9 +15016,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -15470,7 +15033,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "col_ref_list"
-    # QueryParser.g:653:1: col_ref_list : ( col_ref | ( LEFT_PAREN col_ref ( COMMA col_ref )* RIGHT_PAREN ) ) -> ( col_ref )+ ;
+    # QueryParser.g:577:1: col_ref_list : ( col_ref | ( LEFT_PAREN col_ref ( COMMA col_ref )* RIGHT_PAREN ) ) -> ( col_ref )+ ;
     def col_ref_list(self, ):
 
         retval = self.col_ref_list_return()
@@ -15497,10 +15060,10 @@ class QueryParser(Parser):
         stream_col_ref = RewriteRuleSubtreeStream(self._adaptor, "rule col_ref")
         try:
             try:
-                # QueryParser.g:653:14: ( ( col_ref | ( LEFT_PAREN col_ref ( COMMA col_ref )* RIGHT_PAREN ) ) -> ( col_ref )+ )
-                # QueryParser.g:653:16: ( col_ref | ( LEFT_PAREN col_ref ( COMMA col_ref )* RIGHT_PAREN ) )
+                # QueryParser.g:577:14: ( ( col_ref | ( LEFT_PAREN col_ref ( COMMA col_ref )* RIGHT_PAREN ) ) -> ( col_ref )+ )
+                # QueryParser.g:577:16: ( col_ref | ( LEFT_PAREN col_ref ( COMMA col_ref )* RIGHT_PAREN ) )
                 pass 
-                # QueryParser.g:653:16: ( col_ref | ( LEFT_PAREN col_ref ( COMMA col_ref )* RIGHT_PAREN ) )
+                # QueryParser.g:577:16: ( col_ref | ( LEFT_PAREN col_ref ( COMMA col_ref )* RIGHT_PAREN ) )
                 alt138 = 2
                 LA138_0 = self.input.LA(1)
 
@@ -15517,9 +15080,9 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt138 == 1:
-                    # QueryParser.g:653:18: col_ref
+                    # QueryParser.g:577:18: col_ref
                     pass 
-                    self._state.following.append(self.FOLLOW_col_ref_in_col_ref_list5180)
+                    self._state.following.append(self.FOLLOW_col_ref_in_col_ref_list5175)
                     col_ref509 = self.col_ref()
 
                     self._state.following.pop()
@@ -15528,21 +15091,21 @@ class QueryParser(Parser):
 
 
                 elif alt138 == 2:
-                    # QueryParser.g:653:28: ( LEFT_PAREN col_ref ( COMMA col_ref )* RIGHT_PAREN )
+                    # QueryParser.g:577:28: ( LEFT_PAREN col_ref ( COMMA col_ref )* RIGHT_PAREN )
                     pass 
-                    # QueryParser.g:653:28: ( LEFT_PAREN col_ref ( COMMA col_ref )* RIGHT_PAREN )
-                    # QueryParser.g:653:30: LEFT_PAREN col_ref ( COMMA col_ref )* RIGHT_PAREN
+                    # QueryParser.g:577:28: ( LEFT_PAREN col_ref ( COMMA col_ref )* RIGHT_PAREN )
+                    # QueryParser.g:577:30: LEFT_PAREN col_ref ( COMMA col_ref )* RIGHT_PAREN
                     pass 
-                    LEFT_PAREN510=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_col_ref_list5186) 
+                    LEFT_PAREN510=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_col_ref_list5181) 
                     if self._state.backtracking == 0:
                         stream_LEFT_PAREN.add(LEFT_PAREN510)
-                    self._state.following.append(self.FOLLOW_col_ref_in_col_ref_list5188)
+                    self._state.following.append(self.FOLLOW_col_ref_in_col_ref_list5183)
                     col_ref511 = self.col_ref()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         stream_col_ref.add(col_ref511.tree)
-                    # QueryParser.g:653:49: ( COMMA col_ref )*
+                    # QueryParser.g:577:49: ( COMMA col_ref )*
                     while True: #loop137
                         alt137 = 2
                         LA137_0 = self.input.LA(1)
@@ -15552,12 +15115,12 @@ class QueryParser(Parser):
 
 
                         if alt137 == 1:
-                            # QueryParser.g:653:51: COMMA col_ref
+                            # QueryParser.g:577:51: COMMA col_ref
                             pass 
-                            COMMA512=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_col_ref_list5192) 
+                            COMMA512=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_col_ref_list5187) 
                             if self._state.backtracking == 0:
                                 stream_COMMA.add(COMMA512)
-                            self._state.following.append(self.FOLLOW_col_ref_in_col_ref_list5194)
+                            self._state.following.append(self.FOLLOW_col_ref_in_col_ref_list5189)
                             col_ref513 = self.col_ref()
 
                             self._state.following.pop()
@@ -15567,7 +15130,7 @@ class QueryParser(Parser):
 
                         else:
                             break #loop137
-                    RIGHT_PAREN514=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_col_ref_list5199) 
+                    RIGHT_PAREN514=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_col_ref_list5194) 
                     if self._state.backtracking == 0:
                         stream_RIGHT_PAREN.add(RIGHT_PAREN514)
 
@@ -15595,8 +15158,8 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 654:13: -> ( col_ref )+
-                    # QueryParser.g:654:16: ( col_ref )+
+                    # 578:13: -> ( col_ref )+
+                    # QueryParser.g:578:16: ( col_ref )+
                     if not (stream_col_ref.hasNext()):
                         raise RewriteEarlyExitException()
 
@@ -15621,9 +15184,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -15641,7 +15201,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "nested_filter"
-    # QueryParser.g:657:1: nested_filter : FILTER nested_op_input BY cond ;
+    # QueryParser.g:581:1: nested_filter : FILTER nested_op_input BY cond ;
     def nested_filter(self, ):
 
         retval = self.nested_filter_return()
@@ -15661,25 +15221,25 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:657:15: ( FILTER nested_op_input BY cond )
-                # QueryParser.g:657:17: FILTER nested_op_input BY cond
+                # QueryParser.g:581:15: ( FILTER nested_op_input BY cond )
+                # QueryParser.g:581:17: FILTER nested_op_input BY cond
                 pass 
                 root_0 = self._adaptor.nil()
 
-                FILTER515=self.match(self.input, FILTER, self.FOLLOW_FILTER_in_nested_filter5229)
+                FILTER515=self.match(self.input, FILTER, self.FOLLOW_FILTER_in_nested_filter5224)
                 if self._state.backtracking == 0:
 
                     FILTER515_tree = self._adaptor.createWithPayload(FILTER515)
                     root_0 = self._adaptor.becomeRoot(FILTER515_tree, root_0)
 
-                self._state.following.append(self.FOLLOW_nested_op_input_in_nested_filter5232)
+                self._state.following.append(self.FOLLOW_nested_op_input_in_nested_filter5227)
                 nested_op_input516 = self.nested_op_input()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, nested_op_input516.tree)
-                BY517=self.match(self.input, BY, self.FOLLOW_BY_in_nested_filter5234)
-                self._state.following.append(self.FOLLOW_cond_in_nested_filter5237)
+                BY517=self.match(self.input, BY, self.FOLLOW_BY_in_nested_filter5229)
+                self._state.following.append(self.FOLLOW_cond_in_nested_filter5232)
                 cond518 = self.cond()
 
                 self._state.following.pop()
@@ -15697,9 +15257,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -15717,7 +15274,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "nested_sort"
-    # QueryParser.g:660:1: nested_sort : ORDER nested_op_input BY order_by_clause ( USING func_clause )? ;
+    # QueryParser.g:584:1: nested_sort : ORDER nested_op_input BY order_by_clause ( USING func_clause )? ;
     def nested_sort(self, ):
 
         retval = self.nested_sort_return()
@@ -15741,41 +15298,41 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:660:13: ( ORDER nested_op_input BY order_by_clause ( USING func_clause )? )
-                # QueryParser.g:660:15: ORDER nested_op_input BY order_by_clause ( USING func_clause )?
+                # QueryParser.g:584:13: ( ORDER nested_op_input BY order_by_clause ( USING func_clause )? )
+                # QueryParser.g:584:15: ORDER nested_op_input BY order_by_clause ( USING func_clause )?
                 pass 
                 root_0 = self._adaptor.nil()
 
-                ORDER519=self.match(self.input, ORDER, self.FOLLOW_ORDER_in_nested_sort5246)
+                ORDER519=self.match(self.input, ORDER, self.FOLLOW_ORDER_in_nested_sort5241)
                 if self._state.backtracking == 0:
 
                     ORDER519_tree = self._adaptor.createWithPayload(ORDER519)
                     root_0 = self._adaptor.becomeRoot(ORDER519_tree, root_0)
 
-                self._state.following.append(self.FOLLOW_nested_op_input_in_nested_sort5249)
+                self._state.following.append(self.FOLLOW_nested_op_input_in_nested_sort5244)
                 nested_op_input520 = self.nested_op_input()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, nested_op_input520.tree)
-                BY521=self.match(self.input, BY, self.FOLLOW_BY_in_nested_sort5251)
-                self._state.following.append(self.FOLLOW_order_by_clause_in_nested_sort5255)
+                BY521=self.match(self.input, BY, self.FOLLOW_BY_in_nested_sort5246)
+                self._state.following.append(self.FOLLOW_order_by_clause_in_nested_sort5250)
                 order_by_clause522 = self.order_by_clause()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, order_by_clause522.tree)
-                # QueryParser.g:660:59: ( USING func_clause )?
+                # QueryParser.g:584:59: ( USING func_clause )?
                 alt139 = 2
                 LA139_0 = self.input.LA(1)
 
                 if (LA139_0 == USING) :
                     alt139 = 1
                 if alt139 == 1:
-                    # QueryParser.g:660:61: USING func_clause
+                    # QueryParser.g:584:61: USING func_clause
                     pass 
-                    USING523=self.match(self.input, USING, self.FOLLOW_USING_in_nested_sort5259)
-                    self._state.following.append(self.FOLLOW_func_clause_in_nested_sort5262)
+                    USING523=self.match(self.input, USING, self.FOLLOW_USING_in_nested_sort5254)
+                    self._state.following.append(self.FOLLOW_func_clause_in_nested_sort5257)
                     func_clause524 = self.func_clause()
 
                     self._state.following.pop()
@@ -15796,9 +15353,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -15816,7 +15370,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "nested_distinct"
-    # QueryParser.g:663:1: nested_distinct : DISTINCT nested_op_input ;
+    # QueryParser.g:587:1: nested_distinct : DISTINCT nested_op_input ;
     def nested_distinct(self, ):
 
         retval = self.nested_distinct_return()
@@ -15832,18 +15386,18 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:663:17: ( DISTINCT nested_op_input )
-                # QueryParser.g:663:19: DISTINCT nested_op_input
+                # QueryParser.g:587:17: ( DISTINCT nested_op_input )
+                # QueryParser.g:587:19: DISTINCT nested_op_input
                 pass 
                 root_0 = self._adaptor.nil()
 
-                DISTINCT525=self.match(self.input, DISTINCT, self.FOLLOW_DISTINCT_in_nested_distinct5274)
+                DISTINCT525=self.match(self.input, DISTINCT, self.FOLLOW_DISTINCT_in_nested_distinct5269)
                 if self._state.backtracking == 0:
 
                     DISTINCT525_tree = self._adaptor.createWithPayload(DISTINCT525)
                     root_0 = self._adaptor.becomeRoot(DISTINCT525_tree, root_0)
 
-                self._state.following.append(self.FOLLOW_nested_op_input_in_nested_distinct5277)
+                self._state.following.append(self.FOLLOW_nested_op_input_in_nested_distinct5272)
                 nested_op_input526 = self.nested_op_input()
 
                 self._state.following.pop()
@@ -15861,9 +15415,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -15881,7 +15432,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "nested_limit"
-    # QueryParser.g:666:1: nested_limit : LIMIT nested_op_input ( ( INTEGER SEMI_COLON )=> INTEGER | expr ) ;
+    # QueryParser.g:590:1: nested_limit : LIMIT nested_op_input ( ( INTEGER SEMI_COLON )=> INTEGER | expr ) ;
     def nested_limit(self, ):
 
         retval = self.nested_limit_return()
@@ -15901,24 +15452,24 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:666:14: ( LIMIT nested_op_input ( ( INTEGER SEMI_COLON )=> INTEGER | expr ) )
-                # QueryParser.g:666:16: LIMIT nested_op_input ( ( INTEGER SEMI_COLON )=> INTEGER | expr )
+                # QueryParser.g:590:14: ( LIMIT nested_op_input ( ( INTEGER SEMI_COLON )=> INTEGER | expr ) )
+                # QueryParser.g:590:16: LIMIT nested_op_input ( ( INTEGER SEMI_COLON )=> INTEGER | expr )
                 pass 
                 root_0 = self._adaptor.nil()
 
-                LIMIT527=self.match(self.input, LIMIT, self.FOLLOW_LIMIT_in_nested_limit5286)
+                LIMIT527=self.match(self.input, LIMIT, self.FOLLOW_LIMIT_in_nested_limit5281)
                 if self._state.backtracking == 0:
 
                     LIMIT527_tree = self._adaptor.createWithPayload(LIMIT527)
                     root_0 = self._adaptor.becomeRoot(LIMIT527_tree, root_0)
 
-                self._state.following.append(self.FOLLOW_nested_op_input_in_nested_limit5289)
+                self._state.following.append(self.FOLLOW_nested_op_input_in_nested_limit5284)
                 nested_op_input528 = self.nested_op_input()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, nested_op_input528.tree)
-                # QueryParser.g:666:39: ( ( INTEGER SEMI_COLON )=> INTEGER | expr )
+                # QueryParser.g:590:39: ( ( INTEGER SEMI_COLON )=> INTEGER | expr )
                 alt140 = 2
                 LA140_0 = self.input.LA(1)
 
@@ -15948,9 +15499,9 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt140 == 1:
-                    # QueryParser.g:666:41: ( INTEGER SEMI_COLON )=> INTEGER
+                    # QueryParser.g:590:41: ( INTEGER SEMI_COLON )=> INTEGER
                     pass 
-                    INTEGER529=self.match(self.input, INTEGER, self.FOLLOW_INTEGER_in_nested_limit5301)
+                    INTEGER529=self.match(self.input, INTEGER, self.FOLLOW_INTEGER_in_nested_limit5296)
                     if self._state.backtracking == 0:
 
                         INTEGER529_tree = self._adaptor.createWithPayload(INTEGER529)
@@ -15959,9 +15510,9 @@ class QueryParser(Parser):
 
 
                 elif alt140 == 2:
-                    # QueryParser.g:666:75: expr
+                    # QueryParser.g:590:75: expr
                     pass 
-                    self._state.following.append(self.FOLLOW_expr_in_nested_limit5305)
+                    self._state.following.append(self.FOLLOW_expr_in_nested_limit5300)
                     expr530 = self.expr()
 
                     self._state.following.pop()
@@ -15982,9 +15533,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -16002,7 +15550,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "nested_cross"
-    # QueryParser.g:669:1: nested_cross : CROSS nested_op_input_list ;
+    # QueryParser.g:593:1: nested_cross : CROSS nested_op_input_list ;
     def nested_cross(self, ):
 
         retval = self.nested_cross_return()
@@ -16018,18 +15566,18 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:669:14: ( CROSS nested_op_input_list )
-                # QueryParser.g:669:16: CROSS nested_op_input_list
+                # QueryParser.g:593:14: ( CROSS nested_op_input_list )
+                # QueryParser.g:593:16: CROSS nested_op_input_list
                 pass 
                 root_0 = self._adaptor.nil()
 
-                CROSS531=self.match(self.input, CROSS, self.FOLLOW_CROSS_in_nested_cross5316)
+                CROSS531=self.match(self.input, CROSS, self.FOLLOW_CROSS_in_nested_cross5311)
                 if self._state.backtracking == 0:
 
                     CROSS531_tree = self._adaptor.createWithPayload(CROSS531)
                     root_0 = self._adaptor.becomeRoot(CROSS531_tree, root_0)
 
-                self._state.following.append(self.FOLLOW_nested_op_input_list_in_nested_cross5319)
+                self._state.following.append(self.FOLLOW_nested_op_input_list_in_nested_cross5314)
                 nested_op_input_list532 = self.nested_op_input_list()
 
                 self._state.following.pop()
@@ -16047,9 +15595,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -16067,7 +15612,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "nested_foreach"
-    # QueryParser.g:672:1: nested_foreach : FOREACH nested_op_input generate_clause ;
+    # QueryParser.g:596:1: nested_foreach : FOREACH nested_op_input generate_clause ;
     def nested_foreach(self, ):
 
         retval = self.nested_foreach_return()
@@ -16085,24 +15630,24 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:672:15: ( FOREACH nested_op_input generate_clause )
-                # QueryParser.g:672:17: FOREACH nested_op_input generate_clause
+                # QueryParser.g:596:15: ( FOREACH nested_op_input generate_clause )
+                # QueryParser.g:596:17: FOREACH nested_op_input generate_clause
                 pass 
                 root_0 = self._adaptor.nil()
 
-                FOREACH533=self.match(self.input, FOREACH, self.FOLLOW_FOREACH_in_nested_foreach5327)
+                FOREACH533=self.match(self.input, FOREACH, self.FOLLOW_FOREACH_in_nested_foreach5322)
                 if self._state.backtracking == 0:
 
                     FOREACH533_tree = self._adaptor.createWithPayload(FOREACH533)
                     root_0 = self._adaptor.becomeRoot(FOREACH533_tree, root_0)
 
-                self._state.following.append(self.FOLLOW_nested_op_input_in_nested_foreach5330)
+                self._state.following.append(self.FOLLOW_nested_op_input_in_nested_foreach5325)
                 nested_op_input534 = self.nested_op_input()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, nested_op_input534.tree)
-                self._state.following.append(self.FOLLOW_generate_clause_in_nested_foreach5332)
+                self._state.following.append(self.FOLLOW_generate_clause_in_nested_foreach5327)
                 generate_clause535 = self.generate_clause()
 
                 self._state.following.pop()
@@ -16120,9 +15665,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -16140,7 +15682,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "nested_op_input"
-    # QueryParser.g:675:1: nested_op_input : ( col_ref | nested_proj );
+    # QueryParser.g:599:1: nested_op_input : ( col_ref | nested_proj );
     def nested_op_input(self, ):
 
         retval = self.nested_op_input_return()
@@ -16156,7 +15698,7 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:675:17: ( col_ref | nested_proj )
+                # QueryParser.g:599:17: ( col_ref | nested_proj )
                 alt141 = 2
                 LA141 = self.input.LA(1)
                 if LA141 == GROUP:
@@ -16228,11 +15770,11 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt141 == 1:
-                    # QueryParser.g:675:19: col_ref
+                    # QueryParser.g:599:19: col_ref
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_col_ref_in_nested_op_input5341)
+                    self._state.following.append(self.FOLLOW_col_ref_in_nested_op_input5336)
                     col_ref536 = self.col_ref()
 
                     self._state.following.pop()
@@ -16241,11 +15783,11 @@ class QueryParser(Parser):
 
 
                 elif alt141 == 2:
-                    # QueryParser.g:675:29: nested_proj
+                    # QueryParser.g:599:29: nested_proj
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_nested_proj_in_nested_op_input5345)
+                    self._state.following.append(self.FOLLOW_nested_proj_in_nested_op_input5340)
                     nested_proj537 = self.nested_proj()
 
                     self._state.following.pop()
@@ -16262,9 +15804,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -16282,7 +15821,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "nested_op_input_list"
-    # QueryParser.g:678:1: nested_op_input_list : nested_op_input ( COMMA nested_op_input )* -> ( nested_op_input )+ ;
+    # QueryParser.g:602:1: nested_op_input_list : nested_op_input ( COMMA nested_op_input )* -> ( nested_op_input )+ ;
     def nested_op_input_list(self, ):
 
         retval = self.nested_op_input_list_return()
@@ -16301,16 +15840,16 @@ class QueryParser(Parser):
         stream_nested_op_input = RewriteRuleSubtreeStream(self._adaptor, "rule nested_op_input")
         try:
             try:
-                # QueryParser.g:678:22: ( nested_op_input ( COMMA nested_op_input )* -> ( nested_op_input )+ )
-                # QueryParser.g:678:24: nested_op_input ( COMMA nested_op_input )*
+                # QueryParser.g:602:22: ( nested_op_input ( COMMA nested_op_input )* -> ( nested_op_input )+ )
+                # QueryParser.g:602:24: nested_op_input ( COMMA nested_op_input )*
                 pass 
-                self._state.following.append(self.FOLLOW_nested_op_input_in_nested_op_input_list5354)
+                self._state.following.append(self.FOLLOW_nested_op_input_in_nested_op_input_list5349)
                 nested_op_input538 = self.nested_op_input()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     stream_nested_op_input.add(nested_op_input538.tree)
-                # QueryParser.g:678:40: ( COMMA nested_op_input )*
+                # QueryParser.g:602:40: ( COMMA nested_op_input )*
                 while True: #loop142
                     alt142 = 2
                     LA142_0 = self.input.LA(1)
@@ -16320,12 +15859,12 @@ class QueryParser(Parser):
 
 
                     if alt142 == 1:
-                        # QueryParser.g:678:42: COMMA nested_op_input
+                        # QueryParser.g:602:42: COMMA nested_op_input
                         pass 
-                        COMMA539=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_nested_op_input_list5358) 
+                        COMMA539=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_nested_op_input_list5353) 
                         if self._state.backtracking == 0:
                             stream_COMMA.add(COMMA539)
-                        self._state.following.append(self.FOLLOW_nested_op_input_in_nested_op_input_list5360)
+                        self._state.following.append(self.FOLLOW_nested_op_input_in_nested_op_input_list5355)
                         nested_op_input540 = self.nested_op_input()
 
                         self._state.following.pop()
@@ -16354,8 +15893,8 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 679:9: -> ( nested_op_input )+
-                    # QueryParser.g:679:12: ( nested_op_input )+
+                    # 603:9: -> ( nested_op_input )+
+                    # QueryParser.g:603:12: ( nested_op_input )+
                     if not (stream_nested_op_input.hasNext()):
                         raise RewriteEarlyExitException()
 
@@ -16380,9 +15919,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -16400,7 +15936,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "stream_clause"
-    # QueryParser.g:682:1: stream_clause : STREAM rel THROUGH ( EXECCOMMAND | alias ) ( as_clause )? ;
+    # QueryParser.g:606:1: stream_clause : STREAM rel THROUGH ( EXECCOMMAND | alias ) ( as_clause )? ;
     def stream_clause(self, ):
 
         retval = self.stream_clause_return()
@@ -16424,25 +15960,25 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:682:15: ( STREAM rel THROUGH ( EXECCOMMAND | alias ) ( as_clause )? )
-                # QueryParser.g:682:17: STREAM rel THROUGH ( EXECCOMMAND | alias ) ( as_clause )?
+                # QueryParser.g:606:15: ( STREAM rel THROUGH ( EXECCOMMAND | alias ) ( as_clause )? )
+                # QueryParser.g:606:17: STREAM rel THROUGH ( EXECCOMMAND | alias ) ( as_clause )?
                 pass 
                 root_0 = self._adaptor.nil()
 
-                STREAM541=self.match(self.input, STREAM, self.FOLLOW_STREAM_in_stream_clause5385)
+                STREAM541=self.match(self.input, STREAM, self.FOLLOW_STREAM_in_stream_clause5380)
                 if self._state.backtracking == 0:
 
                     STREAM541_tree = self._adaptor.createWithPayload(STREAM541)
                     root_0 = self._adaptor.becomeRoot(STREAM541_tree, root_0)
 
-                self._state.following.append(self.FOLLOW_rel_in_stream_clause5388)
+                self._state.following.append(self.FOLLOW_rel_in_stream_clause5383)
                 rel542 = self.rel()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, rel542.tree)
-                THROUGH543=self.match(self.input, THROUGH, self.FOLLOW_THROUGH_in_stream_clause5390)
-                # QueryParser.g:682:38: ( EXECCOMMAND | alias )
+                THROUGH543=self.match(self.input, THROUGH, self.FOLLOW_THROUGH_in_stream_clause5385)
+                # QueryParser.g:606:38: ( EXECCOMMAND | alias )
                 alt143 = 2
                 LA143_0 = self.input.LA(1)
 
@@ -16459,9 +15995,9 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt143 == 1:
-                    # QueryParser.g:682:40: EXECCOMMAND
+                    # QueryParser.g:606:40: EXECCOMMAND
                     pass 
-                    EXECCOMMAND544=self.match(self.input, EXECCOMMAND, self.FOLLOW_EXECCOMMAND_in_stream_clause5395)
+                    EXECCOMMAND544=self.match(self.input, EXECCOMMAND, self.FOLLOW_EXECCOMMAND_in_stream_clause5390)
                     if self._state.backtracking == 0:
 
                         EXECCOMMAND544_tree = self._adaptor.createWithPayload(EXECCOMMAND544)
@@ -16470,9 +16006,9 @@ class QueryParser(Parser):
 
 
                 elif alt143 == 2:
-                    # QueryParser.g:682:54: alias
+                    # QueryParser.g:606:54: alias
                     pass 
-                    self._state.following.append(self.FOLLOW_alias_in_stream_clause5399)
+                    self._state.following.append(self.FOLLOW_alias_in_stream_clause5394)
                     alias545 = self.alias()
 
                     self._state.following.pop()
@@ -16481,7 +16017,7 @@ class QueryParser(Parser):
 
 
 
-                # QueryParser.g:682:62: ( as_clause )?
+                # QueryParser.g:606:62: ( as_clause )?
                 alt144 = 2
                 LA144_0 = self.input.LA(1)
 
@@ -16490,7 +16026,7 @@ class QueryParser(Parser):
                 if alt144 == 1:
                     # QueryParser.g:0:0: as_clause
                     pass 
-                    self._state.following.append(self.FOLLOW_as_clause_in_stream_clause5403)
+                    self._state.following.append(self.FOLLOW_as_clause_in_stream_clause5398)
                     as_clause546 = self.as_clause()
 
                     self._state.following.pop()
@@ -16511,9 +16047,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -16531,7 +16064,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "mr_clause"
-    # QueryParser.g:685:1: mr_clause : MAPREDUCE QUOTEDSTRING ( LEFT_PAREN path_list RIGHT_PAREN )? store_clause load_clause ( EXECCOMMAND )? ;
+    # QueryParser.g:609:1: mr_clause : MAPREDUCE QUOTEDSTRING ( LEFT_PAREN path_list RIGHT_PAREN )? store_clause load_clause ( EXECCOMMAND )? ;
     def mr_clause(self, ):
 
         retval = self.mr_clause_return()
@@ -16559,56 +16092,56 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:685:11: ( MAPREDUCE QUOTEDSTRING ( LEFT_PAREN path_list RIGHT_PAREN )? store_clause load_clause ( EXECCOMMAND )? )
-                # QueryParser.g:685:13: MAPREDUCE QUOTEDSTRING ( LEFT_PAREN path_list RIGHT_PAREN )? store_clause load_clause ( EXECCOMMAND )?
+                # QueryParser.g:609:11: ( MAPREDUCE QUOTEDSTRING ( LEFT_PAREN path_list RIGHT_PAREN )? store_clause load_clause ( EXECCOMMAND )? )
+                # QueryParser.g:609:13: MAPREDUCE QUOTEDSTRING ( LEFT_PAREN path_list RIGHT_PAREN )? store_clause load_clause ( EXECCOMMAND )?
                 pass 
                 root_0 = self._adaptor.nil()
 
-                MAPREDUCE547=self.match(self.input, MAPREDUCE, self.FOLLOW_MAPREDUCE_in_mr_clause5413)
+                MAPREDUCE547=self.match(self.input, MAPREDUCE, self.FOLLOW_MAPREDUCE_in_mr_clause5408)
                 if self._state.backtracking == 0:
 
                     MAPREDUCE547_tree = self._adaptor.createWithPayload(MAPREDUCE547)
                     root_0 = self._adaptor.becomeRoot(MAPREDUCE547_tree, root_0)
 
-                QUOTEDSTRING548=self.match(self.input, QUOTEDSTRING, self.FOLLOW_QUOTEDSTRING_in_mr_clause5416)
+                QUOTEDSTRING548=self.match(self.input, QUOTEDSTRING, self.FOLLOW_QUOTEDSTRING_in_mr_clause5411)
                 if self._state.backtracking == 0:
 
                     QUOTEDSTRING548_tree = self._adaptor.createWithPayload(QUOTEDSTRING548)
                     self._adaptor.addChild(root_0, QUOTEDSTRING548_tree)
 
-                # QueryParser.g:685:37: ( LEFT_PAREN path_list RIGHT_PAREN )?
+                # QueryParser.g:609:37: ( LEFT_PAREN path_list RIGHT_PAREN )?
                 alt145 = 2
                 LA145_0 = self.input.LA(1)
 
                 if (LA145_0 == LEFT_PAREN) :
                     alt145 = 1
                 if alt145 == 1:
-                    # QueryParser.g:685:39: LEFT_PAREN path_list RIGHT_PAREN
+                    # QueryParser.g:609:39: LEFT_PAREN path_list RIGHT_PAREN
                     pass 
-                    LEFT_PAREN549=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_mr_clause5420)
-                    self._state.following.append(self.FOLLOW_path_list_in_mr_clause5423)
+                    LEFT_PAREN549=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_mr_clause5415)
+                    self._state.following.append(self.FOLLOW_path_list_in_mr_clause5418)
                     path_list550 = self.path_list()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         self._adaptor.addChild(root_0, path_list550.tree)
-                    RIGHT_PAREN551=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_mr_clause5425)
+                    RIGHT_PAREN551=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_mr_clause5420)
 
 
 
-                self._state.following.append(self.FOLLOW_store_clause_in_mr_clause5431)
+                self._state.following.append(self.FOLLOW_store_clause_in_mr_clause5426)
                 store_clause552 = self.store_clause()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, store_clause552.tree)
-                self._state.following.append(self.FOLLOW_load_clause_in_mr_clause5433)
+                self._state.following.append(self.FOLLOW_load_clause_in_mr_clause5428)
                 load_clause553 = self.load_clause()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     self._adaptor.addChild(root_0, load_clause553.tree)
-                # QueryParser.g:685:102: ( EXECCOMMAND )?
+                # QueryParser.g:609:102: ( EXECCOMMAND )?
                 alt146 = 2
                 LA146_0 = self.input.LA(1)
 
@@ -16617,7 +16150,7 @@ class QueryParser(Parser):
                 if alt146 == 1:
                     # QueryParser.g:0:0: EXECCOMMAND
                     pass 
-                    EXECCOMMAND554=self.match(self.input, EXECCOMMAND, self.FOLLOW_EXECCOMMAND_in_mr_clause5435)
+                    EXECCOMMAND554=self.match(self.input, EXECCOMMAND, self.FOLLOW_EXECCOMMAND_in_mr_clause5430)
                     if self._state.backtracking == 0:
 
                         EXECCOMMAND554_tree = self._adaptor.createWithPayload(EXECCOMMAND554)
@@ -16638,9 +16171,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -16658,7 +16188,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "split_clause"
-    # QueryParser.g:688:1: split_clause : SPLIT rel INTO split_branch ( ( COMMA split_branch )+ | ( ( COMMA split_branch )* COMMA split_otherwise ) ) -> ^( SPLIT rel ( split_branch )+ ( split_otherwise )? ) ;
+    # QueryParser.g:612:1: split_clause : SPLIT rel INTO split_branch ( ( COMMA split_branch )+ | ( ( COMMA split_branch )* COMMA split_otherwise ) ) -> ^( SPLIT rel ( split_branch )+ ( split_otherwise )? ) ;
     def split_clause(self, ):
 
         retval = self.split_clause_return()
@@ -16695,28 +16225,28 @@ class QueryParser(Parser):
         stream_split_branch = RewriteRuleSubtreeStream(self._adaptor, "rule split_branch")
         try:
             try:
-                # QueryParser.g:688:14: ( SPLIT rel INTO split_branch ( ( COMMA split_branch )+ | ( ( COMMA split_branch )* COMMA split_otherwise ) ) -> ^( SPLIT rel ( split_branch )+ ( split_otherwise )? ) )
-                # QueryParser.g:688:16: SPLIT rel INTO split_branch ( ( COMMA split_branch )+ | ( ( COMMA split_branch )* COMMA split_otherwise ) )
+                # QueryParser.g:612:14: ( SPLIT rel INTO split_branch ( ( COMMA split_branch )+ | ( ( COMMA split_branch )* COMMA split_otherwise ) ) -> ^( SPLIT rel ( split_branch )+ ( split_otherwise )? ) )
+                # QueryParser.g:612:16: SPLIT rel INTO split_branch ( ( COMMA split_branch )+ | ( ( COMMA split_branch )* COMMA split_otherwise ) )
                 pass 
-                SPLIT555=self.match(self.input, SPLIT, self.FOLLOW_SPLIT_in_split_clause5445) 
+                SPLIT555=self.match(self.input, SPLIT, self.FOLLOW_SPLIT_in_split_clause5440) 
                 if self._state.backtracking == 0:
                     stream_SPLIT.add(SPLIT555)
-                self._state.following.append(self.FOLLOW_rel_in_split_clause5447)
+                self._state.following.append(self.FOLLOW_rel_in_split_clause5442)
                 rel556 = self.rel()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     stream_rel.add(rel556.tree)
-                INTO557=self.match(self.input, INTO, self.FOLLOW_INTO_in_split_clause5449) 
+                INTO557=self.match(self.input, INTO, self.FOLLOW_INTO_in_split_clause5444) 
                 if self._state.backtracking == 0:
                     stream_INTO.add(INTO557)
-                self._state.following.append(self.FOLLOW_split_branch_in_split_clause5451)
+                self._state.following.append(self.FOLLOW_split_branch_in_split_clause5446)
                 split_branch558 = self.split_branch()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     stream_split_branch.add(split_branch558.tree)
-                # QueryParser.g:688:44: ( ( COMMA split_branch )+ | ( ( COMMA split_branch )* COMMA split_otherwise ) )
+                # QueryParser.g:612:44: ( ( COMMA split_branch )+ | ( ( COMMA split_branch )* COMMA split_otherwise ) )
                 alt149 = 2
                 LA149_0 = self.input.LA(1)
 
@@ -16744,9 +16274,9 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt149 == 1:
-                    # QueryParser.g:688:46: ( COMMA split_branch )+
+                    # QueryParser.g:612:46: ( COMMA split_branch )+
                     pass 
-                    # QueryParser.g:688:46: ( COMMA split_branch )+
+                    # QueryParser.g:612:46: ( COMMA split_branch )+
                     cnt147 = 0
                     while True: #loop147
                         alt147 = 2
@@ -16757,12 +16287,12 @@ class QueryParser(Parser):
 
 
                         if alt147 == 1:
-                            # QueryParser.g:688:48: COMMA split_branch
+                            # QueryParser.g:612:48: COMMA split_branch
                             pass 
-                            COMMA559=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_split_clause5457) 
+                            COMMA559=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_split_clause5452) 
                             if self._state.backtracking == 0:
                                 stream_COMMA.add(COMMA559)
-                            self._state.following.append(self.FOLLOW_split_branch_in_split_clause5459)
+                            self._state.following.append(self.FOLLOW_split_branch_in_split_clause5454)
                             split_branch560 = self.split_branch()
 
                             self._state.following.pop()
@@ -16784,12 +16314,12 @@ class QueryParser(Parser):
 
 
                 elif alt149 == 2:
-                    # QueryParser.g:688:72: ( ( COMMA split_branch )* COMMA split_otherwise )
+                    # QueryParser.g:612:72: ( ( COMMA split_branch )* COMMA split_otherwise )
                     pass 
-                    # QueryParser.g:688:72: ( ( COMMA split_branch )* COMMA split_otherwise )
-                    # QueryParser.g:688:74: ( COMMA split_branch )* COMMA split_otherwise
+                    # QueryParser.g:612:72: ( ( COMMA split_branch )* COMMA split_otherwise )
+                    # QueryParser.g:612:74: ( COMMA split_branch )* COMMA split_otherwise
                     pass 
-                    # QueryParser.g:688:74: ( COMMA split_branch )*
+                    # QueryParser.g:612:74: ( COMMA split_branch )*
                     while True: #loop148
                         alt148 = 2
                         LA148_0 = self.input.LA(1)
@@ -16809,12 +16339,12 @@ class QueryParser(Parser):
 
 
                         if alt148 == 1:
-                            # QueryParser.g:688:76: COMMA split_branch
+                            # QueryParser.g:612:76: COMMA split_branch
                             pass 
-                            COMMA561=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_split_clause5470) 
+                            COMMA561=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_split_clause5465) 
                             if self._state.backtracking == 0:
                                 stream_COMMA.add(COMMA561)
-                            self._state.following.append(self.FOLLOW_split_branch_in_split_clause5472)
+                            self._state.following.append(self.FOLLOW_split_branch_in_split_clause5467)
                             split_branch562 = self.split_branch()
 
                             self._state.following.pop()
@@ -16824,10 +16354,10 @@ class QueryParser(Parser):
 
                         else:
                             break #loop148
-                    COMMA563=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_split_clause5477) 
+                    COMMA563=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_split_clause5472) 
                     if self._state.backtracking == 0:
                         stream_COMMA.add(COMMA563)
-                    self._state.following.append(self.FOLLOW_split_otherwise_in_split_clause5479)
+                    self._state.following.append(self.FOLLOW_split_otherwise_in_split_clause5474)
                     split_otherwise564 = self.split_otherwise()
 
                     self._state.following.pop()
@@ -16841,7 +16371,7 @@ class QueryParser(Parser):
 
 
                 # AST Rewrite
-                # elements: split_branch, SPLIT, split_otherwise, rel
+                # elements: rel, split_otherwise, split_branch, SPLIT
                 # token labels: 
                 # rule labels: retval
                 # token list labels: 
@@ -16858,13 +16388,13 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 689:13: -> ^( SPLIT rel ( split_branch )+ ( split_otherwise )? )
-                    # QueryParser.g:689:16: ^( SPLIT rel ( split_branch )+ ( split_otherwise )? )
+                    # 613:13: -> ^( SPLIT rel ( split_branch )+ ( split_otherwise )? )
+                    # QueryParser.g:613:16: ^( SPLIT rel ( split_branch )+ ( split_otherwise )? )
                     root_1 = self._adaptor.nil()
                     root_1 = self._adaptor.becomeRoot(stream_SPLIT.nextNode(), root_1)
 
                     self._adaptor.addChild(root_1, stream_rel.nextTree())
-                    # QueryParser.g:689:29: ( split_branch )+
+                    # QueryParser.g:613:29: ( split_branch )+
                     if not (stream_split_branch.hasNext()):
                         raise RewriteEarlyExitException()
 
@@ -16873,7 +16403,7 @@ class QueryParser(Parser):
 
 
                     stream_split_branch.reset()
-                    # QueryParser.g:689:43: ( split_otherwise )?
+                    # QueryParser.g:613:43: ( split_otherwise )?
                     if stream_split_otherwise.hasNext():
                         self._adaptor.addChild(root_1, stream_split_otherwise.nextTree())
 
@@ -16897,9 +16427,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -16917,7 +16444,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "split_branch"
-    # QueryParser.g:692:1: split_branch : alias IF cond -> ^( SPLIT_BRANCH alias cond ) ;
+    # QueryParser.g:616:1: split_branch : alias IF cond -> ^( SPLIT_BRANCH alias cond ) ;
     def split_branch(self, ):
 
         retval = self.split_branch_return()
@@ -16937,19 +16464,19 @@ class QueryParser(Parser):
         stream_cond = RewriteRuleSubtreeStream(self._adaptor, "rule cond")
         try:
             try:
-                # QueryParser.g:692:14: ( alias IF cond -> ^( SPLIT_BRANCH alias cond ) )
-                # QueryParser.g:692:16: alias IF cond
+                # QueryParser.g:616:14: ( alias IF cond -> ^( SPLIT_BRANCH alias cond ) )
+                # QueryParser.g:616:16: alias IF cond
                 pass 
-                self._state.following.append(self.FOLLOW_alias_in_split_branch5519)
+                self._state.following.append(self.FOLLOW_alias_in_split_branch5514)
                 alias565 = self.alias()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     stream_alias.add(alias565.tree)
-                IF566=self.match(self.input, IF, self.FOLLOW_IF_in_split_branch5521) 
+                IF566=self.match(self.input, IF, self.FOLLOW_IF_in_split_branch5516) 
                 if self._state.backtracking == 0:
                     stream_IF.add(IF566)
-                self._state.following.append(self.FOLLOW_cond_in_split_branch5523)
+                self._state.following.append(self.FOLLOW_cond_in_split_branch5518)
                 cond567 = self.cond()
 
                 self._state.following.pop()
@@ -16974,8 +16501,8 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 693:13: -> ^( SPLIT_BRANCH alias cond )
-                    # QueryParser.g:693:16: ^( SPLIT_BRANCH alias cond )
+                    # 617:13: -> ^( SPLIT_BRANCH alias cond )
+                    # QueryParser.g:617:16: ^( SPLIT_BRANCH alias cond )
                     root_1 = self._adaptor.nil()
                     root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(SPLIT_BRANCH, "SPLIT_BRANCH"), root_1)
 
@@ -16999,9 +16526,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -17019,7 +16543,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "split_otherwise"
-    # QueryParser.g:696:1: split_otherwise : alias OTHERWISE -> ^( OTHERWISE alias ) ;
+    # QueryParser.g:620:1: split_otherwise : alias OTHERWISE -> ^( OTHERWISE alias ) ;
     def split_otherwise(self, ):
 
         retval = self.split_otherwise_return()
@@ -17036,16 +16560,16 @@ class QueryParser(Parser):
         stream_alias = RewriteRuleSubtreeStream(self._adaptor, "rule alias")
         try:
             try:
-                # QueryParser.g:696:17: ( alias OTHERWISE -> ^( OTHERWISE alias ) )
-                # QueryParser.g:696:19: alias OTHERWISE
+                # QueryParser.g:620:17: ( alias OTHERWISE -> ^( OTHERWISE alias ) )
+                # QueryParser.g:620:19: alias OTHERWISE
                 pass 
-                self._state.following.append(self.FOLLOW_alias_in_split_otherwise5556)
+                self._state.following.append(self.FOLLOW_alias_in_split_otherwise5551)
                 alias568 = self.alias()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     stream_alias.add(alias568.tree)
-                OTHERWISE569=self.match(self.input, OTHERWISE, self.FOLLOW_OTHERWISE_in_split_otherwise5558) 
+                OTHERWISE569=self.match(self.input, OTHERWISE, self.FOLLOW_OTHERWISE_in_split_otherwise5553) 
                 if self._state.backtracking == 0:
                     stream_OTHERWISE.add(OTHERWISE569)
 
@@ -17067,8 +16591,8 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 697:13: -> ^( OTHERWISE alias )
-                    # QueryParser.g:697:16: ^( OTHERWISE alias )
+                    # 621:13: -> ^( OTHERWISE alias )
+                    # QueryParser.g:621:16: ^( OTHERWISE alias )
                     root_1 = self._adaptor.nil()
                     root_1 = self._adaptor.becomeRoot(stream_OTHERWISE.nextNode(), root_1)
 
@@ -17091,9 +16615,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -17111,7 +16632,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "col_ref"
-    # QueryParser.g:700:1: col_ref : ( alias_col_ref | dollar_col_ref );
+    # QueryParser.g:624:1: col_ref : ( alias_col_ref | dollar_col_ref );
     def col_ref(self, ):
 
         retval = self.col_ref_return()
@@ -17127,7 +16648,7 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:700:9: ( alias_col_ref | dollar_col_ref )
+                # QueryParser.g:624:9: ( alias_col_ref | dollar_col_ref )
                 alt150 = 2
                 LA150_0 = self.input.LA(1)
 
@@ -17144,11 +16665,11 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt150 == 1:
-                    # QueryParser.g:700:11: alias_col_ref
+                    # QueryParser.g:624:11: alias_col_ref
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_alias_col_ref_in_col_ref5589)
+                    self._state.following.append(self.FOLLOW_alias_col_ref_in_col_ref5584)
                     alias_col_ref570 = self.alias_col_ref()
 
                     self._state.following.pop()
@@ -17157,11 +16678,11 @@ class QueryParser(Parser):
 
 
                 elif alt150 == 2:
-                    # QueryParser.g:700:27: dollar_col_ref
+                    # QueryParser.g:624:27: dollar_col_ref
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_dollar_col_ref_in_col_ref5593)
+                    self._state.following.append(self.FOLLOW_dollar_col_ref_in_col_ref5588)
                     dollar_col_ref571 = self.dollar_col_ref()
 
                     self._state.following.pop()
@@ -17178,9 +16699,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -17198,7 +16716,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "alias_col_ref"
-    # QueryParser.g:703:1: alias_col_ref : ( GROUP | CUBE | identifier );
+    # QueryParser.g:627:1: alias_col_ref : ( GROUP | CUBE | identifier );
     def alias_col_ref(self, ):
 
         retval = self.alias_col_ref_return()
@@ -17216,7 +16734,7 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:703:15: ( GROUP | CUBE | identifier )
+                # QueryParser.g:627:15: ( GROUP | CUBE | identifier )
                 alt151 = 3
                 LA151 = self.input.LA(1)
                 if LA151 == GROUP:
@@ -17234,11 +16752,11 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt151 == 1:
-                    # QueryParser.g:703:17: GROUP
+                    # QueryParser.g:627:17: GROUP
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    GROUP572=self.match(self.input, GROUP, self.FOLLOW_GROUP_in_alias_col_ref5602)
+                    GROUP572=self.match(self.input, GROUP, self.FOLLOW_GROUP_in_alias_col_ref5597)
                     if self._state.backtracking == 0:
 
                         GROUP572_tree = self._adaptor.createWithPayload(GROUP572)
@@ -17247,11 +16765,11 @@ class QueryParser(Parser):
 
 
                 elif alt151 == 2:
-                    # QueryParser.g:703:25: CUBE
+                    # QueryParser.g:627:25: CUBE
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    CUBE573=self.match(self.input, CUBE, self.FOLLOW_CUBE_in_alias_col_ref5606)
+                    CUBE573=self.match(self.input, CUBE, self.FOLLOW_CUBE_in_alias_col_ref5601)
                     if self._state.backtracking == 0:
 
                         CUBE573_tree = self._adaptor.createWithPayload(CUBE573)
@@ -17260,11 +16778,11 @@ class QueryParser(Parser):
 
 
                 elif alt151 == 3:
-                    # QueryParser.g:703:32: identifier
+                    # QueryParser.g:627:32: identifier
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_identifier_in_alias_col_ref5610)
+                    self._state.following.append(self.FOLLOW_identifier_in_alias_col_ref5605)
                     identifier574 = self.identifier()
 
                     self._state.following.pop()
@@ -17281,9 +16799,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -17301,7 +16816,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "dollar_col_ref"
-    # QueryParser.g:706:1: dollar_col_ref : DOLLARVAR ;
+    # QueryParser.g:630:1: dollar_col_ref : DOLLARVAR ;
     def dollar_col_ref(self, ):
 
         retval = self.dollar_col_ref_return()
@@ -17315,12 +16830,12 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:706:16: ( DOLLARVAR )
-                # QueryParser.g:706:18: DOLLARVAR
+                # QueryParser.g:630:16: ( DOLLARVAR )
+                # QueryParser.g:630:18: DOLLARVAR
                 pass 
                 root_0 = self._adaptor.nil()
 
-                DOLLARVAR575=self.match(self.input, DOLLARVAR, self.FOLLOW_DOLLARVAR_in_dollar_col_ref5619)
+                DOLLARVAR575=self.match(self.input, DOLLARVAR, self.FOLLOW_DOLLARVAR_in_dollar_col_ref5614)
                 if self._state.backtracking == 0:
 
                     DOLLARVAR575_tree = self._adaptor.createWithPayload(DOLLARVAR575)
@@ -17338,9 +16853,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -17358,7 +16870,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "const_expr"
-    # QueryParser.g:709:1: const_expr : literal ;
+    # QueryParser.g:633:1: const_expr : literal ;
     def const_expr(self, ):
 
         retval = self.const_expr_return()
@@ -17372,12 +16884,12 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:709:12: ( literal )
-                # QueryParser.g:709:14: literal
+                # QueryParser.g:633:12: ( literal )
+                # QueryParser.g:633:14: literal
                 pass 
                 root_0 = self._adaptor.nil()
 
-                self._state.following.append(self.FOLLOW_literal_in_const_expr5628)
+                self._state.following.append(self.FOLLOW_literal_in_const_expr5623)
                 literal576 = self.literal()
 
                 self._state.following.pop()
@@ -17395,9 +16907,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -17415,7 +16924,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "literal"
-    # QueryParser.g:712:1: literal : ( scalar | map | bag | tuple );
+    # QueryParser.g:636:1: literal : ( scalar | map | bag | tuple );
     def literal(self, ):
 
         retval = self.literal_return()
@@ -17435,7 +16944,7 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:712:9: ( scalar | map | bag | tuple )
+                # QueryParser.g:636:9: ( scalar | map | bag | tuple )
                 alt152 = 4
                 LA152 = self.input.LA(1)
                 if LA152 == TRUE or LA152 == FALSE or LA152 == IDENTIFIER_L or LA152 == INTEGER or LA152 == LONGINTEGER or LA152 == MINUS or LA152 == DOUBLENUMBER or LA152 == FLOATNUMBER or LA152 == QUOTEDSTRING:
@@ -17455,11 +16964,11 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt152 == 1:
-                    # QueryParser.g:712:11: scalar
+                    # QueryParser.g:636:11: scalar
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_scalar_in_literal5637)
+                    self._state.following.append(self.FOLLOW_scalar_in_literal5632)
                     scalar577 = self.scalar()
 
                     self._state.following.pop()
@@ -17468,11 +16977,11 @@ class QueryParser(Parser):
 
 
                 elif alt152 == 2:
-                    # QueryParser.g:712:20: map
+                    # QueryParser.g:636:20: map
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_map_in_literal5641)
+                    self._state.following.append(self.FOLLOW_map_in_literal5636)
                     map578 = self.map()
 
                     self._state.following.pop()
@@ -17481,11 +16990,11 @@ class QueryParser(Parser):
 
 
                 elif alt152 == 3:
-                    # QueryParser.g:712:26: bag
+                    # QueryParser.g:636:26: bag
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_bag_in_literal5645)
+                    self._state.following.append(self.FOLLOW_bag_in_literal5640)
                     bag579 = self.bag()
 
                     self._state.following.pop()
@@ -17494,11 +17003,11 @@ class QueryParser(Parser):
 
 
                 elif alt152 == 4:
-                    # QueryParser.g:712:32: tuple
+                    # QueryParser.g:636:32: tuple
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_tuple_in_literal5649)
+                    self._state.following.append(self.FOLLOW_tuple_in_literal5644)
                     tuple580 = self.tuple()
 
                     self._state.following.pop()
@@ -17515,9 +17024,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -17535,7 +17041,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "scalar"
-    # QueryParser.g:716:1: scalar : ( num_scalar | QUOTEDSTRING | null_keyword | TRUE | FALSE );
+    # QueryParser.g:640:1: scalar : ( num_scalar | QUOTEDSTRING | null_keyword | TRUE | FALSE );
     def scalar(self, ):
 
         retval = self.scalar_return()
@@ -17557,7 +17063,7 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:716:8: ( num_scalar | QUOTEDSTRING | null_keyword | TRUE | FALSE )
+                # QueryParser.g:640:8: ( num_scalar | QUOTEDSTRING | null_keyword | TRUE | FALSE )
                 alt153 = 5
                 LA153 = self.input.LA(1)
                 if LA153 == INTEGER or LA153 == LONGINTEGER or LA153 == MINUS or LA153 == DOUBLENUMBER or LA153 == FLOATNUMBER:
@@ -17579,11 +17085,11 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt153 == 1:
-                    # QueryParser.g:716:10: num_scalar
+                    # QueryParser.g:640:10: num_scalar
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_num_scalar_in_scalar5659)
+                    self._state.following.append(self.FOLLOW_num_scalar_in_scalar5654)
                     num_scalar581 = self.num_scalar()
 
                     self._state.following.pop()
@@ -17592,11 +17098,11 @@ class QueryParser(Parser):
 
 
                 elif alt153 == 2:
-                    # QueryParser.g:716:23: QUOTEDSTRING
+                    # QueryParser.g:640:23: QUOTEDSTRING
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    QUOTEDSTRING582=self.match(self.input, QUOTEDSTRING, self.FOLLOW_QUOTEDSTRING_in_scalar5663)
+                    QUOTEDSTRING582=self.match(self.input, QUOTEDSTRING, self.FOLLOW_QUOTEDSTRING_in_scalar5658)
                     if self._state.backtracking == 0:
 
                         QUOTEDSTRING582_tree = self._adaptor.createWithPayload(QUOTEDSTRING582)
@@ -17605,11 +17111,11 @@ class QueryParser(Parser):
 
 
                 elif alt153 == 3:
-                    # QueryParser.g:716:38: null_keyword
+                    # QueryParser.g:640:38: null_keyword
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_null_keyword_in_scalar5667)
+                    self._state.following.append(self.FOLLOW_null_keyword_in_scalar5662)
                     null_keyword583 = self.null_keyword()
 
                     self._state.following.pop()
@@ -17618,11 +17124,11 @@ class QueryParser(Parser):
 
 
                 elif alt153 == 4:
-                    # QueryParser.g:716:53: TRUE
+                    # QueryParser.g:640:53: TRUE
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    TRUE584=self.match(self.input, TRUE, self.FOLLOW_TRUE_in_scalar5671)
+                    TRUE584=self.match(self.input, TRUE, self.FOLLOW_TRUE_in_scalar5666)
                     if self._state.backtracking == 0:
 
                         TRUE584_tree = self._adaptor.createWithPayload(TRUE584)
@@ -17631,11 +17137,11 @@ class QueryParser(Parser):
 
 
                 elif alt153 == 5:
-                    # QueryParser.g:716:60: FALSE
+                    # QueryParser.g:640:60: FALSE
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    FALSE585=self.match(self.input, FALSE, self.FOLLOW_FALSE_in_scalar5675)
+                    FALSE585=self.match(self.input, FALSE, self.FOLLOW_FALSE_in_scalar5670)
                     if self._state.backtracking == 0:
 
                         FALSE585_tree = self._adaptor.createWithPayload(FALSE585)
@@ -17652,9 +17158,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -17672,7 +17175,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "num_scalar"
-    # QueryParser.g:719:1: num_scalar : ( MINUS )? ( INTEGER | LONGINTEGER | FLOATNUMBER | DOUBLENUMBER ) ;
+    # QueryParser.g:643:1: num_scalar : ( MINUS )? ( INTEGER | LONGINTEGER | FLOATNUMBER | DOUBLENUMBER ) ;
     def num_scalar(self, ):
 
         retval = self.num_scalar_return()
@@ -17688,12 +17191,12 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:719:12: ( ( MINUS )? ( INTEGER | LONGINTEGER | FLOATNUMBER | DOUBLENUMBER ) )
-                # QueryParser.g:719:14: ( MINUS )? ( INTEGER | LONGINTEGER | FLOATNUMBER | DOUBLENUMBER )
+                # QueryParser.g:643:12: ( ( MINUS )? ( INTEGER | LONGINTEGER | FLOATNUMBER | DOUBLENUMBER ) )
+                # QueryParser.g:643:14: ( MINUS )? ( INTEGER | LONGINTEGER | FLOATNUMBER | DOUBLENUMBER )
                 pass 
                 root_0 = self._adaptor.nil()
 
-                # QueryParser.g:719:14: ( MINUS )?
+                # QueryParser.g:643:14: ( MINUS )?
                 alt154 = 2
                 LA154_0 = self.input.LA(1)
 
@@ -17702,7 +17205,7 @@ class QueryParser(Parser):
                 if alt154 == 1:
                     # QueryParser.g:0:0: MINUS
                     pass 
-                    MINUS586=self.match(self.input, MINUS, self.FOLLOW_MINUS_in_num_scalar5684)
+                    MINUS586=self.match(self.input, MINUS, self.FOLLOW_MINUS_in_num_scalar5679)
                     if self._state.backtracking == 0:
 
                         MINUS586_tree = self._adaptor.createWithPayload(MINUS586)
@@ -17738,9 +17241,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -17758,7 +17258,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "map"
-    # QueryParser.g:722:1: map : ( LEFT_BRACKET keyvalue ( COMMA keyvalue )* RIGHT_BRACKET -> ^( MAP_VAL ( keyvalue )+ ) | LEFT_BRACKET RIGHT_BRACKET -> ^( MAP_VAL ) );
+    # QueryParser.g:646:1: map : ( LEFT_BRACKET keyvalue ( COMMA keyvalue )* RIGHT_BRACKET -> ^( MAP_VAL ( keyvalue )+ ) | LEFT_BRACKET RIGHT_BRACKET -> ^( MAP_VAL ) );
     def map(self, ):
 
         retval = self.map_return()
@@ -17787,7 +17287,7 @@ class QueryParser(Parser):
         stream_keyvalue = RewriteRuleSubtreeStream(self._adaptor, "rule keyvalue")
         try:
             try:
-                # QueryParser.g:722:5: ( LEFT_BRACKET keyvalue ( COMMA keyvalue )* RIGHT_BRACKET -> ^( MAP_VAL ( keyvalue )+ ) | LEFT_BRACKET RIGHT_BRACKET -> ^( MAP_VAL ) )
+                # QueryParser.g:646:5: ( LEFT_BRACKET keyvalue ( COMMA keyvalue )* RIGHT_BRACKET -> ^( MAP_VAL ( keyvalue )+ ) | LEFT_BRACKET RIGHT_BRACKET -> ^( MAP_VAL ) )
                 alt156 = 2
                 LA156_0 = self.input.LA(1)
 
@@ -17815,18 +17315,18 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt156 == 1:
-                    # QueryParser.g:722:7: LEFT_BRACKET keyvalue ( COMMA keyvalue )* RIGHT_BRACKET
+                    # QueryParser.g:646:7: LEFT_BRACKET keyvalue ( COMMA keyvalue )* RIGHT_BRACKET
                     pass 
-                    LEFT_BRACKET588=self.match(self.input, LEFT_BRACKET, self.FOLLOW_LEFT_BRACKET_in_map5712) 
+                    LEFT_BRACKET588=self.match(self.input, LEFT_BRACKET, self.FOLLOW_LEFT_BRACKET_in_map5707) 
                     if self._state.backtracking == 0:
                         stream_LEFT_BRACKET.add(LEFT_BRACKET588)
-                    self._state.following.append(self.FOLLOW_keyvalue_in_map5714)
+                    self._state.following.append(self.FOLLOW_keyvalue_in_map5709)
                     keyvalue589 = self.keyvalue()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         stream_keyvalue.add(keyvalue589.tree)
-                    # QueryParser.g:722:29: ( COMMA keyvalue )*
+                    # QueryParser.g:646:29: ( COMMA keyvalue )*
                     while True: #loop155
                         alt155 = 2
                         LA155_0 = self.input.LA(1)
@@ -17836,12 +17336,12 @@ class QueryParser(Parser):
 
 
                         if alt155 == 1:
-                            # QueryParser.g:722:31: COMMA keyvalue
+                            # QueryParser.g:646:31: COMMA keyvalue
                             pass 
-                            COMMA590=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_map5718) 
+                            COMMA590=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_map5713) 
                             if self._state.backtracking == 0:
                                 stream_COMMA.add(COMMA590)
-                            self._state.following.append(self.FOLLOW_keyvalue_in_map5720)
+                            self._state.following.append(self.FOLLOW_keyvalue_in_map5715)
                             keyvalue591 = self.keyvalue()
 
                             self._state.following.pop()
@@ -17851,7 +17351,7 @@ class QueryParser(Parser):
 
                         else:
                             break #loop155
-                    RIGHT_BRACKET592=self.match(self.input, RIGHT_BRACKET, self.FOLLOW_RIGHT_BRACKET_in_map5725) 
+                    RIGHT_BRACKET592=self.match(self.input, RIGHT_BRACKET, self.FOLLOW_RIGHT_BRACKET_in_map5720) 
                     if self._state.backtracking == 0:
                         stream_RIGHT_BRACKET.add(RIGHT_BRACKET592)
 
@@ -17873,12 +17373,12 @@ class QueryParser(Parser):
 
 
                         root_0 = self._adaptor.nil()
-                        # 723:4: -> ^( MAP_VAL ( keyvalue )+ )
-                        # QueryParser.g:723:7: ^( MAP_VAL ( keyvalue )+ )
+                        # 647:4: -> ^( MAP_VAL ( keyvalue )+ )
+                        # QueryParser.g:647:7: ^( MAP_VAL ( keyvalue )+ )
                         root_1 = self._adaptor.nil()
                         root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(MAP_VAL, "MAP_VAL"), root_1)
 
-                        # QueryParser.g:723:18: ( keyvalue )+
+                        # QueryParser.g:647:18: ( keyvalue )+
                         if not (stream_keyvalue.hasNext()):
                             raise RewriteEarlyExitException()
 
@@ -17896,12 +17396,12 @@ class QueryParser(Parser):
 
 
                 elif alt156 == 2:
-                    # QueryParser.g:724:7: LEFT_BRACKET RIGHT_BRACKET
+                    # QueryParser.g:648:7: LEFT_BRACKET RIGHT_BRACKET
                     pass 
-                    LEFT_BRACKET593=self.match(self.input, LEFT_BRACKET, self.FOLLOW_LEFT_BRACKET_in_map5747) 
+                    LEFT_BRACKET593=self.match(self.input, LEFT_BRACKET, self.FOLLOW_LEFT_BRACKET_in_map5742) 
                     if self._state.backtracking == 0:
                         stream_LEFT_BRACKET.add(LEFT_BRACKET593)
-                    RIGHT_BRACKET594=self.match(self.input, RIGHT_BRACKET, self.FOLLOW_RIGHT_BRACKET_in_map5749) 
+                    RIGHT_BRACKET594=self.match(self.input, RIGHT_BRACKET, self.FOLLOW_RIGHT_BRACKET_in_map5744) 
                     if self._state.backtracking == 0:
                         stream_RIGHT_BRACKET.add(RIGHT_BRACKET594)
 
@@ -17923,8 +17423,8 @@ class QueryParser(Parser):
 
 
                         root_0 = self._adaptor.nil()
-                        # 725:4: -> ^( MAP_VAL )
-                        # QueryParser.g:725:7: ^( MAP_VAL )
+                        # 649:4: -> ^( MAP_VAL )
+                        # QueryParser.g:649:7: ^( MAP_VAL )
                         root_1 = self._adaptor.nil()
                         root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(MAP_VAL, "MAP_VAL"), root_1)
 
@@ -17944,9 +17444,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -17964,7 +17461,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "keyvalue"
-    # QueryParser.g:728:1: keyvalue : map_key POUND const_expr -> ^( KEY_VAL_PAIR map_key const_expr ) ;
+    # QueryParser.g:652:1: keyvalue : map_key POUND const_expr -> ^( KEY_VAL_PAIR map_key const_expr ) ;
     def keyvalue(self, ):
 
         retval = self.keyvalue_return()
@@ -17984,19 +17481,19 @@ class QueryParser(Parser):
         stream_map_key = RewriteRuleSubtreeStream(self._adaptor, "rule map_key")
         try:
             try:
-                # QueryParser.g:728:10: ( map_key POUND const_expr -> ^( KEY_VAL_PAIR map_key const_expr ) )
-                # QueryParser.g:728:12: map_key POUND const_expr
+                # QueryParser.g:652:10: ( map_key POUND const_expr -> ^( KEY_VAL_PAIR map_key const_expr ) )
+                # QueryParser.g:652:12: map_key POUND const_expr
                 pass 
-                self._state.following.append(self.FOLLOW_map_key_in_keyvalue5769)
+                self._state.following.append(self.FOLLOW_map_key_in_keyvalue5764)
                 map_key595 = self.map_key()
 
                 self._state.following.pop()
                 if self._state.backtracking == 0:
                     stream_map_key.add(map_key595.tree)
-                POUND596=self.match(self.input, POUND, self.FOLLOW_POUND_in_keyvalue5771) 
+                POUND596=self.match(self.input, POUND, self.FOLLOW_POUND_in_keyvalue5766) 
                 if self._state.backtracking == 0:
                     stream_POUND.add(POUND596)
-                self._state.following.append(self.FOLLOW_const_expr_in_keyvalue5773)
+                self._state.following.append(self.FOLLOW_const_expr_in_keyvalue5768)
                 const_expr597 = self.const_expr()
 
                 self._state.following.pop()
@@ -18021,8 +17518,8 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 729:9: -> ^( KEY_VAL_PAIR map_key const_expr )
-                    # QueryParser.g:729:12: ^( KEY_VAL_PAIR map_key const_expr )
+                    # 653:9: -> ^( KEY_VAL_PAIR map_key const_expr )
+                    # QueryParser.g:653:12: ^( KEY_VAL_PAIR map_key const_expr )
                     root_1 = self._adaptor.nil()
                     root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(KEY_VAL_PAIR, "KEY_VAL_PAIR"), root_1)
 
@@ -18046,9 +17543,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -18066,7 +17560,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "map_key"
-    # QueryParser.g:732:1: map_key : QUOTEDSTRING ;
+    # QueryParser.g:656:1: map_key : QUOTEDSTRING ;
     def map_key(self, ):
 
         retval = self.map_key_return()
@@ -18080,12 +17574,12 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:732:9: ( QUOTEDSTRING )
-                # QueryParser.g:732:11: QUOTEDSTRING
+                # QueryParser.g:656:9: ( QUOTEDSTRING )
+                # QueryParser.g:656:11: QUOTEDSTRING
                 pass 
                 root_0 = self._adaptor.nil()
 
-                QUOTEDSTRING598=self.match(self.input, QUOTEDSTRING, self.FOLLOW_QUOTEDSTRING_in_map_key5802)
+                QUOTEDSTRING598=self.match(self.input, QUOTEDSTRING, self.FOLLOW_QUOTEDSTRING_in_map_key5797)
                 if self._state.backtracking == 0:
 
                     QUOTEDSTRING598_tree = self._adaptor.createWithPayload(QUOTEDSTRING598)
@@ -18103,9 +17597,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -18123,7 +17614,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "bag"
-    # QueryParser.g:735:1: bag : ( LEFT_CURLY tuple ( COMMA tuple )* RIGHT_CURLY -> ^( BAG_VAL ( tuple )+ ) | LEFT_CURLY RIGHT_CURLY -> ^( BAG_VAL ) );
+    # QueryParser.g:659:1: bag : ( LEFT_CURLY tuple ( COMMA tuple )* RIGHT_CURLY -> ^( BAG_VAL ( tuple )+ ) | LEFT_CURLY RIGHT_CURLY -> ^( BAG_VAL ) );
     def bag(self, ):
 
         retval = self.bag_return()
@@ -18152,7 +17643,7 @@ class QueryParser(Parser):
         stream_tuple = RewriteRuleSubtreeStream(self._adaptor, "rule tuple")
         try:
             try:
-                # QueryParser.g:735:5: ( LEFT_CURLY tuple ( COMMA tuple )* RIGHT_CURLY -> ^( BAG_VAL ( tuple )+ ) | LEFT_CURLY RIGHT_CURLY -> ^( BAG_VAL ) )
+                # QueryParser.g:659:5: ( LEFT_CURLY tuple ( COMMA tuple )* RIGHT_CURLY -> ^( BAG_VAL ( tuple )+ ) | LEFT_CURLY RIGHT_CURLY -> ^( BAG_VAL ) )
                 alt158 = 2
                 LA158_0 = self.input.LA(1)
 
@@ -18180,18 +17671,18 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt158 == 1:
-                    # QueryParser.g:735:7: LEFT_CURLY tuple ( COMMA tuple )* RIGHT_CURLY
+                    # QueryParser.g:659:7: LEFT_CURLY tuple ( COMMA tuple )* RIGHT_CURLY
                     pass 
-                    LEFT_CURLY599=self.match(self.input, LEFT_CURLY, self.FOLLOW_LEFT_CURLY_in_bag5811) 
+                    LEFT_CURLY599=self.match(self.input, LEFT_CURLY, self.FOLLOW_LEFT_CURLY_in_bag5806) 
                     if self._state.backtracking == 0:
                         stream_LEFT_CURLY.add(LEFT_CURLY599)
-                    self._state.following.append(self.FOLLOW_tuple_in_bag5813)
+                    self._state.following.append(self.FOLLOW_tuple_in_bag5808)
                     tuple600 = self.tuple()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         stream_tuple.add(tuple600.tree)
-                    # QueryParser.g:735:24: ( COMMA tuple )*
+                    # QueryParser.g:659:24: ( COMMA tuple )*
                     while True: #loop157
                         alt157 = 2
                         LA157_0 = self.input.LA(1)
@@ -18201,12 +17692,12 @@ class QueryParser(Parser):
 
 
                         if alt157 == 1:
-                            # QueryParser.g:735:26: COMMA tuple
+                            # QueryParser.g:659:26: COMMA tuple
                             pass 
-                            COMMA601=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_bag5817) 
+                            COMMA601=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_bag5812) 
                             if self._state.backtracking == 0:
                                 stream_COMMA.add(COMMA601)
-                            self._state.following.append(self.FOLLOW_tuple_in_bag5819)
+                            self._state.following.append(self.FOLLOW_tuple_in_bag5814)
                             tuple602 = self.tuple()
 
                             self._state.following.pop()
@@ -18216,7 +17707,7 @@ class QueryParser(Parser):
 
                         else:
                             break #loop157
-                    RIGHT_CURLY603=self.match(self.input, RIGHT_CURLY, self.FOLLOW_RIGHT_CURLY_in_bag5824) 
+                    RIGHT_CURLY603=self.match(self.input, RIGHT_CURLY, self.FOLLOW_RIGHT_CURLY_in_bag5819) 
                     if self._state.backtracking == 0:
                         stream_RIGHT_CURLY.add(RIGHT_CURLY603)
 
@@ -18238,12 +17729,12 @@ class QueryParser(Parser):
 
 
                         root_0 = self._adaptor.nil()
-                        # 736:4: -> ^( BAG_VAL ( tuple )+ )
-                        # QueryParser.g:736:7: ^( BAG_VAL ( tuple )+ )
+                        # 660:4: -> ^( BAG_VAL ( tuple )+ )
+                        # QueryParser.g:660:7: ^( BAG_VAL ( tuple )+ )
                         root_1 = self._adaptor.nil()
                         root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(BAG_VAL, "BAG_VAL"), root_1)
 
-                        # QueryParser.g:736:18: ( tuple )+
+                        # QueryParser.g:660:18: ( tuple )+
                         if not (stream_tuple.hasNext()):
                             raise RewriteEarlyExitException()
 
@@ -18261,12 +17752,12 @@ class QueryParser(Parser):
 
 
                 elif alt158 == 2:
-                    # QueryParser.g:737:7: LEFT_CURLY RIGHT_CURLY
+                    # QueryParser.g:661:7: LEFT_CURLY RIGHT_CURLY
                     pass 
-                    LEFT_CURLY604=self.match(self.input, LEFT_CURLY, self.FOLLOW_LEFT_CURLY_in_bag5846) 
+                    LEFT_CURLY604=self.match(self.input, LEFT_CURLY, self.FOLLOW_LEFT_CURLY_in_bag5841) 
                     if self._state.backtracking == 0:
                         stream_LEFT_CURLY.add(LEFT_CURLY604)
-                    RIGHT_CURLY605=self.match(self.input, RIGHT_CURLY, self.FOLLOW_RIGHT_CURLY_in_bag5848) 
+                    RIGHT_CURLY605=self.match(self.input, RIGHT_CURLY, self.FOLLOW_RIGHT_CURLY_in_bag5843) 
                     if self._state.backtracking == 0:
                         stream_RIGHT_CURLY.add(RIGHT_CURLY605)
 
@@ -18288,8 +17779,8 @@ class QueryParser(Parser):
 
 
                         root_0 = self._adaptor.nil()
-                        # 738:4: -> ^( BAG_VAL )
-                        # QueryParser.g:738:7: ^( BAG_VAL )
+                        # 662:4: -> ^( BAG_VAL )
+                        # QueryParser.g:662:7: ^( BAG_VAL )
                         root_1 = self._adaptor.nil()
                         root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(BAG_VAL, "BAG_VAL"), root_1)
 
@@ -18309,9 +17800,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -18329,7 +17817,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "tuple"
-    # QueryParser.g:741:1: tuple : ( LEFT_PAREN literal ( COMMA literal )* RIGHT_PAREN -> ^( TUPLE_VAL ( literal )+ ) | LEFT_PAREN RIGHT_PAREN -> ^( TUPLE_VAL ) );
+    # QueryParser.g:665:1: tuple : ( LEFT_PAREN literal ( COMMA literal )* RIGHT_PAREN -> ^( TUPLE_VAL ( literal )+ ) | LEFT_PAREN RIGHT_PAREN -> ^( TUPLE_VAL ) );
     def tuple(self, ):
 
         retval = self.tuple_return()
@@ -18358,7 +17846,7 @@ class QueryParser(Parser):
         stream_literal = RewriteRuleSubtreeStream(self._adaptor, "rule literal")
         try:
             try:
-                # QueryParser.g:741:7: ( LEFT_PAREN literal ( COMMA literal )* RIGHT_PAREN -> ^( TUPLE_VAL ( literal )+ ) | LEFT_PAREN RIGHT_PAREN -> ^( TUPLE_VAL ) )
+                # QueryParser.g:665:7: ( LEFT_PAREN literal ( COMMA literal )* RIGHT_PAREN -> ^( TUPLE_VAL ( literal )+ ) | LEFT_PAREN RIGHT_PAREN -> ^( TUPLE_VAL ) )
                 alt160 = 2
                 LA160_0 = self.input.LA(1)
 
@@ -18386,18 +17874,18 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt160 == 1:
-                    # QueryParser.g:741:9: LEFT_PAREN literal ( COMMA literal )* RIGHT_PAREN
+                    # QueryParser.g:665:9: LEFT_PAREN literal ( COMMA literal )* RIGHT_PAREN
                     pass 
-                    LEFT_PAREN606=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_tuple5868) 
+                    LEFT_PAREN606=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_tuple5863) 
                     if self._state.backtracking == 0:
                         stream_LEFT_PAREN.add(LEFT_PAREN606)
-                    self._state.following.append(self.FOLLOW_literal_in_tuple5870)
+                    self._state.following.append(self.FOLLOW_literal_in_tuple5865)
                     literal607 = self.literal()
 
                     self._state.following.pop()
                     if self._state.backtracking == 0:
                         stream_literal.add(literal607.tree)
-                    # QueryParser.g:741:28: ( COMMA literal )*
+                    # QueryParser.g:665:28: ( COMMA literal )*
                     while True: #loop159
                         alt159 = 2
                         LA159_0 = self.input.LA(1)
@@ -18407,12 +17895,12 @@ class QueryParser(Parser):
 
 
                         if alt159 == 1:
-                            # QueryParser.g:741:30: COMMA literal
+                            # QueryParser.g:665:30: COMMA literal
                             pass 
-                            COMMA608=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_tuple5874) 
+                            COMMA608=self.match(self.input, COMMA, self.FOLLOW_COMMA_in_tuple5869) 
                             if self._state.backtracking == 0:
                                 stream_COMMA.add(COMMA608)
-                            self._state.following.append(self.FOLLOW_literal_in_tuple5876)
+                            self._state.following.append(self.FOLLOW_literal_in_tuple5871)
                             literal609 = self.literal()
 
                             self._state.following.pop()
@@ -18422,7 +17910,7 @@ class QueryParser(Parser):
 
                         else:
                             break #loop159
-                    RIGHT_PAREN610=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_tuple5881) 
+                    RIGHT_PAREN610=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_tuple5876) 
                     if self._state.backtracking == 0:
                         stream_RIGHT_PAREN.add(RIGHT_PAREN610)
 
@@ -18444,12 +17932,12 @@ class QueryParser(Parser):
 
 
                         root_0 = self._adaptor.nil()
-                        # 742:6: -> ^( TUPLE_VAL ( literal )+ )
-                        # QueryParser.g:742:9: ^( TUPLE_VAL ( literal )+ )
+                        # 666:6: -> ^( TUPLE_VAL ( literal )+ )
+                        # QueryParser.g:666:9: ^( TUPLE_VAL ( literal )+ )
                         root_1 = self._adaptor.nil()
                         root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(TUPLE_VAL, "TUPLE_VAL"), root_1)
 
-                        # QueryParser.g:742:22: ( literal )+
+                        # QueryParser.g:666:22: ( literal )+
                         if not (stream_literal.hasNext()):
                             raise RewriteEarlyExitException()
 
@@ -18467,12 +17955,12 @@ class QueryParser(Parser):
 
 
                 elif alt160 == 2:
-                    # QueryParser.g:743:9: LEFT_PAREN RIGHT_PAREN
+                    # QueryParser.g:667:9: LEFT_PAREN RIGHT_PAREN
                     pass 
-                    LEFT_PAREN611=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_tuple5907) 
+                    LEFT_PAREN611=self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_tuple5902) 
                     if self._state.backtracking == 0:
                         stream_LEFT_PAREN.add(LEFT_PAREN611)
-                    RIGHT_PAREN612=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_tuple5909) 
+                    RIGHT_PAREN612=self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_tuple5904) 
                     if self._state.backtracking == 0:
                         stream_RIGHT_PAREN.add(RIGHT_PAREN612)
 
@@ -18494,8 +17982,8 @@ class QueryParser(Parser):
 
 
                         root_0 = self._adaptor.nil()
-                        # 744:6: -> ^( TUPLE_VAL )
-                        # QueryParser.g:744:9: ^( TUPLE_VAL )
+                        # 668:6: -> ^( TUPLE_VAL )
+                        # QueryParser.g:668:9: ^( TUPLE_VAL )
                         root_1 = self._adaptor.nil()
                         root_1 = self._adaptor.becomeRoot(self._adaptor.createFromType(TUPLE_VAL, "TUPLE_VAL"), root_1)
 
@@ -18515,9 +18003,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -18535,7 +18020,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "eid"
-    # QueryParser.g:748:1: eid : ( rel_str_op | IMPORT | RETURNS | DEFINE | LOAD | FILTER | FOREACH | CUBE | ROLLUP | ORDER | DISTINCT | COGROUP | JOIN | CROSS | UNION | SPLIT | INTO | IF | ALL | AS | BY | USING | INNER | OUTER | PARALLEL | PARTITION | GROUP | AND | OR | NOT | GENERATE | FLATTEN | ASC | DESC | BOOL | INT | LONG | FLOAT | DOUBLE | DATETIME | CHARARRAY | BYTEARRAY | BAG | TUPLE | MAP | IS | STREAM | THROUGH | STORE | MAPREDUCE | SHIP | CACHE | INPUT | OUTPUT | STDERROR | STDIN | STDOUT | LIMIT | SAMPLE | LEFT | RIGHT | FULL | identifier | null_keyword | TRUE | FALSE | REALIAS );
+    # QueryParser.g:672:1: eid : ( rel_str_op | IMPORT | RETURNS | DEFINE | LOAD | FILTER | FOREACH | CUBE | ROLLUP | ORDER | DISTINCT | COGROUP | JOIN | CROSS | UNION | SPLIT | INTO | IF | ALL | AS | BY | USING | INNER | OUTER | PARALLEL | PARTITION | GROUP | AND | OR | NOT | GENERATE | FLATTEN | ASC | DESC | BOOL | INT | LONG | FLOAT | DOUBLE | DATETIME | CHARARRAY | BYTEARRAY | BAG | TUPLE | MAP | IS | STREAM | THROUGH | STORE | MAPREDUCE | SHIP | CACHE | INPUT | OUTPUT | STDERROR | STDIN | STDOUT | LIMIT | SAMPLE | LEFT | RIGHT | FULL | identifier | null_keyword | TRUE | FALSE | REALIAS );
     def eid(self, ):
 
         retval = self.eid_return()
@@ -18681,15 +18166,15 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:748:5: ( rel_str_op | IMPORT | RETURNS | DEFINE | LOAD | FILTER | FOREACH | CUBE | ROLLUP | ORDER | DISTINCT | COGROUP | JOIN | CROSS | UNION | SPLIT | INTO | IF | ALL | AS | BY | USING | INNER | OUTER | PARALLEL | PARTITION | GROUP | AND | OR | NOT | GENERATE | FLATTEN | ASC | DESC | BOOL | INT | LONG | FLOAT | DOUBLE | DATETIME | CHARARRAY | BYTEARRAY | BAG | TUPLE | MAP | IS | STREAM | THROUGH | STORE | MAPREDUCE | SHIP | CACHE | INPUT | OUTPUT | STDERROR | STDIN | STDOUT | LIMIT | SAMPLE | LEFT | RIGHT | FULL | identifier | null_keyword | TRUE | FALSE | REALIAS )
+                # QueryParser.g:672:5: ( rel_str_op | IMPORT | RETURNS | DEFINE | LOAD | FILTER | FOREACH | CUBE | ROLLUP | ORDER | DISTINCT | COGROUP | JOIN | CROSS | UNION | SPLIT | INTO | IF | ALL | AS | BY | USING | INNER | OUTER | PARALLEL | PARTITION | GROUP | AND | OR | NOT | GENERATE | FLATTEN | ASC | DESC | BOOL | INT | LONG | FLOAT | DOUBLE | DATETIME | CHARARRAY | BYTEARRAY | BAG | TUPLE | MAP | IS | STREAM | THROUGH | STORE | MAPREDUCE | SHIP | CACHE | INPUT | OUTPUT | STDERROR | STDIN | STDOUT | LIMIT | SAMPLE | LEFT | RIGHT | FULL | identifier | null_keyword | TRUE | FALSE | REALIAS )
                 alt161 = 67
                 alt161 = self.dfa161.predict(self.input)
                 if alt161 == 1:
-                    # QueryParser.g:748:7: rel_str_op
+                    # QueryParser.g:672:7: rel_str_op
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_rel_str_op_in_eid5932)
+                    self._state.following.append(self.FOLLOW_rel_str_op_in_eid5927)
                     rel_str_op613 = self.rel_str_op()
 
                     self._state.following.pop()
@@ -18698,11 +18183,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 2:
-                    # QueryParser.g:749:7: IMPORT
+                    # QueryParser.g:673:7: IMPORT
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    IMPORT614=self.match(self.input, IMPORT, self.FOLLOW_IMPORT_in_eid5940)
+                    IMPORT614=self.match(self.input, IMPORT, self.FOLLOW_IMPORT_in_eid5935)
                     if self._state.backtracking == 0:
 
                         IMPORT614_tree = self._adaptor.createWithPayload(IMPORT614)
@@ -18711,11 +18196,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 3:
-                    # QueryParser.g:750:7: RETURNS
+                    # QueryParser.g:674:7: RETURNS
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    RETURNS615=self.match(self.input, RETURNS, self.FOLLOW_RETURNS_in_eid5948)
+                    RETURNS615=self.match(self.input, RETURNS, self.FOLLOW_RETURNS_in_eid5943)
                     if self._state.backtracking == 0:
 
                         RETURNS615_tree = self._adaptor.createWithPayload(RETURNS615)
@@ -18724,11 +18209,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 4:
-                    # QueryParser.g:751:7: DEFINE
+                    # QueryParser.g:675:7: DEFINE
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    DEFINE616=self.match(self.input, DEFINE, self.FOLLOW_DEFINE_in_eid5956)
+                    DEFINE616=self.match(self.input, DEFINE, self.FOLLOW_DEFINE_in_eid5951)
                     if self._state.backtracking == 0:
 
                         DEFINE616_tree = self._adaptor.createWithPayload(DEFINE616)
@@ -18737,11 +18222,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 5:
-                    # QueryParser.g:752:7: LOAD
+                    # QueryParser.g:676:7: LOAD
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    LOAD617=self.match(self.input, LOAD, self.FOLLOW_LOAD_in_eid5964)
+                    LOAD617=self.match(self.input, LOAD, self.FOLLOW_LOAD_in_eid5959)
                     if self._state.backtracking == 0:
 
                         LOAD617_tree = self._adaptor.createWithPayload(LOAD617)
@@ -18750,11 +18235,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 6:
-                    # QueryParser.g:753:7: FILTER
+                    # QueryParser.g:677:7: FILTER
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    FILTER618=self.match(self.input, FILTER, self.FOLLOW_FILTER_in_eid5972)
+                    FILTER618=self.match(self.input, FILTER, self.FOLLOW_FILTER_in_eid5967)
                     if self._state.backtracking == 0:
 
                         FILTER618_tree = self._adaptor.createWithPayload(FILTER618)
@@ -18763,11 +18248,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 7:
-                    # QueryParser.g:754:7: FOREACH
+                    # QueryParser.g:678:7: FOREACH
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    FOREACH619=self.match(self.input, FOREACH, self.FOLLOW_FOREACH_in_eid5980)
+                    FOREACH619=self.match(self.input, FOREACH, self.FOLLOW_FOREACH_in_eid5975)
                     if self._state.backtracking == 0:
 
                         FOREACH619_tree = self._adaptor.createWithPayload(FOREACH619)
@@ -18776,11 +18261,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 8:
-                    # QueryParser.g:755:7: CUBE
+                    # QueryParser.g:679:7: CUBE
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    CUBE620=self.match(self.input, CUBE, self.FOLLOW_CUBE_in_eid5988)
+                    CUBE620=self.match(self.input, CUBE, self.FOLLOW_CUBE_in_eid5983)
                     if self._state.backtracking == 0:
 
                         CUBE620_tree = self._adaptor.createWithPayload(CUBE620)
@@ -18789,11 +18274,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 9:
-                    # QueryParser.g:756:7: ROLLUP
+                    # QueryParser.g:680:7: ROLLUP
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    ROLLUP621=self.match(self.input, ROLLUP, self.FOLLOW_ROLLUP_in_eid5996)
+                    ROLLUP621=self.match(self.input, ROLLUP, self.FOLLOW_ROLLUP_in_eid5991)
                     if self._state.backtracking == 0:
 
                         ROLLUP621_tree = self._adaptor.createWithPayload(ROLLUP621)
@@ -18802,11 +18287,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 10:
-                    # QueryParser.g:757:7: ORDER
+                    # QueryParser.g:681:7: ORDER
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    ORDER622=self.match(self.input, ORDER, self.FOLLOW_ORDER_in_eid6004)
+                    ORDER622=self.match(self.input, ORDER, self.FOLLOW_ORDER_in_eid5999)
                     if self._state.backtracking == 0:
 
                         ORDER622_tree = self._adaptor.createWithPayload(ORDER622)
@@ -18815,11 +18300,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 11:
-                    # QueryParser.g:758:7: DISTINCT
+                    # QueryParser.g:682:7: DISTINCT
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    DISTINCT623=self.match(self.input, DISTINCT, self.FOLLOW_DISTINCT_in_eid6012)
+                    DISTINCT623=self.match(self.input, DISTINCT, self.FOLLOW_DISTINCT_in_eid6007)
                     if self._state.backtracking == 0:
 
                         DISTINCT623_tree = self._adaptor.createWithPayload(DISTINCT623)
@@ -18828,11 +18313,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 12:
-                    # QueryParser.g:759:7: COGROUP
+                    # QueryParser.g:683:7: COGROUP
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    COGROUP624=self.match(self.input, COGROUP, self.FOLLOW_COGROUP_in_eid6020)
+                    COGROUP624=self.match(self.input, COGROUP, self.FOLLOW_COGROUP_in_eid6015)
                     if self._state.backtracking == 0:
 
                         COGROUP624_tree = self._adaptor.createWithPayload(COGROUP624)
@@ -18841,11 +18326,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 13:
-                    # QueryParser.g:760:7: JOIN
+                    # QueryParser.g:684:7: JOIN
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    JOIN625=self.match(self.input, JOIN, self.FOLLOW_JOIN_in_eid6028)
+                    JOIN625=self.match(self.input, JOIN, self.FOLLOW_JOIN_in_eid6023)
                     if self._state.backtracking == 0:
 
                         JOIN625_tree = self._adaptor.createWithPayload(JOIN625)
@@ -18854,11 +18339,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 14:
-                    # QueryParser.g:761:7: CROSS
+                    # QueryParser.g:685:7: CROSS
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    CROSS626=self.match(self.input, CROSS, self.FOLLOW_CROSS_in_eid6036)
+                    CROSS626=self.match(self.input, CROSS, self.FOLLOW_CROSS_in_eid6031)
                     if self._state.backtracking == 0:
 
                         CROSS626_tree = self._adaptor.createWithPayload(CROSS626)
@@ -18867,11 +18352,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 15:
-                    # QueryParser.g:762:7: UNION
+                    # QueryParser.g:686:7: UNION
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    UNION627=self.match(self.input, UNION, self.FOLLOW_UNION_in_eid6044)
+                    UNION627=self.match(self.input, UNION, self.FOLLOW_UNION_in_eid6039)
                     if self._state.backtracking == 0:
 
                         UNION627_tree = self._adaptor.createWithPayload(UNION627)
@@ -18880,11 +18365,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 16:
-                    # QueryParser.g:763:7: SPLIT
+                    # QueryParser.g:687:7: SPLIT
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    SPLIT628=self.match(self.input, SPLIT, self.FOLLOW_SPLIT_in_eid6052)
+                    SPLIT628=self.match(self.input, SPLIT, self.FOLLOW_SPLIT_in_eid6047)
                     if self._state.backtracking == 0:
 
                         SPLIT628_tree = self._adaptor.createWithPayload(SPLIT628)
@@ -18893,11 +18378,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 17:
-                    # QueryParser.g:764:7: INTO
+                    # QueryParser.g:688:7: INTO
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    INTO629=self.match(self.input, INTO, self.FOLLOW_INTO_in_eid6060)
+                    INTO629=self.match(self.input, INTO, self.FOLLOW_INTO_in_eid6055)
                     if self._state.backtracking == 0:
 
                         INTO629_tree = self._adaptor.createWithPayload(INTO629)
@@ -18906,11 +18391,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 18:
-                    # QueryParser.g:765:7: IF
+                    # QueryParser.g:689:7: IF
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    IF630=self.match(self.input, IF, self.FOLLOW_IF_in_eid6068)
+                    IF630=self.match(self.input, IF, self.FOLLOW_IF_in_eid6063)
                     if self._state.backtracking == 0:
 
                         IF630_tree = self._adaptor.createWithPayload(IF630)
@@ -18919,11 +18404,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 19:
-                    # QueryParser.g:766:7: ALL
+                    # QueryParser.g:690:7: ALL
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    ALL631=self.match(self.input, ALL, self.FOLLOW_ALL_in_eid6076)
+                    ALL631=self.match(self.input, ALL, self.FOLLOW_ALL_in_eid6071)
                     if self._state.backtracking == 0:
 
                         ALL631_tree = self._adaptor.createWithPayload(ALL631)
@@ -18932,11 +18417,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 20:
-                    # QueryParser.g:767:7: AS
+                    # QueryParser.g:691:7: AS
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    AS632=self.match(self.input, AS, self.FOLLOW_AS_in_eid6084)
+                    AS632=self.match(self.input, AS, self.FOLLOW_AS_in_eid6079)
                     if self._state.backtracking == 0:
 
                         AS632_tree = self._adaptor.createWithPayload(AS632)
@@ -18945,11 +18430,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 21:
-                    # QueryParser.g:768:7: BY
+                    # QueryParser.g:692:7: BY
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    BY633=self.match(self.input, BY, self.FOLLOW_BY_in_eid6092)
+                    BY633=self.match(self.input, BY, self.FOLLOW_BY_in_eid6087)
                     if self._state.backtracking == 0:
 
                         BY633_tree = self._adaptor.createWithPayload(BY633)
@@ -18958,11 +18443,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 22:
-                    # QueryParser.g:769:7: USING
+                    # QueryParser.g:693:7: USING
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    USING634=self.match(self.input, USING, self.FOLLOW_USING_in_eid6100)
+                    USING634=self.match(self.input, USING, self.FOLLOW_USING_in_eid6095)
                     if self._state.backtracking == 0:
 
                         USING634_tree = self._adaptor.createWithPayload(USING634)
@@ -18971,11 +18456,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 23:
-                    # QueryParser.g:770:7: INNER
+                    # QueryParser.g:694:7: INNER
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    INNER635=self.match(self.input, INNER, self.FOLLOW_INNER_in_eid6108)
+                    INNER635=self.match(self.input, INNER, self.FOLLOW_INNER_in_eid6103)
                     if self._state.backtracking == 0:
 
                         INNER635_tree = self._adaptor.createWithPayload(INNER635)
@@ -18984,11 +18469,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 24:
-                    # QueryParser.g:771:7: OUTER
+                    # QueryParser.g:695:7: OUTER
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    OUTER636=self.match(self.input, OUTER, self.FOLLOW_OUTER_in_eid6116)
+                    OUTER636=self.match(self.input, OUTER, self.FOLLOW_OUTER_in_eid6111)
                     if self._state.backtracking == 0:
 
                         OUTER636_tree = self._adaptor.createWithPayload(OUTER636)
@@ -18997,11 +18482,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 25:
-                    # QueryParser.g:772:7: PARALLEL
+                    # QueryParser.g:696:7: PARALLEL
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    PARALLEL637=self.match(self.input, PARALLEL, self.FOLLOW_PARALLEL_in_eid6124)
+                    PARALLEL637=self.match(self.input, PARALLEL, self.FOLLOW_PARALLEL_in_eid6119)
                     if self._state.backtracking == 0:
 
                         PARALLEL637_tree = self._adaptor.createWithPayload(PARALLEL637)
@@ -19010,11 +18495,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 26:
-                    # QueryParser.g:773:7: PARTITION
+                    # QueryParser.g:697:7: PARTITION
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    PARTITION638=self.match(self.input, PARTITION, self.FOLLOW_PARTITION_in_eid6132)
+                    PARTITION638=self.match(self.input, PARTITION, self.FOLLOW_PARTITION_in_eid6127)
                     if self._state.backtracking == 0:
 
                         PARTITION638_tree = self._adaptor.createWithPayload(PARTITION638)
@@ -19023,11 +18508,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 27:
-                    # QueryParser.g:774:7: GROUP
+                    # QueryParser.g:698:7: GROUP
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    GROUP639=self.match(self.input, GROUP, self.FOLLOW_GROUP_in_eid6140)
+                    GROUP639=self.match(self.input, GROUP, self.FOLLOW_GROUP_in_eid6135)
                     if self._state.backtracking == 0:
 
                         GROUP639_tree = self._adaptor.createWithPayload(GROUP639)
@@ -19036,11 +18521,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 28:
-                    # QueryParser.g:775:7: AND
+                    # QueryParser.g:699:7: AND
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    AND640=self.match(self.input, AND, self.FOLLOW_AND_in_eid6148)
+                    AND640=self.match(self.input, AND, self.FOLLOW_AND_in_eid6143)
                     if self._state.backtracking == 0:
 
                         AND640_tree = self._adaptor.createWithPayload(AND640)
@@ -19049,11 +18534,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 29:
-                    # QueryParser.g:776:7: OR
+                    # QueryParser.g:700:7: OR
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    OR641=self.match(self.input, OR, self.FOLLOW_OR_in_eid6156)
+                    OR641=self.match(self.input, OR, self.FOLLOW_OR_in_eid6151)
                     if self._state.backtracking == 0:
 
                         OR641_tree = self._adaptor.createWithPayload(OR641)
@@ -19062,11 +18547,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 30:
-                    # QueryParser.g:777:7: NOT
+                    # QueryParser.g:701:7: NOT
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    NOT642=self.match(self.input, NOT, self.FOLLOW_NOT_in_eid6164)
+                    NOT642=self.match(self.input, NOT, self.FOLLOW_NOT_in_eid6159)
                     if self._state.backtracking == 0:
 
                         NOT642_tree = self._adaptor.createWithPayload(NOT642)
@@ -19075,11 +18560,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 31:
-                    # QueryParser.g:778:7: GENERATE
+                    # QueryParser.g:702:7: GENERATE
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    GENERATE643=self.match(self.input, GENERATE, self.FOLLOW_GENERATE_in_eid6172)
+                    GENERATE643=self.match(self.input, GENERATE, self.FOLLOW_GENERATE_in_eid6167)
                     if self._state.backtracking == 0:
 
                         GENERATE643_tree = self._adaptor.createWithPayload(GENERATE643)
@@ -19088,11 +18573,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 32:
-                    # QueryParser.g:779:7: FLATTEN
+                    # QueryParser.g:703:7: FLATTEN
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    FLATTEN644=self.match(self.input, FLATTEN, self.FOLLOW_FLATTEN_in_eid6180)
+                    FLATTEN644=self.match(self.input, FLATTEN, self.FOLLOW_FLATTEN_in_eid6175)
                     if self._state.backtracking == 0:
 
                         FLATTEN644_tree = self._adaptor.createWithPayload(FLATTEN644)
@@ -19101,11 +18586,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 33:
-                    # QueryParser.g:780:7: ASC
+                    # QueryParser.g:704:7: ASC
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    ASC645=self.match(self.input, ASC, self.FOLLOW_ASC_in_eid6188)
+                    ASC645=self.match(self.input, ASC, self.FOLLOW_ASC_in_eid6183)
                     if self._state.backtracking == 0:
 
                         ASC645_tree = self._adaptor.createWithPayload(ASC645)
@@ -19114,11 +18599,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 34:
-                    # QueryParser.g:781:7: DESC
+                    # QueryParser.g:705:7: DESC
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    DESC646=self.match(self.input, DESC, self.FOLLOW_DESC_in_eid6196)
+                    DESC646=self.match(self.input, DESC, self.FOLLOW_DESC_in_eid6191)
                     if self._state.backtracking == 0:
 
                         DESC646_tree = self._adaptor.createWithPayload(DESC646)
@@ -19127,11 +18612,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 35:
-                    # QueryParser.g:782:7: BOOL
+                    # QueryParser.g:706:7: BOOL
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    BOOL647=self.match(self.input, BOOL, self.FOLLOW_BOOL_in_eid6204)
+                    BOOL647=self.match(self.input, BOOL, self.FOLLOW_BOOL_in_eid6199)
                     if self._state.backtracking == 0:
 
                         BOOL647_tree = self._adaptor.createWithPayload(BOOL647)
@@ -19140,11 +18625,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 36:
-                    # QueryParser.g:783:7: INT
+                    # QueryParser.g:707:7: INT
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    INT648=self.match(self.input, INT, self.FOLLOW_INT_in_eid6212)
+                    INT648=self.match(self.input, INT, self.FOLLOW_INT_in_eid6207)
                     if self._state.backtracking == 0:
 
                         INT648_tree = self._adaptor.createWithPayload(INT648)
@@ -19153,11 +18638,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 37:
-                    # QueryParser.g:784:7: LONG
+                    # QueryParser.g:708:7: LONG
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    LONG649=self.match(self.input, LONG, self.FOLLOW_LONG_in_eid6220)
+                    LONG649=self.match(self.input, LONG, self.FOLLOW_LONG_in_eid6215)
                     if self._state.backtracking == 0:
 
                         LONG649_tree = self._adaptor.createWithPayload(LONG649)
@@ -19166,11 +18651,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 38:
-                    # QueryParser.g:785:7: FLOAT
+                    # QueryParser.g:709:7: FLOAT
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    FLOAT650=self.match(self.input, FLOAT, self.FOLLOW_FLOAT_in_eid6228)
+                    FLOAT650=self.match(self.input, FLOAT, self.FOLLOW_FLOAT_in_eid6223)
                     if self._state.backtracking == 0:
 
                         FLOAT650_tree = self._adaptor.createWithPayload(FLOAT650)
@@ -19179,11 +18664,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 39:
-                    # QueryParser.g:786:7: DOUBLE
+                    # QueryParser.g:710:7: DOUBLE
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    DOUBLE651=self.match(self.input, DOUBLE, self.FOLLOW_DOUBLE_in_eid6236)
+                    DOUBLE651=self.match(self.input, DOUBLE, self.FOLLOW_DOUBLE_in_eid6231)
                     if self._state.backtracking == 0:
 
                         DOUBLE651_tree = self._adaptor.createWithPayload(DOUBLE651)
@@ -19192,11 +18677,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 40:
-                    # QueryParser.g:787:7: DATETIME
+                    # QueryParser.g:711:7: DATETIME
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    DATETIME652=self.match(self.input, DATETIME, self.FOLLOW_DATETIME_in_eid6244)
+                    DATETIME652=self.match(self.input, DATETIME, self.FOLLOW_DATETIME_in_eid6239)
                     if self._state.backtracking == 0:
 
                         DATETIME652_tree = self._adaptor.createWithPayload(DATETIME652)
@@ -19205,11 +18690,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 41:
-                    # QueryParser.g:788:7: CHARARRAY
+                    # QueryParser.g:712:7: CHARARRAY
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    CHARARRAY653=self.match(self.input, CHARARRAY, self.FOLLOW_CHARARRAY_in_eid6252)
+                    CHARARRAY653=self.match(self.input, CHARARRAY, self.FOLLOW_CHARARRAY_in_eid6247)
                     if self._state.backtracking == 0:
 
                         CHARARRAY653_tree = self._adaptor.createWithPayload(CHARARRAY653)
@@ -19218,11 +18703,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 42:
-                    # QueryParser.g:789:7: BYTEARRAY
+                    # QueryParser.g:713:7: BYTEARRAY
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    BYTEARRAY654=self.match(self.input, BYTEARRAY, self.FOLLOW_BYTEARRAY_in_eid6260)
+                    BYTEARRAY654=self.match(self.input, BYTEARRAY, self.FOLLOW_BYTEARRAY_in_eid6255)
                     if self._state.backtracking == 0:
 
                         BYTEARRAY654_tree = self._adaptor.createWithPayload(BYTEARRAY654)
@@ -19231,11 +18716,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 43:
-                    # QueryParser.g:790:7: BAG
+                    # QueryParser.g:714:7: BAG
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    BAG655=self.match(self.input, BAG, self.FOLLOW_BAG_in_eid6268)
+                    BAG655=self.match(self.input, BAG, self.FOLLOW_BAG_in_eid6263)
                     if self._state.backtracking == 0:
 
                         BAG655_tree = self._adaptor.createWithPayload(BAG655)
@@ -19244,11 +18729,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 44:
-                    # QueryParser.g:791:7: TUPLE
+                    # QueryParser.g:715:7: TUPLE
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    TUPLE656=self.match(self.input, TUPLE, self.FOLLOW_TUPLE_in_eid6276)
+                    TUPLE656=self.match(self.input, TUPLE, self.FOLLOW_TUPLE_in_eid6271)
                     if self._state.backtracking == 0:
 
                         TUPLE656_tree = self._adaptor.createWithPayload(TUPLE656)
@@ -19257,11 +18742,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 45:
-                    # QueryParser.g:792:7: MAP
+                    # QueryParser.g:716:7: MAP
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    MAP657=self.match(self.input, MAP, self.FOLLOW_MAP_in_eid6284)
+                    MAP657=self.match(self.input, MAP, self.FOLLOW_MAP_in_eid6279)
                     if self._state.backtracking == 0:
 
                         MAP657_tree = self._adaptor.createWithPayload(MAP657)
@@ -19270,11 +18755,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 46:
-                    # QueryParser.g:793:7: IS
+                    # QueryParser.g:717:7: IS
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    IS658=self.match(self.input, IS, self.FOLLOW_IS_in_eid6292)
+                    IS658=self.match(self.input, IS, self.FOLLOW_IS_in_eid6287)
                     if self._state.backtracking == 0:
 
                         IS658_tree = self._adaptor.createWithPayload(IS658)
@@ -19283,11 +18768,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 47:
-                    # QueryParser.g:794:7: STREAM
+                    # QueryParser.g:718:7: STREAM
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    STREAM659=self.match(self.input, STREAM, self.FOLLOW_STREAM_in_eid6300)
+                    STREAM659=self.match(self.input, STREAM, self.FOLLOW_STREAM_in_eid6295)
                     if self._state.backtracking == 0:
 
                         STREAM659_tree = self._adaptor.createWithPayload(STREAM659)
@@ -19296,11 +18781,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 48:
-                    # QueryParser.g:795:7: THROUGH
+                    # QueryParser.g:719:7: THROUGH
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    THROUGH660=self.match(self.input, THROUGH, self.FOLLOW_THROUGH_in_eid6308)
+                    THROUGH660=self.match(self.input, THROUGH, self.FOLLOW_THROUGH_in_eid6303)
                     if self._state.backtracking == 0:
 
                         THROUGH660_tree = self._adaptor.createWithPayload(THROUGH660)
@@ -19309,11 +18794,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 49:
-                    # QueryParser.g:796:7: STORE
+                    # QueryParser.g:720:7: STORE
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    STORE661=self.match(self.input, STORE, self.FOLLOW_STORE_in_eid6316)
+                    STORE661=self.match(self.input, STORE, self.FOLLOW_STORE_in_eid6311)
                     if self._state.backtracking == 0:
 
                         STORE661_tree = self._adaptor.createWithPayload(STORE661)
@@ -19322,11 +18807,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 50:
-                    # QueryParser.g:797:7: MAPREDUCE
+                    # QueryParser.g:721:7: MAPREDUCE
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    MAPREDUCE662=self.match(self.input, MAPREDUCE, self.FOLLOW_MAPREDUCE_in_eid6324)
+                    MAPREDUCE662=self.match(self.input, MAPREDUCE, self.FOLLOW_MAPREDUCE_in_eid6319)
                     if self._state.backtracking == 0:
 
                         MAPREDUCE662_tree = self._adaptor.createWithPayload(MAPREDUCE662)
@@ -19335,11 +18820,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 51:
-                    # QueryParser.g:798:7: SHIP
+                    # QueryParser.g:722:7: SHIP
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    SHIP663=self.match(self.input, SHIP, self.FOLLOW_SHIP_in_eid6332)
+                    SHIP663=self.match(self.input, SHIP, self.FOLLOW_SHIP_in_eid6327)
                     if self._state.backtracking == 0:
 
                         SHIP663_tree = self._adaptor.createWithPayload(SHIP663)
@@ -19348,11 +18833,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 52:
-                    # QueryParser.g:799:7: CACHE
+                    # QueryParser.g:723:7: CACHE
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    CACHE664=self.match(self.input, CACHE, self.FOLLOW_CACHE_in_eid6340)
+                    CACHE664=self.match(self.input, CACHE, self.FOLLOW_CACHE_in_eid6335)
                     if self._state.backtracking == 0:
 
                         CACHE664_tree = self._adaptor.createWithPayload(CACHE664)
@@ -19361,11 +18846,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 53:
-                    # QueryParser.g:800:7: INPUT
+                    # QueryParser.g:724:7: INPUT
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    INPUT665=self.match(self.input, INPUT, self.FOLLOW_INPUT_in_eid6348)
+                    INPUT665=self.match(self.input, INPUT, self.FOLLOW_INPUT_in_eid6343)
                     if self._state.backtracking == 0:
 
                         INPUT665_tree = self._adaptor.createWithPayload(INPUT665)
@@ -19374,11 +18859,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 54:
-                    # QueryParser.g:801:7: OUTPUT
+                    # QueryParser.g:725:7: OUTPUT
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    OUTPUT666=self.match(self.input, OUTPUT, self.FOLLOW_OUTPUT_in_eid6356)
+                    OUTPUT666=self.match(self.input, OUTPUT, self.FOLLOW_OUTPUT_in_eid6351)
                     if self._state.backtracking == 0:
 
                         OUTPUT666_tree = self._adaptor.createWithPayload(OUTPUT666)
@@ -19387,11 +18872,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 55:
-                    # QueryParser.g:802:7: STDERROR
+                    # QueryParser.g:726:7: STDERROR
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    STDERROR667=self.match(self.input, STDERROR, self.FOLLOW_STDERROR_in_eid6364)
+                    STDERROR667=self.match(self.input, STDERROR, self.FOLLOW_STDERROR_in_eid6359)
                     if self._state.backtracking == 0:
 
                         STDERROR667_tree = self._adaptor.createWithPayload(STDERROR667)
@@ -19400,11 +18885,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 56:
-                    # QueryParser.g:803:7: STDIN
+                    # QueryParser.g:727:7: STDIN
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    STDIN668=self.match(self.input, STDIN, self.FOLLOW_STDIN_in_eid6372)
+                    STDIN668=self.match(self.input, STDIN, self.FOLLOW_STDIN_in_eid6367)
                     if self._state.backtracking == 0:
 
                         STDIN668_tree = self._adaptor.createWithPayload(STDIN668)
@@ -19413,11 +18898,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 57:
-                    # QueryParser.g:804:7: STDOUT
+                    # QueryParser.g:728:7: STDOUT
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    STDOUT669=self.match(self.input, STDOUT, self.FOLLOW_STDOUT_in_eid6380)
+                    STDOUT669=self.match(self.input, STDOUT, self.FOLLOW_STDOUT_in_eid6375)
                     if self._state.backtracking == 0:
 
                         STDOUT669_tree = self._adaptor.createWithPayload(STDOUT669)
@@ -19426,11 +18911,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 58:
-                    # QueryParser.g:805:7: LIMIT
+                    # QueryParser.g:729:7: LIMIT
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    LIMIT670=self.match(self.input, LIMIT, self.FOLLOW_LIMIT_in_eid6388)
+                    LIMIT670=self.match(self.input, LIMIT, self.FOLLOW_LIMIT_in_eid6383)
                     if self._state.backtracking == 0:
 
                         LIMIT670_tree = self._adaptor.createWithPayload(LIMIT670)
@@ -19439,11 +18924,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 59:
-                    # QueryParser.g:806:7: SAMPLE
+                    # QueryParser.g:730:7: SAMPLE
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    SAMPLE671=self.match(self.input, SAMPLE, self.FOLLOW_SAMPLE_in_eid6396)
+                    SAMPLE671=self.match(self.input, SAMPLE, self.FOLLOW_SAMPLE_in_eid6391)
                     if self._state.backtracking == 0:
 
                         SAMPLE671_tree = self._adaptor.createWithPayload(SAMPLE671)
@@ -19452,11 +18937,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 60:
-                    # QueryParser.g:807:7: LEFT
+                    # QueryParser.g:731:7: LEFT
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    LEFT672=self.match(self.input, LEFT, self.FOLLOW_LEFT_in_eid6404)
+                    LEFT672=self.match(self.input, LEFT, self.FOLLOW_LEFT_in_eid6399)
                     if self._state.backtracking == 0:
 
                         LEFT672_tree = self._adaptor.createWithPayload(LEFT672)
@@ -19465,11 +18950,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 61:
-                    # QueryParser.g:808:7: RIGHT
+                    # QueryParser.g:732:7: RIGHT
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    RIGHT673=self.match(self.input, RIGHT, self.FOLLOW_RIGHT_in_eid6412)
+                    RIGHT673=self.match(self.input, RIGHT, self.FOLLOW_RIGHT_in_eid6407)
                     if self._state.backtracking == 0:
 
                         RIGHT673_tree = self._adaptor.createWithPayload(RIGHT673)
@@ -19478,11 +18963,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 62:
-                    # QueryParser.g:809:7: FULL
+                    # QueryParser.g:733:7: FULL
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    FULL674=self.match(self.input, FULL, self.FOLLOW_FULL_in_eid6420)
+                    FULL674=self.match(self.input, FULL, self.FOLLOW_FULL_in_eid6415)
                     if self._state.backtracking == 0:
 
                         FULL674_tree = self._adaptor.createWithPayload(FULL674)
@@ -19491,11 +18976,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 63:
-                    # QueryParser.g:810:7: identifier
+                    # QueryParser.g:734:7: identifier
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_identifier_in_eid6428)
+                    self._state.following.append(self.FOLLOW_identifier_in_eid6423)
                     identifier675 = self.identifier()
 
                     self._state.following.pop()
@@ -19504,11 +18989,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 64:
-                    # QueryParser.g:811:7: null_keyword
+                    # QueryParser.g:735:7: null_keyword
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_null_keyword_in_eid6436)
+                    self._state.following.append(self.FOLLOW_null_keyword_in_eid6431)
                     null_keyword676 = self.null_keyword()
 
                     self._state.following.pop()
@@ -19517,11 +19002,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 65:
-                    # QueryParser.g:812:7: TRUE
+                    # QueryParser.g:736:7: TRUE
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    TRUE677=self.match(self.input, TRUE, self.FOLLOW_TRUE_in_eid6444)
+                    TRUE677=self.match(self.input, TRUE, self.FOLLOW_TRUE_in_eid6439)
                     if self._state.backtracking == 0:
 
                         TRUE677_tree = self._adaptor.createWithPayload(TRUE677)
@@ -19530,11 +19015,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 66:
-                    # QueryParser.g:813:7: FALSE
+                    # QueryParser.g:737:7: FALSE
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    FALSE678=self.match(self.input, FALSE, self.FOLLOW_FALSE_in_eid6452)
+                    FALSE678=self.match(self.input, FALSE, self.FOLLOW_FALSE_in_eid6447)
                     if self._state.backtracking == 0:
 
                         FALSE678_tree = self._adaptor.createWithPayload(FALSE678)
@@ -19543,11 +19028,11 @@ class QueryParser(Parser):
 
 
                 elif alt161 == 67:
-                    # QueryParser.g:814:7: REALIAS
+                    # QueryParser.g:738:7: REALIAS
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    REALIAS679=self.match(self.input, REALIAS, self.FOLLOW_REALIAS_in_eid6460)
+                    REALIAS679=self.match(self.input, REALIAS, self.FOLLOW_REALIAS_in_eid6455)
                     if self._state.backtracking == 0:
 
                         REALIAS679_tree = self._adaptor.createWithPayload(REALIAS679)
@@ -19564,9 +19049,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -19584,7 +19066,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "rel_op"
-    # QueryParser.g:818:1: rel_op : ( rel_op_eq | rel_op_ne | rel_op_gt | rel_op_gte | rel_op_lt | rel_op_lte | STR_OP_MATCHES );
+    # QueryParser.g:742:1: rel_op : ( rel_op_eq | rel_op_ne | rel_op_gt | rel_op_gte | rel_op_lt | rel_op_lte | STR_OP_MATCHES );
     def rel_op(self, ):
 
         retval = self.rel_op_return()
@@ -19610,7 +19092,7 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:818:8: ( rel_op_eq | rel_op_ne | rel_op_gt | rel_op_gte | rel_op_lt | rel_op_lte | STR_OP_MATCHES )
+                # QueryParser.g:742:8: ( rel_op_eq | rel_op_ne | rel_op_gt | rel_op_gte | rel_op_lt | rel_op_lte | STR_OP_MATCHES )
                 alt162 = 7
                 LA162 = self.input.LA(1)
                 if LA162 == STR_OP_EQ or LA162 == NUM_OP_EQ:
@@ -19636,11 +19118,11 @@ class QueryParser(Parser):
                     raise nvae
 
                 if alt162 == 1:
-                    # QueryParser.g:818:10: rel_op_eq
+                    # QueryParser.g:742:10: rel_op_eq
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_rel_op_eq_in_rel_op6470)
+                    self._state.following.append(self.FOLLOW_rel_op_eq_in_rel_op6465)
                     rel_op_eq680 = self.rel_op_eq()
 
                     self._state.following.pop()
@@ -19649,11 +19131,11 @@ class QueryParser(Parser):
 
 
                 elif alt162 == 2:
-                    # QueryParser.g:819:10: rel_op_ne
+                    # QueryParser.g:743:10: rel_op_ne
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_rel_op_ne_in_rel_op6481)
+                    self._state.following.append(self.FOLLOW_rel_op_ne_in_rel_op6476)
                     rel_op_ne681 = self.rel_op_ne()
 
                     self._state.following.pop()
@@ -19662,11 +19144,11 @@ class QueryParser(Parser):
 
 
                 elif alt162 == 3:
-                    # QueryParser.g:820:10: rel_op_gt
+                    # QueryParser.g:744:10: rel_op_gt
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_rel_op_gt_in_rel_op6492)
+                    self._state.following.append(self.FOLLOW_rel_op_gt_in_rel_op6487)
                     rel_op_gt682 = self.rel_op_gt()
 
                     self._state.following.pop()
@@ -19675,11 +19157,11 @@ class QueryParser(Parser):
 
 
                 elif alt162 == 4:
-                    # QueryParser.g:821:10: rel_op_gte
+                    # QueryParser.g:745:10: rel_op_gte
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_rel_op_gte_in_rel_op6503)
+                    self._state.following.append(self.FOLLOW_rel_op_gte_in_rel_op6498)
                     rel_op_gte683 = self.rel_op_gte()
 
                     self._state.following.pop()
@@ -19688,11 +19170,11 @@ class QueryParser(Parser):
 
 
                 elif alt162 == 5:
-                    # QueryParser.g:822:10: rel_op_lt
+                    # QueryParser.g:746:10: rel_op_lt
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_rel_op_lt_in_rel_op6514)
+                    self._state.following.append(self.FOLLOW_rel_op_lt_in_rel_op6509)
                     rel_op_lt684 = self.rel_op_lt()
 
                     self._state.following.pop()
@@ -19701,11 +19183,11 @@ class QueryParser(Parser):
 
 
                 elif alt162 == 6:
-                    # QueryParser.g:823:10: rel_op_lte
+                    # QueryParser.g:747:10: rel_op_lte
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    self._state.following.append(self.FOLLOW_rel_op_lte_in_rel_op6525)
+                    self._state.following.append(self.FOLLOW_rel_op_lte_in_rel_op6520)
                     rel_op_lte685 = self.rel_op_lte()
 
                     self._state.following.pop()
@@ -19714,11 +19196,11 @@ class QueryParser(Parser):
 
 
                 elif alt162 == 7:
-                    # QueryParser.g:824:10: STR_OP_MATCHES
+                    # QueryParser.g:748:10: STR_OP_MATCHES
                     pass 
                     root_0 = self._adaptor.nil()
 
-                    STR_OP_MATCHES686=self.match(self.input, STR_OP_MATCHES, self.FOLLOW_STR_OP_MATCHES_in_rel_op6536)
+                    STR_OP_MATCHES686=self.match(self.input, STR_OP_MATCHES, self.FOLLOW_STR_OP_MATCHES_in_rel_op6531)
                     if self._state.backtracking == 0:
 
                         STR_OP_MATCHES686_tree = self._adaptor.createWithPayload(STR_OP_MATCHES686)
@@ -19735,9 +19217,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -19755,7 +19234,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "rel_op_eq"
-    # QueryParser.g:827:1: rel_op_eq : ( STR_OP_EQ | NUM_OP_EQ );
+    # QueryParser.g:751:1: rel_op_eq : ( STR_OP_EQ | NUM_OP_EQ );
     def rel_op_eq(self, ):
 
         retval = self.rel_op_eq_return()
@@ -19769,7 +19248,7 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:827:11: ( STR_OP_EQ | NUM_OP_EQ )
+                # QueryParser.g:751:11: ( STR_OP_EQ | NUM_OP_EQ )
                 # QueryParser.g:
                 pass 
                 root_0 = self._adaptor.nil()
@@ -19801,9 +19280,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -19821,7 +19297,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "rel_op_ne"
-    # QueryParser.g:830:1: rel_op_ne : ( STR_OP_NE | NUM_OP_NE );
+    # QueryParser.g:754:1: rel_op_ne : ( STR_OP_NE | NUM_OP_NE );
     def rel_op_ne(self, ):
 
         retval = self.rel_op_ne_return()
@@ -19835,7 +19311,7 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:830:11: ( STR_OP_NE | NUM_OP_NE )
+                # QueryParser.g:754:11: ( STR_OP_NE | NUM_OP_NE )
                 # QueryParser.g:
                 pass 
                 root_0 = self._adaptor.nil()
@@ -19867,9 +19343,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -19887,7 +19360,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "rel_op_gt"
-    # QueryParser.g:833:1: rel_op_gt : ( STR_OP_GT | NUM_OP_GT );
+    # QueryParser.g:757:1: rel_op_gt : ( STR_OP_GT | NUM_OP_GT );
     def rel_op_gt(self, ):
 
         retval = self.rel_op_gt_return()
@@ -19901,7 +19374,7 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:833:11: ( STR_OP_GT | NUM_OP_GT )
+                # QueryParser.g:757:11: ( STR_OP_GT | NUM_OP_GT )
                 # QueryParser.g:
                 pass 
                 root_0 = self._adaptor.nil()
@@ -19933,9 +19406,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -19953,7 +19423,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "rel_op_gte"
-    # QueryParser.g:836:1: rel_op_gte : ( STR_OP_GTE | NUM_OP_GTE );
+    # QueryParser.g:760:1: rel_op_gte : ( STR_OP_GTE | NUM_OP_GTE );
     def rel_op_gte(self, ):
 
         retval = self.rel_op_gte_return()
@@ -19967,7 +19437,7 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:836:12: ( STR_OP_GTE | NUM_OP_GTE )
+                # QueryParser.g:760:12: ( STR_OP_GTE | NUM_OP_GTE )
                 # QueryParser.g:
                 pass 
                 root_0 = self._adaptor.nil()
@@ -19999,9 +19469,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -20019,7 +19486,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "rel_op_lt"
-    # QueryParser.g:839:1: rel_op_lt : ( STR_OP_LT | NUM_OP_LT );
+    # QueryParser.g:763:1: rel_op_lt : ( STR_OP_LT | NUM_OP_LT );
     def rel_op_lt(self, ):
 
         retval = self.rel_op_lt_return()
@@ -20033,7 +19500,7 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:839:11: ( STR_OP_LT | NUM_OP_LT )
+                # QueryParser.g:763:11: ( STR_OP_LT | NUM_OP_LT )
                 # QueryParser.g:
                 pass 
                 root_0 = self._adaptor.nil()
@@ -20065,9 +19532,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -20085,7 +19549,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "rel_op_lte"
-    # QueryParser.g:842:1: rel_op_lte : ( STR_OP_LTE | NUM_OP_LTE );
+    # QueryParser.g:766:1: rel_op_lte : ( STR_OP_LTE | NUM_OP_LTE );
     def rel_op_lte(self, ):
 
         retval = self.rel_op_lte_return()
@@ -20099,7 +19563,7 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:842:12: ( STR_OP_LTE | NUM_OP_LTE )
+                # QueryParser.g:766:12: ( STR_OP_LTE | NUM_OP_LTE )
                 # QueryParser.g:
                 pass 
                 root_0 = self._adaptor.nil()
@@ -20131,9 +19595,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -20151,7 +19612,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "rel_str_op"
-    # QueryParser.g:845:1: rel_str_op : ( STR_OP_EQ | STR_OP_NE | STR_OP_GT | STR_OP_LT | STR_OP_GTE | STR_OP_LTE | STR_OP_MATCHES );
+    # QueryParser.g:769:1: rel_str_op : ( STR_OP_EQ | STR_OP_NE | STR_OP_GT | STR_OP_LT | STR_OP_GTE | STR_OP_LTE | STR_OP_MATCHES );
     def rel_str_op(self, ):
 
         retval = self.rel_str_op_return()
@@ -20165,7 +19626,7 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:845:12: ( STR_OP_EQ | STR_OP_NE | STR_OP_GT | STR_OP_LT | STR_OP_GTE | STR_OP_LTE | STR_OP_MATCHES )
+                # QueryParser.g:769:12: ( STR_OP_EQ | STR_OP_NE | STR_OP_GT | STR_OP_LT | STR_OP_GTE | STR_OP_LTE | STR_OP_MATCHES )
                 # QueryParser.g:
                 pass 
                 root_0 = self._adaptor.nil()
@@ -20197,9 +19658,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -20217,7 +19675,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "null_keyword"
-    # QueryParser.g:854:1: null_keyword : {...}? IDENTIFIER_L -> NULL[$IDENTIFIER_L] ;
+    # QueryParser.g:778:1: null_keyword : {...}? IDENTIFIER_L -> NULL[$IDENTIFIER_L] ;
     def null_keyword(self, ):
 
         retval = self.null_keyword_return()
@@ -20232,8 +19690,8 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:854:14: ({...}? IDENTIFIER_L -> NULL[$IDENTIFIER_L] )
-                # QueryParser.g:854:16: {...}? IDENTIFIER_L
+                # QueryParser.g:778:14: ({...}? IDENTIFIER_L -> NULL[$IDENTIFIER_L] )
+                # QueryParser.g:778:16: {...}? IDENTIFIER_L
                 pass 
                 if not ((input.LT(1).getText().equalsIgnoreCase("NULL"))):
                     if self._state.backtracking > 0:
@@ -20241,7 +19699,7 @@ class QueryParser(Parser):
 
                     raise FailedPredicateException(self.input, "null_keyword", "input.LT(1).getText().equalsIgnoreCase(\"NULL\")")
 
-                IDENTIFIER_L694=self.match(self.input, IDENTIFIER_L, self.FOLLOW_IDENTIFIER_L_in_null_keyword6724) 
+                IDENTIFIER_L694=self.match(self.input, IDENTIFIER_L, self.FOLLOW_IDENTIFIER_L_in_null_keyword6719) 
                 if self._state.backtracking == 0:
                     stream_IDENTIFIER_L.add(IDENTIFIER_L694)
 
@@ -20263,7 +19721,7 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 855:6: -> NULL[$IDENTIFIER_L]
+                    # 779:6: -> NULL[$IDENTIFIER_L]
                     self._adaptor.addChild(root_0, self._adaptor.create(NULL, IDENTIFIER_L694))
 
 
@@ -20281,9 +19739,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -20301,7 +19756,7 @@ class QueryParser(Parser):
 
 
     # $ANTLR start "identifier"
-    # QueryParser.g:858:1: identifier : {...}? IDENTIFIER_L -> IDENTIFIER[$IDENTIFIER_L] ;
+    # QueryParser.g:782:1: identifier : {...}? IDENTIFIER_L -> IDENTIFIER[$IDENTIFIER_L] ;
     def identifier(self, ):
 
         retval = self.identifier_return()
@@ -20316,8 +19771,8 @@ class QueryParser(Parser):
 
         try:
             try:
-                # QueryParser.g:858:12: ({...}? IDENTIFIER_L -> IDENTIFIER[$IDENTIFIER_L] )
-                # QueryParser.g:858:14: {...}? IDENTIFIER_L
+                # QueryParser.g:782:12: ({...}? IDENTIFIER_L -> IDENTIFIER[$IDENTIFIER_L] )
+                # QueryParser.g:782:14: {...}? IDENTIFIER_L
                 pass 
                 if not ((!input.LT(1).getText().equalsIgnoreCase("NULL"))):
                     if self._state.backtracking > 0:
@@ -20325,7 +19780,7 @@ class QueryParser(Parser):
 
                     raise FailedPredicateException(self.input, "identifier", "!input.LT(1).getText().equalsIgnoreCase(\"NULL\")")
 
-                IDENTIFIER_L695=self.match(self.input, IDENTIFIER_L, self.FOLLOW_IDENTIFIER_L_in_identifier6745) 
+                IDENTIFIER_L695=self.match(self.input, IDENTIFIER_L, self.FOLLOW_IDENTIFIER_L_in_identifier6740) 
                 if self._state.backtracking == 0:
                     stream_IDENTIFIER_L.add(IDENTIFIER_L695)
 
@@ -20347,7 +19802,7 @@ class QueryParser(Parser):
 
 
                     root_0 = self._adaptor.nil()
-                    # 859:5: -> IDENTIFIER[$IDENTIFIER_L]
+                    # 783:5: -> IDENTIFIER[$IDENTIFIER_L]
                     self._adaptor.addChild(root_0, self._adaptor.create(IDENTIFIER, IDENTIFIER_L695))
 
 
@@ -20365,9 +19820,6 @@ class QueryParser(Parser):
 
 
                         
-            catch(RecognitionException re) {
-                throw re;
-            }
         finally:
 
             pass
@@ -20377,32 +19829,32 @@ class QueryParser(Parser):
 
     # $ANTLR start "synpred13_QueryParser"
     def synpred13_QueryParser_fragment(self, ):
-        # QueryParser.g:189:21: ( ( alias EQUAL )? FOREACH rel LEFT_CURLY )
-        # QueryParser.g:189:23: ( alias EQUAL )? FOREACH rel LEFT_CURLY
+        # QueryParser.g:113:21: ( ( alias EQUAL )? FOREACH rel LEFT_CURLY )
+        # QueryParser.g:113:23: ( alias EQUAL )? FOREACH rel LEFT_CURLY
         pass 
-        # QueryParser.g:189:23: ( alias EQUAL )?
+        # QueryParser.g:113:23: ( alias EQUAL )?
         alt164 = 2
         LA164_0 = self.input.LA(1)
 
         if (LA164_0 == IDENTIFIER_L) :
             alt164 = 1
         if alt164 == 1:
-            # QueryParser.g:189:25: alias EQUAL
+            # QueryParser.g:113:25: alias EQUAL
             pass 
-            self._state.following.append(self.FOLLOW_alias_in_synpred13_QueryParser670)
+            self._state.following.append(self.FOLLOW_alias_in_synpred13_QueryParser665)
             self.alias()
 
             self._state.following.pop()
-            self.match(self.input, EQUAL, self.FOLLOW_EQUAL_in_synpred13_QueryParser672)
+            self.match(self.input, EQUAL, self.FOLLOW_EQUAL_in_synpred13_QueryParser667)
 
 
 
-        self.match(self.input, FOREACH, self.FOLLOW_FOREACH_in_synpred13_QueryParser678)
-        self._state.following.append(self.FOLLOW_rel_in_synpred13_QueryParser680)
+        self.match(self.input, FOREACH, self.FOLLOW_FOREACH_in_synpred13_QueryParser673)
+        self._state.following.append(self.FOLLOW_rel_in_synpred13_QueryParser675)
         self.rel()
 
         self._state.following.pop()
-        self.match(self.input, LEFT_CURLY, self.FOLLOW_LEFT_CURLY_in_synpred13_QueryParser682)
+        self.match(self.input, LEFT_CURLY, self.FOLLOW_LEFT_CURLY_in_synpred13_QueryParser677)
 
 
     # $ANTLR end "synpred13_QueryParser"
@@ -20411,10 +19863,10 @@ class QueryParser(Parser):
 
     # $ANTLR start "synpred15_QueryParser"
     def synpred15_QueryParser_fragment(self, ):
-        # QueryParser.g:193:69: ( SEMI_COLON )
-        # QueryParser.g:193:69: SEMI_COLON
+        # QueryParser.g:117:69: ( SEMI_COLON )
+        # QueryParser.g:117:69: SEMI_COLON
         pass 
-        self.match(self.input, SEMI_COLON, self.FOLLOW_SEMI_COLON_in_synpred15_QueryParser730)
+        self.match(self.input, SEMI_COLON, self.FOLLOW_SEMI_COLON_in_synpred15_QueryParser725)
 
 
     # $ANTLR end "synpred15_QueryParser"
@@ -20423,18 +19875,18 @@ class QueryParser(Parser):
 
     # $ANTLR start "synpred68_QueryParser"
     def synpred68_QueryParser_fragment(self, ):
-        # QueryParser.g:306:18: ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) )
-        # QueryParser.g:306:18: ( LEFT_PAREN field_def_list RIGHT_PAREN )
+        # QueryParser.g:230:18: ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) )
+        # QueryParser.g:230:18: ( LEFT_PAREN field_def_list RIGHT_PAREN )
         pass 
-        # QueryParser.g:306:18: ( LEFT_PAREN field_def_list RIGHT_PAREN )
-        # QueryParser.g:306:20: LEFT_PAREN field_def_list RIGHT_PAREN
+        # QueryParser.g:230:18: ( LEFT_PAREN field_def_list RIGHT_PAREN )
+        # QueryParser.g:230:20: LEFT_PAREN field_def_list RIGHT_PAREN
         pass 
-        self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_synpred68_QueryParser1794)
-        self._state.following.append(self.FOLLOW_field_def_list_in_synpred68_QueryParser1797)
+        self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_synpred68_QueryParser1789)
+        self._state.following.append(self.FOLLOW_field_def_list_in_synpred68_QueryParser1792)
         self.field_def_list()
 
         self._state.following.pop()
-        self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_synpred68_QueryParser1799)
+        self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_synpred68_QueryParser1794)
 
 
 
@@ -20446,10 +19898,10 @@ class QueryParser(Parser):
 
     # $ANTLR start "synpred86_QueryParser"
     def synpred86_QueryParser_fragment(self, ):
-        # QueryParser.g:329:12: ( ( BAG )? LEFT_CURLY ( null_keyword COLON ( tuple_type )? ) RIGHT_CURLY )
-        # QueryParser.g:329:12: ( BAG )? LEFT_CURLY ( null_keyword COLON ( tuple_type )? ) RIGHT_CURLY
+        # QueryParser.g:253:12: ( ( BAG )? LEFT_CURLY ( null_keyword COLON ( tuple_type )? ) RIGHT_CURLY )
+        # QueryParser.g:253:12: ( BAG )? LEFT_CURLY ( null_keyword COLON ( tuple_type )? ) RIGHT_CURLY
         pass 
-        # QueryParser.g:329:12: ( BAG )?
+        # QueryParser.g:253:12: ( BAG )?
         alt172 = 2
         LA172_0 = self.input.LA(1)
 
@@ -20458,20 +19910,20 @@ class QueryParser(Parser):
         if alt172 == 1:
             # QueryParser.g:0:0: BAG
             pass 
-            self.match(self.input, BAG, self.FOLLOW_BAG_in_synpred86_QueryParser2023)
+            self.match(self.input, BAG, self.FOLLOW_BAG_in_synpred86_QueryParser2018)
 
 
 
-        self.match(self.input, LEFT_CURLY, self.FOLLOW_LEFT_CURLY_in_synpred86_QueryParser2026)
-        # QueryParser.g:329:28: ( null_keyword COLON ( tuple_type )? )
-        # QueryParser.g:329:30: null_keyword COLON ( tuple_type )?
+        self.match(self.input, LEFT_CURLY, self.FOLLOW_LEFT_CURLY_in_synpred86_QueryParser2021)
+        # QueryParser.g:253:28: ( null_keyword COLON ( tuple_type )? )
+        # QueryParser.g:253:30: null_keyword COLON ( tuple_type )?
         pass 
-        self._state.following.append(self.FOLLOW_null_keyword_in_synpred86_QueryParser2030)
+        self._state.following.append(self.FOLLOW_null_keyword_in_synpred86_QueryParser2025)
         self.null_keyword()
 
         self._state.following.pop()
-        self.match(self.input, COLON, self.FOLLOW_COLON_in_synpred86_QueryParser2032)
-        # QueryParser.g:329:49: ( tuple_type )?
+        self.match(self.input, COLON, self.FOLLOW_COLON_in_synpred86_QueryParser2027)
+        # QueryParser.g:253:49: ( tuple_type )?
         alt173 = 2
         LA173_0 = self.input.LA(1)
 
@@ -20480,7 +19932,7 @@ class QueryParser(Parser):
         if alt173 == 1:
             # QueryParser.g:0:0: tuple_type
             pass 
-            self._state.following.append(self.FOLLOW_tuple_type_in_synpred86_QueryParser2034)
+            self._state.following.append(self.FOLLOW_tuple_type_in_synpred86_QueryParser2029)
             self.tuple_type()
 
             self._state.following.pop()
@@ -20490,7 +19942,7 @@ class QueryParser(Parser):
 
 
 
-        self.match(self.input, RIGHT_CURLY, self.FOLLOW_RIGHT_CURLY_in_synpred86_QueryParser2039)
+        self.match(self.input, RIGHT_CURLY, self.FOLLOW_RIGHT_CURLY_in_synpred86_QueryParser2034)
 
 
     # $ANTLR end "synpred86_QueryParser"
@@ -20499,10 +19951,10 @@ class QueryParser(Parser):
 
     # $ANTLR start "synpred107_QueryParser"
     def synpred107_QueryParser_fragment(self, ):
-        # QueryParser.g:369:21: ( foreach_clause_complex )
-        # QueryParser.g:369:21: foreach_clause_complex
+        # QueryParser.g:293:21: ( foreach_clause_complex )
+        # QueryParser.g:293:21: foreach_clause_complex
         pass 
-        self._state.following.append(self.FOLLOW_foreach_clause_complex_in_synpred107_QueryParser2435)
+        self._state.following.append(self.FOLLOW_foreach_clause_complex_in_synpred107_QueryParser2430)
         self.foreach_clause_complex()
 
         self._state.following.pop()
@@ -20514,18 +19966,18 @@ class QueryParser(Parser):
 
     # $ANTLR start "synpred110_QueryParser"
     def synpred110_QueryParser_fragment(self, ):
-        # QueryParser.g:372:49: ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) )
-        # QueryParser.g:372:49: ( LEFT_PAREN field_def_list RIGHT_PAREN )
+        # QueryParser.g:296:49: ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) )
+        # QueryParser.g:296:49: ( LEFT_PAREN field_def_list RIGHT_PAREN )
         pass 
-        # QueryParser.g:372:49: ( LEFT_PAREN field_def_list RIGHT_PAREN )
-        # QueryParser.g:372:51: LEFT_PAREN field_def_list RIGHT_PAREN
+        # QueryParser.g:296:49: ( LEFT_PAREN field_def_list RIGHT_PAREN )
+        # QueryParser.g:296:51: LEFT_PAREN field_def_list RIGHT_PAREN
         pass 
-        self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_synpred110_QueryParser2479)
-        self._state.following.append(self.FOLLOW_field_def_list_in_synpred110_QueryParser2482)
+        self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_synpred110_QueryParser2474)
+        self._state.following.append(self.FOLLOW_field_def_list_in_synpred110_QueryParser2477)
         self.field_def_list()
 
         self._state.following.pop()
-        self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_synpred110_QueryParser2484)
+        self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_synpred110_QueryParser2479)
 
 
 
@@ -20537,47 +19989,47 @@ class QueryParser(Parser):
 
     # $ANTLR start "synpred112_QueryParser"
     def synpred112_QueryParser_fragment(self, ):
-        # QueryParser.g:372:26: ( flatten_clause ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )? )
-        # QueryParser.g:372:26: flatten_clause ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )?
+        # QueryParser.g:296:26: ( flatten_clause ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )? )
+        # QueryParser.g:296:26: flatten_clause ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )?
         pass 
-        self._state.following.append(self.FOLLOW_flatten_clause_in_synpred112_QueryParser2468)
+        self._state.following.append(self.FOLLOW_flatten_clause_in_synpred112_QueryParser2463)
         self.flatten_clause()
 
         self._state.following.pop()
-        # QueryParser.g:372:41: ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )?
+        # QueryParser.g:296:41: ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )?
         alt177 = 2
         LA177_0 = self.input.LA(1)
 
         if (LA177_0 == AS) :
             alt177 = 1
         if alt177 == 1:
-            # QueryParser.g:372:43: AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def )
+            # QueryParser.g:296:43: AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def )
             pass 
-            self.match(self.input, AS, self.FOLLOW_AS_in_synpred112_QueryParser2472)
-            # QueryParser.g:372:47: ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def )
+            self.match(self.input, AS, self.FOLLOW_AS_in_synpred112_QueryParser2467)
+            # QueryParser.g:296:47: ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def )
             alt176 = 2
             alt176 = self.dfa176.predict(self.input)
             if alt176 == 1:
-                # QueryParser.g:372:49: ( LEFT_PAREN field_def_list RIGHT_PAREN )
+                # QueryParser.g:296:49: ( LEFT_PAREN field_def_list RIGHT_PAREN )
                 pass 
-                # QueryParser.g:372:49: ( LEFT_PAREN field_def_list RIGHT_PAREN )
-                # QueryParser.g:372:51: LEFT_PAREN field_def_list RIGHT_PAREN
+                # QueryParser.g:296:49: ( LEFT_PAREN field_def_list RIGHT_PAREN )
+                # QueryParser.g:296:51: LEFT_PAREN field_def_list RIGHT_PAREN
                 pass 
-                self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_synpred112_QueryParser2479)
-                self._state.following.append(self.FOLLOW_field_def_list_in_synpred112_QueryParser2482)
+                self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_synpred112_QueryParser2474)
+                self._state.following.append(self.FOLLOW_field_def_list_in_synpred112_QueryParser2477)
                 self.field_def_list()
 
                 self._state.following.pop()
-                self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_synpred112_QueryParser2484)
+                self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_synpred112_QueryParser2479)
 
 
 
 
 
             elif alt176 == 2:
-                # QueryParser.g:372:95: field_def
+                # QueryParser.g:296:95: field_def
                 pass 
-                self._state.following.append(self.FOLLOW_field_def_in_synpred112_QueryParser2491)
+                self._state.following.append(self.FOLLOW_field_def_in_synpred112_QueryParser2486)
                 self.field_def()
 
                 self._state.following.pop()
@@ -20595,18 +20047,18 @@ class QueryParser(Parser):
 
     # $ANTLR start "synpred113_QueryParser"
     def synpred113_QueryParser_fragment(self, ):
-        # QueryParser.g:373:44: ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) )
-        # QueryParser.g:373:44: ( LEFT_PAREN field_def_list RIGHT_PAREN )
+        # QueryParser.g:297:44: ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) )
+        # QueryParser.g:297:44: ( LEFT_PAREN field_def_list RIGHT_PAREN )
         pass 
-        # QueryParser.g:373:44: ( LEFT_PAREN field_def_list RIGHT_PAREN )
-        # QueryParser.g:373:46: LEFT_PAREN field_def_list RIGHT_PAREN
+        # QueryParser.g:297:44: ( LEFT_PAREN field_def_list RIGHT_PAREN )
+        # QueryParser.g:297:46: LEFT_PAREN field_def_list RIGHT_PAREN
         pass 
-        self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_synpred113_QueryParser2534)
-        self._state.following.append(self.FOLLOW_field_def_list_in_synpred113_QueryParser2537)
+        self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_synpred113_QueryParser2529)
+        self._state.following.append(self.FOLLOW_field_def_list_in_synpred113_QueryParser2532)
         self.field_def_list()
 
         self._state.following.pop()
-        self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_synpred113_QueryParser2539)
+        self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_synpred113_QueryParser2534)
 
 
 
@@ -20618,47 +20070,47 @@ class QueryParser(Parser):
 
     # $ANTLR start "synpred115_QueryParser"
     def synpred115_QueryParser_fragment(self, ):
-        # QueryParser.g:373:26: ( col_range ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )? )
-        # QueryParser.g:373:26: col_range ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )?
+        # QueryParser.g:297:26: ( col_range ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )? )
+        # QueryParser.g:297:26: col_range ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )?
         pass 
-        self._state.following.append(self.FOLLOW_col_range_in_synpred115_QueryParser2523)
+        self._state.following.append(self.FOLLOW_col_range_in_synpred115_QueryParser2518)
         self.col_range()
 
         self._state.following.pop()
-        # QueryParser.g:373:36: ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )?
+        # QueryParser.g:297:36: ( AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def ) )?
         alt180 = 2
         LA180_0 = self.input.LA(1)
 
         if (LA180_0 == AS) :
             alt180 = 1
         if alt180 == 1:
-            # QueryParser.g:373:38: AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def )
+            # QueryParser.g:297:38: AS ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def )
             pass 
-            self.match(self.input, AS, self.FOLLOW_AS_in_synpred115_QueryParser2527)
-            # QueryParser.g:373:42: ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def )
+            self.match(self.input, AS, self.FOLLOW_AS_in_synpred115_QueryParser2522)
+            # QueryParser.g:297:42: ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) | field_def )
             alt179 = 2
             alt179 = self.dfa179.predict(self.input)
             if alt179 == 1:
-                # QueryParser.g:373:44: ( LEFT_PAREN field_def_list RIGHT_PAREN )
+                # QueryParser.g:297:44: ( LEFT_PAREN field_def_list RIGHT_PAREN )
                 pass 
-                # QueryParser.g:373:44: ( LEFT_PAREN field_def_list RIGHT_PAREN )
-                # QueryParser.g:373:46: LEFT_PAREN field_def_list RIGHT_PAREN
+                # QueryParser.g:297:44: ( LEFT_PAREN field_def_list RIGHT_PAREN )
+                # QueryParser.g:297:46: LEFT_PAREN field_def_list RIGHT_PAREN
                 pass 
-                self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_synpred115_QueryParser2534)
-                self._state.following.append(self.FOLLOW_field_def_list_in_synpred115_QueryParser2537)
+                self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_synpred115_QueryParser2529)
+                self._state.following.append(self.FOLLOW_field_def_list_in_synpred115_QueryParser2532)
                 self.field_def_list()
 
                 self._state.following.pop()
-                self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_synpred115_QueryParser2539)
+                self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_synpred115_QueryParser2534)
 
 
 
 
 
             elif alt179 == 2:
-                # QueryParser.g:373:90: field_def
+                # QueryParser.g:297:90: field_def
                 pass 
-                self._state.following.append(self.FOLLOW_field_def_in_synpred115_QueryParser2546)
+                self._state.following.append(self.FOLLOW_field_def_in_synpred115_QueryParser2541)
                 self.field_def()
 
                 self._state.following.pop()
@@ -20676,24 +20128,24 @@ class QueryParser(Parser):
 
     # $ANTLR start "synpred117_QueryParser"
     def synpred117_QueryParser_fragment(self, ):
-        # QueryParser.g:374:26: ( expr ( AS field_def )? )
-        # QueryParser.g:374:26: expr ( AS field_def )?
+        # QueryParser.g:298:26: ( expr ( AS field_def )? )
+        # QueryParser.g:298:26: expr ( AS field_def )?
         pass 
-        self._state.following.append(self.FOLLOW_expr_in_synpred117_QueryParser2578)
+        self._state.following.append(self.FOLLOW_expr_in_synpred117_QueryParser2573)
         self.expr()
 
         self._state.following.pop()
-        # QueryParser.g:374:31: ( AS field_def )?
+        # QueryParser.g:298:31: ( AS field_def )?
         alt181 = 2
         LA181_0 = self.input.LA(1)
 
         if (LA181_0 == AS) :
             alt181 = 1
         if alt181 == 1:
-            # QueryParser.g:374:33: AS field_def
+            # QueryParser.g:298:33: AS field_def
             pass 
-            self.match(self.input, AS, self.FOLLOW_AS_in_synpred117_QueryParser2582)
-            self._state.following.append(self.FOLLOW_field_def_in_synpred117_QueryParser2585)
+            self.match(self.input, AS, self.FOLLOW_AS_in_synpred117_QueryParser2577)
+            self._state.following.append(self.FOLLOW_field_def_in_synpred117_QueryParser2580)
             self.field_def()
 
             self._state.following.pop()
@@ -20708,18 +20160,18 @@ class QueryParser(Parser):
 
     # $ANTLR start "synpred118_QueryParser"
     def synpred118_QueryParser_fragment(self, ):
-        # QueryParser.g:375:39: ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) )
-        # QueryParser.g:375:39: ( LEFT_PAREN field_def_list RIGHT_PAREN )
+        # QueryParser.g:299:39: ( ( LEFT_PAREN field_def_list RIGHT_PAREN ) )
+        # QueryParser.g:299:39: ( LEFT_PAREN field_def_list RIGHT_PAREN )
         pass 
-        # QueryParser.g:375:39: ( LEFT_PAREN field_def_list RIGHT_PAREN )
-        # QueryParser.g:375:41: LEFT_PAREN field_def_list RIGHT_PAREN
+        # QueryParser.g:299:39: ( LEFT_PAREN field_def_list RIGHT_PAREN )
+        # QueryParser.g:299:41: LEFT_PAREN field_def_list RIGHT_PAREN
         pass 
-        self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_synpred118_QueryParser2626)
-        self._state.following.append(self.FOLLOW_field_def_list_in_synpred118_QueryParser2629)
+        self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_synpred118_QueryParser2621)
+        self._state.following.append(self.FOLLOW_field_def_list_in_synpred118_QueryParser2624)
         self.field_def_list()
 
         self._state.following.pop()
-        self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_synpred118_QueryParser2631)
+        self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_synpred118_QueryParser2626)
 
 
 
@@ -20731,15 +20183,15 @@ class QueryParser(Parser):
 
     # $ANTLR start "synpred123_QueryParser"
     def synpred123_QueryParser_fragment(self, ):
-        # QueryParser.g:396:14: ( LEFT_PAREN cond RIGHT_PAREN )
-        # QueryParser.g:396:14: LEFT_PAREN cond RIGHT_PAREN
+        # QueryParser.g:320:14: ( LEFT_PAREN cond RIGHT_PAREN )
+        # QueryParser.g:320:14: LEFT_PAREN cond RIGHT_PAREN
         pass 
-        self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_synpred123_QueryParser2763)
-        self._state.following.append(self.FOLLOW_cond_in_synpred123_QueryParser2766)
+        self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_synpred123_QueryParser2758)
+        self._state.following.append(self.FOLLOW_cond_in_synpred123_QueryParser2761)
         self.cond()
 
         self._state.following.pop()
-        self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_synpred123_QueryParser2768)
+        self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_synpred123_QueryParser2763)
 
 
     # $ANTLR end "synpred123_QueryParser"
@@ -20748,10 +20200,10 @@ class QueryParser(Parser):
 
     # $ANTLR start "synpred124_QueryParser"
     def synpred124_QueryParser_fragment(self, ):
-        # QueryParser.g:397:14: ( not_cond )
-        # QueryParser.g:397:14: not_cond
+        # QueryParser.g:321:14: ( not_cond )
+        # QueryParser.g:321:14: not_cond
         pass 
-        self._state.following.append(self.FOLLOW_not_cond_in_synpred124_QueryParser2784)
+        self._state.following.append(self.FOLLOW_not_cond_in_synpred124_QueryParser2779)
         self.not_cond()
 
         self._state.following.pop()
@@ -20763,18 +20215,18 @@ class QueryParser(Parser):
 
     # $ANTLR start "synpred125_QueryParser"
     def synpred125_QueryParser_fragment(self, ):
-        # QueryParser.g:398:14: ( expr rel_op expr )
-        # QueryParser.g:398:14: expr rel_op expr
+        # QueryParser.g:322:14: ( expr rel_op expr )
+        # QueryParser.g:322:14: expr rel_op expr
         pass 
-        self._state.following.append(self.FOLLOW_expr_in_synpred125_QueryParser2799)
+        self._state.following.append(self.FOLLOW_expr_in_synpred125_QueryParser2794)
         self.expr()
 
         self._state.following.pop()
-        self._state.following.append(self.FOLLOW_rel_op_in_synpred125_QueryParser2801)
+        self._state.following.append(self.FOLLOW_rel_op_in_synpred125_QueryParser2796)
         self.rel_op()
 
         self._state.following.pop()
-        self._state.following.append(self.FOLLOW_expr_in_synpred125_QueryParser2804)
+        self._state.following.append(self.FOLLOW_expr_in_synpred125_QueryParser2799)
         self.expr()
 
         self._state.following.pop()
@@ -20786,10 +20238,10 @@ class QueryParser(Parser):
 
     # $ANTLR start "synpred126_QueryParser"
     def synpred126_QueryParser_fragment(self, ):
-        # QueryParser.g:399:14: ( func_eval )
-        # QueryParser.g:399:14: func_eval
+        # QueryParser.g:323:14: ( func_eval )
+        # QueryParser.g:323:14: func_eval
         pass 
-        self._state.following.append(self.FOLLOW_func_eval_in_synpred126_QueryParser2819)
+        self._state.following.append(self.FOLLOW_func_eval_in_synpred126_QueryParser2814)
         self.func_eval()
 
         self._state.following.pop()
@@ -20801,16 +20253,16 @@ class QueryParser(Parser):
 
     # $ANTLR start "synpred137_QueryParser"
     def synpred137_QueryParser_fragment(self, ):
-        # QueryParser.g:429:13: ( LEFT_PAREN type_cast RIGHT_PAREN unary_expr )
-        # QueryParser.g:429:13: LEFT_PAREN type_cast RIGHT_PAREN unary_expr
+        # QueryParser.g:353:13: ( LEFT_PAREN type_cast RIGHT_PAREN unary_expr )
+        # QueryParser.g:353:13: LEFT_PAREN type_cast RIGHT_PAREN unary_expr
         pass 
-        self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_synpred137_QueryParser3032)
-        self._state.following.append(self.FOLLOW_type_cast_in_synpred137_QueryParser3034)
+        self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_synpred137_QueryParser3027)
+        self._state.following.append(self.FOLLOW_type_cast_in_synpred137_QueryParser3029)
         self.type_cast()
 
         self._state.following.pop()
-        self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_synpred137_QueryParser3036)
-        self._state.following.append(self.FOLLOW_unary_expr_in_synpred137_QueryParser3038)
+        self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_synpred137_QueryParser3031)
+        self._state.following.append(self.FOLLOW_unary_expr_in_synpred137_QueryParser3033)
         self.unary_expr()
 
         self._state.following.pop()
@@ -20822,10 +20274,10 @@ class QueryParser(Parser):
 
     # $ANTLR start "synpred144_QueryParser"
     def synpred144_QueryParser_fragment(self, ):
-        # QueryParser.g:445:14: ( expr_eval )
-        # QueryParser.g:445:14: expr_eval
+        # QueryParser.g:369:14: ( expr_eval )
+        # QueryParser.g:369:14: expr_eval
         pass 
-        self._state.following.append(self.FOLLOW_expr_eval_in_synpred144_QueryParser3198)
+        self._state.following.append(self.FOLLOW_expr_eval_in_synpred144_QueryParser3193)
         self.expr_eval()
 
         self._state.following.pop()
@@ -20837,15 +20289,15 @@ class QueryParser(Parser):
 
     # $ANTLR start "synpred145_QueryParser"
     def synpred145_QueryParser_fragment(self, ):
-        # QueryParser.g:446:14: ( LEFT_PAREN expr RIGHT_PAREN )
-        # QueryParser.g:446:14: LEFT_PAREN expr RIGHT_PAREN
+        # QueryParser.g:370:14: ( LEFT_PAREN expr RIGHT_PAREN )
+        # QueryParser.g:370:14: LEFT_PAREN expr RIGHT_PAREN
         pass 
-        self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_synpred145_QueryParser3214)
-        self._state.following.append(self.FOLLOW_expr_in_synpred145_QueryParser3216)
+        self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_synpred145_QueryParser3209)
+        self._state.following.append(self.FOLLOW_expr_in_synpred145_QueryParser3211)
         self.expr()
 
         self._state.following.pop()
-        self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_synpred145_QueryParser3218)
+        self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_synpred145_QueryParser3213)
 
 
     # $ANTLR end "synpred145_QueryParser"
@@ -20854,10 +20306,10 @@ class QueryParser(Parser):
 
     # $ANTLR start "synpred146_QueryParser"
     def synpred146_QueryParser_fragment(self, ):
-        # QueryParser.g:451:13: ( const_expr )
-        # QueryParser.g:451:13: const_expr
+        # QueryParser.g:375:13: ( const_expr )
+        # QueryParser.g:375:13: const_expr
         pass 
-        self._state.following.append(self.FOLLOW_const_expr_in_synpred146_QueryParser3262)
+        self._state.following.append(self.FOLLOW_const_expr_in_synpred146_QueryParser3257)
         self.const_expr()
 
         self._state.following.pop()
@@ -20869,10 +20321,10 @@ class QueryParser(Parser):
 
     # $ANTLR start "synpred149_QueryParser"
     def synpred149_QueryParser_fragment(self, ):
-        # QueryParser.g:457:19: ( func_eval )
-        # QueryParser.g:457:19: func_eval
+        # QueryParser.g:381:19: ( func_eval )
+        # QueryParser.g:381:19: func_eval
         pass 
-        self._state.following.append(self.FOLLOW_func_eval_in_synpred149_QueryParser3294)
+        self._state.following.append(self.FOLLOW_func_eval_in_synpred149_QueryParser3289)
         self.func_eval()
 
         self._state.following.pop()
@@ -20884,10 +20336,10 @@ class QueryParser(Parser):
 
     # $ANTLR start "synpred150_QueryParser"
     def synpred150_QueryParser_fragment(self, ):
-        # QueryParser.g:457:31: ( col_ref )
-        # QueryParser.g:457:31: col_ref
+        # QueryParser.g:381:31: ( col_ref )
+        # QueryParser.g:381:31: col_ref
         pass 
-        self._state.following.append(self.FOLLOW_col_ref_in_synpred150_QueryParser3298)
+        self._state.following.append(self.FOLLOW_col_ref_in_synpred150_QueryParser3293)
         self.col_ref()
 
         self._state.following.pop()
@@ -20899,10 +20351,10 @@ class QueryParser(Parser):
 
     # $ANTLR start "synpred151_QueryParser"
     def synpred151_QueryParser_fragment(self, ):
-        # QueryParser.g:457:41: ( bin_expr )
-        # QueryParser.g:457:41: bin_expr
+        # QueryParser.g:381:41: ( bin_expr )
+        # QueryParser.g:381:41: bin_expr
         pass 
-        self._state.following.append(self.FOLLOW_bin_expr_in_synpred151_QueryParser3302)
+        self._state.following.append(self.FOLLOW_bin_expr_in_synpred151_QueryParser3297)
         self.bin_expr()
 
         self._state.following.pop()
@@ -20914,11 +20366,11 @@ class QueryParser(Parser):
 
     # $ANTLR start "synpred163_QueryParser"
     def synpred163_QueryParser_fragment(self, ):
-        # QueryParser.g:500:29: ( INTEGER SEMI_COLON )
-        # QueryParser.g:500:30: INTEGER SEMI_COLON
+        # QueryParser.g:424:29: ( INTEGER SEMI_COLON )
+        # QueryParser.g:424:30: INTEGER SEMI_COLON
         pass 
-        self.match(self.input, INTEGER, self.FOLLOW_INTEGER_in_synpred163_QueryParser3777)
-        self.match(self.input, SEMI_COLON, self.FOLLOW_SEMI_COLON_in_synpred163_QueryParser3779)
+        self.match(self.input, INTEGER, self.FOLLOW_INTEGER_in_synpred163_QueryParser3772)
+        self.match(self.input, SEMI_COLON, self.FOLLOW_SEMI_COLON_in_synpred163_QueryParser3774)
 
 
     # $ANTLR end "synpred163_QueryParser"
@@ -20927,11 +20379,11 @@ class QueryParser(Parser):
 
     # $ANTLR start "synpred164_QueryParser"
     def synpred164_QueryParser_fragment(self, ):
-        # QueryParser.g:500:63: ( LONGINTEGER SEMI_COLON )
-        # QueryParser.g:500:64: LONGINTEGER SEMI_COLON
+        # QueryParser.g:424:63: ( LONGINTEGER SEMI_COLON )
+        # QueryParser.g:424:64: LONGINTEGER SEMI_COLON
         pass 
-        self.match(self.input, LONGINTEGER, self.FOLLOW_LONGINTEGER_in_synpred164_QueryParser3789)
-        self.match(self.input, SEMI_COLON, self.FOLLOW_SEMI_COLON_in_synpred164_QueryParser3791)
+        self.match(self.input, LONGINTEGER, self.FOLLOW_LONGINTEGER_in_synpred164_QueryParser3784)
+        self.match(self.input, SEMI_COLON, self.FOLLOW_SEMI_COLON_in_synpred164_QueryParser3786)
 
 
     # $ANTLR end "synpred164_QueryParser"
@@ -20940,11 +20392,11 @@ class QueryParser(Parser):
 
     # $ANTLR start "synpred165_QueryParser"
     def synpred165_QueryParser_fragment(self, ):
-        # QueryParser.g:503:31: ( DOUBLENUMBER SEMI_COLON )
-        # QueryParser.g:503:32: DOUBLENUMBER SEMI_COLON
+        # QueryParser.g:427:31: ( DOUBLENUMBER SEMI_COLON )
+        # QueryParser.g:427:32: DOUBLENUMBER SEMI_COLON
         pass 
-        self.match(self.input, DOUBLENUMBER, self.FOLLOW_DOUBLENUMBER_in_synpred165_QueryParser3819)
-        self.match(self.input, SEMI_COLON, self.FOLLOW_SEMI_COLON_in_synpred165_QueryParser3821)
+        self.match(self.input, DOUBLENUMBER, self.FOLLOW_DOUBLENUMBER_in_synpred165_QueryParser3814)
+        self.match(self.input, SEMI_COLON, self.FOLLOW_SEMI_COLON_in_synpred165_QueryParser3816)
 
 
     # $ANTLR end "synpred165_QueryParser"
@@ -20953,10 +20405,10 @@ class QueryParser(Parser):
 
     # $ANTLR start "synpred198_QueryParser"
     def synpred198_QueryParser_fragment(self, ):
-        # QueryParser.g:559:19: ( join_item ( LEFT | RIGHT | FULL ) ( OUTER )? COMMA join_item )
-        # QueryParser.g:559:19: join_item ( LEFT | RIGHT | FULL ) ( OUTER )? COMMA join_item
+        # QueryParser.g:483:19: ( join_item ( LEFT | RIGHT | FULL ) ( OUTER )? COMMA join_item )
+        # QueryParser.g:483:19: join_item ( LEFT | RIGHT | FULL ) ( OUTER )? COMMA join_item
         pass 
-        self._state.following.append(self.FOLLOW_join_item_in_synpred198_QueryParser4275)
+        self._state.following.append(self.FOLLOW_join_item_in_synpred198_QueryParser4270)
         self.join_item()
 
         self._state.following.pop()
@@ -20972,7 +20424,7 @@ class QueryParser(Parser):
             raise mse
 
 
-        # QueryParser.g:559:53: ( OUTER )?
+        # QueryParser.g:483:53: ( OUTER )?
         alt190 = 2
         LA190_0 = self.input.LA(1)
 
@@ -20981,12 +20433,12 @@ class QueryParser(Parser):
         if alt190 == 1:
             # QueryParser.g:0:0: OUTER
             pass 
-            self.match(self.input, OUTER, self.FOLLOW_OUTER_in_synpred198_QueryParser4291)
+            self.match(self.input, OUTER, self.FOLLOW_OUTER_in_synpred198_QueryParser4286)
 
 
 
-        self.match(self.input, COMMA, self.FOLLOW_COMMA_in_synpred198_QueryParser4294)
-        self._state.following.append(self.FOLLOW_join_item_in_synpred198_QueryParser4297)
+        self.match(self.input, COMMA, self.FOLLOW_COMMA_in_synpred198_QueryParser4289)
+        self._state.following.append(self.FOLLOW_join_item_in_synpred198_QueryParser4292)
         self.join_item()
 
         self._state.following.pop()
@@ -20998,15 +20450,15 @@ class QueryParser(Parser):
 
     # $ANTLR start "synpred201_QueryParser"
     def synpred201_QueryParser_fragment(self, ):
-        # QueryParser.g:573:27: ( LEFT_PAREN join_group_by_expr ( COMMA join_group_by_expr )* RIGHT_PAREN )
-        # QueryParser.g:573:27: LEFT_PAREN join_group_by_expr ( COMMA join_group_by_expr )* RIGHT_PAREN
+        # QueryParser.g:497:27: ( LEFT_PAREN join_group_by_expr ( COMMA join_group_by_expr )* RIGHT_PAREN )
+        # QueryParser.g:497:27: LEFT_PAREN join_group_by_expr ( COMMA join_group_by_expr )* RIGHT_PAREN
         pass 
-        self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_synpred201_QueryParser4390)
-        self._state.following.append(self.FOLLOW_join_group_by_expr_in_synpred201_QueryParser4392)
+        self.match(self.input, LEFT_PAREN, self.FOLLOW_LEFT_PAREN_in_synpred201_QueryParser4385)
+        self._state.following.append(self.FOLLOW_join_group_by_expr_in_synpred201_QueryParser4387)
         self.join_group_by_expr()
 
         self._state.following.pop()
-        # QueryParser.g:573:57: ( COMMA join_group_by_expr )*
+        # QueryParser.g:497:57: ( COMMA join_group_by_expr )*
         while True: #loop191
             alt191 = 2
             LA191_0 = self.input.LA(1)
@@ -21016,10 +20468,10 @@ class QueryParser(Parser):
 
 
             if alt191 == 1:
-                # QueryParser.g:573:59: COMMA join_group_by_expr
+                # QueryParser.g:497:59: COMMA join_group_by_expr
                 pass 
-                self.match(self.input, COMMA, self.FOLLOW_COMMA_in_synpred201_QueryParser4396)
-                self._state.following.append(self.FOLLOW_join_group_by_expr_in_synpred201_QueryParser4398)
+                self.match(self.input, COMMA, self.FOLLOW_COMMA_in_synpred201_QueryParser4391)
+                self._state.following.append(self.FOLLOW_join_group_by_expr_in_synpred201_QueryParser4393)
                 self.join_group_by_expr()
 
                 self._state.following.pop()
@@ -21027,7 +20479,7 @@ class QueryParser(Parser):
 
             else:
                 break #loop191
-        self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_synpred201_QueryParser4403)
+        self.match(self.input, RIGHT_PAREN, self.FOLLOW_RIGHT_PAREN_in_synpred201_QueryParser4398)
 
 
     # $ANTLR end "synpred201_QueryParser"
@@ -21036,10 +20488,10 @@ class QueryParser(Parser):
 
     # $ANTLR start "synpred212_QueryParser"
     def synpred212_QueryParser_fragment(self, ):
-        # QueryParser.g:628:23: ( ( nested_command SEMI_COLON )* )
-        # QueryParser.g:628:23: ( nested_command SEMI_COLON )*
+        # QueryParser.g:552:23: ( ( nested_command SEMI_COLON )* )
+        # QueryParser.g:552:23: ( nested_command SEMI_COLON )*
         pass 
-        # QueryParser.g:628:23: ( nested_command SEMI_COLON )*
+        # QueryParser.g:552:23: ( nested_command SEMI_COLON )*
         while True: #loop192
             alt192 = 2
             LA192_0 = self.input.LA(1)
@@ -21049,13 +20501,13 @@ class QueryParser(Parser):
 
 
             if alt192 == 1:
-                # QueryParser.g:628:25: nested_command SEMI_COLON
+                # QueryParser.g:552:25: nested_command SEMI_COLON
                 pass 
-                self._state.following.append(self.FOLLOW_nested_command_in_synpred212_QueryParser4844)
+                self._state.following.append(self.FOLLOW_nested_command_in_synpred212_QueryParser4839)
                 self.nested_command()
 
                 self._state.following.pop()
-                self.match(self.input, SEMI_COLON, self.FOLLOW_SEMI_COLON_in_synpred212_QueryParser4846)
+                self.match(self.input, SEMI_COLON, self.FOLLOW_SEMI_COLON_in_synpred212_QueryParser4841)
 
 
             else:
@@ -21068,20 +20520,20 @@ class QueryParser(Parser):
 
     # $ANTLR start "synpred213_QueryParser"
     def synpred213_QueryParser_fragment(self, ):
-        # QueryParser.g:633:18: ( identifier EQUAL col_ref PERIOD col_ref_list {...}?)
-        # QueryParser.g:633:20: identifier EQUAL col_ref PERIOD col_ref_list {...}?
+        # QueryParser.g:557:18: ( identifier EQUAL col_ref PERIOD col_ref_list {...}?)
+        # QueryParser.g:557:20: identifier EQUAL col_ref PERIOD col_ref_list {...}?
         pass 
-        self._state.following.append(self.FOLLOW_identifier_in_synpred213_QueryParser4906)
+        self._state.following.append(self.FOLLOW_identifier_in_synpred213_QueryParser4901)
         self.identifier()
 
         self._state.following.pop()
-        self.match(self.input, EQUAL, self.FOLLOW_EQUAL_in_synpred213_QueryParser4908)
-        self._state.following.append(self.FOLLOW_col_ref_in_synpred213_QueryParser4910)
+        self.match(self.input, EQUAL, self.FOLLOW_EQUAL_in_synpred213_QueryParser4903)
+        self._state.following.append(self.FOLLOW_col_ref_in_synpred213_QueryParser4905)
         self.col_ref()
 
         self._state.following.pop()
-        self.match(self.input, PERIOD, self.FOLLOW_PERIOD_in_synpred213_QueryParser4912)
-        self._state.following.append(self.FOLLOW_col_ref_list_in_synpred213_QueryParser4914)
+        self.match(self.input, PERIOD, self.FOLLOW_PERIOD_in_synpred213_QueryParser4907)
+        self._state.following.append(self.FOLLOW_col_ref_list_in_synpred213_QueryParser4909)
         self.col_ref_list()
 
         self._state.following.pop()
@@ -21099,15 +20551,15 @@ class QueryParser(Parser):
 
     # $ANTLR start "synpred214_QueryParser"
     def synpred214_QueryParser_fragment(self, ):
-        # QueryParser.g:635:18: ( identifier EQUAL expr )
-        # QueryParser.g:635:18: identifier EQUAL expr
+        # QueryParser.g:559:18: ( identifier EQUAL expr )
+        # QueryParser.g:559:18: identifier EQUAL expr
         pass 
-        self._state.following.append(self.FOLLOW_identifier_in_synpred214_QueryParser4975)
+        self._state.following.append(self.FOLLOW_identifier_in_synpred214_QueryParser4970)
         self.identifier()
 
         self._state.following.pop()
-        self.match(self.input, EQUAL, self.FOLLOW_EQUAL_in_synpred214_QueryParser4977)
-        self._state.following.append(self.FOLLOW_expr_in_synpred214_QueryParser4979)
+        self.match(self.input, EQUAL, self.FOLLOW_EQUAL_in_synpred214_QueryParser4972)
+        self._state.following.append(self.FOLLOW_expr_in_synpred214_QueryParser4974)
         self.expr()
 
         self._state.following.pop()
@@ -21119,11 +20571,11 @@ class QueryParser(Parser):
 
     # $ANTLR start "synpred223_QueryParser"
     def synpred223_QueryParser_fragment(self, ):
-        # QueryParser.g:666:41: ( INTEGER SEMI_COLON )
-        # QueryParser.g:666:42: INTEGER SEMI_COLON
+        # QueryParser.g:590:41: ( INTEGER SEMI_COLON )
+        # QueryParser.g:590:42: INTEGER SEMI_COLON
         pass 
-        self.match(self.input, INTEGER, self.FOLLOW_INTEGER_in_synpred223_QueryParser5294)
-        self.match(self.input, SEMI_COLON, self.FOLLOW_SEMI_COLON_in_synpred223_QueryParser5296)
+        self.match(self.input, INTEGER, self.FOLLOW_INTEGER_in_synpred223_QueryParser5289)
+        self.match(self.input, SEMI_COLON, self.FOLLOW_SEMI_COLON_in_synpred223_QueryParser5291)
 
 
     # $ANTLR end "synpred223_QueryParser"
@@ -21132,10 +20584,10 @@ class QueryParser(Parser):
 
     # $ANTLR start "synpred231_QueryParser"
     def synpred231_QueryParser_fragment(self, ):
-        # QueryParser.g:688:46: ( ( COMMA split_branch )+ )
-        # QueryParser.g:688:46: ( COMMA split_branch )+
+        # QueryParser.g:612:46: ( ( COMMA split_branch )+ )
+        # QueryParser.g:612:46: ( COMMA split_branch )+
         pass 
-        # QueryParser.g:688:46: ( COMMA split_branch )+
+        # QueryParser.g:612:46: ( COMMA split_branch )+
         cnt193 = 0
         while True: #loop193
             alt193 = 2
@@ -21146,10 +20598,10 @@ class QueryParser(Parser):
 
 
             if alt193 == 1:
-                # QueryParser.g:688:48: COMMA split_branch
+                # QueryParser.g:612:48: COMMA split_branch
                 pass 
-                self.match(self.input, COMMA, self.FOLLOW_COMMA_in_synpred231_QueryParser5457)
-                self._state.following.append(self.FOLLOW_split_branch_in_synpred231_QueryParser5459)
+                self.match(self.input, COMMA, self.FOLLOW_COMMA_in_synpred231_QueryParser5452)
+                self._state.following.append(self.FOLLOW_split_branch_in_synpred231_QueryParser5454)
                 self.split_branch()
 
                 self._state.following.pop()
@@ -21174,10 +20626,10 @@ class QueryParser(Parser):
 
     # $ANTLR start "synpred315_QueryParser"
     def synpred315_QueryParser_fragment(self, ):
-        # QueryParser.g:810:7: ( identifier )
-        # QueryParser.g:810:7: identifier
+        # QueryParser.g:734:7: ( identifier )
+        # QueryParser.g:734:7: identifier
         pass 
-        self._state.following.append(self.FOLLOW_identifier_in_synpred315_QueryParser6428)
+        self._state.following.append(self.FOLLOW_identifier_in_synpred315_QueryParser6423)
         self.identifier()
 
         self._state.following.pop()
@@ -21189,10 +20641,10 @@ class QueryParser(Parser):
 
     # $ANTLR start "synpred316_QueryParser"
     def synpred316_QueryParser_fragment(self, ):
-        # QueryParser.g:811:7: ( null_keyword )
-        # QueryParser.g:811:7: null_keyword
+        # QueryParser.g:735:7: ( null_keyword )
+        # QueryParser.g:735:7: null_keyword
         pass 
-        self._state.following.append(self.FOLLOW_null_keyword_in_synpred316_QueryParser6436)
+        self._state.following.append(self.FOLLOW_null_keyword_in_synpred316_QueryParser6431)
         self.null_keyword()
 
         self._state.following.pop()
@@ -22719,7 +22171,7 @@ class QueryParser(Parser):
                 if (((self.synpred115_QueryParser()) and ((!input.LT(1).getText().equalsIgnoreCase("NULL"))))):
                     s = 6
 
-                elif ((((self.synpred117_QueryParser()) and ((input.LT(1).getText().equalsIgnoreCase("NULL")))) or ((self.synpred117_QueryParser()) and ((!input.LT(1).getText().equalsIgnoreCase("NULL")))) or ((self.synpred117_QueryParser()) and ((input.LT(1).getText().equalsIgnoreCase("NULL")))) or ((self.synpred117_QueryParser()) and ((!input.LT(1).getText().equalsIgnoreCase("NULL")))))):
+                elif ((((self.synpred117_QueryParser()) and ((input.LT(1).getText().equalsIgnoreCase("NULL")))) or ((self.synpred117_QueryParser()) and ((input.LT(1).getText().equalsIgnoreCase("NULL")))) or ((self.synpred117_QueryParser()) and ((!input.LT(1).getText().equalsIgnoreCase("NULL")))) or ((self.synpred117_QueryParser()) and ((!input.LT(1).getText().equalsIgnoreCase("NULL")))))):
                     s = 7
 
                  
@@ -25279,7 +24731,7 @@ class QueryParser(Parser):
                 index89_63 = input.index()
                 input.rewind()
                 s = -1
-                if ((((self.synpred149_QueryParser()) and ((input.LT(1).getText().equalsIgnoreCase("NULL")))) or ((self.synpred149_QueryParser()) and ((!input.LT(1).getText().equalsIgnoreCase("NULL")))))):
+                if ((((self.synpred149_QueryParser()) and ((!input.LT(1).getText().equalsIgnoreCase("NULL")))) or ((self.synpred149_QueryParser()) and ((input.LT(1).getText().equalsIgnoreCase("NULL")))))):
                     s = 1
 
                 elif (((self.synpred150_QueryParser()) and ((!input.LT(1).getText().equalsIgnoreCase("NULL"))))):
@@ -26014,696 +25466,696 @@ class QueryParser(Parser):
             raise nvae
  
 
-    FOLLOW_statement_in_query372 = frozenset([5, 7, 8, 9, 10, 11, 12, 14, 16, 17, 18, 19, 20, 21, 34, 54, 56, 57, 65, 66, 90, 109, 110])
-    FOLLOW_EOF_in_query375 = frozenset([1])
-    FOLLOW_SEMI_COLON_in_statement400 = frozenset([1])
-    FOLLOW_general_statement_in_statement415 = frozenset([1])
-    FOLLOW_foreach_statement_in_statement429 = frozenset([1])
-    FOLLOW_split_statement_in_statement443 = frozenset([1])
-    FOLLOW_inline_statement_in_statement459 = frozenset([1])
-    FOLLOW_import_statement_in_statement481 = frozenset([1])
-    FOLLOW_realias_statement_in_statement495 = frozenset([1])
-    FOLLOW_import_clause_in_import_statement504 = frozenset([109])
-    FOLLOW_SEMI_COLON_in_import_statement506 = frozenset([1])
-    FOLLOW_inline_clause_in_inline_statement516 = frozenset([109])
-    FOLLOW_SEMI_COLON_in_inline_statement518 = frozenset([1])
-    FOLLOW_split_clause_in_split_statement528 = frozenset([109])
-    FOLLOW_SEMI_COLON_in_split_statement530 = frozenset([1])
-    FOLLOW_alias_in_general_statement542 = frozenset([117])
-    FOLLOW_EQUAL_in_general_statement544 = frozenset([7, 8, 9, 11, 12, 14, 16, 17, 18, 19, 20, 34, 54, 56, 57, 65, 66, 110])
-    FOLLOW_op_clause_in_general_statement550 = frozenset([32, 109])
-    FOLLOW_parallel_clause_in_general_statement552 = frozenset([109])
-    FOLLOW_LEFT_PAREN_in_general_statement557 = frozenset([7, 8, 9, 11, 12, 14, 16, 17, 18, 19, 20, 34, 54, 56, 57, 65, 66])
-    FOLLOW_op_clause_in_general_statement559 = frozenset([32, 111])
-    FOLLOW_parallel_clause_in_general_statement561 = frozenset([111])
-    FOLLOW_RIGHT_PAREN_in_general_statement564 = frozenset([109])
-    FOLLOW_SEMI_COLON_in_general_statement567 = frozenset([1])
-    FOLLOW_realias_clause_in_realias_statement610 = frozenset([109])
-    FOLLOW_SEMI_COLON_in_realias_statement612 = frozenset([1])
-    FOLLOW_alias_in_realias_clause622 = frozenset([117])
-    FOLLOW_EQUAL_in_realias_clause624 = frozenset([90])
-    FOLLOW_identifier_in_realias_clause626 = frozenset([1])
-    FOLLOW_PARALLEL_in_parallel_clause650 = frozenset([91])
-    FOLLOW_INTEGER_in_parallel_clause653 = frozenset([1])
-    FOLLOW_foreach_complex_statement_in_foreach_statement688 = frozenset([1])
-    FOLLOW_foreach_simple_statement_in_foreach_statement710 = frozenset([1])
-    FOLLOW_alias_in_foreach_complex_statement721 = frozenset([117])
-    FOLLOW_EQUAL_in_foreach_complex_statement723 = frozenset([10, 90])
-    FOLLOW_foreach_clause_complex_in_foreach_complex_statement728 = frozenset([1, 109])
-    FOLLOW_SEMI_COLON_in_foreach_complex_statement730 = frozenset([1])
-    FOLLOW_alias_in_foreach_simple_statement780 = frozenset([117])
-    FOLLOW_EQUAL_in_foreach_simple_statement782 = frozenset([10, 110])
-    FOLLOW_foreach_clause_simple_in_foreach_simple_statement788 = frozenset([32, 109])
-    FOLLOW_parallel_clause_in_foreach_simple_statement790 = frozenset([109])
-    FOLLOW_LEFT_PAREN_in_foreach_simple_statement844 = frozenset([10])
-    FOLLOW_foreach_clause_simple_in_foreach_simple_statement846 = frozenset([32, 111])
-    FOLLOW_parallel_clause_in_foreach_simple_statement848 = frozenset([111])
-    FOLLOW_RIGHT_PAREN_in_foreach_simple_statement851 = frozenset([109])
-    FOLLOW_SEMI_COLON_in_foreach_simple_statement854 = frozenset([1])
-    FOLLOW_identifier_in_alias903 = frozenset([1])
-    FOLLOW_identifier_in_parameter917 = frozenset([1])
-    FOLLOW_INTEGER_in_parameter926 = frozenset([1])
-    FOLLOW_DOUBLENUMBER_in_parameter935 = frozenset([1])
-    FOLLOW_QUOTEDSTRING_in_parameter943 = frozenset([1])
-    FOLLOW_DOLLARVAR_in_parameter951 = frozenset([1])
-    FOLLOW_LEFT_CURLY_in_content960 = frozenset([4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163])
-    FOLLOW_content_in_content964 = frozenset([4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163])
-    FOLLOW_set_in_content968 = frozenset([4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163])
-    FOLLOW_RIGHT_CURLY_in_content980 = frozenset([1])
-    FOLLOW_define_clause_in_op_clause989 = frozenset([1])
-    FOLLOW_load_clause_in_op_clause1004 = frozenset([1])
-    FOLLOW_group_clause_in_op_clause1018 = frozenset([1])
-    FOLLOW_cube_clause_in_op_clause1032 = frozenset([1])
-    FOLLOW_store_clause_in_op_clause1046 = frozenset([1])
-    FOLLOW_filter_clause_in_op_clause1060 = frozenset([1])
-    FOLLOW_distinct_clause_in_op_clause1074 = frozenset([1])
-    FOLLOW_limit_clause_in_op_clause1088 = frozenset([1])
-    FOLLOW_sample_clause_in_op_clause1102 = frozenset([1])
-    FOLLOW_order_clause_in_op_clause1116 = frozenset([1])
-    FOLLOW_rank_clause_in_op_clause1130 = frozenset([1])
-    FOLLOW_cross_clause_in_op_clause1144 = frozenset([1])
-    FOLLOW_join_clause_in_op_clause1158 = frozenset([1])
-    FOLLOW_union_clause_in_op_clause1172 = frozenset([1])
-    FOLLOW_stream_clause_in_op_clause1186 = frozenset([1])
-    FOLLOW_mr_clause_in_op_clause1200 = frozenset([1])
-    FOLLOW_LEFT_PAREN_in_macro_param_clause1209 = frozenset([90, 111])
+    FOLLOW_statement_in_query367 = frozenset([5, 7, 8, 9, 10, 11, 12, 14, 16, 17, 18, 19, 20, 21, 34, 54, 56, 57, 65, 66, 90, 109, 110])
+    FOLLOW_EOF_in_query370 = frozenset([1])
+    FOLLOW_SEMI_COLON_in_statement395 = frozenset([1])
+    FOLLOW_general_statement_in_statement410 = frozenset([1])
+    FOLLOW_foreach_statement_in_statement424 = frozenset([1])
+    FOLLOW_split_statement_in_statement438 = frozenset([1])
+    FOLLOW_inline_statement_in_statement454 = frozenset([1])
+    FOLLOW_import_statement_in_statement476 = frozenset([1])
+    FOLLOW_realias_statement_in_statement490 = frozenset([1])
+    FOLLOW_import_clause_in_import_statement499 = frozenset([109])
+    FOLLOW_SEMI_COLON_in_import_statement501 = frozenset([1])
+    FOLLOW_inline_clause_in_inline_statement511 = frozenset([109])
+    FOLLOW_SEMI_COLON_in_inline_statement513 = frozenset([1])
+    FOLLOW_split_clause_in_split_statement523 = frozenset([109])
+    FOLLOW_SEMI_COLON_in_split_statement525 = frozenset([1])
+    FOLLOW_alias_in_general_statement537 = frozenset([117])
+    FOLLOW_EQUAL_in_general_statement539 = frozenset([7, 8, 9, 11, 12, 14, 16, 17, 18, 19, 20, 34, 54, 56, 57, 65, 66, 110])
+    FOLLOW_op_clause_in_general_statement545 = frozenset([32, 109])
+    FOLLOW_parallel_clause_in_general_statement547 = frozenset([109])
+    FOLLOW_LEFT_PAREN_in_general_statement552 = frozenset([7, 8, 9, 11, 12, 14, 16, 17, 18, 19, 20, 34, 54, 56, 57, 65, 66])
+    FOLLOW_op_clause_in_general_statement554 = frozenset([32, 111])
+    FOLLOW_parallel_clause_in_general_statement556 = frozenset([111])
+    FOLLOW_RIGHT_PAREN_in_general_statement559 = frozenset([109])
+    FOLLOW_SEMI_COLON_in_general_statement562 = frozenset([1])
+    FOLLOW_realias_clause_in_realias_statement605 = frozenset([109])
+    FOLLOW_SEMI_COLON_in_realias_statement607 = frozenset([1])
+    FOLLOW_alias_in_realias_clause617 = frozenset([117])
+    FOLLOW_EQUAL_in_realias_clause619 = frozenset([90])
+    FOLLOW_identifier_in_realias_clause621 = frozenset([1])
+    FOLLOW_PARALLEL_in_parallel_clause645 = frozenset([91])
+    FOLLOW_INTEGER_in_parallel_clause648 = frozenset([1])
+    FOLLOW_foreach_complex_statement_in_foreach_statement683 = frozenset([1])
+    FOLLOW_foreach_simple_statement_in_foreach_statement705 = frozenset([1])
+    FOLLOW_alias_in_foreach_complex_statement716 = frozenset([117])
+    FOLLOW_EQUAL_in_foreach_complex_statement718 = frozenset([10, 90])
+    FOLLOW_foreach_clause_complex_in_foreach_complex_statement723 = frozenset([1, 109])
+    FOLLOW_SEMI_COLON_in_foreach_complex_statement725 = frozenset([1])
+    FOLLOW_alias_in_foreach_simple_statement775 = frozenset([117])
+    FOLLOW_EQUAL_in_foreach_simple_statement777 = frozenset([10, 110])
+    FOLLOW_foreach_clause_simple_in_foreach_simple_statement783 = frozenset([32, 109])
+    FOLLOW_parallel_clause_in_foreach_simple_statement785 = frozenset([109])
+    FOLLOW_LEFT_PAREN_in_foreach_simple_statement839 = frozenset([10])
+    FOLLOW_foreach_clause_simple_in_foreach_simple_statement841 = frozenset([32, 111])
+    FOLLOW_parallel_clause_in_foreach_simple_statement843 = frozenset([111])
+    FOLLOW_RIGHT_PAREN_in_foreach_simple_statement846 = frozenset([109])
+    FOLLOW_SEMI_COLON_in_foreach_simple_statement849 = frozenset([1])
+    FOLLOW_identifier_in_alias898 = frozenset([1])
+    FOLLOW_identifier_in_parameter912 = frozenset([1])
+    FOLLOW_INTEGER_in_parameter921 = frozenset([1])
+    FOLLOW_DOUBLENUMBER_in_parameter930 = frozenset([1])
+    FOLLOW_QUOTEDSTRING_in_parameter938 = frozenset([1])
+    FOLLOW_DOLLARVAR_in_parameter946 = frozenset([1])
+    FOLLOW_LEFT_CURLY_in_content955 = frozenset([4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163])
+    FOLLOW_content_in_content959 = frozenset([4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163])
+    FOLLOW_set_in_content963 = frozenset([4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163])
+    FOLLOW_RIGHT_CURLY_in_content975 = frozenset([1])
+    FOLLOW_define_clause_in_op_clause984 = frozenset([1])
+    FOLLOW_load_clause_in_op_clause999 = frozenset([1])
+    FOLLOW_group_clause_in_op_clause1013 = frozenset([1])
+    FOLLOW_cube_clause_in_op_clause1027 = frozenset([1])
+    FOLLOW_store_clause_in_op_clause1041 = frozenset([1])
+    FOLLOW_filter_clause_in_op_clause1055 = frozenset([1])
+    FOLLOW_distinct_clause_in_op_clause1069 = frozenset([1])
+    FOLLOW_limit_clause_in_op_clause1083 = frozenset([1])
+    FOLLOW_sample_clause_in_op_clause1097 = frozenset([1])
+    FOLLOW_order_clause_in_op_clause1111 = frozenset([1])
+    FOLLOW_rank_clause_in_op_clause1125 = frozenset([1])
+    FOLLOW_cross_clause_in_op_clause1139 = frozenset([1])
+    FOLLOW_join_clause_in_op_clause1153 = frozenset([1])
+    FOLLOW_union_clause_in_op_clause1167 = frozenset([1])
+    FOLLOW_stream_clause_in_op_clause1181 = frozenset([1])
+    FOLLOW_mr_clause_in_op_clause1195 = frozenset([1])
+    FOLLOW_LEFT_PAREN_in_macro_param_clause1204 = frozenset([90, 111])
+    FOLLOW_alias_in_macro_param_clause1208 = frozenset([111, 118])
+    FOLLOW_COMMA_in_macro_param_clause1211 = frozenset([90])
     FOLLOW_alias_in_macro_param_clause1213 = frozenset([111, 118])
-    FOLLOW_COMMA_in_macro_param_clause1216 = frozenset([90])
-    FOLLOW_alias_in_macro_param_clause1218 = frozenset([111, 118])
-    FOLLOW_RIGHT_PAREN_in_macro_param_clause1225 = frozenset([1])
-    FOLLOW_RETURNS_in_macro_return_clause1252 = frozenset([4, 90])
+    FOLLOW_RIGHT_PAREN_in_macro_param_clause1220 = frozenset([1])
+    FOLLOW_RETURNS_in_macro_return_clause1247 = frozenset([4, 90])
+    FOLLOW_alias_in_macro_return_clause1251 = frozenset([1, 118])
+    FOLLOW_COMMA_in_macro_return_clause1254 = frozenset([90])
     FOLLOW_alias_in_macro_return_clause1256 = frozenset([1, 118])
-    FOLLOW_COMMA_in_macro_return_clause1259 = frozenset([90])
-    FOLLOW_alias_in_macro_return_clause1261 = frozenset([1, 118])
-    FOLLOW_VOID_in_macro_return_clause1268 = frozenset([1])
-    FOLLOW_content_in_macro_body_clause1295 = frozenset([1])
-    FOLLOW_macro_param_clause_in_macro_clause1317 = frozenset([6])
-    FOLLOW_macro_return_clause_in_macro_clause1319 = frozenset([112])
-    FOLLOW_macro_body_clause_in_macro_clause1321 = frozenset([1])
-    FOLLOW_alias_in_inline_return_clause1351 = frozenset([117])
-    FOLLOW_EQUAL_in_inline_return_clause1353 = frozenset([1])
-    FOLLOW_alias_in_inline_return_clause1366 = frozenset([118])
-    FOLLOW_COMMA_in_inline_return_clause1369 = frozenset([90])
-    FOLLOW_alias_in_inline_return_clause1371 = frozenset([117, 118])
-    FOLLOW_EQUAL_in_inline_return_clause1375 = frozenset([1])
-    FOLLOW_LEFT_PAREN_in_inline_param_clause1404 = frozenset([90, 91, 96, 99, 101, 111])
+    FOLLOW_VOID_in_macro_return_clause1263 = frozenset([1])
+    FOLLOW_content_in_macro_body_clause1290 = frozenset([1])
+    FOLLOW_macro_param_clause_in_macro_clause1312 = frozenset([6])
+    FOLLOW_macro_return_clause_in_macro_clause1314 = frozenset([112])
+    FOLLOW_macro_body_clause_in_macro_clause1316 = frozenset([1])
+    FOLLOW_alias_in_inline_return_clause1346 = frozenset([117])
+    FOLLOW_EQUAL_in_inline_return_clause1348 = frozenset([1])
+    FOLLOW_alias_in_inline_return_clause1361 = frozenset([118])
+    FOLLOW_COMMA_in_inline_return_clause1364 = frozenset([90])
+    FOLLOW_alias_in_inline_return_clause1366 = frozenset([117, 118])
+    FOLLOW_EQUAL_in_inline_return_clause1370 = frozenset([1])
+    FOLLOW_LEFT_PAREN_in_inline_param_clause1399 = frozenset([90, 91, 96, 99, 101, 111])
+    FOLLOW_parameter_in_inline_param_clause1403 = frozenset([111, 118])
+    FOLLOW_COMMA_in_inline_param_clause1406 = frozenset([90, 91, 96, 99, 101])
     FOLLOW_parameter_in_inline_param_clause1408 = frozenset([111, 118])
-    FOLLOW_COMMA_in_inline_param_clause1411 = frozenset([90, 91, 96, 99, 101])
-    FOLLOW_parameter_in_inline_param_clause1413 = frozenset([111, 118])
-    FOLLOW_RIGHT_PAREN_in_inline_param_clause1420 = frozenset([1])
-    FOLLOW_inline_return_clause_in_inline_clause1442 = frozenset([90])
-    FOLLOW_alias_in_inline_clause1444 = frozenset([110])
-    FOLLOW_inline_param_clause_in_inline_clause1446 = frozenset([1])
-    FOLLOW_IMPORT_in_import_clause1471 = frozenset([101])
-    FOLLOW_QUOTEDSTRING_in_import_clause1474 = frozenset([1])
-    FOLLOW_DEFINE_in_define_clause1483 = frozenset([90])
-    FOLLOW_alias_in_define_clause1486 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 103, 110, 162, 163])
-    FOLLOW_cmd_in_define_clause1490 = frozenset([1])
-    FOLLOW_func_clause_in_define_clause1494 = frozenset([1])
-    FOLLOW_macro_clause_in_define_clause1498 = frozenset([1])
-    FOLLOW_EXECCOMMAND_in_cmd1508 = frozenset([1, 58, 59, 60, 61, 62])
-    FOLLOW_ship_clause_in_cmd1513 = frozenset([1, 58, 59, 60, 61, 62])
-    FOLLOW_cache_clause_in_cmd1517 = frozenset([1, 58, 59, 60, 61, 62])
-    FOLLOW_input_clause_in_cmd1521 = frozenset([1, 58, 59, 60, 61, 62])
-    FOLLOW_output_clause_in_cmd1525 = frozenset([1, 58, 59, 60, 61, 62])
-    FOLLOW_error_clause_in_cmd1529 = frozenset([1, 58, 59, 60, 61, 62])
-    FOLLOW_SHIP_in_ship_clause1541 = frozenset([110])
-    FOLLOW_LEFT_PAREN_in_ship_clause1544 = frozenset([101, 111])
-    FOLLOW_path_list_in_ship_clause1547 = frozenset([111])
-    FOLLOW_RIGHT_PAREN_in_ship_clause1550 = frozenset([1])
-    FOLLOW_QUOTEDSTRING_in_path_list1560 = frozenset([1, 118])
-    FOLLOW_COMMA_in_path_list1564 = frozenset([101])
-    FOLLOW_QUOTEDSTRING_in_path_list1566 = frozenset([1, 118])
-    FOLLOW_CACHE_in_cache_clause1593 = frozenset([110])
-    FOLLOW_LEFT_PAREN_in_cache_clause1596 = frozenset([101])
-    FOLLOW_path_list_in_cache_clause1599 = frozenset([111])
-    FOLLOW_RIGHT_PAREN_in_cache_clause1601 = frozenset([1])
-    FOLLOW_INPUT_in_input_clause1611 = frozenset([110])
-    FOLLOW_LEFT_PAREN_in_input_clause1614 = frozenset([63, 64, 101])
-    FOLLOW_stream_cmd_list_in_input_clause1617 = frozenset([111])
-    FOLLOW_RIGHT_PAREN_in_input_clause1619 = frozenset([1])
-    FOLLOW_stream_cmd_in_stream_cmd_list1629 = frozenset([1, 118])
-    FOLLOW_COMMA_in_stream_cmd_list1633 = frozenset([63, 64, 101])
-    FOLLOW_stream_cmd_in_stream_cmd_list1635 = frozenset([1, 118])
-    FOLLOW_set_in_stream_cmd1667 = frozenset([1, 28])
-    FOLLOW_USING_in_stream_cmd1684 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 162, 163])
-    FOLLOW_func_clause_in_stream_cmd1689 = frozenset([1])
-    FOLLOW_OUTPUT_in_output_clause1703 = frozenset([110])
-    FOLLOW_LEFT_PAREN_in_output_clause1706 = frozenset([63, 64, 101])
-    FOLLOW_stream_cmd_list_in_output_clause1709 = frozenset([111])
-    FOLLOW_RIGHT_PAREN_in_output_clause1711 = frozenset([1])
-    FOLLOW_STDERROR_in_error_clause1721 = frozenset([110])
-    FOLLOW_LEFT_PAREN_in_error_clause1724 = frozenset([101, 111])
-    FOLLOW_QUOTEDSTRING_in_error_clause1729 = frozenset([65, 111])
-    FOLLOW_LIMIT_in_error_clause1733 = frozenset([91])
-    FOLLOW_INTEGER_in_error_clause1736 = frozenset([111])
-    FOLLOW_RIGHT_PAREN_in_error_clause1744 = frozenset([1])
-    FOLLOW_LOAD_in_load_clause1754 = frozenset([101])
-    FOLLOW_filename_in_load_clause1757 = frozenset([1, 26, 28])
-    FOLLOW_USING_in_load_clause1761 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 162, 163])
-    FOLLOW_func_clause_in_load_clause1764 = frozenset([1, 26])
-    FOLLOW_as_clause_in_load_clause1769 = frozenset([1])
-    FOLLOW_QUOTEDSTRING_in_filename1779 = frozenset([1])
-    FOLLOW_AS_in_as_clause1787 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
-    FOLLOW_LEFT_PAREN_in_as_clause1794 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
-    FOLLOW_field_def_list_in_as_clause1797 = frozenset([111])
-    FOLLOW_RIGHT_PAREN_in_as_clause1799 = frozenset([1])
-    FOLLOW_field_def_in_as_clause1806 = frozenset([1])
-    FOLLOW_identifier_in_field_def1817 = frozenset([1, 105])
-    FOLLOW_COLON_in_field_def1821 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
-    FOLLOW_type_in_field_def1823 = frozenset([1])
-    FOLLOW_type_in_field_def1862 = frozenset([1])
-    FOLLOW_field_def_in_field_def_list1890 = frozenset([1, 118])
-    FOLLOW_COMMA_in_field_def_list1894 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
-    FOLLOW_field_def_in_field_def_list1896 = frozenset([1, 118])
-    FOLLOW_simple_type_in_type1927 = frozenset([1])
-    FOLLOW_tuple_type_in_type1931 = frozenset([1])
-    FOLLOW_bag_type_in_type1935 = frozenset([1])
-    FOLLOW_map_type_in_type1939 = frozenset([1])
+    FOLLOW_RIGHT_PAREN_in_inline_param_clause1415 = frozenset([1])
+    FOLLOW_inline_return_clause_in_inline_clause1437 = frozenset([90])
+    FOLLOW_alias_in_inline_clause1439 = frozenset([110])
+    FOLLOW_inline_param_clause_in_inline_clause1441 = frozenset([1])
+    FOLLOW_IMPORT_in_import_clause1466 = frozenset([101])
+    FOLLOW_QUOTEDSTRING_in_import_clause1469 = frozenset([1])
+    FOLLOW_DEFINE_in_define_clause1478 = frozenset([90])
+    FOLLOW_alias_in_define_clause1481 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 103, 110, 162, 163])
+    FOLLOW_cmd_in_define_clause1485 = frozenset([1])
+    FOLLOW_func_clause_in_define_clause1489 = frozenset([1])
+    FOLLOW_macro_clause_in_define_clause1493 = frozenset([1])
+    FOLLOW_EXECCOMMAND_in_cmd1503 = frozenset([1, 58, 59, 60, 61, 62])
+    FOLLOW_ship_clause_in_cmd1508 = frozenset([1, 58, 59, 60, 61, 62])
+    FOLLOW_cache_clause_in_cmd1512 = frozenset([1, 58, 59, 60, 61, 62])
+    FOLLOW_input_clause_in_cmd1516 = frozenset([1, 58, 59, 60, 61, 62])
+    FOLLOW_output_clause_in_cmd1520 = frozenset([1, 58, 59, 60, 61, 62])
+    FOLLOW_error_clause_in_cmd1524 = frozenset([1, 58, 59, 60, 61, 62])
+    FOLLOW_SHIP_in_ship_clause1536 = frozenset([110])
+    FOLLOW_LEFT_PAREN_in_ship_clause1539 = frozenset([101, 111])
+    FOLLOW_path_list_in_ship_clause1542 = frozenset([111])
+    FOLLOW_RIGHT_PAREN_in_ship_clause1545 = frozenset([1])
+    FOLLOW_QUOTEDSTRING_in_path_list1555 = frozenset([1, 118])
+    FOLLOW_COMMA_in_path_list1559 = frozenset([101])
+    FOLLOW_QUOTEDSTRING_in_path_list1561 = frozenset([1, 118])
+    FOLLOW_CACHE_in_cache_clause1588 = frozenset([110])
+    FOLLOW_LEFT_PAREN_in_cache_clause1591 = frozenset([101])
+    FOLLOW_path_list_in_cache_clause1594 = frozenset([111])
+    FOLLOW_RIGHT_PAREN_in_cache_clause1596 = frozenset([1])
+    FOLLOW_INPUT_in_input_clause1606 = frozenset([110])
+    FOLLOW_LEFT_PAREN_in_input_clause1609 = frozenset([63, 64, 101])
+    FOLLOW_stream_cmd_list_in_input_clause1612 = frozenset([111])
+    FOLLOW_RIGHT_PAREN_in_input_clause1614 = frozenset([1])
+    FOLLOW_stream_cmd_in_stream_cmd_list1624 = frozenset([1, 118])
+    FOLLOW_COMMA_in_stream_cmd_list1628 = frozenset([63, 64, 101])
+    FOLLOW_stream_cmd_in_stream_cmd_list1630 = frozenset([1, 118])
+    FOLLOW_set_in_stream_cmd1662 = frozenset([1, 28])
+    FOLLOW_USING_in_stream_cmd1679 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 162, 163])
+    FOLLOW_func_clause_in_stream_cmd1684 = frozenset([1])
+    FOLLOW_OUTPUT_in_output_clause1698 = frozenset([110])
+    FOLLOW_LEFT_PAREN_in_output_clause1701 = frozenset([63, 64, 101])
+    FOLLOW_stream_cmd_list_in_output_clause1704 = frozenset([111])
+    FOLLOW_RIGHT_PAREN_in_output_clause1706 = frozenset([1])
+    FOLLOW_STDERROR_in_error_clause1716 = frozenset([110])
+    FOLLOW_LEFT_PAREN_in_error_clause1719 = frozenset([101, 111])
+    FOLLOW_QUOTEDSTRING_in_error_clause1724 = frozenset([65, 111])
+    FOLLOW_LIMIT_in_error_clause1728 = frozenset([91])
+    FOLLOW_INTEGER_in_error_clause1731 = frozenset([111])
+    FOLLOW_RIGHT_PAREN_in_error_clause1739 = frozenset([1])
+    FOLLOW_LOAD_in_load_clause1749 = frozenset([101])
+    FOLLOW_filename_in_load_clause1752 = frozenset([1, 26, 28])
+    FOLLOW_USING_in_load_clause1756 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 162, 163])
+    FOLLOW_func_clause_in_load_clause1759 = frozenset([1, 26])
+    FOLLOW_as_clause_in_load_clause1764 = frozenset([1])
+    FOLLOW_QUOTEDSTRING_in_filename1774 = frozenset([1])
+    FOLLOW_AS_in_as_clause1782 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
+    FOLLOW_LEFT_PAREN_in_as_clause1789 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
+    FOLLOW_field_def_list_in_as_clause1792 = frozenset([111])
+    FOLLOW_RIGHT_PAREN_in_as_clause1794 = frozenset([1])
+    FOLLOW_field_def_in_as_clause1801 = frozenset([1])
+    FOLLOW_identifier_in_field_def1812 = frozenset([1, 105])
+    FOLLOW_COLON_in_field_def1816 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
+    FOLLOW_type_in_field_def1818 = frozenset([1])
+    FOLLOW_type_in_field_def1857 = frozenset([1])
+    FOLLOW_field_def_in_field_def_list1885 = frozenset([1, 118])
+    FOLLOW_COMMA_in_field_def_list1889 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
+    FOLLOW_field_def_in_field_def_list1891 = frozenset([1, 118])
+    FOLLOW_simple_type_in_type1922 = frozenset([1])
+    FOLLOW_tuple_type_in_type1926 = frozenset([1])
+    FOLLOW_bag_type_in_type1930 = frozenset([1])
+    FOLLOW_map_type_in_type1934 = frozenset([1])
     FOLLOW_set_in_simple_type0 = frozenset([1])
-    FOLLOW_TUPLE_in_tuple_type1985 = frozenset([110])
-    FOLLOW_LEFT_PAREN_in_tuple_type1988 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 111, 112, 114])
-    FOLLOW_field_def_list_in_tuple_type1990 = frozenset([111])
-    FOLLOW_RIGHT_PAREN_in_tuple_type1993 = frozenset([1])
-    FOLLOW_BAG_in_bag_type2023 = frozenset([112])
-    FOLLOW_LEFT_CURLY_in_bag_type2026 = frozenset([90])
-    FOLLOW_null_keyword_in_bag_type2030 = frozenset([105])
-    FOLLOW_COLON_in_bag_type2032 = frozenset([51, 110, 113])
-    FOLLOW_tuple_type_in_bag_type2034 = frozenset([113])
-    FOLLOW_RIGHT_CURLY_in_bag_type2039 = frozenset([1])
-    FOLLOW_BAG_in_bag_type2071 = frozenset([112])
-    FOLLOW_LEFT_CURLY_in_bag_type2074 = frozenset([51, 90, 110, 113])
-    FOLLOW_identifier_in_bag_type2080 = frozenset([105])
-    FOLLOW_COLON_in_bag_type2082 = frozenset([51, 110])
-    FOLLOW_tuple_type_in_bag_type2087 = frozenset([113])
-    FOLLOW_RIGHT_CURLY_in_bag_type2092 = frozenset([1])
-    FOLLOW_MAP_in_map_type2123 = frozenset([114])
-    FOLLOW_LEFT_BRACKET_in_map_type2126 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114, 115])
-    FOLLOW_type_in_map_type2128 = frozenset([115])
-    FOLLOW_RIGHT_BRACKET_in_map_type2131 = frozenset([1])
-    FOLLOW_func_name_in_func_clause2159 = frozenset([1])
-    FOLLOW_func_name_in_func_clause2196 = frozenset([110])
-    FOLLOW_LEFT_PAREN_in_func_clause2198 = frozenset([101, 102, 111])
-    FOLLOW_func_args_in_func_clause2200 = frozenset([111])
-    FOLLOW_RIGHT_PAREN_in_func_clause2203 = frozenset([1])
-    FOLLOW_eid_in_func_name2236 = frozenset([1, 92, 95])
-    FOLLOW_set_in_func_name2240 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 162, 163])
-    FOLLOW_eid_in_func_name2250 = frozenset([1, 92, 95])
+    FOLLOW_TUPLE_in_tuple_type1980 = frozenset([110])
+    FOLLOW_LEFT_PAREN_in_tuple_type1983 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 111, 112, 114])
+    FOLLOW_field_def_list_in_tuple_type1985 = frozenset([111])
+    FOLLOW_RIGHT_PAREN_in_tuple_type1988 = frozenset([1])
+    FOLLOW_BAG_in_bag_type2018 = frozenset([112])
+    FOLLOW_LEFT_CURLY_in_bag_type2021 = frozenset([90])
+    FOLLOW_null_keyword_in_bag_type2025 = frozenset([105])
+    FOLLOW_COLON_in_bag_type2027 = frozenset([51, 110, 113])
+    FOLLOW_tuple_type_in_bag_type2029 = frozenset([113])
+    FOLLOW_RIGHT_CURLY_in_bag_type2034 = frozenset([1])
+    FOLLOW_BAG_in_bag_type2066 = frozenset([112])
+    FOLLOW_LEFT_CURLY_in_bag_type2069 = frozenset([51, 90, 110, 113])
+    FOLLOW_identifier_in_bag_type2075 = frozenset([105])
+    FOLLOW_COLON_in_bag_type2077 = frozenset([51, 110])
+    FOLLOW_tuple_type_in_bag_type2082 = frozenset([113])
+    FOLLOW_RIGHT_CURLY_in_bag_type2087 = frozenset([1])
+    FOLLOW_MAP_in_map_type2118 = frozenset([114])
+    FOLLOW_LEFT_BRACKET_in_map_type2121 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114, 115])
+    FOLLOW_type_in_map_type2123 = frozenset([115])
+    FOLLOW_RIGHT_BRACKET_in_map_type2126 = frozenset([1])
+    FOLLOW_func_name_in_func_clause2154 = frozenset([1])
+    FOLLOW_func_name_in_func_clause2191 = frozenset([110])
+    FOLLOW_LEFT_PAREN_in_func_clause2193 = frozenset([101, 102, 111])
+    FOLLOW_func_args_in_func_clause2195 = frozenset([111])
+    FOLLOW_RIGHT_PAREN_in_func_clause2198 = frozenset([1])
+    FOLLOW_eid_in_func_name2231 = frozenset([1, 92, 95])
+    FOLLOW_set_in_func_name2235 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 162, 163])
+    FOLLOW_eid_in_func_name2245 = frozenset([1, 92, 95])
     FOLLOW_set_in_func_args_string0 = frozenset([1])
-    FOLLOW_func_args_string_in_func_args2275 = frozenset([1, 118])
-    FOLLOW_COMMA_in_func_args2279 = frozenset([101, 102])
-    FOLLOW_func_args_string_in_func_args2281 = frozenset([1, 118])
-    FOLLOW_set_in_group_clause2307 = frozenset([90, 110])
-    FOLLOW_group_item_list_in_group_clause2318 = frozenset([1, 28, 33])
-    FOLLOW_USING_in_group_clause2322 = frozenset([101])
-    FOLLOW_group_type_in_group_clause2325 = frozenset([1, 33])
-    FOLLOW_partition_clause_in_group_clause2330 = frozenset([1])
-    FOLLOW_QUOTEDSTRING_in_group_type2340 = frozenset([1])
-    FOLLOW_group_item_in_group_item_list2349 = frozenset([1, 118])
-    FOLLOW_COMMA_in_group_item_list2353 = frozenset([90, 110])
-    FOLLOW_group_item_in_group_item_list2355 = frozenset([1, 118])
-    FOLLOW_rel_in_group_item2387 = frozenset([25, 27, 158])
-    FOLLOW_join_group_by_clause_in_group_item2391 = frozenset([1, 29, 30])
-    FOLLOW_ALL_in_group_item2395 = frozenset([1, 29, 30])
-    FOLLOW_ANY_in_group_item2399 = frozenset([1, 29, 30])
-    FOLLOW_set_in_group_item2403 = frozenset([1])
-    FOLLOW_alias_in_rel2421 = frozenset([1])
-    FOLLOW_LEFT_PAREN_in_rel2430 = frozenset([7, 8, 9, 10, 11, 12, 14, 16, 17, 18, 19, 20, 34, 54, 56, 57, 65, 66, 90])
-    FOLLOW_foreach_clause_complex_in_rel2435 = frozenset([111])
-    FOLLOW_op_clause_in_rel2443 = frozenset([32, 111])
-    FOLLOW_foreach_clause_simple_in_rel2447 = frozenset([32, 111])
-    FOLLOW_parallel_clause_in_rel2451 = frozenset([111])
-    FOLLOW_RIGHT_PAREN_in_rel2458 = frozenset([1])
-    FOLLOW_flatten_clause_in_flatten_generated_item2468 = frozenset([1, 26])
-    FOLLOW_AS_in_flatten_generated_item2472 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
-    FOLLOW_LEFT_PAREN_in_flatten_generated_item2479 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
-    FOLLOW_field_def_list_in_flatten_generated_item2482 = frozenset([111])
-    FOLLOW_RIGHT_PAREN_in_flatten_generated_item2484 = frozenset([1])
-    FOLLOW_field_def_in_flatten_generated_item2491 = frozenset([1])
-    FOLLOW_col_range_in_flatten_generated_item2523 = frozenset([1, 26])
-    FOLLOW_AS_in_flatten_generated_item2527 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
-    FOLLOW_LEFT_PAREN_in_flatten_generated_item2534 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
-    FOLLOW_field_def_list_in_flatten_generated_item2537 = frozenset([111])
-    FOLLOW_RIGHT_PAREN_in_flatten_generated_item2539 = frozenset([1])
-    FOLLOW_field_def_in_flatten_generated_item2546 = frozenset([1])
-    FOLLOW_expr_in_flatten_generated_item2578 = frozenset([1, 26])
-    FOLLOW_AS_in_flatten_generated_item2582 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
-    FOLLOW_field_def_in_flatten_generated_item2585 = frozenset([1])
-    FOLLOW_STAR_in_flatten_generated_item2615 = frozenset([1, 26])
-    FOLLOW_AS_in_flatten_generated_item2619 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
-    FOLLOW_LEFT_PAREN_in_flatten_generated_item2626 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
-    FOLLOW_field_def_list_in_flatten_generated_item2629 = frozenset([111])
-    FOLLOW_RIGHT_PAREN_in_flatten_generated_item2631 = frozenset([1])
-    FOLLOW_field_def_in_flatten_generated_item2638 = frozenset([1])
-    FOLLOW_FLATTEN_in_flatten_clause2653 = frozenset([110])
-    FOLLOW_LEFT_PAREN_in_flatten_clause2656 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
-    FOLLOW_expr_in_flatten_clause2659 = frozenset([111])
-    FOLLOW_RIGHT_PAREN_in_flatten_clause2661 = frozenset([1])
-    FOLLOW_STORE_in_store_clause2671 = frozenset([90, 110])
-    FOLLOW_rel_in_store_clause2674 = frozenset([22])
-    FOLLOW_INTO_in_store_clause2676 = frozenset([101])
-    FOLLOW_filename_in_store_clause2679 = frozenset([1, 28])
-    FOLLOW_USING_in_store_clause2683 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 162, 163])
-    FOLLOW_func_clause_in_store_clause2686 = frozenset([1])
-    FOLLOW_FILTER_in_filter_clause2698 = frozenset([90, 110])
-    FOLLOW_rel_in_filter_clause2701 = frozenset([27])
-    FOLLOW_BY_in_filter_clause2703 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
-    FOLLOW_cond_in_filter_clause2706 = frozenset([1])
-    FOLLOW_or_cond_in_cond2715 = frozenset([1])
-    FOLLOW_and_cond_in_or_cond2724 = frozenset([1, 36])
-    FOLLOW_OR_in_or_cond2729 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
-    FOLLOW_and_cond_in_or_cond2732 = frozenset([1, 36])
-    FOLLOW_unary_cond_in_and_cond2744 = frozenset([1, 35])
-    FOLLOW_AND_in_and_cond2748 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
-    FOLLOW_unary_cond_in_and_cond2751 = frozenset([1, 35])
-    FOLLOW_LEFT_PAREN_in_unary_cond2763 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
-    FOLLOW_cond_in_unary_cond2766 = frozenset([111])
-    FOLLOW_RIGHT_PAREN_in_unary_cond2768 = frozenset([1])
-    FOLLOW_not_cond_in_unary_cond2784 = frozenset([1])
-    FOLLOW_expr_in_unary_cond2799 = frozenset([70, 71, 72, 73, 74, 75, 76, 79, 80, 81, 82, 83, 84])
-    FOLLOW_rel_op_in_unary_cond2801 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
-    FOLLOW_expr_in_unary_cond2804 = frozenset([1])
-    FOLLOW_func_eval_in_unary_cond2819 = frozenset([1])
-    FOLLOW_null_check_cond_in_unary_cond2834 = frozenset([1])
-    FOLLOW_NOT_in_not_cond2843 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
-    FOLLOW_unary_cond_in_not_cond2846 = frozenset([1])
-    FOLLOW_func_name_in_func_eval2855 = frozenset([110])
-    FOLLOW_LEFT_PAREN_in_func_eval2857 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 111, 112, 114, 119, 162, 163])
-    FOLLOW_real_arg_list_in_func_eval2859 = frozenset([111])
-    FOLLOW_RIGHT_PAREN_in_func_eval2862 = frozenset([1])
-    FOLLOW_real_arg_in_real_arg_list2894 = frozenset([1, 118])
-    FOLLOW_COMMA_in_real_arg_list2898 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
-    FOLLOW_real_arg_in_real_arg_list2900 = frozenset([1, 118])
-    FOLLOW_expr_in_real_arg2930 = frozenset([1])
-    FOLLOW_STAR_in_real_arg2934 = frozenset([1])
-    FOLLOW_col_range_in_real_arg2938 = frozenset([1])
-    FOLLOW_expr_in_null_check_cond2947 = frozenset([53])
-    FOLLOW_IS_in_null_check_cond2949 = frozenset([37, 90])
-    FOLLOW_NOT_in_null_check_cond2952 = frozenset([90])
-    FOLLOW_null_keyword_in_null_check_cond2955 = frozenset([1])
-    FOLLOW_add_expr_in_expr2965 = frozenset([1])
-    FOLLOW_multi_expr_in_add_expr2974 = frozenset([1, 97, 98])
-    FOLLOW_set_in_add_expr2978 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
-    FOLLOW_multi_expr_in_add_expr2989 = frozenset([1, 97, 98])
-    FOLLOW_cast_expr_in_multi_expr3001 = frozenset([1, 104, 120, 121])
-    FOLLOW_set_in_multi_expr3005 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
-    FOLLOW_cast_expr_in_multi_expr3020 = frozenset([1, 104, 120, 121])
-    FOLLOW_LEFT_PAREN_in_cast_expr3032 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
-    FOLLOW_type_cast_in_cast_expr3034 = frozenset([111])
-    FOLLOW_RIGHT_PAREN_in_cast_expr3036 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
-    FOLLOW_unary_expr_in_cast_expr3038 = frozenset([1])
-    FOLLOW_unary_expr_in_cast_expr3073 = frozenset([1])
-    FOLLOW_simple_type_in_type_cast3082 = frozenset([1])
-    FOLLOW_map_type_in_type_cast3086 = frozenset([1])
-    FOLLOW_tuple_type_cast_in_type_cast3090 = frozenset([1])
-    FOLLOW_bag_type_cast_in_type_cast3094 = frozenset([1])
-    FOLLOW_TUPLE_in_tuple_type_cast3103 = frozenset([110])
-    FOLLOW_LEFT_PAREN_in_tuple_type_cast3105 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 111, 112, 114])
-    FOLLOW_type_cast_in_tuple_type_cast3109 = frozenset([111, 118])
-    FOLLOW_COMMA_in_tuple_type_cast3113 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
-    FOLLOW_type_cast_in_tuple_type_cast3115 = frozenset([111, 118])
-    FOLLOW_RIGHT_PAREN_in_tuple_type_cast3123 = frozenset([1])
-    FOLLOW_BAG_in_bag_type_cast3158 = frozenset([112])
-    FOLLOW_LEFT_CURLY_in_bag_type_cast3160 = frozenset([51, 113])
-    FOLLOW_tuple_type_cast_in_bag_type_cast3162 = frozenset([113])
-    FOLLOW_RIGHT_CURLY_in_bag_type_cast3165 = frozenset([1])
-    FOLLOW_expr_eval_in_unary_expr3198 = frozenset([1])
-    FOLLOW_LEFT_PAREN_in_unary_expr3214 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
-    FOLLOW_expr_in_unary_expr3216 = frozenset([111])
-    FOLLOW_RIGHT_PAREN_in_unary_expr3218 = frozenset([1])
-    FOLLOW_neg_expr_in_unary_expr3253 = frozenset([1])
-    FOLLOW_const_expr_in_expr_eval3262 = frozenset([1])
-    FOLLOW_var_expr_in_expr_eval3266 = frozenset([1])
-    FOLLOW_projectable_expr_in_var_expr3275 = frozenset([1, 92, 116])
-    FOLLOW_dot_proj_in_var_expr3279 = frozenset([1, 92, 116])
-    FOLLOW_pound_proj_in_var_expr3283 = frozenset([1, 92, 116])
-    FOLLOW_func_eval_in_projectable_expr3294 = frozenset([1])
-    FOLLOW_col_ref_in_projectable_expr3298 = frozenset([1])
-    FOLLOW_bin_expr_in_projectable_expr3302 = frozenset([1])
-    FOLLOW_type_conversion_in_projectable_expr3306 = frozenset([1])
-    FOLLOW_LEFT_CURLY_in_type_conversion3315 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
-    FOLLOW_real_arg_list_in_type_conversion3317 = frozenset([113])
-    FOLLOW_RIGHT_CURLY_in_type_conversion3319 = frozenset([1])
-    FOLLOW_LEFT_BRACKET_in_type_conversion3366 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
-    FOLLOW_real_arg_list_in_type_conversion3368 = frozenset([115])
-    FOLLOW_RIGHT_BRACKET_in_type_conversion3370 = frozenset([1])
-    FOLLOW_LEFT_PAREN_in_type_conversion3417 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
-    FOLLOW_real_arg_in_type_conversion3419 = frozenset([118])
-    FOLLOW_COMMA_in_type_conversion3423 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
-    FOLLOW_real_arg_in_type_conversion3425 = frozenset([111, 118])
-    FOLLOW_RIGHT_PAREN_in_type_conversion3430 = frozenset([1])
-    FOLLOW_PERIOD_in_dot_proj3468 = frozenset([14, 34, 90, 96, 110])
-    FOLLOW_col_alias_or_index_in_dot_proj3472 = frozenset([1])
-    FOLLOW_LEFT_PAREN_in_dot_proj3497 = frozenset([14, 34, 90, 96])
-    FOLLOW_col_alias_or_index_in_dot_proj3499 = frozenset([111, 118])
-    FOLLOW_COMMA_in_dot_proj3503 = frozenset([14, 34, 90, 96])
-    FOLLOW_col_alias_or_index_in_dot_proj3505 = frozenset([111, 118])
-    FOLLOW_RIGHT_PAREN_in_dot_proj3510 = frozenset([1])
-    FOLLOW_col_alias_in_col_alias_or_index3542 = frozenset([1])
-    FOLLOW_col_index_in_col_alias_or_index3546 = frozenset([1])
-    FOLLOW_GROUP_in_col_alias3555 = frozenset([1])
-    FOLLOW_CUBE_in_col_alias3559 = frozenset([1])
-    FOLLOW_identifier_in_col_alias3563 = frozenset([1])
-    FOLLOW_DOLLARVAR_in_col_index3572 = frozenset([1])
-    FOLLOW_col_ref_in_col_range3585 = frozenset([119])
-    FOLLOW_DOUBLE_PERIOD_in_col_range3587 = frozenset([1, 14, 34, 90, 96])
-    FOLLOW_col_ref_in_col_range3593 = frozenset([1])
-    FOLLOW_DOUBLE_PERIOD_in_col_range3634 = frozenset([14, 34, 90, 96])
-    FOLLOW_col_ref_in_col_range3636 = frozenset([1])
-    FOLLOW_POUND_in_pound_proj3667 = frozenset([90, 101])
-    FOLLOW_QUOTEDSTRING_in_pound_proj3672 = frozenset([1])
-    FOLLOW_null_keyword_in_pound_proj3676 = frozenset([1])
-    FOLLOW_LEFT_PAREN_in_bin_expr3687 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
-    FOLLOW_cond_in_bin_expr3689 = frozenset([122])
-    FOLLOW_QMARK_in_bin_expr3691 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
-    FOLLOW_expr_in_bin_expr3697 = frozenset([105])
-    FOLLOW_COLON_in_bin_expr3699 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
-    FOLLOW_expr_in_bin_expr3705 = frozenset([111])
-    FOLLOW_RIGHT_PAREN_in_bin_expr3707 = frozenset([1])
-    FOLLOW_MINUS_in_neg_expr3740 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
-    FOLLOW_cast_expr_in_neg_expr3742 = frozenset([1])
-    FOLLOW_LIMIT_in_limit_clause3769 = frozenset([90, 110])
-    FOLLOW_rel_in_limit_clause3772 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
-    FOLLOW_INTEGER_in_limit_clause3784 = frozenset([1])
-    FOLLOW_LONGINTEGER_in_limit_clause3796 = frozenset([1])
-    FOLLOW_expr_in_limit_clause3800 = frozenset([1])
-    FOLLOW_SAMPLE_in_sample_clause3811 = frozenset([90, 110])
-    FOLLOW_rel_in_sample_clause3814 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
-    FOLLOW_DOUBLENUMBER_in_sample_clause3826 = frozenset([1])
-    FOLLOW_expr_in_sample_clause3830 = frozenset([1])
-    FOLLOW_RANK_in_rank_clause3841 = frozenset([90, 110])
-    FOLLOW_rel_in_rank_clause3844 = frozenset([1, 27])
-    FOLLOW_rank_by_statement_in_rank_clause3848 = frozenset([1])
-    FOLLOW_BY_in_rank_by_statement3860 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
-    FOLLOW_rank_by_clause_in_rank_by_statement3863 = frozenset([1, 13])
-    FOLLOW_DENSE_in_rank_by_statement3867 = frozenset([1])
-    FOLLOW_STAR_in_rank_by_clause3879 = frozenset([1, 40, 41])
-    FOLLOW_set_in_rank_by_clause3881 = frozenset([1])
-    FOLLOW_rank_list_in_rank_by_clause3900 = frozenset([1])
-    FOLLOW_rank_col_in_rank_list3909 = frozenset([1, 118])
-    FOLLOW_COMMA_in_rank_list3913 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
-    FOLLOW_rank_col_in_rank_list3915 = frozenset([1, 118])
-    FOLLOW_col_range_in_rank_col3941 = frozenset([1, 40, 41])
-    FOLLOW_set_in_rank_col3943 = frozenset([1])
-    FOLLOW_col_ref_in_rank_col3965 = frozenset([1, 40, 41])
-    FOLLOW_set_in_rank_col3967 = frozenset([1])
-    FOLLOW_ORDER_in_order_clause3985 = frozenset([90, 110])
-    FOLLOW_rel_in_order_clause3988 = frozenset([27])
-    FOLLOW_BY_in_order_clause3990 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
-    FOLLOW_order_by_clause_in_order_clause3993 = frozenset([1, 28])
-    FOLLOW_USING_in_order_clause3997 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 162, 163])
-    FOLLOW_func_clause_in_order_clause4000 = frozenset([1])
-    FOLLOW_STAR_in_order_by_clause4012 = frozenset([1, 40, 41])
-    FOLLOW_set_in_order_by_clause4014 = frozenset([1])
-    FOLLOW_order_col_list_in_order_by_clause4043 = frozenset([1])
-    FOLLOW_order_col_in_order_col_list4052 = frozenset([1, 118])
-    FOLLOW_COMMA_in_order_col_list4056 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
-    FOLLOW_order_col_in_order_col_list4058 = frozenset([1, 118])
-    FOLLOW_col_range_in_order_col4089 = frozenset([1, 40, 41])
-    FOLLOW_set_in_order_col4091 = frozenset([1])
-    FOLLOW_col_ref_in_order_col4112 = frozenset([1, 40, 41])
-    FOLLOW_set_in_order_col4114 = frozenset([1])
-    FOLLOW_LEFT_PAREN_in_order_col4139 = frozenset([14, 34, 90, 96])
-    FOLLOW_col_ref_in_order_col4142 = frozenset([40, 41, 111])
-    FOLLOW_set_in_order_col4144 = frozenset([111])
-    FOLLOW_RIGHT_PAREN_in_order_col4155 = frozenset([1])
-    FOLLOW_DISTINCT_in_distinct_clause4165 = frozenset([90, 110])
-    FOLLOW_rel_in_distinct_clause4168 = frozenset([1, 33])
-    FOLLOW_partition_clause_in_distinct_clause4170 = frozenset([1])
-    FOLLOW_PARTITION_in_partition_clause4180 = frozenset([27])
-    FOLLOW_BY_in_partition_clause4183 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 162, 163])
-    FOLLOW_func_name_in_partition_clause4186 = frozenset([1])
-    FOLLOW_CROSS_in_cross_clause4195 = frozenset([90, 110])
-    FOLLOW_rel_list_in_cross_clause4198 = frozenset([1, 33])
-    FOLLOW_partition_clause_in_cross_clause4200 = frozenset([1])
-    FOLLOW_rel_in_rel_list4210 = frozenset([1, 118])
-    FOLLOW_COMMA_in_rel_list4214 = frozenset([90, 110])
-    FOLLOW_rel_in_rel_list4216 = frozenset([1, 118])
-    FOLLOW_JOIN_in_join_clause4241 = frozenset([90, 110])
-    FOLLOW_join_sub_clause_in_join_clause4244 = frozenset([1, 28, 33])
-    FOLLOW_USING_in_join_clause4248 = frozenset([101])
-    FOLLOW_join_type_in_join_clause4251 = frozenset([1, 33])
-    FOLLOW_partition_clause_in_join_clause4256 = frozenset([1])
-    FOLLOW_QUOTEDSTRING_in_join_type4266 = frozenset([1])
-    FOLLOW_join_item_in_join_sub_clause4275 = frozenset([67, 68, 69])
-    FOLLOW_set_in_join_sub_clause4277 = frozenset([30, 118])
-    FOLLOW_OUTER_in_join_sub_clause4291 = frozenset([118])
-    FOLLOW_COMMA_in_join_sub_clause4294 = frozenset([90, 110])
-    FOLLOW_join_item_in_join_sub_clause4297 = frozenset([1])
-    FOLLOW_join_item_list_in_join_sub_clause4317 = frozenset([1])
-    FOLLOW_join_item_in_join_item_list4326 = frozenset([118])
-    FOLLOW_COMMA_in_join_item_list4330 = frozenset([90, 110])
-    FOLLOW_join_item_in_join_item_list4333 = frozenset([1, 118])
-    FOLLOW_rel_in_join_item4345 = frozenset([27])
-    FOLLOW_join_group_by_clause_in_join_item4347 = frozenset([1])
-    FOLLOW_BY_in_join_group_by_clause4378 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
-    FOLLOW_join_group_by_expr_list_in_join_group_by_clause4381 = frozenset([1])
-    FOLLOW_LEFT_PAREN_in_join_group_by_expr_list4390 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
-    FOLLOW_join_group_by_expr_in_join_group_by_expr_list4392 = frozenset([111, 118])
-    FOLLOW_COMMA_in_join_group_by_expr_list4396 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
-    FOLLOW_join_group_by_expr_in_join_group_by_expr_list4398 = frozenset([111, 118])
-    FOLLOW_RIGHT_PAREN_in_join_group_by_expr_list4403 = frozenset([1])
-    FOLLOW_join_group_by_expr_in_join_group_by_expr_list4459 = frozenset([1])
-    FOLLOW_col_range_in_join_group_by_expr4468 = frozenset([1])
-    FOLLOW_expr_in_join_group_by_expr4473 = frozenset([1])
-    FOLLOW_STAR_in_join_group_by_expr4477 = frozenset([1])
-    FOLLOW_UNION_in_union_clause4486 = frozenset([31, 90, 110])
-    FOLLOW_ONSCHEMA_in_union_clause4489 = frozenset([90, 110])
-    FOLLOW_rel_list_in_union_clause4492 = frozenset([1])
-    FOLLOW_FOREACH_in_foreach_clause_simple4501 = frozenset([90, 110])
-    FOLLOW_rel_in_foreach_clause_simple4504 = frozenset([38])
-    FOLLOW_foreach_plan_simple_in_foreach_clause_simple4506 = frozenset([1])
-    FOLLOW_generate_clause_in_foreach_plan_simple4515 = frozenset([1])
-    FOLLOW_FOREACH_in_foreach_clause_complex4553 = frozenset([90, 110])
-    FOLLOW_rel_in_foreach_clause_complex4556 = frozenset([112])
-    FOLLOW_foreach_plan_complex_in_foreach_clause_complex4558 = frozenset([1])
-    FOLLOW_nested_blk_in_foreach_plan_complex4567 = frozenset([1])
-    FOLLOW_CUBE_in_cube_clause4606 = frozenset([90, 110])
-    FOLLOW_cube_item_in_cube_clause4609 = frozenset([1])
-    FOLLOW_rel_in_cube_item4619 = frozenset([27])
-    FOLLOW_cube_by_clause_in_cube_item4623 = frozenset([1])
-    FOLLOW_BY_in_cube_by_clause4634 = frozenset([14, 15])
-    FOLLOW_cube_or_rollup_in_cube_by_clause4637 = frozenset([1])
-    FOLLOW_cube_rollup_list_in_cube_or_rollup4646 = frozenset([1, 118])
-    FOLLOW_COMMA_in_cube_or_rollup4650 = frozenset([14, 15])
-    FOLLOW_cube_rollup_list_in_cube_or_rollup4652 = frozenset([1, 118])
-    FOLLOW_set_in_cube_rollup_list4685 = frozenset([110])
-    FOLLOW_cube_by_expr_list_in_cube_rollup_list4696 = frozenset([1])
-    FOLLOW_LEFT_PAREN_in_cube_by_expr_list4705 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
-    FOLLOW_cube_by_expr_in_cube_by_expr_list4707 = frozenset([111, 118])
-    FOLLOW_COMMA_in_cube_by_expr_list4711 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
-    FOLLOW_cube_by_expr_in_cube_by_expr_list4713 = frozenset([111, 118])
-    FOLLOW_RIGHT_PAREN_in_cube_by_expr_list4718 = frozenset([1])
-    FOLLOW_col_range_in_cube_by_expr4751 = frozenset([1])
-    FOLLOW_expr_in_cube_by_expr4756 = frozenset([1])
-    FOLLOW_STAR_in_cube_by_expr4760 = frozenset([1])
-    FOLLOW_LEFT_CURLY_in_nested_blk4769 = frozenset([38, 90])
-    FOLLOW_nested_command_list_in_nested_blk4772 = frozenset([38])
-    FOLLOW_generate_clause_in_nested_blk4776 = frozenset([109])
-    FOLLOW_SEMI_COLON_in_nested_blk4778 = frozenset([113])
-    FOLLOW_RIGHT_CURLY_in_nested_blk4783 = frozenset([1])
-    FOLLOW_GENERATE_in_generate_clause4793 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
-    FOLLOW_flatten_generated_item_in_generate_clause4795 = frozenset([1, 118])
-    FOLLOW_COMMA_in_generate_clause4799 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
-    FOLLOW_flatten_generated_item_in_generate_clause4801 = frozenset([1, 118])
-    FOLLOW_nested_command_in_nested_command_list4844 = frozenset([109])
-    FOLLOW_SEMI_COLON_in_nested_command_list4846 = frozenset([1, 90])
-    FOLLOW_identifier_in_nested_command4924 = frozenset([117])
-    FOLLOW_EQUAL_in_nested_command4926 = frozenset([14, 34, 90, 96])
-    FOLLOW_nested_proj_in_nested_command4928 = frozenset([1])
-    FOLLOW_identifier_in_nested_command4975 = frozenset([117])
-    FOLLOW_EQUAL_in_nested_command4977 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
-    FOLLOW_expr_in_nested_command4979 = frozenset([1])
-    FOLLOW_identifier_in_nested_command5024 = frozenset([117])
-    FOLLOW_EQUAL_in_nested_command5026 = frozenset([9, 10, 11, 16, 19, 65])
-    FOLLOW_nested_op_in_nested_command5028 = frozenset([1])
-    FOLLOW_nested_filter_in_nested_op5063 = frozenset([1])
-    FOLLOW_nested_sort_in_nested_op5077 = frozenset([1])
-    FOLLOW_nested_distinct_in_nested_op5091 = frozenset([1])
-    FOLLOW_nested_limit_in_nested_op5105 = frozenset([1])
-    FOLLOW_nested_cross_in_nested_op5119 = frozenset([1])
-    FOLLOW_nested_foreach_in_nested_op5133 = frozenset([1])
-    FOLLOW_col_ref_in_nested_proj5142 = frozenset([92])
-    FOLLOW_PERIOD_in_nested_proj5144 = frozenset([14, 34, 90, 96, 110])
-    FOLLOW_col_ref_list_in_nested_proj5146 = frozenset([1])
-    FOLLOW_col_ref_in_col_ref_list5180 = frozenset([1])
-    FOLLOW_LEFT_PAREN_in_col_ref_list5186 = frozenset([14, 34, 90, 96])
-    FOLLOW_col_ref_in_col_ref_list5188 = frozenset([111, 118])
-    FOLLOW_COMMA_in_col_ref_list5192 = frozenset([14, 34, 90, 96])
-    FOLLOW_col_ref_in_col_ref_list5194 = frozenset([111, 118])
-    FOLLOW_RIGHT_PAREN_in_col_ref_list5199 = frozenset([1])
-    FOLLOW_FILTER_in_nested_filter5229 = frozenset([14, 34, 90, 96])
-    FOLLOW_nested_op_input_in_nested_filter5232 = frozenset([27])
-    FOLLOW_BY_in_nested_filter5234 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
-    FOLLOW_cond_in_nested_filter5237 = frozenset([1])
-    FOLLOW_ORDER_in_nested_sort5246 = frozenset([14, 34, 90, 96])
-    FOLLOW_nested_op_input_in_nested_sort5249 = frozenset([27])
-    FOLLOW_BY_in_nested_sort5251 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
-    FOLLOW_order_by_clause_in_nested_sort5255 = frozenset([1, 28])
-    FOLLOW_USING_in_nested_sort5259 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 162, 163])
-    FOLLOW_func_clause_in_nested_sort5262 = frozenset([1])
-    FOLLOW_DISTINCT_in_nested_distinct5274 = frozenset([14, 34, 90, 96])
-    FOLLOW_nested_op_input_in_nested_distinct5277 = frozenset([1])
-    FOLLOW_LIMIT_in_nested_limit5286 = frozenset([14, 34, 90, 96])
-    FOLLOW_nested_op_input_in_nested_limit5289 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
-    FOLLOW_INTEGER_in_nested_limit5301 = frozenset([1])
-    FOLLOW_expr_in_nested_limit5305 = frozenset([1])
-    FOLLOW_CROSS_in_nested_cross5316 = frozenset([14, 34, 90, 96])
-    FOLLOW_nested_op_input_list_in_nested_cross5319 = frozenset([1])
-    FOLLOW_FOREACH_in_nested_foreach5327 = frozenset([14, 34, 90, 96])
-    FOLLOW_nested_op_input_in_nested_foreach5330 = frozenset([38])
-    FOLLOW_generate_clause_in_nested_foreach5332 = frozenset([1])
-    FOLLOW_col_ref_in_nested_op_input5341 = frozenset([1])
-    FOLLOW_nested_proj_in_nested_op_input5345 = frozenset([1])
-    FOLLOW_nested_op_input_in_nested_op_input_list5354 = frozenset([1, 118])
-    FOLLOW_COMMA_in_nested_op_input_list5358 = frozenset([14, 34, 90, 96])
-    FOLLOW_nested_op_input_in_nested_op_input_list5360 = frozenset([1, 118])
-    FOLLOW_STREAM_in_stream_clause5385 = frozenset([90, 110])
-    FOLLOW_rel_in_stream_clause5388 = frozenset([55])
-    FOLLOW_THROUGH_in_stream_clause5390 = frozenset([90, 103])
-    FOLLOW_EXECCOMMAND_in_stream_clause5395 = frozenset([1, 26])
-    FOLLOW_alias_in_stream_clause5399 = frozenset([1, 26])
-    FOLLOW_as_clause_in_stream_clause5403 = frozenset([1])
-    FOLLOW_MAPREDUCE_in_mr_clause5413 = frozenset([101])
-    FOLLOW_QUOTEDSTRING_in_mr_clause5416 = frozenset([56, 110])
-    FOLLOW_LEFT_PAREN_in_mr_clause5420 = frozenset([101])
-    FOLLOW_path_list_in_mr_clause5423 = frozenset([111])
-    FOLLOW_RIGHT_PAREN_in_mr_clause5425 = frozenset([56])
-    FOLLOW_store_clause_in_mr_clause5431 = frozenset([8])
-    FOLLOW_load_clause_in_mr_clause5433 = frozenset([1, 103])
-    FOLLOW_EXECCOMMAND_in_mr_clause5435 = frozenset([1])
-    FOLLOW_SPLIT_in_split_clause5445 = frozenset([90, 110])
-    FOLLOW_rel_in_split_clause5447 = frozenset([22])
-    FOLLOW_INTO_in_split_clause5449 = frozenset([90])
-    FOLLOW_split_branch_in_split_clause5451 = frozenset([118])
-    FOLLOW_COMMA_in_split_clause5457 = frozenset([90])
-    FOLLOW_split_branch_in_split_clause5459 = frozenset([1, 118])
-    FOLLOW_COMMA_in_split_clause5470 = frozenset([90])
-    FOLLOW_split_branch_in_split_clause5472 = frozenset([118])
-    FOLLOW_COMMA_in_split_clause5477 = frozenset([90])
-    FOLLOW_split_otherwise_in_split_clause5479 = frozenset([1])
-    FOLLOW_alias_in_split_branch5519 = frozenset([23])
-    FOLLOW_IF_in_split_branch5521 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
-    FOLLOW_cond_in_split_branch5523 = frozenset([1])
-    FOLLOW_alias_in_split_otherwise5556 = frozenset([24])
-    FOLLOW_OTHERWISE_in_split_otherwise5558 = frozenset([1])
-    FOLLOW_alias_col_ref_in_col_ref5589 = frozenset([1])
-    FOLLOW_dollar_col_ref_in_col_ref5593 = frozenset([1])
-    FOLLOW_GROUP_in_alias_col_ref5602 = frozenset([1])
-    FOLLOW_CUBE_in_alias_col_ref5606 = frozenset([1])
-    FOLLOW_identifier_in_alias_col_ref5610 = frozenset([1])
-    FOLLOW_DOLLARVAR_in_dollar_col_ref5619 = frozenset([1])
-    FOLLOW_literal_in_const_expr5628 = frozenset([1])
-    FOLLOW_scalar_in_literal5637 = frozenset([1])
-    FOLLOW_map_in_literal5641 = frozenset([1])
-    FOLLOW_bag_in_literal5645 = frozenset([1])
-    FOLLOW_tuple_in_literal5649 = frozenset([1])
-    FOLLOW_num_scalar_in_scalar5659 = frozenset([1])
-    FOLLOW_QUOTEDSTRING_in_scalar5663 = frozenset([1])
-    FOLLOW_null_keyword_in_scalar5667 = frozenset([1])
-    FOLLOW_TRUE_in_scalar5671 = frozenset([1])
-    FOLLOW_FALSE_in_scalar5675 = frozenset([1])
-    FOLLOW_MINUS_in_num_scalar5684 = frozenset([91, 94, 99, 100])
-    FOLLOW_set_in_num_scalar5687 = frozenset([1])
-    FOLLOW_LEFT_BRACKET_in_map5712 = frozenset([101])
-    FOLLOW_keyvalue_in_map5714 = frozenset([115, 118])
-    FOLLOW_COMMA_in_map5718 = frozenset([101])
-    FOLLOW_keyvalue_in_map5720 = frozenset([115, 118])
-    FOLLOW_RIGHT_BRACKET_in_map5725 = frozenset([1])
-    FOLLOW_LEFT_BRACKET_in_map5747 = frozenset([115])
-    FOLLOW_RIGHT_BRACKET_in_map5749 = frozenset([1])
-    FOLLOW_map_key_in_keyvalue5769 = frozenset([116])
-    FOLLOW_POUND_in_keyvalue5771 = frozenset([77, 78, 90, 91, 94, 97, 99, 100, 101, 110, 112, 114])
-    FOLLOW_const_expr_in_keyvalue5773 = frozenset([1])
-    FOLLOW_QUOTEDSTRING_in_map_key5802 = frozenset([1])
-    FOLLOW_LEFT_CURLY_in_bag5811 = frozenset([77, 78, 90, 91, 94, 97, 99, 100, 101, 110, 112, 114])
-    FOLLOW_tuple_in_bag5813 = frozenset([113, 118])
-    FOLLOW_COMMA_in_bag5817 = frozenset([77, 78, 90, 91, 94, 97, 99, 100, 101, 110, 112, 114])
-    FOLLOW_tuple_in_bag5819 = frozenset([113, 118])
-    FOLLOW_RIGHT_CURLY_in_bag5824 = frozenset([1])
-    FOLLOW_LEFT_CURLY_in_bag5846 = frozenset([113])
-    FOLLOW_RIGHT_CURLY_in_bag5848 = frozenset([1])
-    FOLLOW_LEFT_PAREN_in_tuple5868 = frozenset([77, 78, 90, 91, 94, 97, 99, 100, 101, 110, 112, 114])
-    FOLLOW_literal_in_tuple5870 = frozenset([111, 118])
-    FOLLOW_COMMA_in_tuple5874 = frozenset([77, 78, 90, 91, 94, 97, 99, 100, 101, 110, 112, 114])
-    FOLLOW_literal_in_tuple5876 = frozenset([111, 118])
-    FOLLOW_RIGHT_PAREN_in_tuple5881 = frozenset([1])
-    FOLLOW_LEFT_PAREN_in_tuple5907 = frozenset([111])
-    FOLLOW_RIGHT_PAREN_in_tuple5909 = frozenset([1])
-    FOLLOW_rel_str_op_in_eid5932 = frozenset([1])
-    FOLLOW_IMPORT_in_eid5940 = frozenset([1])
-    FOLLOW_RETURNS_in_eid5948 = frozenset([1])
-    FOLLOW_DEFINE_in_eid5956 = frozenset([1])
-    FOLLOW_LOAD_in_eid5964 = frozenset([1])
-    FOLLOW_FILTER_in_eid5972 = frozenset([1])
-    FOLLOW_FOREACH_in_eid5980 = frozenset([1])
-    FOLLOW_CUBE_in_eid5988 = frozenset([1])
-    FOLLOW_ROLLUP_in_eid5996 = frozenset([1])
-    FOLLOW_ORDER_in_eid6004 = frozenset([1])
-    FOLLOW_DISTINCT_in_eid6012 = frozenset([1])
-    FOLLOW_COGROUP_in_eid6020 = frozenset([1])
-    FOLLOW_JOIN_in_eid6028 = frozenset([1])
-    FOLLOW_CROSS_in_eid6036 = frozenset([1])
-    FOLLOW_UNION_in_eid6044 = frozenset([1])
-    FOLLOW_SPLIT_in_eid6052 = frozenset([1])
-    FOLLOW_INTO_in_eid6060 = frozenset([1])
-    FOLLOW_IF_in_eid6068 = frozenset([1])
-    FOLLOW_ALL_in_eid6076 = frozenset([1])
-    FOLLOW_AS_in_eid6084 = frozenset([1])
-    FOLLOW_BY_in_eid6092 = frozenset([1])
-    FOLLOW_USING_in_eid6100 = frozenset([1])
-    FOLLOW_INNER_in_eid6108 = frozenset([1])
-    FOLLOW_OUTER_in_eid6116 = frozenset([1])
-    FOLLOW_PARALLEL_in_eid6124 = frozenset([1])
-    FOLLOW_PARTITION_in_eid6132 = frozenset([1])
-    FOLLOW_GROUP_in_eid6140 = frozenset([1])
-    FOLLOW_AND_in_eid6148 = frozenset([1])
-    FOLLOW_OR_in_eid6156 = frozenset([1])
-    FOLLOW_NOT_in_eid6164 = frozenset([1])
-    FOLLOW_GENERATE_in_eid6172 = frozenset([1])
-    FOLLOW_FLATTEN_in_eid6180 = frozenset([1])
-    FOLLOW_ASC_in_eid6188 = frozenset([1])
-    FOLLOW_DESC_in_eid6196 = frozenset([1])
-    FOLLOW_BOOL_in_eid6204 = frozenset([1])
-    FOLLOW_INT_in_eid6212 = frozenset([1])
-    FOLLOW_LONG_in_eid6220 = frozenset([1])
-    FOLLOW_FLOAT_in_eid6228 = frozenset([1])
-    FOLLOW_DOUBLE_in_eid6236 = frozenset([1])
-    FOLLOW_DATETIME_in_eid6244 = frozenset([1])
-    FOLLOW_CHARARRAY_in_eid6252 = frozenset([1])
-    FOLLOW_BYTEARRAY_in_eid6260 = frozenset([1])
-    FOLLOW_BAG_in_eid6268 = frozenset([1])
-    FOLLOW_TUPLE_in_eid6276 = frozenset([1])
-    FOLLOW_MAP_in_eid6284 = frozenset([1])
-    FOLLOW_IS_in_eid6292 = frozenset([1])
-    FOLLOW_STREAM_in_eid6300 = frozenset([1])
-    FOLLOW_THROUGH_in_eid6308 = frozenset([1])
-    FOLLOW_STORE_in_eid6316 = frozenset([1])
-    FOLLOW_MAPREDUCE_in_eid6324 = frozenset([1])
-    FOLLOW_SHIP_in_eid6332 = frozenset([1])
-    FOLLOW_CACHE_in_eid6340 = frozenset([1])
-    FOLLOW_INPUT_in_eid6348 = frozenset([1])
-    FOLLOW_OUTPUT_in_eid6356 = frozenset([1])
-    FOLLOW_STDERROR_in_eid6364 = frozenset([1])
-    FOLLOW_STDIN_in_eid6372 = frozenset([1])
-    FOLLOW_STDOUT_in_eid6380 = frozenset([1])
-    FOLLOW_LIMIT_in_eid6388 = frozenset([1])
-    FOLLOW_SAMPLE_in_eid6396 = frozenset([1])
-    FOLLOW_LEFT_in_eid6404 = frozenset([1])
-    FOLLOW_RIGHT_in_eid6412 = frozenset([1])
-    FOLLOW_FULL_in_eid6420 = frozenset([1])
-    FOLLOW_identifier_in_eid6428 = frozenset([1])
-    FOLLOW_null_keyword_in_eid6436 = frozenset([1])
-    FOLLOW_TRUE_in_eid6444 = frozenset([1])
-    FOLLOW_FALSE_in_eid6452 = frozenset([1])
-    FOLLOW_REALIAS_in_eid6460 = frozenset([1])
-    FOLLOW_rel_op_eq_in_rel_op6470 = frozenset([1])
-    FOLLOW_rel_op_ne_in_rel_op6481 = frozenset([1])
-    FOLLOW_rel_op_gt_in_rel_op6492 = frozenset([1])
-    FOLLOW_rel_op_gte_in_rel_op6503 = frozenset([1])
-    FOLLOW_rel_op_lt_in_rel_op6514 = frozenset([1])
-    FOLLOW_rel_op_lte_in_rel_op6525 = frozenset([1])
-    FOLLOW_STR_OP_MATCHES_in_rel_op6536 = frozenset([1])
+    FOLLOW_func_args_string_in_func_args2270 = frozenset([1, 118])
+    FOLLOW_COMMA_in_func_args2274 = frozenset([101, 102])
+    FOLLOW_func_args_string_in_func_args2276 = frozenset([1, 118])
+    FOLLOW_set_in_group_clause2302 = frozenset([90, 110])
+    FOLLOW_group_item_list_in_group_clause2313 = frozenset([1, 28, 33])
+    FOLLOW_USING_in_group_clause2317 = frozenset([101])
+    FOLLOW_group_type_in_group_clause2320 = frozenset([1, 33])
+    FOLLOW_partition_clause_in_group_clause2325 = frozenset([1])
+    FOLLOW_QUOTEDSTRING_in_group_type2335 = frozenset([1])
+    FOLLOW_group_item_in_group_item_list2344 = frozenset([1, 118])
+    FOLLOW_COMMA_in_group_item_list2348 = frozenset([90, 110])
+    FOLLOW_group_item_in_group_item_list2350 = frozenset([1, 118])
+    FOLLOW_rel_in_group_item2382 = frozenset([25, 27, 158])
+    FOLLOW_join_group_by_clause_in_group_item2386 = frozenset([1, 29, 30])
+    FOLLOW_ALL_in_group_item2390 = frozenset([1, 29, 30])
+    FOLLOW_ANY_in_group_item2394 = frozenset([1, 29, 30])
+    FOLLOW_set_in_group_item2398 = frozenset([1])
+    FOLLOW_alias_in_rel2416 = frozenset([1])
+    FOLLOW_LEFT_PAREN_in_rel2425 = frozenset([7, 8, 9, 10, 11, 12, 14, 16, 17, 18, 19, 20, 34, 54, 56, 57, 65, 66, 90])
+    FOLLOW_foreach_clause_complex_in_rel2430 = frozenset([111])
+    FOLLOW_op_clause_in_rel2438 = frozenset([32, 111])
+    FOLLOW_foreach_clause_simple_in_rel2442 = frozenset([32, 111])
+    FOLLOW_parallel_clause_in_rel2446 = frozenset([111])
+    FOLLOW_RIGHT_PAREN_in_rel2453 = frozenset([1])
+    FOLLOW_flatten_clause_in_flatten_generated_item2463 = frozenset([1, 26])
+    FOLLOW_AS_in_flatten_generated_item2467 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
+    FOLLOW_LEFT_PAREN_in_flatten_generated_item2474 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
+    FOLLOW_field_def_list_in_flatten_generated_item2477 = frozenset([111])
+    FOLLOW_RIGHT_PAREN_in_flatten_generated_item2479 = frozenset([1])
+    FOLLOW_field_def_in_flatten_generated_item2486 = frozenset([1])
+    FOLLOW_col_range_in_flatten_generated_item2518 = frozenset([1, 26])
+    FOLLOW_AS_in_flatten_generated_item2522 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
+    FOLLOW_LEFT_PAREN_in_flatten_generated_item2529 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
+    FOLLOW_field_def_list_in_flatten_generated_item2532 = frozenset([111])
+    FOLLOW_RIGHT_PAREN_in_flatten_generated_item2534 = frozenset([1])
+    FOLLOW_field_def_in_flatten_generated_item2541 = frozenset([1])
+    FOLLOW_expr_in_flatten_generated_item2573 = frozenset([1, 26])
+    FOLLOW_AS_in_flatten_generated_item2577 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
+    FOLLOW_field_def_in_flatten_generated_item2580 = frozenset([1])
+    FOLLOW_STAR_in_flatten_generated_item2610 = frozenset([1, 26])
+    FOLLOW_AS_in_flatten_generated_item2614 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
+    FOLLOW_LEFT_PAREN_in_flatten_generated_item2621 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
+    FOLLOW_field_def_list_in_flatten_generated_item2624 = frozenset([111])
+    FOLLOW_RIGHT_PAREN_in_flatten_generated_item2626 = frozenset([1])
+    FOLLOW_field_def_in_flatten_generated_item2633 = frozenset([1])
+    FOLLOW_FLATTEN_in_flatten_clause2648 = frozenset([110])
+    FOLLOW_LEFT_PAREN_in_flatten_clause2651 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
+    FOLLOW_expr_in_flatten_clause2654 = frozenset([111])
+    FOLLOW_RIGHT_PAREN_in_flatten_clause2656 = frozenset([1])
+    FOLLOW_STORE_in_store_clause2666 = frozenset([90, 110])
+    FOLLOW_rel_in_store_clause2669 = frozenset([22])
+    FOLLOW_INTO_in_store_clause2671 = frozenset([101])
+    FOLLOW_filename_in_store_clause2674 = frozenset([1, 28])
+    FOLLOW_USING_in_store_clause2678 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 162, 163])
+    FOLLOW_func_clause_in_store_clause2681 = frozenset([1])
+    FOLLOW_FILTER_in_filter_clause2693 = frozenset([90, 110])
+    FOLLOW_rel_in_filter_clause2696 = frozenset([27])
+    FOLLOW_BY_in_filter_clause2698 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
+    FOLLOW_cond_in_filter_clause2701 = frozenset([1])
+    FOLLOW_or_cond_in_cond2710 = frozenset([1])
+    FOLLOW_and_cond_in_or_cond2719 = frozenset([1, 36])
+    FOLLOW_OR_in_or_cond2724 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
+    FOLLOW_and_cond_in_or_cond2727 = frozenset([1, 36])
+    FOLLOW_unary_cond_in_and_cond2739 = frozenset([1, 35])
+    FOLLOW_AND_in_and_cond2743 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
+    FOLLOW_unary_cond_in_and_cond2746 = frozenset([1, 35])
+    FOLLOW_LEFT_PAREN_in_unary_cond2758 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
+    FOLLOW_cond_in_unary_cond2761 = frozenset([111])
+    FOLLOW_RIGHT_PAREN_in_unary_cond2763 = frozenset([1])
+    FOLLOW_not_cond_in_unary_cond2779 = frozenset([1])
+    FOLLOW_expr_in_unary_cond2794 = frozenset([70, 71, 72, 73, 74, 75, 76, 79, 80, 81, 82, 83, 84])
+    FOLLOW_rel_op_in_unary_cond2796 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
+    FOLLOW_expr_in_unary_cond2799 = frozenset([1])
+    FOLLOW_func_eval_in_unary_cond2814 = frozenset([1])
+    FOLLOW_null_check_cond_in_unary_cond2829 = frozenset([1])
+    FOLLOW_NOT_in_not_cond2838 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
+    FOLLOW_unary_cond_in_not_cond2841 = frozenset([1])
+    FOLLOW_func_name_in_func_eval2850 = frozenset([110])
+    FOLLOW_LEFT_PAREN_in_func_eval2852 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 111, 112, 114, 119, 162, 163])
+    FOLLOW_real_arg_list_in_func_eval2854 = frozenset([111])
+    FOLLOW_RIGHT_PAREN_in_func_eval2857 = frozenset([1])
+    FOLLOW_real_arg_in_real_arg_list2889 = frozenset([1, 118])
+    FOLLOW_COMMA_in_real_arg_list2893 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
+    FOLLOW_real_arg_in_real_arg_list2895 = frozenset([1, 118])
+    FOLLOW_expr_in_real_arg2925 = frozenset([1])
+    FOLLOW_STAR_in_real_arg2929 = frozenset([1])
+    FOLLOW_col_range_in_real_arg2933 = frozenset([1])
+    FOLLOW_expr_in_null_check_cond2942 = frozenset([53])
+    FOLLOW_IS_in_null_check_cond2944 = frozenset([37, 90])
+    FOLLOW_NOT_in_null_check_cond2947 = frozenset([90])
+    FOLLOW_null_keyword_in_null_check_cond2950 = frozenset([1])
+    FOLLOW_add_expr_in_expr2960 = frozenset([1])
+    FOLLOW_multi_expr_in_add_expr2969 = frozenset([1, 97, 98])
+    FOLLOW_set_in_add_expr2973 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
+    FOLLOW_multi_expr_in_add_expr2984 = frozenset([1, 97, 98])
+    FOLLOW_cast_expr_in_multi_expr2996 = frozenset([1, 104, 120, 121])
+    FOLLOW_set_in_multi_expr3000 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
+    FOLLOW_cast_expr_in_multi_expr3015 = frozenset([1, 104, 120, 121])
+    FOLLOW_LEFT_PAREN_in_cast_expr3027 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
+    FOLLOW_type_cast_in_cast_expr3029 = frozenset([111])
+    FOLLOW_RIGHT_PAREN_in_cast_expr3031 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
+    FOLLOW_unary_expr_in_cast_expr3033 = frozenset([1])
+    FOLLOW_unary_expr_in_cast_expr3068 = frozenset([1])
+    FOLLOW_simple_type_in_type_cast3077 = frozenset([1])
+    FOLLOW_map_type_in_type_cast3081 = frozenset([1])
+    FOLLOW_tuple_type_cast_in_type_cast3085 = frozenset([1])
+    FOLLOW_bag_type_cast_in_type_cast3089 = frozenset([1])
+    FOLLOW_TUPLE_in_tuple_type_cast3098 = frozenset([110])
+    FOLLOW_LEFT_PAREN_in_tuple_type_cast3100 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 111, 112, 114])
+    FOLLOW_type_cast_in_tuple_type_cast3104 = frozenset([111, 118])
+    FOLLOW_COMMA_in_tuple_type_cast3108 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
+    FOLLOW_type_cast_in_tuple_type_cast3110 = frozenset([111, 118])
+    FOLLOW_RIGHT_PAREN_in_tuple_type_cast3118 = frozenset([1])
+    FOLLOW_BAG_in_bag_type_cast3153 = frozenset([112])
+    FOLLOW_LEFT_CURLY_in_bag_type_cast3155 = frozenset([51, 113])
+    FOLLOW_tuple_type_cast_in_bag_type_cast3157 = frozenset([113])
+    FOLLOW_RIGHT_CURLY_in_bag_type_cast3160 = frozenset([1])
+    FOLLOW_expr_eval_in_unary_expr3193 = frozenset([1])
+    FOLLOW_LEFT_PAREN_in_unary_expr3209 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
+    FOLLOW_expr_in_unary_expr3211 = frozenset([111])
+    FOLLOW_RIGHT_PAREN_in_unary_expr3213 = frozenset([1])
+    FOLLOW_neg_expr_in_unary_expr3248 = frozenset([1])
+    FOLLOW_const_expr_in_expr_eval3257 = frozenset([1])
+    FOLLOW_var_expr_in_expr_eval3261 = frozenset([1])
+    FOLLOW_projectable_expr_in_var_expr3270 = frozenset([1, 92, 116])
+    FOLLOW_dot_proj_in_var_expr3274 = frozenset([1, 92, 116])
+    FOLLOW_pound_proj_in_var_expr3278 = frozenset([1, 92, 116])
+    FOLLOW_func_eval_in_projectable_expr3289 = frozenset([1])
+    FOLLOW_col_ref_in_projectable_expr3293 = frozenset([1])
+    FOLLOW_bin_expr_in_projectable_expr3297 = frozenset([1])
+    FOLLOW_type_conversion_in_projectable_expr3301 = frozenset([1])
+    FOLLOW_LEFT_CURLY_in_type_conversion3310 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
+    FOLLOW_real_arg_list_in_type_conversion3312 = frozenset([113])
+    FOLLOW_RIGHT_CURLY_in_type_conversion3314 = frozenset([1])
+    FOLLOW_LEFT_BRACKET_in_type_conversion3361 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
+    FOLLOW_real_arg_list_in_type_conversion3363 = frozenset([115])
+    FOLLOW_RIGHT_BRACKET_in_type_conversion3365 = frozenset([1])
+    FOLLOW_LEFT_PAREN_in_type_conversion3412 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
+    FOLLOW_real_arg_in_type_conversion3414 = frozenset([118])
+    FOLLOW_COMMA_in_type_conversion3418 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
+    FOLLOW_real_arg_in_type_conversion3420 = frozenset([111, 118])
+    FOLLOW_RIGHT_PAREN_in_type_conversion3425 = frozenset([1])
+    FOLLOW_PERIOD_in_dot_proj3463 = frozenset([14, 34, 90, 96, 110])
+    FOLLOW_col_alias_or_index_in_dot_proj3467 = frozenset([1])
+    FOLLOW_LEFT_PAREN_in_dot_proj3492 = frozenset([14, 34, 90, 96])
+    FOLLOW_col_alias_or_index_in_dot_proj3494 = frozenset([111, 118])
+    FOLLOW_COMMA_in_dot_proj3498 = frozenset([14, 34, 90, 96])
+    FOLLOW_col_alias_or_index_in_dot_proj3500 = frozenset([111, 118])
+    FOLLOW_RIGHT_PAREN_in_dot_proj3505 = frozenset([1])
+    FOLLOW_col_alias_in_col_alias_or_index3537 = frozenset([1])
+    FOLLOW_col_index_in_col_alias_or_index3541 = frozenset([1])
+    FOLLOW_GROUP_in_col_alias3550 = frozenset([1])
+    FOLLOW_CUBE_in_col_alias3554 = frozenset([1])
+    FOLLOW_identifier_in_col_alias3558 = frozenset([1])
+    FOLLOW_DOLLARVAR_in_col_index3567 = frozenset([1])
+    FOLLOW_col_ref_in_col_range3580 = frozenset([119])
+    FOLLOW_DOUBLE_PERIOD_in_col_range3582 = frozenset([1, 14, 34, 90, 96])
+    FOLLOW_col_ref_in_col_range3588 = frozenset([1])
+    FOLLOW_DOUBLE_PERIOD_in_col_range3629 = frozenset([14, 34, 90, 96])
+    FOLLOW_col_ref_in_col_range3631 = frozenset([1])
+    FOLLOW_POUND_in_pound_proj3662 = frozenset([90, 101])
+    FOLLOW_QUOTEDSTRING_in_pound_proj3667 = frozenset([1])
+    FOLLOW_null_keyword_in_pound_proj3671 = frozenset([1])
+    FOLLOW_LEFT_PAREN_in_bin_expr3682 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
+    FOLLOW_cond_in_bin_expr3684 = frozenset([122])
+    FOLLOW_QMARK_in_bin_expr3686 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
+    FOLLOW_expr_in_bin_expr3692 = frozenset([105])
+    FOLLOW_COLON_in_bin_expr3694 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
+    FOLLOW_expr_in_bin_expr3700 = frozenset([111])
+    FOLLOW_RIGHT_PAREN_in_bin_expr3702 = frozenset([1])
+    FOLLOW_MINUS_in_neg_expr3735 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
+    FOLLOW_cast_expr_in_neg_expr3737 = frozenset([1])
+    FOLLOW_LIMIT_in_limit_clause3764 = frozenset([90, 110])
+    FOLLOW_rel_in_limit_clause3767 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
+    FOLLOW_INTEGER_in_limit_clause3779 = frozenset([1])
+    FOLLOW_LONGINTEGER_in_limit_clause3791 = frozenset([1])
+    FOLLOW_expr_in_limit_clause3795 = frozenset([1])
+    FOLLOW_SAMPLE_in_sample_clause3806 = frozenset([90, 110])
+    FOLLOW_rel_in_sample_clause3809 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
+    FOLLOW_DOUBLENUMBER_in_sample_clause3821 = frozenset([1])
+    FOLLOW_expr_in_sample_clause3825 = frozenset([1])
+    FOLLOW_RANK_in_rank_clause3836 = frozenset([90, 110])
+    FOLLOW_rel_in_rank_clause3839 = frozenset([1, 27])
+    FOLLOW_rank_by_statement_in_rank_clause3843 = frozenset([1])
+    FOLLOW_BY_in_rank_by_statement3855 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
+    FOLLOW_rank_by_clause_in_rank_by_statement3858 = frozenset([1, 13])
+    FOLLOW_DENSE_in_rank_by_statement3862 = frozenset([1])
+    FOLLOW_STAR_in_rank_by_clause3874 = frozenset([1, 40, 41])
+    FOLLOW_set_in_rank_by_clause3876 = frozenset([1])
+    FOLLOW_rank_list_in_rank_by_clause3895 = frozenset([1])
+    FOLLOW_rank_col_in_rank_list3904 = frozenset([1, 118])
+    FOLLOW_COMMA_in_rank_list3908 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
+    FOLLOW_rank_col_in_rank_list3910 = frozenset([1, 118])
+    FOLLOW_col_range_in_rank_col3936 = frozenset([1, 40, 41])
+    FOLLOW_set_in_rank_col3938 = frozenset([1])
+    FOLLOW_col_ref_in_rank_col3960 = frozenset([1, 40, 41])
+    FOLLOW_set_in_rank_col3962 = frozenset([1])
+    FOLLOW_ORDER_in_order_clause3980 = frozenset([90, 110])
+    FOLLOW_rel_in_order_clause3983 = frozenset([27])
+    FOLLOW_BY_in_order_clause3985 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
+    FOLLOW_order_by_clause_in_order_clause3988 = frozenset([1, 28])
+    FOLLOW_USING_in_order_clause3992 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 162, 163])
+    FOLLOW_func_clause_in_order_clause3995 = frozenset([1])
+    FOLLOW_STAR_in_order_by_clause4007 = frozenset([1, 40, 41])
+    FOLLOW_set_in_order_by_clause4009 = frozenset([1])
+    FOLLOW_order_col_list_in_order_by_clause4038 = frozenset([1])
+    FOLLOW_order_col_in_order_col_list4047 = frozenset([1, 118])
+    FOLLOW_COMMA_in_order_col_list4051 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
+    FOLLOW_order_col_in_order_col_list4053 = frozenset([1, 118])
+    FOLLOW_col_range_in_order_col4084 = frozenset([1, 40, 41])
+    FOLLOW_set_in_order_col4086 = frozenset([1])
+    FOLLOW_col_ref_in_order_col4107 = frozenset([1, 40, 41])
+    FOLLOW_set_in_order_col4109 = frozenset([1])
+    FOLLOW_LEFT_PAREN_in_order_col4134 = frozenset([14, 34, 90, 96])
+    FOLLOW_col_ref_in_order_col4137 = frozenset([40, 41, 111])
+    FOLLOW_set_in_order_col4139 = frozenset([111])
+    FOLLOW_RIGHT_PAREN_in_order_col4150 = frozenset([1])
+    FOLLOW_DISTINCT_in_distinct_clause4160 = frozenset([90, 110])
+    FOLLOW_rel_in_distinct_clause4163 = frozenset([1, 33])
+    FOLLOW_partition_clause_in_distinct_clause4165 = frozenset([1])
+    FOLLOW_PARTITION_in_partition_clause4175 = frozenset([27])
+    FOLLOW_BY_in_partition_clause4178 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 162, 163])
+    FOLLOW_func_name_in_partition_clause4181 = frozenset([1])
+    FOLLOW_CROSS_in_cross_clause4190 = frozenset([90, 110])
+    FOLLOW_rel_list_in_cross_clause4193 = frozenset([1, 33])
+    FOLLOW_partition_clause_in_cross_clause4195 = frozenset([1])
+    FOLLOW_rel_in_rel_list4205 = frozenset([1, 118])
+    FOLLOW_COMMA_in_rel_list4209 = frozenset([90, 110])
+    FOLLOW_rel_in_rel_list4211 = frozenset([1, 118])
+    FOLLOW_JOIN_in_join_clause4236 = frozenset([90, 110])
+    FOLLOW_join_sub_clause_in_join_clause4239 = frozenset([1, 28, 33])
+    FOLLOW_USING_in_join_clause4243 = frozenset([101])
+    FOLLOW_join_type_in_join_clause4246 = frozenset([1, 33])
+    FOLLOW_partition_clause_in_join_clause4251 = frozenset([1])
+    FOLLOW_QUOTEDSTRING_in_join_type4261 = frozenset([1])
+    FOLLOW_join_item_in_join_sub_clause4270 = frozenset([67, 68, 69])
+    FOLLOW_set_in_join_sub_clause4272 = frozenset([30, 118])
+    FOLLOW_OUTER_in_join_sub_clause4286 = frozenset([118])
+    FOLLOW_COMMA_in_join_sub_clause4289 = frozenset([90, 110])
+    FOLLOW_join_item_in_join_sub_clause4292 = frozenset([1])
+    FOLLOW_join_item_list_in_join_sub_clause4312 = frozenset([1])
+    FOLLOW_join_item_in_join_item_list4321 = frozenset([118])
+    FOLLOW_COMMA_in_join_item_list4325 = frozenset([90, 110])
+    FOLLOW_join_item_in_join_item_list4328 = frozenset([1, 118])
+    FOLLOW_rel_in_join_item4340 = frozenset([27])
+    FOLLOW_join_group_by_clause_in_join_item4342 = frozenset([1])
+    FOLLOW_BY_in_join_group_by_clause4373 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
+    FOLLOW_join_group_by_expr_list_in_join_group_by_clause4376 = frozenset([1])
+    FOLLOW_LEFT_PAREN_in_join_group_by_expr_list4385 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
+    FOLLOW_join_group_by_expr_in_join_group_by_expr_list4387 = frozenset([111, 118])
+    FOLLOW_COMMA_in_join_group_by_expr_list4391 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
+    FOLLOW_join_group_by_expr_in_join_group_by_expr_list4393 = frozenset([111, 118])
+    FOLLOW_RIGHT_PAREN_in_join_group_by_expr_list4398 = frozenset([1])
+    FOLLOW_join_group_by_expr_in_join_group_by_expr_list4454 = frozenset([1])
+    FOLLOW_col_range_in_join_group_by_expr4463 = frozenset([1])
+    FOLLOW_expr_in_join_group_by_expr4468 = frozenset([1])
+    FOLLOW_STAR_in_join_group_by_expr4472 = frozenset([1])
+    FOLLOW_UNION_in_union_clause4481 = frozenset([31, 90, 110])
+    FOLLOW_ONSCHEMA_in_union_clause4484 = frozenset([90, 110])
+    FOLLOW_rel_list_in_union_clause4487 = frozenset([1])
+    FOLLOW_FOREACH_in_foreach_clause_simple4496 = frozenset([90, 110])
+    FOLLOW_rel_in_foreach_clause_simple4499 = frozenset([38])
+    FOLLOW_foreach_plan_simple_in_foreach_clause_simple4501 = frozenset([1])
+    FOLLOW_generate_clause_in_foreach_plan_simple4510 = frozenset([1])
+    FOLLOW_FOREACH_in_foreach_clause_complex4548 = frozenset([90, 110])
+    FOLLOW_rel_in_foreach_clause_complex4551 = frozenset([112])
+    FOLLOW_foreach_plan_complex_in_foreach_clause_complex4553 = frozenset([1])
+    FOLLOW_nested_blk_in_foreach_plan_complex4562 = frozenset([1])
+    FOLLOW_CUBE_in_cube_clause4601 = frozenset([90, 110])
+    FOLLOW_cube_item_in_cube_clause4604 = frozenset([1])
+    FOLLOW_rel_in_cube_item4614 = frozenset([27])
+    FOLLOW_cube_by_clause_in_cube_item4618 = frozenset([1])
+    FOLLOW_BY_in_cube_by_clause4629 = frozenset([14, 15])
+    FOLLOW_cube_or_rollup_in_cube_by_clause4632 = frozenset([1])
+    FOLLOW_cube_rollup_list_in_cube_or_rollup4641 = frozenset([1, 118])
+    FOLLOW_COMMA_in_cube_or_rollup4645 = frozenset([14, 15])
+    FOLLOW_cube_rollup_list_in_cube_or_rollup4647 = frozenset([1, 118])
+    FOLLOW_set_in_cube_rollup_list4680 = frozenset([110])
+    FOLLOW_cube_by_expr_list_in_cube_rollup_list4691 = frozenset([1])
+    FOLLOW_LEFT_PAREN_in_cube_by_expr_list4700 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
+    FOLLOW_cube_by_expr_in_cube_by_expr_list4702 = frozenset([111, 118])
+    FOLLOW_COMMA_in_cube_by_expr_list4706 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
+    FOLLOW_cube_by_expr_in_cube_by_expr_list4708 = frozenset([111, 118])
+    FOLLOW_RIGHT_PAREN_in_cube_by_expr_list4713 = frozenset([1])
+    FOLLOW_col_range_in_cube_by_expr4746 = frozenset([1])
+    FOLLOW_expr_in_cube_by_expr4751 = frozenset([1])
+    FOLLOW_STAR_in_cube_by_expr4755 = frozenset([1])
+    FOLLOW_LEFT_CURLY_in_nested_blk4764 = frozenset([38, 90])
+    FOLLOW_nested_command_list_in_nested_blk4767 = frozenset([38])
+    FOLLOW_generate_clause_in_nested_blk4771 = frozenset([109])
+    FOLLOW_SEMI_COLON_in_nested_blk4773 = frozenset([113])
+    FOLLOW_RIGHT_CURLY_in_nested_blk4778 = frozenset([1])
+    FOLLOW_GENERATE_in_generate_clause4788 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
+    FOLLOW_flatten_generated_item_in_generate_clause4790 = frozenset([1, 118])
+    FOLLOW_COMMA_in_generate_clause4794 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
+    FOLLOW_flatten_generated_item_in_generate_clause4796 = frozenset([1, 118])
+    FOLLOW_nested_command_in_nested_command_list4839 = frozenset([109])
+    FOLLOW_SEMI_COLON_in_nested_command_list4841 = frozenset([1, 90])
+    FOLLOW_identifier_in_nested_command4919 = frozenset([117])
+    FOLLOW_EQUAL_in_nested_command4921 = frozenset([14, 34, 90, 96])
+    FOLLOW_nested_proj_in_nested_command4923 = frozenset([1])
+    FOLLOW_identifier_in_nested_command4970 = frozenset([117])
+    FOLLOW_EQUAL_in_nested_command4972 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
+    FOLLOW_expr_in_nested_command4974 = frozenset([1])
+    FOLLOW_identifier_in_nested_command5019 = frozenset([117])
+    FOLLOW_EQUAL_in_nested_command5021 = frozenset([9, 10, 11, 16, 19, 65])
+    FOLLOW_nested_op_in_nested_command5023 = frozenset([1])
+    FOLLOW_nested_filter_in_nested_op5058 = frozenset([1])
+    FOLLOW_nested_sort_in_nested_op5072 = frozenset([1])
+    FOLLOW_nested_distinct_in_nested_op5086 = frozenset([1])
+    FOLLOW_nested_limit_in_nested_op5100 = frozenset([1])
+    FOLLOW_nested_cross_in_nested_op5114 = frozenset([1])
+    FOLLOW_nested_foreach_in_nested_op5128 = frozenset([1])
+    FOLLOW_col_ref_in_nested_proj5137 = frozenset([92])
+    FOLLOW_PERIOD_in_nested_proj5139 = frozenset([14, 34, 90, 96, 110])
+    FOLLOW_col_ref_list_in_nested_proj5141 = frozenset([1])
+    FOLLOW_col_ref_in_col_ref_list5175 = frozenset([1])
+    FOLLOW_LEFT_PAREN_in_col_ref_list5181 = frozenset([14, 34, 90, 96])
+    FOLLOW_col_ref_in_col_ref_list5183 = frozenset([111, 118])
+    FOLLOW_COMMA_in_col_ref_list5187 = frozenset([14, 34, 90, 96])
+    FOLLOW_col_ref_in_col_ref_list5189 = frozenset([111, 118])
+    FOLLOW_RIGHT_PAREN_in_col_ref_list5194 = frozenset([1])
+    FOLLOW_FILTER_in_nested_filter5224 = frozenset([14, 34, 90, 96])
+    FOLLOW_nested_op_input_in_nested_filter5227 = frozenset([27])
+    FOLLOW_BY_in_nested_filter5229 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
+    FOLLOW_cond_in_nested_filter5232 = frozenset([1])
+    FOLLOW_ORDER_in_nested_sort5241 = frozenset([14, 34, 90, 96])
+    FOLLOW_nested_op_input_in_nested_sort5244 = frozenset([27])
+    FOLLOW_BY_in_nested_sort5246 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
+    FOLLOW_order_by_clause_in_nested_sort5250 = frozenset([1, 28])
+    FOLLOW_USING_in_nested_sort5254 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 162, 163])
+    FOLLOW_func_clause_in_nested_sort5257 = frozenset([1])
+    FOLLOW_DISTINCT_in_nested_distinct5269 = frozenset([14, 34, 90, 96])
+    FOLLOW_nested_op_input_in_nested_distinct5272 = frozenset([1])
+    FOLLOW_LIMIT_in_nested_limit5281 = frozenset([14, 34, 90, 96])
+    FOLLOW_nested_op_input_in_nested_limit5284 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
+    FOLLOW_INTEGER_in_nested_limit5296 = frozenset([1])
+    FOLLOW_expr_in_nested_limit5300 = frozenset([1])
+    FOLLOW_CROSS_in_nested_cross5311 = frozenset([14, 34, 90, 96])
+    FOLLOW_nested_op_input_list_in_nested_cross5314 = frozenset([1])
+    FOLLOW_FOREACH_in_nested_foreach5322 = frozenset([14, 34, 90, 96])
+    FOLLOW_nested_op_input_in_nested_foreach5325 = frozenset([38])
+    FOLLOW_generate_clause_in_nested_foreach5327 = frozenset([1])
+    FOLLOW_col_ref_in_nested_op_input5336 = frozenset([1])
+    FOLLOW_nested_proj_in_nested_op_input5340 = frozenset([1])
+    FOLLOW_nested_op_input_in_nested_op_input_list5349 = frozenset([1, 118])
+    FOLLOW_COMMA_in_nested_op_input_list5353 = frozenset([14, 34, 90, 96])
+    FOLLOW_nested_op_input_in_nested_op_input_list5355 = frozenset([1, 118])
+    FOLLOW_STREAM_in_stream_clause5380 = frozenset([90, 110])
+    FOLLOW_rel_in_stream_clause5383 = frozenset([55])
+    FOLLOW_THROUGH_in_stream_clause5385 = frozenset([90, 103])
+    FOLLOW_EXECCOMMAND_in_stream_clause5390 = frozenset([1, 26])
+    FOLLOW_alias_in_stream_clause5394 = frozenset([1, 26])
+    FOLLOW_as_clause_in_stream_clause5398 = frozenset([1])
+    FOLLOW_MAPREDUCE_in_mr_clause5408 = frozenset([101])
+    FOLLOW_QUOTEDSTRING_in_mr_clause5411 = frozenset([56, 110])
+    FOLLOW_LEFT_PAREN_in_mr_clause5415 = frozenset([101])
+    FOLLOW_path_list_in_mr_clause5418 = frozenset([111])
+    FOLLOW_RIGHT_PAREN_in_mr_clause5420 = frozenset([56])
+    FOLLOW_store_clause_in_mr_clause5426 = frozenset([8])
+    FOLLOW_load_clause_in_mr_clause5428 = frozenset([1, 103])
+    FOLLOW_EXECCOMMAND_in_mr_clause5430 = frozenset([1])
+    FOLLOW_SPLIT_in_split_clause5440 = frozenset([90, 110])
+    FOLLOW_rel_in_split_clause5442 = frozenset([22])
+    FOLLOW_INTO_in_split_clause5444 = frozenset([90])
+    FOLLOW_split_branch_in_split_clause5446 = frozenset([118])
+    FOLLOW_COMMA_in_split_clause5452 = frozenset([90])
+    FOLLOW_split_branch_in_split_clause5454 = frozenset([1, 118])
+    FOLLOW_COMMA_in_split_clause5465 = frozenset([90])
+    FOLLOW_split_branch_in_split_clause5467 = frozenset([118])
+    FOLLOW_COMMA_in_split_clause5472 = frozenset([90])
+    FOLLOW_split_otherwise_in_split_clause5474 = frozenset([1])
+    FOLLOW_alias_in_split_branch5514 = frozenset([23])
+    FOLLOW_IF_in_split_branch5516 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
+    FOLLOW_cond_in_split_branch5518 = frozenset([1])
+    FOLLOW_alias_in_split_otherwise5551 = frozenset([24])
+    FOLLOW_OTHERWISE_in_split_otherwise5553 = frozenset([1])
+    FOLLOW_alias_col_ref_in_col_ref5584 = frozenset([1])
+    FOLLOW_dollar_col_ref_in_col_ref5588 = frozenset([1])
+    FOLLOW_GROUP_in_alias_col_ref5597 = frozenset([1])
+    FOLLOW_CUBE_in_alias_col_ref5601 = frozenset([1])
+    FOLLOW_identifier_in_alias_col_ref5605 = frozenset([1])
+    FOLLOW_DOLLARVAR_in_dollar_col_ref5614 = frozenset([1])
+    FOLLOW_literal_in_const_expr5623 = frozenset([1])
+    FOLLOW_scalar_in_literal5632 = frozenset([1])
+    FOLLOW_map_in_literal5636 = frozenset([1])
+    FOLLOW_bag_in_literal5640 = frozenset([1])
+    FOLLOW_tuple_in_literal5644 = frozenset([1])
+    FOLLOW_num_scalar_in_scalar5654 = frozenset([1])
+    FOLLOW_QUOTEDSTRING_in_scalar5658 = frozenset([1])
+    FOLLOW_null_keyword_in_scalar5662 = frozenset([1])
+    FOLLOW_TRUE_in_scalar5666 = frozenset([1])
+    FOLLOW_FALSE_in_scalar5670 = frozenset([1])
+    FOLLOW_MINUS_in_num_scalar5679 = frozenset([91, 94, 99, 100])
+    FOLLOW_set_in_num_scalar5682 = frozenset([1])
+    FOLLOW_LEFT_BRACKET_in_map5707 = frozenset([101])
+    FOLLOW_keyvalue_in_map5709 = frozenset([115, 118])
+    FOLLOW_COMMA_in_map5713 = frozenset([101])
+    FOLLOW_keyvalue_in_map5715 = frozenset([115, 118])
+    FOLLOW_RIGHT_BRACKET_in_map5720 = frozenset([1])
+    FOLLOW_LEFT_BRACKET_in_map5742 = frozenset([115])
+    FOLLOW_RIGHT_BRACKET_in_map5744 = frozenset([1])
+    FOLLOW_map_key_in_keyvalue5764 = frozenset([116])
+    FOLLOW_POUND_in_keyvalue5766 = frozenset([77, 78, 90, 91, 94, 97, 99, 100, 101, 110, 112, 114])
+    FOLLOW_const_expr_in_keyvalue5768 = frozenset([1])
+    FOLLOW_QUOTEDSTRING_in_map_key5797 = frozenset([1])
+    FOLLOW_LEFT_CURLY_in_bag5806 = frozenset([77, 78, 90, 91, 94, 97, 99, 100, 101, 110, 112, 114])
+    FOLLOW_tuple_in_bag5808 = frozenset([113, 118])
+    FOLLOW_COMMA_in_bag5812 = frozenset([77, 78, 90, 91, 94, 97, 99, 100, 101, 110, 112, 114])
+    FOLLOW_tuple_in_bag5814 = frozenset([113, 118])
+    FOLLOW_RIGHT_CURLY_in_bag5819 = frozenset([1])
+    FOLLOW_LEFT_CURLY_in_bag5841 = frozenset([113])
+    FOLLOW_RIGHT_CURLY_in_bag5843 = frozenset([1])
+    FOLLOW_LEFT_PAREN_in_tuple5863 = frozenset([77, 78, 90, 91, 94, 97, 99, 100, 101, 110, 112, 114])
+    FOLLOW_literal_in_tuple5865 = frozenset([111, 118])
+    FOLLOW_COMMA_in_tuple5869 = frozenset([77, 78, 90, 91, 94, 97, 99, 100, 101, 110, 112, 114])
+    FOLLOW_literal_in_tuple5871 = frozenset([111, 118])
+    FOLLOW_RIGHT_PAREN_in_tuple5876 = frozenset([1])
+    FOLLOW_LEFT_PAREN_in_tuple5902 = frozenset([111])
+    FOLLOW_RIGHT_PAREN_in_tuple5904 = frozenset([1])
+    FOLLOW_rel_str_op_in_eid5927 = frozenset([1])
+    FOLLOW_IMPORT_in_eid5935 = frozenset([1])
+    FOLLOW_RETURNS_in_eid5943 = frozenset([1])
+    FOLLOW_DEFINE_in_eid5951 = frozenset([1])
+    FOLLOW_LOAD_in_eid5959 = frozenset([1])
+    FOLLOW_FILTER_in_eid5967 = frozenset([1])
+    FOLLOW_FOREACH_in_eid5975 = frozenset([1])
+    FOLLOW_CUBE_in_eid5983 = frozenset([1])
+    FOLLOW_ROLLUP_in_eid5991 = frozenset([1])
+    FOLLOW_ORDER_in_eid5999 = frozenset([1])
+    FOLLOW_DISTINCT_in_eid6007 = frozenset([1])
+    FOLLOW_COGROUP_in_eid6015 = frozenset([1])
+    FOLLOW_JOIN_in_eid6023 = frozenset([1])
+    FOLLOW_CROSS_in_eid6031 = frozenset([1])
+    FOLLOW_UNION_in_eid6039 = frozenset([1])
+    FOLLOW_SPLIT_in_eid6047 = frozenset([1])
+    FOLLOW_INTO_in_eid6055 = frozenset([1])
+    FOLLOW_IF_in_eid6063 = frozenset([1])
+    FOLLOW_ALL_in_eid6071 = frozenset([1])
+    FOLLOW_AS_in_eid6079 = frozenset([1])
+    FOLLOW_BY_in_eid6087 = frozenset([1])
+    FOLLOW_USING_in_eid6095 = frozenset([1])
+    FOLLOW_INNER_in_eid6103 = frozenset([1])
+    FOLLOW_OUTER_in_eid6111 = frozenset([1])
+    FOLLOW_PARALLEL_in_eid6119 = frozenset([1])
+    FOLLOW_PARTITION_in_eid6127 = frozenset([1])
+    FOLLOW_GROUP_in_eid6135 = frozenset([1])
+    FOLLOW_AND_in_eid6143 = frozenset([1])
+    FOLLOW_OR_in_eid6151 = frozenset([1])
+    FOLLOW_NOT_in_eid6159 = frozenset([1])
+    FOLLOW_GENERATE_in_eid6167 = frozenset([1])
+    FOLLOW_FLATTEN_in_eid6175 = frozenset([1])
+    FOLLOW_ASC_in_eid6183 = frozenset([1])
+    FOLLOW_DESC_in_eid6191 = frozenset([1])
+    FOLLOW_BOOL_in_eid6199 = frozenset([1])
+    FOLLOW_INT_in_eid6207 = frozenset([1])
+    FOLLOW_LONG_in_eid6215 = frozenset([1])
+    FOLLOW_FLOAT_in_eid6223 = frozenset([1])
+    FOLLOW_DOUBLE_in_eid6231 = frozenset([1])
+    FOLLOW_DATETIME_in_eid6239 = frozenset([1])
+    FOLLOW_CHARARRAY_in_eid6247 = frozenset([1])
+    FOLLOW_BYTEARRAY_in_eid6255 = frozenset([1])
+    FOLLOW_BAG_in_eid6263 = frozenset([1])
+    FOLLOW_TUPLE_in_eid6271 = frozenset([1])
+    FOLLOW_MAP_in_eid6279 = frozenset([1])
+    FOLLOW_IS_in_eid6287 = frozenset([1])
+    FOLLOW_STREAM_in_eid6295 = frozenset([1])
+    FOLLOW_THROUGH_in_eid6303 = frozenset([1])
+    FOLLOW_STORE_in_eid6311 = frozenset([1])
+    FOLLOW_MAPREDUCE_in_eid6319 = frozenset([1])
+    FOLLOW_SHIP_in_eid6327 = frozenset([1])
+    FOLLOW_CACHE_in_eid6335 = frozenset([1])
+    FOLLOW_INPUT_in_eid6343 = frozenset([1])
+    FOLLOW_OUTPUT_in_eid6351 = frozenset([1])
+    FOLLOW_STDERROR_in_eid6359 = frozenset([1])
+    FOLLOW_STDIN_in_eid6367 = frozenset([1])
+    FOLLOW_STDOUT_in_eid6375 = frozenset([1])
+    FOLLOW_LIMIT_in_eid6383 = frozenset([1])
+    FOLLOW_SAMPLE_in_eid6391 = frozenset([1])
+    FOLLOW_LEFT_in_eid6399 = frozenset([1])
+    FOLLOW_RIGHT_in_eid6407 = frozenset([1])
+    FOLLOW_FULL_in_eid6415 = frozenset([1])
+    FOLLOW_identifier_in_eid6423 = frozenset([1])
+    FOLLOW_null_keyword_in_eid6431 = frozenset([1])
+    FOLLOW_TRUE_in_eid6439 = frozenset([1])
+    FOLLOW_FALSE_in_eid6447 = frozenset([1])
+    FOLLOW_REALIAS_in_eid6455 = frozenset([1])
+    FOLLOW_rel_op_eq_in_rel_op6465 = frozenset([1])
+    FOLLOW_rel_op_ne_in_rel_op6476 = frozenset([1])
+    FOLLOW_rel_op_gt_in_rel_op6487 = frozenset([1])
+    FOLLOW_rel_op_gte_in_rel_op6498 = frozenset([1])
+    FOLLOW_rel_op_lt_in_rel_op6509 = frozenset([1])
+    FOLLOW_rel_op_lte_in_rel_op6520 = frozenset([1])
+    FOLLOW_STR_OP_MATCHES_in_rel_op6531 = frozenset([1])
     FOLLOW_set_in_rel_op_eq0 = frozenset([1])
     FOLLOW_set_in_rel_op_ne0 = frozenset([1])
     FOLLOW_set_in_rel_op_gt0 = frozenset([1])
@@ -26711,100 +26163,100 @@ class QueryParser(Parser):
     FOLLOW_set_in_rel_op_lt0 = frozenset([1])
     FOLLOW_set_in_rel_op_lte0 = frozenset([1])
     FOLLOW_set_in_rel_str_op0 = frozenset([1])
-    FOLLOW_IDENTIFIER_L_in_null_keyword6724 = frozenset([1])
-    FOLLOW_IDENTIFIER_L_in_identifier6745 = frozenset([1])
-    FOLLOW_alias_in_synpred13_QueryParser670 = frozenset([117])
-    FOLLOW_EQUAL_in_synpred13_QueryParser672 = frozenset([10])
-    FOLLOW_FOREACH_in_synpred13_QueryParser678 = frozenset([90, 110])
-    FOLLOW_rel_in_synpred13_QueryParser680 = frozenset([112])
-    FOLLOW_LEFT_CURLY_in_synpred13_QueryParser682 = frozenset([1])
-    FOLLOW_SEMI_COLON_in_synpred15_QueryParser730 = frozenset([1])
-    FOLLOW_LEFT_PAREN_in_synpred68_QueryParser1794 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
-    FOLLOW_field_def_list_in_synpred68_QueryParser1797 = frozenset([111])
-    FOLLOW_RIGHT_PAREN_in_synpred68_QueryParser1799 = frozenset([1])
-    FOLLOW_BAG_in_synpred86_QueryParser2023 = frozenset([112])
-    FOLLOW_LEFT_CURLY_in_synpred86_QueryParser2026 = frozenset([90])
-    FOLLOW_null_keyword_in_synpred86_QueryParser2030 = frozenset([105])
-    FOLLOW_COLON_in_synpred86_QueryParser2032 = frozenset([51, 110, 113])
-    FOLLOW_tuple_type_in_synpred86_QueryParser2034 = frozenset([113])
-    FOLLOW_RIGHT_CURLY_in_synpred86_QueryParser2039 = frozenset([1])
-    FOLLOW_foreach_clause_complex_in_synpred107_QueryParser2435 = frozenset([1])
-    FOLLOW_LEFT_PAREN_in_synpred110_QueryParser2479 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
-    FOLLOW_field_def_list_in_synpred110_QueryParser2482 = frozenset([111])
-    FOLLOW_RIGHT_PAREN_in_synpred110_QueryParser2484 = frozenset([1])
-    FOLLOW_flatten_clause_in_synpred112_QueryParser2468 = frozenset([1, 26])
-    FOLLOW_AS_in_synpred112_QueryParser2472 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
-    FOLLOW_LEFT_PAREN_in_synpred112_QueryParser2479 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
-    FOLLOW_field_def_list_in_synpred112_QueryParser2482 = frozenset([111])
-    FOLLOW_RIGHT_PAREN_in_synpred112_QueryParser2484 = frozenset([1])
-    FOLLOW_field_def_in_synpred112_QueryParser2491 = frozenset([1])
-    FOLLOW_LEFT_PAREN_in_synpred113_QueryParser2534 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
-    FOLLOW_field_def_list_in_synpred113_QueryParser2537 = frozenset([111])
-    FOLLOW_RIGHT_PAREN_in_synpred113_QueryParser2539 = frozenset([1])
-    FOLLOW_col_range_in_synpred115_QueryParser2523 = frozenset([1, 26])
-    FOLLOW_AS_in_synpred115_QueryParser2527 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
-    FOLLOW_LEFT_PAREN_in_synpred115_QueryParser2534 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
-    FOLLOW_field_def_list_in_synpred115_QueryParser2537 = frozenset([111])
-    FOLLOW_RIGHT_PAREN_in_synpred115_QueryParser2539 = frozenset([1])
-    FOLLOW_field_def_in_synpred115_QueryParser2546 = frozenset([1])
-    FOLLOW_expr_in_synpred117_QueryParser2578 = frozenset([1, 26])
-    FOLLOW_AS_in_synpred117_QueryParser2582 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
-    FOLLOW_field_def_in_synpred117_QueryParser2585 = frozenset([1])
-    FOLLOW_LEFT_PAREN_in_synpred118_QueryParser2626 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
-    FOLLOW_field_def_list_in_synpred118_QueryParser2629 = frozenset([111])
-    FOLLOW_RIGHT_PAREN_in_synpred118_QueryParser2631 = frozenset([1])
-    FOLLOW_LEFT_PAREN_in_synpred123_QueryParser2763 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
-    FOLLOW_cond_in_synpred123_QueryParser2766 = frozenset([111])
-    FOLLOW_RIGHT_PAREN_in_synpred123_QueryParser2768 = frozenset([1])
-    FOLLOW_not_cond_in_synpred124_QueryParser2784 = frozenset([1])
-    FOLLOW_expr_in_synpred125_QueryParser2799 = frozenset([70, 71, 72, 73, 74, 75, 76, 79, 80, 81, 82, 83, 84])
-    FOLLOW_rel_op_in_synpred125_QueryParser2801 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
-    FOLLOW_expr_in_synpred125_QueryParser2804 = frozenset([1])
-    FOLLOW_func_eval_in_synpred126_QueryParser2819 = frozenset([1])
-    FOLLOW_LEFT_PAREN_in_synpred137_QueryParser3032 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
-    FOLLOW_type_cast_in_synpred137_QueryParser3034 = frozenset([111])
-    FOLLOW_RIGHT_PAREN_in_synpred137_QueryParser3036 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
-    FOLLOW_unary_expr_in_synpred137_QueryParser3038 = frozenset([1])
-    FOLLOW_expr_eval_in_synpred144_QueryParser3198 = frozenset([1])
-    FOLLOW_LEFT_PAREN_in_synpred145_QueryParser3214 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
-    FOLLOW_expr_in_synpred145_QueryParser3216 = frozenset([111])
-    FOLLOW_RIGHT_PAREN_in_synpred145_QueryParser3218 = frozenset([1])
-    FOLLOW_const_expr_in_synpred146_QueryParser3262 = frozenset([1])
-    FOLLOW_func_eval_in_synpred149_QueryParser3294 = frozenset([1])
-    FOLLOW_col_ref_in_synpred150_QueryParser3298 = frozenset([1])
-    FOLLOW_bin_expr_in_synpred151_QueryParser3302 = frozenset([1])
-    FOLLOW_INTEGER_in_synpred163_QueryParser3777 = frozenset([109])
-    FOLLOW_SEMI_COLON_in_synpred163_QueryParser3779 = frozenset([1])
-    FOLLOW_LONGINTEGER_in_synpred164_QueryParser3789 = frozenset([109])
-    FOLLOW_SEMI_COLON_in_synpred164_QueryParser3791 = frozenset([1])
-    FOLLOW_DOUBLENUMBER_in_synpred165_QueryParser3819 = frozenset([109])
-    FOLLOW_SEMI_COLON_in_synpred165_QueryParser3821 = frozenset([1])
-    FOLLOW_join_item_in_synpred198_QueryParser4275 = frozenset([67, 68, 69])
-    FOLLOW_set_in_synpred198_QueryParser4277 = frozenset([30, 118])
-    FOLLOW_OUTER_in_synpred198_QueryParser4291 = frozenset([118])
-    FOLLOW_COMMA_in_synpred198_QueryParser4294 = frozenset([90, 110])
-    FOLLOW_join_item_in_synpred198_QueryParser4297 = frozenset([1])
-    FOLLOW_LEFT_PAREN_in_synpred201_QueryParser4390 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
-    FOLLOW_join_group_by_expr_in_synpred201_QueryParser4392 = frozenset([111, 118])
-    FOLLOW_COMMA_in_synpred201_QueryParser4396 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
-    FOLLOW_join_group_by_expr_in_synpred201_QueryParser4398 = frozenset([111, 118])
-    FOLLOW_RIGHT_PAREN_in_synpred201_QueryParser4403 = frozenset([1])
-    FOLLOW_nested_command_in_synpred212_QueryParser4844 = frozenset([109])
-    FOLLOW_SEMI_COLON_in_synpred212_QueryParser4846 = frozenset([1, 90])
-    FOLLOW_identifier_in_synpred213_QueryParser4906 = frozenset([117])
-    FOLLOW_EQUAL_in_synpred213_QueryParser4908 = frozenset([14, 34, 90, 96])
-    FOLLOW_col_ref_in_synpred213_QueryParser4910 = frozenset([92])
-    FOLLOW_PERIOD_in_synpred213_QueryParser4912 = frozenset([14, 34, 90, 96, 110])
-    FOLLOW_col_ref_list_in_synpred213_QueryParser4914 = frozenset([1])
-    FOLLOW_identifier_in_synpred214_QueryParser4975 = frozenset([117])
-    FOLLOW_EQUAL_in_synpred214_QueryParser4977 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
-    FOLLOW_expr_in_synpred214_QueryParser4979 = frozenset([1])
-    FOLLOW_INTEGER_in_synpred223_QueryParser5294 = frozenset([109])
-    FOLLOW_SEMI_COLON_in_synpred223_QueryParser5296 = frozenset([1])
-    FOLLOW_COMMA_in_synpred231_QueryParser5457 = frozenset([90])
-    FOLLOW_split_branch_in_synpred231_QueryParser5459 = frozenset([1, 118])
-    FOLLOW_identifier_in_synpred315_QueryParser6428 = frozenset([1])
-    FOLLOW_null_keyword_in_synpred316_QueryParser6436 = frozenset([1])
+    FOLLOW_IDENTIFIER_L_in_null_keyword6719 = frozenset([1])
+    FOLLOW_IDENTIFIER_L_in_identifier6740 = frozenset([1])
+    FOLLOW_alias_in_synpred13_QueryParser665 = frozenset([117])
+    FOLLOW_EQUAL_in_synpred13_QueryParser667 = frozenset([10])
+    FOLLOW_FOREACH_in_synpred13_QueryParser673 = frozenset([90, 110])
+    FOLLOW_rel_in_synpred13_QueryParser675 = frozenset([112])
+    FOLLOW_LEFT_CURLY_in_synpred13_QueryParser677 = frozenset([1])
+    FOLLOW_SEMI_COLON_in_synpred15_QueryParser725 = frozenset([1])
+    FOLLOW_LEFT_PAREN_in_synpred68_QueryParser1789 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
+    FOLLOW_field_def_list_in_synpred68_QueryParser1792 = frozenset([111])
+    FOLLOW_RIGHT_PAREN_in_synpred68_QueryParser1794 = frozenset([1])
+    FOLLOW_BAG_in_synpred86_QueryParser2018 = frozenset([112])
+    FOLLOW_LEFT_CURLY_in_synpred86_QueryParser2021 = frozenset([90])
+    FOLLOW_null_keyword_in_synpred86_QueryParser2025 = frozenset([105])
+    FOLLOW_COLON_in_synpred86_QueryParser2027 = frozenset([51, 110, 113])
+    FOLLOW_tuple_type_in_synpred86_QueryParser2029 = frozenset([113])
+    FOLLOW_RIGHT_CURLY_in_synpred86_QueryParser2034 = frozenset([1])
+    FOLLOW_foreach_clause_complex_in_synpred107_QueryParser2430 = frozenset([1])
+    FOLLOW_LEFT_PAREN_in_synpred110_QueryParser2474 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
+    FOLLOW_field_def_list_in_synpred110_QueryParser2477 = frozenset([111])
+    FOLLOW_RIGHT_PAREN_in_synpred110_QueryParser2479 = frozenset([1])
+    FOLLOW_flatten_clause_in_synpred112_QueryParser2463 = frozenset([1, 26])
+    FOLLOW_AS_in_synpred112_QueryParser2467 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
+    FOLLOW_LEFT_PAREN_in_synpred112_QueryParser2474 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
+    FOLLOW_field_def_list_in_synpred112_QueryParser2477 = frozenset([111])
+    FOLLOW_RIGHT_PAREN_in_synpred112_QueryParser2479 = frozenset([1])
+    FOLLOW_field_def_in_synpred112_QueryParser2486 = frozenset([1])
+    FOLLOW_LEFT_PAREN_in_synpred113_QueryParser2529 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
+    FOLLOW_field_def_list_in_synpred113_QueryParser2532 = frozenset([111])
+    FOLLOW_RIGHT_PAREN_in_synpred113_QueryParser2534 = frozenset([1])
+    FOLLOW_col_range_in_synpred115_QueryParser2518 = frozenset([1, 26])
+    FOLLOW_AS_in_synpred115_QueryParser2522 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
+    FOLLOW_LEFT_PAREN_in_synpred115_QueryParser2529 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
+    FOLLOW_field_def_list_in_synpred115_QueryParser2532 = frozenset([111])
+    FOLLOW_RIGHT_PAREN_in_synpred115_QueryParser2534 = frozenset([1])
+    FOLLOW_field_def_in_synpred115_QueryParser2541 = frozenset([1])
+    FOLLOW_expr_in_synpred117_QueryParser2573 = frozenset([1, 26])
+    FOLLOW_AS_in_synpred117_QueryParser2577 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
+    FOLLOW_field_def_in_synpred117_QueryParser2580 = frozenset([1])
+    FOLLOW_LEFT_PAREN_in_synpred118_QueryParser2621 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
+    FOLLOW_field_def_list_in_synpred118_QueryParser2624 = frozenset([111])
+    FOLLOW_RIGHT_PAREN_in_synpred118_QueryParser2626 = frozenset([1])
+    FOLLOW_LEFT_PAREN_in_synpred123_QueryParser2758 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
+    FOLLOW_cond_in_synpred123_QueryParser2761 = frozenset([111])
+    FOLLOW_RIGHT_PAREN_in_synpred123_QueryParser2763 = frozenset([1])
+    FOLLOW_not_cond_in_synpred124_QueryParser2779 = frozenset([1])
+    FOLLOW_expr_in_synpred125_QueryParser2794 = frozenset([70, 71, 72, 73, 74, 75, 76, 79, 80, 81, 82, 83, 84])
+    FOLLOW_rel_op_in_synpred125_QueryParser2796 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
+    FOLLOW_expr_in_synpred125_QueryParser2799 = frozenset([1])
+    FOLLOW_func_eval_in_synpred126_QueryParser2814 = frozenset([1])
+    FOLLOW_LEFT_PAREN_in_synpred137_QueryParser3027 = frozenset([42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 90, 110, 112, 114])
+    FOLLOW_type_cast_in_synpred137_QueryParser3029 = frozenset([111])
+    FOLLOW_RIGHT_PAREN_in_synpred137_QueryParser3031 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
+    FOLLOW_unary_expr_in_synpred137_QueryParser3033 = frozenset([1])
+    FOLLOW_expr_eval_in_synpred144_QueryParser3193 = frozenset([1])
+    FOLLOW_LEFT_PAREN_in_synpred145_QueryParser3209 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
+    FOLLOW_expr_in_synpred145_QueryParser3211 = frozenset([111])
+    FOLLOW_RIGHT_PAREN_in_synpred145_QueryParser3213 = frozenset([1])
+    FOLLOW_const_expr_in_synpred146_QueryParser3257 = frozenset([1])
+    FOLLOW_func_eval_in_synpred149_QueryParser3289 = frozenset([1])
+    FOLLOW_col_ref_in_synpred150_QueryParser3293 = frozenset([1])
+    FOLLOW_bin_expr_in_synpred151_QueryParser3297 = frozenset([1])
+    FOLLOW_INTEGER_in_synpred163_QueryParser3772 = frozenset([109])
+    FOLLOW_SEMI_COLON_in_synpred163_QueryParser3774 = frozenset([1])
+    FOLLOW_LONGINTEGER_in_synpred164_QueryParser3784 = frozenset([109])
+    FOLLOW_SEMI_COLON_in_synpred164_QueryParser3786 = frozenset([1])
+    FOLLOW_DOUBLENUMBER_in_synpred165_QueryParser3814 = frozenset([109])
+    FOLLOW_SEMI_COLON_in_synpred165_QueryParser3816 = frozenset([1])
+    FOLLOW_join_item_in_synpred198_QueryParser4270 = frozenset([67, 68, 69])
+    FOLLOW_set_in_synpred198_QueryParser4272 = frozenset([30, 118])
+    FOLLOW_OUTER_in_synpred198_QueryParser4286 = frozenset([118])
+    FOLLOW_COMMA_in_synpred198_QueryParser4289 = frozenset([90, 110])
+    FOLLOW_join_item_in_synpred198_QueryParser4292 = frozenset([1])
+    FOLLOW_LEFT_PAREN_in_synpred201_QueryParser4385 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
+    FOLLOW_join_group_by_expr_in_synpred201_QueryParser4387 = frozenset([111, 118])
+    FOLLOW_COMMA_in_synpred201_QueryParser4391 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 104, 110, 112, 114, 119, 162, 163])
+    FOLLOW_join_group_by_expr_in_synpred201_QueryParser4393 = frozenset([111, 118])
+    FOLLOW_RIGHT_PAREN_in_synpred201_QueryParser4398 = frozenset([1])
+    FOLLOW_nested_command_in_synpred212_QueryParser4839 = frozenset([109])
+    FOLLOW_SEMI_COLON_in_synpred212_QueryParser4841 = frozenset([1, 90])
+    FOLLOW_identifier_in_synpred213_QueryParser4901 = frozenset([117])
+    FOLLOW_EQUAL_in_synpred213_QueryParser4903 = frozenset([14, 34, 90, 96])
+    FOLLOW_col_ref_in_synpred213_QueryParser4905 = frozenset([92])
+    FOLLOW_PERIOD_in_synpred213_QueryParser4907 = frozenset([14, 34, 90, 96, 110])
+    FOLLOW_col_ref_list_in_synpred213_QueryParser4909 = frozenset([1])
+    FOLLOW_identifier_in_synpred214_QueryParser4970 = frozenset([117])
+    FOLLOW_EQUAL_in_synpred214_QueryParser4972 = frozenset([5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 90, 91, 94, 96, 97, 99, 100, 101, 110, 112, 114, 162, 163])
+    FOLLOW_expr_in_synpred214_QueryParser4974 = frozenset([1])
+    FOLLOW_INTEGER_in_synpred223_QueryParser5289 = frozenset([109])
+    FOLLOW_SEMI_COLON_in_synpred223_QueryParser5291 = frozenset([1])
+    FOLLOW_COMMA_in_synpred231_QueryParser5452 = frozenset([90])
+    FOLLOW_split_branch_in_synpred231_QueryParser5454 = frozenset([1, 118])
+    FOLLOW_identifier_in_synpred315_QueryParser6423 = frozenset([1])
+    FOLLOW_null_keyword_in_synpred316_QueryParser6431 = frozenset([1])
 
 
 
