@@ -9,3 +9,4 @@ Main purpose of the project is to "teach" disco speak Pig Latin, and so to enabl
 
 Friendly comments and contribution are very welcome.
 
+Current status: very bloody alpha under development. Tested while working on Disco.
