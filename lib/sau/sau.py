@@ -18,6 +18,9 @@ class SauShell(Cmd):
     def do_version(self, line):
         print "Sau v0.1, sau shell v0.1"
     
+    def do_load(self, line):
+        self.sau.execute("load %s" % line)
+
     def help_version(self):
         print "Shows the version information"
 
@@ -38,6 +41,9 @@ class SauShell(Cmd):
 
     def help_help(self):
         print "Prints the shell help"
+
+    def help_load(self):
+        print "Loads data"
 
     def default(self, line):
         self.sau.execute(line)
