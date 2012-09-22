@@ -1,0 +1,278 @@
+Created by PLY version 3.4 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    MIN
+    EXPLAIN
+    KILL
+    COPYTOLOCAL
+    ORDER
+    BYTEARRAY
+    STREAM
+    E_U
+    F_L
+    LONG
+    PIG
+    F_U
+    RM
+    DEFINE
+    FULL
+    EXEC
+    SAMPLE
+    FOREACH
+    EVAL
+    RUN
+    PARALLEL
+    ILLUSTRATE
+    MAP
+    DOUBLE
+    LIMIT
+    CHARARRAY
+    MAX
+    OUTPUT
+    OR
+    COUNT
+    GROUP
+    HELP
+    STDIN
+    DECLARE
+    DIFF
+    DISTINCT
+    BY
+    INTO
+    UNION
+    MKDIR
+    PIGSTORAGE
+    INPUT
+    GENERATE
+    SIZE
+    AND
+    MATCHES
+    FILTER
+    MV
+    THROUGH
+    STDERR
+    NOT
+    AVG
+    ANY
+    SPLIT
+    DUMP
+    DEFAULT
+    SUM
+    CROSS
+    SET
+    REGISTER
+    ASC
+    RMF
+    TOKENIZE
+    DESC
+    LEFT
+    PIGDUMP
+    DESCRIBE
+    OUTER
+    CD
+    SHIP
+    CP
+    QUIT
+    ALL
+    JOIN
+    TUPLE
+    INT
+    FLATTEN
+    USING
+    ARRANGE
+    TEXTLOADER
+    STDOUT
+    CACHE
+    CAT
+    BAG
+    DU
+    CONCAT
+    NULL
+    L_U
+    COPYFROMLOCAL
+    LS
+    L_L
+    E_L
+    IS
+    AS
+    INNER
+    BINSTORAGE
+    STORE
+    IF
+    RIGHT
+    FLOAT
+    COGROUP
+    PWD
+
+Grammar
+
+Rule 0     S' -> expression
+Rule 1     expression -> LOAD expression SCOL
+Rule 2     expression -> PATH
+
+Terminals, with rules where they appear
+
+ALL                  : 
+AND                  : 
+ANY                  : 
+ARRANGE              : 
+AS                   : 
+ASC                  : 
+AVG                  : 
+BAG                  : 
+BINSTORAGE           : 
+BY                   : 
+BYTEARRAY            : 
+CACHE                : 
+CAT                  : 
+CD                   : 
+CHARARRAY            : 
+COGROUP              : 
+CONCAT               : 
+COPYFROMLOCAL        : 
+COPYTOLOCAL          : 
+COUNT                : 
+CP                   : 
+CROSS                : 
+DECLARE              : 
+DEFAULT              : 
+DEFINE               : 
+DESC                 : 
+DESCRIBE             : 
+DIFF                 : 
+DISTINCT             : 
+DOUBLE               : 
+DU                   : 
+DUMP                 : 
+EVAL                 : 
+EXEC                 : 
+EXPLAIN              : 
+E_L                  : 
+E_U                  : 
+FILTER               : 
+FLATTEN              : 
+FLOAT                : 
+FOREACH              : 
+FULL                 : 
+F_L                  : 
+F_U                  : 
+GENERATE             : 
+GROUP                : 
+HELP                 : 
+IF                   : 
+ILLUSTRATE           : 
+INNER                : 
+INPUT                : 
+INT                  : 
+INTO                 : 
+IS                   : 
+JOIN                 : 
+KILL                 : 
+LEFT                 : 
+LIMIT                : 
+LOAD                 : 1
+LONG                 : 
+LS                   : 
+L_L                  : 
+L_U                  : 
+MAP                  : 
+MATCHES              : 
+MAX                  : 
+MIN                  : 
+MKDIR                : 
+MV                   : 
+NOT                  : 
+NULL                 : 
+OR                   : 
+ORDER                : 
+OUTER                : 
+OUTPUT               : 
+PARALLEL             : 
+PATH                 : 2
+PIG                  : 
+PIGDUMP              : 
+PIGSTORAGE           : 
+PWD                  : 
+QUIT                 : 
+REGISTER             : 
+RIGHT                : 
+RM                   : 
+RMF                  : 
+RUN                  : 
+SAMPLE               : 
+SCOL                 : 1
+SET                  : 
+SHIP                 : 
+SIZE                 : 
+SPLIT                : 
+STDERR               : 
+STDIN                : 
+STDOUT               : 
+STORE                : 
+STREAM               : 
+SUM                  : 
+TEXTLOADER           : 
+THROUGH              : 
+TOKENIZE             : 
+TUPLE                : 
+UNION                : 
+USING                : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+expression           : 1 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . expression
+    (1) expression -> . LOAD expression SCOL
+    (2) expression -> . PATH
+
+    LOAD            shift and go to state 1
+    PATH            shift and go to state 2
+
+    expression                     shift and go to state 3
+
+state 1
+
+    (1) expression -> LOAD . expression SCOL
+    (1) expression -> . LOAD expression SCOL
+    (2) expression -> . PATH
+
+    LOAD            shift and go to state 1
+    PATH            shift and go to state 2
+
+    expression                     shift and go to state 4
+
+state 2
+
+    (2) expression -> PATH .
+
+    SCOL            reduce using rule 2 (expression -> PATH .)
+    $end            reduce using rule 2 (expression -> PATH .)
+
+
+state 3
+
+    (0) S' -> expression .
+
+
+
+state 4
+
+    (1) expression -> LOAD expression . SCOL
+
+    SCOL            shift and go to state 5
+
+
+state 5
+
+    (1) expression -> LOAD expression SCOL .
+
+    SCOL            reduce using rule 1 (expression -> LOAD expression SCOL .)
+    $end            reduce using rule 1 (expression -> LOAD expression SCOL .)
+

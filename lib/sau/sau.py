@@ -18,8 +18,9 @@ class SauShell(Cmd):
     def do_version(self, line):
         print "Sau v0.1, sau shell v0.1"
     
+    # TODO: see commend in default
     def do_load(self, line):
-        self.sau.execute("load %s" % line)
+        self.sau.execute("load %s;" % line)
 
     def help_version(self):
         print "Shows the version information"
@@ -45,8 +46,11 @@ class SauShell(Cmd):
     def help_load(self):
         print "Loads data"
 
+    # TODO: evil hack, semicolons get stripped, thus
+    # adding one makes it impossible yet to do multiline.
+    # Fix it in cmd/cmd2 or check out options
     def default(self, line):
-        self.sau.execute(line)
+        self.sau.execute("%s;" % line)
         return line
 
 if __name__ == '__main__':
